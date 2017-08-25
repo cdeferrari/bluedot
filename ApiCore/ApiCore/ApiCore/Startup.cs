@@ -18,21 +18,7 @@ namespace ApiCore
         {
             ConfigureAuth(app);
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configuration
-                  .EnableSwagger(c =>
-                  {
-                      c.SingleApiVersion("v1", "SomosTechies API")
-                 .Description("A sample API for testing")
-                 .TermsOfService("Some terms")
-             .Contact(cc => cc
-               .Name("Jesus Angulo")
-               .Url("https://somostechies.com/contact")
-               .Email("jesus.angulo@outlook.com"))
-             .License(lc => lc
-               .Name("Some License")
-               .Url("https://somostechies.com/license"));
-                  })
-              .EnableSwaggerUi();
+         
 
         }
     }
