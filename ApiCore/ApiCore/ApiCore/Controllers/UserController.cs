@@ -13,45 +13,44 @@ namespace ApiCore.Controllers
     /// <summary>
     /// Controlador de tickets
     /// </summary>
-    [RoutePrefix("Tickets")]
-    public class TicketController : ApiController
+    [RoutePrefix("Users")]
+    public class UserController : ApiController
     {
 
-        public ITicketService TicketService { get; set; }
+        public IUserService UserService { get; set; }
      
 
-        // GET api/<controller>/5
+        // GET api/<controller>/5        
         /// <summary>
-        /// Devuelve un ticket
+        /// Devuelve el usuario del id
         /// </summary>
-        /// <param name="ticket">id del Ticket</param>
+        /// <param name="id">id del usuario</param>
         /// <returns></returns>
-
         [Route("{id}")]        
-        [ResponseType(typeof(TicketResponse))]
+        [ResponseType(typeof(UserResponse))]
         public string Get(int id)
         {
-            var completeTicket = TicketService.GetById(id);
+            var completeUser = UserService.GetById(id);
 
-            if (completeTicket == null)
-                throw new NotFoundException(ErrorMessages.TicketNotFound);
+            if (completeUser == null)
+                throw new NotFoundException(ErrorMessages.UserNotFound);
 
-            var dto = Mapper.Map<TicketResponse>(completeTicket);
+            var dto = Mapper.Map<UsuarioResponse>(completeUser);
             
             return Ok(dto);
         }
 
         // POST api/<controller>
         /// <summary>
-        /// Inserta un ticket
+        /// Inserta un usuario
         /// </summary>
-        /// <param name="ticket">Ticket a insertar</param>
+        /// <param name="user">Usuario a insertar</param>
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public void Post(TicketRequest ticket)
+        public void Post(UserRequest user)
         {
-            var result = TicketService.CreateTicket(ticket);
+            var result = UserService.CreateUser(user);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 
@@ -59,15 +58,15 @@ namespace ApiCore.Controllers
 
         // PUT api/<controller>/5
         /// <summary>
-        /// Modifica un ticket
+        /// Modifica un usuario
         /// </summary>
-        /// <param name="ticket">Ticket a modificar</param>
+        /// <param name="user">Usuario a modificar</param>
         /// <returns></returns>
-        public void Put(int id, TicketRequest ticket)
+        public void Put(int id, UserRequest user)
         {            
-            var originalTicket = TicketService.GetById(id);
+            var originalUser = UserService.GetById(id);
             
-            var ret = TicketService.UpdateTicket(originalTicket, ticket);
+            var ret = UserService.UpdateUser(originalUser, user);
 
             return Ok();
             
@@ -75,9 +74,9 @@ namespace ApiCore.Controllers
 
         // DELETE api/<controller>/5
         /// <summary>
-        /// Elimina un ticket
+        /// Elimina un usuario
         /// </summary>
-        /// <param name="id">Ticket a eliminar</param>
+        /// <param name="id">Usuario a eliminar</param>
         /// <returns></returns>
         public void Delete(int id)
         {
@@ -87,7 +86,7 @@ namespace ApiCore.Controllers
             
             try
             {
-               TicketService.DeleteTicket(id);
+               UserService.DeleteUser(id);
                 return Ok();
             }
             catch (Exception ex)
