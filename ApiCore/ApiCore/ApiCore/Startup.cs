@@ -17,7 +17,7 @@ namespace ApiCore
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+           // GlobalConfiguration.Configure(WebApiConfig.Register);
          
 
         }

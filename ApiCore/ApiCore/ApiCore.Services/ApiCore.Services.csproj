@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>eadc51f8-9f48-4bf5-8787-65cffcf4d160</ProjectGuid>
+    <ProjectGuid>{EADC51F8-9F48-4BF5-8787-65CFFCF4D160}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ApiCore.Services</RootNamespace>
@@ -30,24 +30,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Contracts\Tickets\ITicketService.cs" />
+    <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Implementations\Tickets\TicketService.cs" />
+    <Compile Include="Implementations\Users\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApiCore.DomainModel\ApiCore.DomainModel.csproj">
+      <Project>{d4be36f3-92d7-47c7-82bd-77c06662c513}</Project>
+      <Name>ApiCore.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApiCore.Dtos\ApiCore.Dtos.csproj">
+      <Project>{1d1d00a0-a6e5-4176-be19-1a8879ce6815}</Project>
+      <Name>ApiCore.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApiCore.Library\ApiCore.Library.csproj">
+      <Project>{429b4985-2396-4ec3-9fe2-59c466ffde87}</Project>
+      <Name>ApiCore.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApiCore.Repository\ApiCore.Repository.csproj">
+      <Project>{cc4385f2-4211-4003-8058-be063f598e22}</Project>
+      <Name>ApiCore.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

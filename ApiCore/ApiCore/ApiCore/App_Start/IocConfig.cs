@@ -5,6 +5,13 @@ using System.Web;
 using Autofac;
 using Autofac.Core;
 using System.Reflection;
+using Autofac.Integration.WebApi;
+using System.Web.Http;
+using Autofac.Extras.CommonServiceLocator;
+using Microsoft.Practices.ServiceLocation;
+using ApiCore.Repository;
+using ApiCore.Repository.Contracts;
+using ApiCore.Repository.Interceptors;
 
 namespace ApiCore.App_Start
 {
@@ -35,5 +42,16 @@ namespace ApiCore.App_Start
         {
             builder.RegisterApiControllers(assembly).PropertiesAutowired();
         }
+
+        private static void RegisterCustomTypes(ContainerBuilder builder)
+        {
+            builder.RegisterType<DataContext>().As<IDbContext>().PropertiesAutowired().InstancePerRequest();
+
+            builder.RegisterType<ServicesInterceptor>().AsSelf().PropertiesAutowired().InstancePerRequest();
+
+            // Sen
+
+        }
+
     }
 }

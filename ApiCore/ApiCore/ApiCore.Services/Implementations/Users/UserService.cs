@@ -2,6 +2,10 @@
 using System;
 using ApiCore.DomainModel;
 using ApiCore.Dtos.Request;
+using ApiCore.Repository.Attributes;
+using ApiCore.Library.Exceptions;
+using ApiCore.Library.Mensajes;
+using ApiCore.Repository.Contracts;
 
 namespace ApiCore.Services.Implementations.Users
 {
@@ -44,15 +48,13 @@ namespace ApiCore.Services.Implementations.Users
             var user = UserRepository.GetById(userId);
             UserRepository.Delete(user);
         }
-
-        #region private Methods 
+        
 
         private void MergeUser(User originalUser, UserRequest User)
         {
         
         }
-
-        #endRegion
+        
 
     }
 }

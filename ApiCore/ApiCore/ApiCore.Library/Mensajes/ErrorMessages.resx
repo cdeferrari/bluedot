@@ -117,73 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbonoNoPerteneceAlAnunciante" xml:space="preserve">
-    <value>El abono indicado no existe para el anunciate</value>
-  </data>
-  <data name="AccesoDenegado" xml:space="preserve">
-    <value>Acceso denegado. Su usuario no tiene permisos para la acción.</value>
-  </data>
-  <data name="AnuncianteNoEncontrado" xml:space="preserve">
-    <value>El Anunciante no existe.</value>
-  </data>
-  <data name="AnuncianteSinAbonosDeEsaCaracteristica" xml:space="preserve">
-    <value>El Anunciante no tiene abonos con esas caracteristicas.</value>
-  </data>
-  <data name="AvisoInexistenteOEliminado" xml:space="preserve">
-    <value>El aviso no existe o fue eliminado.</value>
-  </data>
   <data name="BadRequest" xml:space="preserve">
-    <value>Error en la llamada.</value>
-  </data>
-  <data name="BannerNoExiste" xml:space="preserve">
-    <value>El Banner no existe.</value>
-  </data>
-  <data name="ClienteNoExiste" xml:space="preserve">
-    <value>El Cliente no Existe</value>
-  </data>
-  <data name="EquivalenciaAnuncianteSapError" xml:space="preserve">
-    <value>No se encunetra un anunciante sap asociado al idAnunciante {0}</value>
+    <value>BadRequest</value>
   </data>
   <data name="Forbidden" xml:space="preserve">
-    <value>No tiene acceso.</value>
+    <value>Forbidden</value>
   </data>
   <data name="InternalServerError" xml:space="preserve">
-    <value>Error en el servidor, vuelva a intentarlo.</value>
+    <value>InternalServerError</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>No se encuentra el recurso.</value>
+    <value>NotFound</value>
   </data>
-  <data name="PackInvalido" xml:space="preserve">
-    <value>Se Indico un Pack que no existe.</value>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
-  <data name="PathInvalido" xml:space="preserve">
-    <value>El Path no existe o es invalido.</value>
-  </data>
-  <data name="PuntosInsuficientes" xml:space="preserve">
-    <value>No posee suficientes puntos para modificar el aviso; comuniquese con su ejecutivo de cuentas.</value>
-  </data>
-  <data name="RedisMasterError" xml:space="preserve">
-    <value>Error al acceder a redis master. {0}</value>
-  </data>
-  <data name="SapClienteExiste" xml:space="preserve">
-    <value>El SAP Cliente ingresado ya ha sido utilizado.</value>
-  </data>
-  <data name="SinCliente" xml:space="preserve">
-    <value>El Anunciante no tiene Cliente asociado.</value>
-  </data>
-  <data name="SinEjecutivoVenta" xml:space="preserve">
-    <value>Se necesita asignar un ejecutivo de venta.</value>
-  </data>
-  <data name="TokenInvalido" xml:space="preserve">
-    <value>Token inválido. Vuelva a loguearse.</value>
-  </data>
-  <data name="TokenNoEnviado" xml:space="preserve">
-    <value>Token no enviado. Debe enviar su token con la petición.</value>
+  <data name="TicketNoEncontrado" xml:space="preserve">
+    <value>Ticket no encontrado</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
-    <value>Usuario/Password no válido.</value>
+    <value>Unauthorized</value>
   </data>
-  <data name="UsuarioExistente" xml:space="preserve">
-    <value>El UserName ya existe.</value>
+  <data name="UserNoEncontrado" xml:space="preserve">
+    <value>Usuario no encontrado</value>
   </data>
 </root>

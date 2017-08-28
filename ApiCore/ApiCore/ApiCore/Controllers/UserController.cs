@@ -7,6 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ApiCore.Dtos;
 using ApiCore.Dtos.Request;
+using ApiCore.Dtos.Response;
+using ApiCore.Library.Exceptions;
+using ApiCore.Library.Mensajes;
+using AutoMapper;
+using ApiCore.Services.Contracts.Users;
 
 namespace ApiCore.Controllers
 {
@@ -28,14 +33,14 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         [Route("{id}")]        
         [ResponseType(typeof(UserResponse))]
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
             var completeUser = UserService.GetById(id);
 
             if (completeUser == null)
-                throw new NotFoundException(ErrorMessages.UserNotFound);
+                throw new NotFoundException(ErrorMessages.UserNoEncontrado);
 
-            var dto = Mapper.Map<UsuarioResponse>(completeUser);
+            var dto = Mapper.Map<UserResponse>(completeUser);
             
             return Ok(dto);
         }
@@ -48,7 +53,7 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public void Post(UserRequest user)
+        public IHttpActionResult Post(UserRequest user)
         {
             var result = UserService.CreateUser(user);
 
@@ -62,7 +67,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="user">Usuario a modificar</param>
         /// <returns></returns>
-        public void Put(int id, UserRequest user)
+        public IHttpActionResult Put(int id, UserRequest user)
         {            
             var originalUser = UserService.GetById(id);
             
@@ -78,7 +83,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="id">Usuario a eliminar</param>
         /// <returns></returns>
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
 
             if (id <= 0)

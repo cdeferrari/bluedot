@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ApiCore.DomainModel;
+using ApiCore.Dtos.Request;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApiCore.Services.Contracts.Tickets
 {
-    interface ITicketService
+    public interface ITicketService
     {
         Ticket CreateTicket(TicketRequest ticket);
         Ticket GetById(int ticketId);

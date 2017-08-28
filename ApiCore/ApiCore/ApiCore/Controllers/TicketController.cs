@@ -7,6 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ApiCore.Dtos;
 using ApiCore.Dtos.Request;
+using AutoMapper;
+using ApiCore.Dtos.Response;
+using ApiCore.Library.Exceptions;
+using ApiCore.Library.Mensajes;
+using ApiCore.Services.Contracts.Tickets;
 
 namespace ApiCore.Controllers
 {
@@ -29,12 +34,12 @@ namespace ApiCore.Controllers
 
         [Route("{id}")]        
         [ResponseType(typeof(TicketResponse))]
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
             var completeTicket = TicketService.GetById(id);
 
             if (completeTicket == null)
-                throw new NotFoundException(ErrorMessages.TicketNotFound);
+                throw new NotFoundException(ErrorMessages.TicketNoEncontrado);
 
             var dto = Mapper.Map<TicketResponse>(completeTicket);
             
@@ -49,7 +54,7 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public void Post(TicketRequest ticket)
+        public IHttpActionResult Post(TicketRequest ticket)
         {
             var result = TicketService.CreateTicket(ticket);
 
@@ -63,7 +68,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="ticket">Ticket a modificar</param>
         /// <returns></returns>
-        public void Put(int id, TicketRequest ticket)
+        public IHttpActionResult Put(int id, TicketRequest ticket)
         {            
             var originalTicket = TicketService.GetById(id);
             
@@ -79,7 +84,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="id">Ticket a eliminar</param>
         /// <returns></returns>
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
 
             if (id <= 0)

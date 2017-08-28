@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiCore.Repository.Contracts
 {
-    interface ITicketRepository : IRepository<Ticket>
+    public interface ITicketRepository : IRepository<Ticket>
     {
         
     }

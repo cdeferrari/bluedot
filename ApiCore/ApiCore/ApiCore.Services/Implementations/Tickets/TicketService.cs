@@ -2,6 +2,10 @@
 using System;
 using ApiCore.DomainModel;
 using ApiCore.Dtos.Request;
+using ApiCore.Repository.Contracts;
+using ApiCore.Repository.Attributes;
+using ApiCore.Library.Exceptions;
+using ApiCore.Library.Mensajes;
 
 namespace ApiCore.Services.Implementations.Tickets
 {
@@ -43,8 +47,7 @@ namespace ApiCore.Services.Implementations.Tickets
             var ticket = TicketRepository.GetById(ticketId);
             TicketRepository.Delete(ticket);
         }
-
-        #region private Methods 
+        
 
         private void MergeTicket(Ticket originalTicket, TicketRequest ticket)
         {
@@ -60,8 +63,7 @@ namespace ApiCore.Services.Implementations.Tickets
             originalTicket.WorkerId = ticket.WorkerId;
             originalTicket.CreatorId = ticket.CreatorId;
         }
-
-        #endRegion
+        
 
     }
 }

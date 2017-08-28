@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
 using System.Web.Http;
-using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 namespace ApiCore
 {
@@ -14,10 +10,44 @@ namespace ApiCore
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
+            ConfigureWebApiCors(config);
+            ConfigureWebApiRoutes(config);
+            ConfigureWebApiFormatters(config);
+            ConfigureCustom(config);
             config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
          
         }
+
+        private static void ConfigureWebApiCors(HttpConfiguration config)
+        {
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+        }
+
+        private static void ConfigureWebApiRoutes(HttpConfiguration config)
+        {
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
+
+        private static void ConfigureWebApiFormatters(HttpConfiguration config)
+        {
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }
+
+
+        private static void ConfigureCustom(HttpConfiguration config)
+        {
+        }
+
     }
 }
