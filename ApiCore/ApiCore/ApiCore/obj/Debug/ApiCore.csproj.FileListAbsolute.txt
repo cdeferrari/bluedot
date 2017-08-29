@@ -24,6 +24,7 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Reposi
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Extras.CommonServiceLocator.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Extras.DynamicProxy2.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Integration.WebApi.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\AutoMapper.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\EntityFramework.dll
@@ -96,7 +97,9 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Compone
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Net.Http.Formatting.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Text.Encodings.Web.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Cors.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Helpers.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.Cors.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.Owin.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.WebHost.dll
@@ -117,6 +120,7 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Reposi
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Extras.CommonServiceLocator.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Extras.DynamicProxy2.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Integration.WebApi.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\AutoMapper.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.AI.DependencyCollector.xml
@@ -164,6 +168,7 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Swashbuckle.As
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Swashbuckle.AspNetCore.SwaggerUI.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Text.Encodings.Web.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.Cors.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Net.Http.Formatting.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Helpers.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.xml
@@ -195,6 +200,3 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.Http.WebHost.resources.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.pdb
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Cors.dll
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.Cors.dll
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Http.Cors.xml

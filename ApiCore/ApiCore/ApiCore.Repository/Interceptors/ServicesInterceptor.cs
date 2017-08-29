@@ -1,6 +1,5 @@
 ﻿using ApiCore.Repository.Attributes;
 using ApiCore.Repository.Contracts;
-using Castle.Core.Interceptor;
 using Castle.DynamicProxy;
 using System;
 using System.Data;

@@ -12,6 +12,10 @@ using Microsoft.Practices.ServiceLocation;
 using ApiCore.Repository;
 using ApiCore.Repository.Contracts;
 using ApiCore.Repository.Interceptors;
+using ApiCore.Services.Contracts.Tickets;
+using ApiCore.Services.Implementations.Tickets;
+using ApiCore.Repository.Implementatios;
+using Autofac.Extras.DynamicProxy2;
 
 namespace ApiCore.App_Start
 {
@@ -49,7 +53,14 @@ namespace ApiCore.App_Start
 
             builder.RegisterType<ServicesInterceptor>().AsSelf().PropertiesAutowired().InstancePerRequest();
 
-            // Sen
+            
+            builder.RegisterType<TicketService>().As<ITicketService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+
+
+            builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
 
         }
 
