@@ -66,19 +66,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\TransactionAttributes.cs" />
+    <Compile Include="Contracts\IBacklogUserRepository.cs" />
+    <Compile Include="Contracts\IFunctionalUnitRepository.cs" />
+    <Compile Include="Contracts\IStatusRepository.cs" />
+    <Compile Include="Contracts\IAdministrationRepository.cs" />
     <Compile Include="Contracts\IDbContextc.cs" />
+    <Compile Include="Contracts\IPriorityRepository.cs" />
     <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IConsortiumRepository.cs" />
     <Compile Include="Contracts\ITicketRepository.cs" />
     <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="Implementatios\BacklogUserRepository.cs" />
+    <Compile Include="Implementatios\ConsortiumRepository.cs" />
+    <Compile Include="Implementatios\FunctionalUnitRepository.cs" />
+    <Compile Include="Implementatios\StatusRepository.cs" />
     <Compile Include="Implementatios\Repository.cs" />
+    <Compile Include="Implementatios\PriorityRepository.cs" />
     <Compile Include="Implementatios\TicketRepository.cs" />
     <Compile Include="Implementatios\UserRepository.cs" />
     <Compile Include="Interceptors\ServicesInterceptor.cs" />
+    <Compile Include="Mappings\AdministrationMap.cs" />
     <Compile Include="Mappings\ContactDataMap.cs" />
     <Compile Include="Mappings\EntityMap.cs" />
     <Compile Include="Mappings\PriorityMap.cs" />
+    <Compile Include="Mappings\BacklogUserMap.cs" />
     <Compile Include="Mappings\RoleMap.cs" />
+    <Compile Include="Mappings\ConsortiumMap.cs" />
+    <Compile Include="Mappings\FunctionalUnitMap.cs" />
+    <Compile Include="Mappings\TicketStatusMap.cs" />
     <Compile Include="Mappings\TicketMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

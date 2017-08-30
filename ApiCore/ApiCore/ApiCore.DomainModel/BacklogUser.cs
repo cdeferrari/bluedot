@@ -10,7 +10,7 @@ namespace ApiCore.DomainModel
     {
         public virtual User User {get; set;}
         public virtual Worker Worker {get; set;}
-        public virtual int OfficeId {get; set;}
+        public virtual int? OfficeId {get; set;}
         public virtual string Password {get; set;}
         public virtual Role Role {get; set;}        
     }

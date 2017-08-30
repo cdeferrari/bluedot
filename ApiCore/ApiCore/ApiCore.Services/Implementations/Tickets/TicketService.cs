@@ -12,11 +12,17 @@ namespace ApiCore.Services.Implementations.Tickets
     public class TicketService : ITicketService
     {
         public ITicketRepository TicketRepository { get; set; }
+        public IConsortiumRepository ConsortiumRepository { get; set; }        
+        public IStatusRepository StatusRepository { get; set; }
+        public IFunctionalUnitRepository FunctionalUnitRepository { get; set; }
+        public IPriorityRepository PriorityRepository { get; set; }        
+        public IBacklogUserRepository BacklogUserRepository { get; set; }
 
         [Transaction]
         public Ticket CreateTicket(TicketRequest ticket)
         {
             var entityToInsert = new Ticket() { };
+            MergeTicket(entityToInsert, ticket);
             TicketRepository.Insert(entityToInsert);
             return entityToInsert;
         }
@@ -52,18 +58,16 @@ namespace ApiCore.Services.Implementations.Tickets
         private void MergeTicket(Ticket originalTicket, TicketRequest ticket)
         {
             originalTicket.Customer = ticket.Customer;
-            originalTicket.ConsortiumId = ticket.ConsortiumId;
-            originalTicket.AdministrationId = ticket.AdministrationId;
-            originalTicket.StatusId = ticket.StatusId;
+            originalTicket.Consortium = this.ConsortiumRepository.GetById(ticket.ConsortiumId);
+            originalTicket.Status = this.StatusRepository.GetById(ticket.StatusId);
             originalTicket.OpenDate = ticket.OpenDate;
             originalTicket.CloseDate = ticket.CloseDate;
             originalTicket.LimitDate = ticket.LimitDate;
-            originalTicket.FunctionalUnitId = ticket.FunctionalUnitId;
-            originalTicket.Priority = ticket.Priority;
-            originalTicket.WorkerId = ticket.WorkerId;
-            originalTicket.CreatorId = ticket.CreatorId;
+            originalTicket.FunctionalUnit = this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId);
+            originalTicket.Priority = this.PriorityRepository.GetById(ticket.PriorityId);
+            originalTicket.Worker = this.BacklogUserRepository.GetById(ticket.WorkerId);
+            originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
         }
         
-
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiCore.Dtos.Response
 {
-    public class UserResponse
+    public class WorkerResponse
     {
         public virtual int Id { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Surname { get; set; }
+        public virtual UserResponse User { get; set; }        
     }
 }
