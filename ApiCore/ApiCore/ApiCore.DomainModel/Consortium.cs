@@ -11,7 +11,7 @@ namespace ApiCore.DomainModel
          public virtual string FriendlyName { get; set; }
          public virtual string CUIT { get; set; }
          public virtual string MailingList { get; set; }
-         public virtual int AdministrationId {get; set;}
-
+         public virtual Administration Administration {get; set;}
+         public virtual Ownership Ownership {get; set;}
     }
 }
