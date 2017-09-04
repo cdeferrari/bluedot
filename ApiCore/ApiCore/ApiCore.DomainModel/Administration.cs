@@ -11,6 +11,6 @@ namespace ApiCore.DomainModel
          public virtual string Name { get; set; }
          public virtual string CUIT { get; set; }
          public virtual Address Address{ get; set; }
-         public virtual Date StartDate{ get; set; }         
+         public virtual DateTime StartDate{ get; set; }         
     }
 }

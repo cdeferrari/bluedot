@@ -19,12 +19,12 @@ namespace Administracion.Services.Implementations.Tickets
 
         public void CreateTicket(Ticket ticket)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTicket, RestMethod.Post, null, new RestParamList { new RestParam("ticket", JsonConvert.SerializeObject(ticket)) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTicket, RestMethod.Post, new RestParamList { new RestParam("ticket", ticket) });                        
         }
 
         public void UpdateTicket(Ticket ticket)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateTicket, RestMethod.Put, null, new RestParamList { new RestParam("id", ticket.Id)), new RestParam("ticket", JsonConvert.SerializeObject(ticket)) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateTicket, RestMethod.Put, null, new RestParamList { new RestParam("id", ticket.Id) , new RestParam("ticket", JsonConvert.SerializeObject(ticket)) });                        
         }
 
         public void DeleteTicket(int ticketId)
@@ -32,5 +32,10 @@ namespace Administracion.Services.Implementations.Tickets
             IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
         }
 
+        Ticket ITicketService.GetTicket(int ticketId)
+        {
+            throw new NotImplementedException();
+        }
+      
     }
 }

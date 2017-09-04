@@ -120,4 +120,10 @@
   <data name="CreateTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>
+  <data name="DeleteTicket" xml:space="preserve">
+    <value>Tickets/</value>
+  </data>
+  <data name="UpdateTicket" xml:space="preserve">
+    <value>Tickets/</value>
+  </data>
 </root>

@@ -9,6 +9,7 @@ namespace Administracion.Services.Contracts.Tickets
 {
     public interface ITicketService
     {
+        Ticket GetTicket(int ticketId);
         void CreateTicket(Ticket ticket);
         void UpdateTicket(Ticket ticket);
         void DeleteTicket(int ticketId);

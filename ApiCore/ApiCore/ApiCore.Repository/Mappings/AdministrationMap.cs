@@ -10,9 +10,11 @@ namespace ApiCore.Repository.Mappings
             
             this.Property(x => x.Name).IsRequired().HasColumnName("name");
             this.Property(x => x.CUIT).IsRequired().HasColumnName("cuit");
-            this.Property(x => x.DirectionId).IsRequired().HasColumnName("direction_id");
-            this.Property(x => x.StartDate).IsRequired().HasColumnName("start_date");
             
+            this.Property(x => x.StartDate).IsRequired().HasColumnName("start_date");
+
+
+            this.HasRequired(x => x.Address).WithMany().Map(x => x.MapKey("property_id"));
 
         }
 

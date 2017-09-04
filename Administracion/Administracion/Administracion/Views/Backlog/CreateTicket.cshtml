@@ -6,7 +6,7 @@
 }
 
 <h2>Create</h2>
-@using (Html.BeginForm("CreateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateNewTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Consumidor</label>
             <div class="col-md-10">
-                <input type="file" name="@Html.NameFor(x => x.Customer)" id="@Html.IdFor(x => x.Customer)" />
+                @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
             </div>
         </div>

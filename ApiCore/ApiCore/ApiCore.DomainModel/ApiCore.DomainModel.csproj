@@ -40,11 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountType.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Address.cs" />
     <Compile Include="BacklogUser.cs" />
     <Compile Include="Administration.cs" />
     <Compile Include="ContactData.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="FunctionalUnit.cs" />
+    <Compile Include="Ownership.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="TicketStatus.cs" />
     <Compile Include="Role.cs" />

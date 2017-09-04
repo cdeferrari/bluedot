@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Administracion.DomainModel
 {
-    public class Ticket
+    public class Ticket 
     {
+        public virtual int Id { get; set; }
         public virtual string Customer { get; set; }
         public virtual int ConsortiumId { get; set; }
         public virtual int StatusId { get; set; }
