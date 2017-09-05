@@ -29,7 +29,7 @@ namespace ApiCore.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-        public virtual IUserService UserService { get; set; }
+        public virtual IBacklogUserService UserService { get; set; }
 
         public AccountController()
         {

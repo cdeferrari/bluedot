@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Contracts\BacklogUsers\IBacklogUserService.cs" />
+    <Compile Include="Implementations\BacklogUser\BacklogUserService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Implementations\Users\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,5 +66,6 @@
       <Name>ApiCore.Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
