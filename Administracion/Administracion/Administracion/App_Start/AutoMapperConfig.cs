@@ -16,7 +16,7 @@ namespace Administracion.App_Start
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Ticket, TicketViewModel>();
                 cfg.CreateMap<TicketViewModel, Ticket>();
-                
+                cfg.CreateMap<Account, AccountViewModel>();
             });
 
         }

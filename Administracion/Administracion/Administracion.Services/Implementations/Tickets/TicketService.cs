@@ -17,19 +17,19 @@ namespace Administracion.Services.Implementations.Tickets
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateTicket(Ticket ticket)
+        public bool CreateTicket(Ticket ticket)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTicket, RestMethod.Post, new RestParamList { new RestParam("ticket", ticket) });                        
+          return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTicket, RestMethod.Post, null, ticket);                        
         }
 
-        public void UpdateTicket(Ticket ticket)
+        public bool UpdateTicket(Ticket ticket)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateTicket, RestMethod.Put, null, new RestParamList { new RestParam("id", ticket.Id) , new RestParam("ticket", JsonConvert.SerializeObject(ticket)) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateTicket, RestMethod.Put, null, new RestParamList { new RestParam("id", ticket.Id) , new RestParam("ticket", JsonConvert.SerializeObject(ticket)) });                        
         }
 
-        public void DeleteTicket(int ticketId)
+        public bool DeleteTicket(int ticketId)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
         }
 
         Ticket ITicketService.GetTicket(int ticketId)

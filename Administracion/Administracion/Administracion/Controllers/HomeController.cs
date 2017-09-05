@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Administracion.DomainModel.Enum;
+using Administracion.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace Administracion.Controllers
 {
     public class HomeController : Controller
     {
+        [CustomAuthorize(Roles.Root)]
         public ActionResult Index()
         {
             return View();

@@ -123,6 +123,9 @@
   <data name="DeleteTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Users/Login</value>
+  </data>
   <data name="UpdateTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>

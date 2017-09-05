@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Administracion.DomainModel.Enum;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Administracion.Models
@@ -60,6 +61,10 @@ namespace Administracion.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public bool HasErrors { get; set; }
+
+        public string MessageError { get; set; }
     }
 
     public class RegisterViewModel
@@ -106,6 +111,27 @@ namespace Administracion.Models
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
+    public class AccountViewModel
+    {
+        public int Id { get; set; }
+
+        [Display(Name ="Usuario")]
+        [Required(ErrorMessage = "Debe seleccionar un Nombre de Usuario")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Debe seleccionar un Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public Roles Role { get; set; }
+
+        [Required(ErrorMessage = "Debe ingresar un Email")]
+        [EmailAddress(ErrorMessage = "El email ingresado no tiene el formato correcto")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

@@ -1,6 +1,8 @@
 ﻿using Administracion.Integration.Contracts;
 using Administracion.Integration.Implementations;
+using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Tickets;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
@@ -34,6 +36,7 @@ namespace Administracion.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
             builder.RegisterType<Asynchronic>().As<IAsync>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<Authentication>().As<IAuthentication>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<Synchronic>().As<ISync>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<TicketService>().As<ITicketService>().SingleInstance().PropertiesAutowired();
             

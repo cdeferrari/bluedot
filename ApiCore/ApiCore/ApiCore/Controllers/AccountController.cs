@@ -16,6 +16,10 @@ using Microsoft.Owin.Security.OAuth;
 using ApiCore.Models;
 using ApiCore.Providers;
 using ApiCore.Results;
+using ApiCore.Services.Implementations.Users;
+using ApiCore.Services.Contracts.Users;
+using AutoMapper;
+using ApiCore.Dtos.Response;
 
 namespace ApiCore.Controllers
 {
@@ -25,6 +29,7 @@ namespace ApiCore.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        public virtual IUserService UserService { get; set; }
 
         public AccountController()
         {
@@ -73,6 +78,19 @@ namespace ApiCore.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
+
+
+        // POST api/Account/Login
+        [Route("Login")]
+        public IHttpActionResult Login(string userName, string password)
+        {
+            var user = this.UserService.GetByEmailAndPassword(userName, password);
+
+            var dto = Mapper.Map<BacklogUserResponse>(user);
+
+            return Ok(dto);
+        }
+
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]

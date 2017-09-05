@@ -23,12 +23,19 @@ namespace Administracion.Controllers
         public ActionResult CreateNewTicket(TicketViewModel ticket)
         {
          
-            var nticket = new Ticket();
+            var nticket = new Ticket(); 
             //this.MapTicket(nticket, ticket);
             nticket = Mapper.Map<Ticket>(ticket);
-            this.TicketService.CreateTicket(nticket);
+            try
+            {
+                this.TicketService.CreateTicket(nticket);
+                return View("CreateSuccess");
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
             
-            return View();
         }
 
 

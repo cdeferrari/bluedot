@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Autentication\IAuthentication.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
+    <Compile Include="Implementations\Autentication\Authentication.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
