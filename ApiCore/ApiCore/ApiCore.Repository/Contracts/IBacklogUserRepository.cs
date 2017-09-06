@@ -9,6 +9,7 @@ namespace ApiCore.Repository.Contracts
 {
     public interface IBacklogUserRepository : IRepository<BacklogUser>
     {
-        
+        BacklogUser GetByEmailAndPassword(string email, string password);
+
     }
 }

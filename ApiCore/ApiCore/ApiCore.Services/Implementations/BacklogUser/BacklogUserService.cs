@@ -1,4 +1,5 @@
-﻿using ApiCore.Services.Implementations.BacklogUsers;
+﻿using ApiCore.Repository.Contracts;
+using ApiCore.Services.Implementations.BacklogUsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ApiCore.Services.Implementations.BacklogUser
 
         public DomainModel.BacklogUser GetByEmailAndPassword(string email, string password)
         {
-            throw new NotImplementedException();
+            return this.BacklogUserRepository.GetByEmailAndPassword(email, password);
         }
     }
 }

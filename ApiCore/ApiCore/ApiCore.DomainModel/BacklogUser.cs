@@ -12,6 +12,7 @@ namespace ApiCore.DomainModel
         public virtual Worker Worker {get; set;}
         public virtual int? OfficeId {get; set;}
         public virtual string Password {get; set;}
+        public virtual string Email { get; set; }
         public virtual Role Role {get; set;}        
     }
 }
