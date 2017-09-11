@@ -16,6 +16,8 @@ using ApiCore.Services.Contracts.Tickets;
 using ApiCore.Services.Implementations.Tickets;
 using ApiCore.Repository.Implementatios;
 using Autofac.Extras.DynamicProxy2;
+using ApiCore.Services.Implementations.BacklogUser;
+using ApiCore.Services.Implementations.BacklogUsers;
 
 namespace ApiCore.App_Start
 {
@@ -58,6 +60,10 @@ namespace ApiCore.App_Start
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<BacklogUserService>().As<IBacklogUserService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+            
 
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();

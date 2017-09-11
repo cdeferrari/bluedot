@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Administracion.Dto
+namespace ApiCore.Dtos.Response
 {
-    public class Class1
+    public class AccountTypeResponse
     {
+        public virtual string Description { get; set; }
+
     }
 }

@@ -20,11 +20,12 @@ using ApiCore.Services.Implementations.Users;
 using ApiCore.Services.Contracts.Users;
 using AutoMapper;
 using ApiCore.Dtos.Response;
+using ApiCore.Services.Implementations.BacklogUsers;
 
 namespace ApiCore.Controllers
 {
-    [Authorize]
-    [RoutePrefix("api/Account")]
+    //[Authorize]
+    [RoutePrefix("Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -82,9 +83,9 @@ namespace ApiCore.Controllers
 
         // POST api/Account/Login
         [Route("Login")]
-        public IHttpActionResult Login(string userName, string password)
+        public IHttpActionResult Login(string email, string password)
         {
-            var user = this.UserService.GetByEmailAndPassword(userName, password);
+            var user = this.UserService.GetByEmailAndPassword(email, password);
 
             var dto = Mapper.Map<BacklogUserResponse>(user);
 

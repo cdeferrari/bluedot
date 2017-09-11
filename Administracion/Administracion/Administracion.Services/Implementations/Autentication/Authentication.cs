@@ -1,14 +1,11 @@
 ﻿using Administracion.Services.Contracts.Autentication;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Administracion.DomainModel;
 using Administracion.Integration.Contracts;
 using System.Configuration;
 using Administracion.Library.ApiResources;
 using Administracion.Integration.Model;
+using Administracion.Dto.Account;
 
 namespace Administracion.Services.Implementations.Autentication
 {
@@ -18,15 +15,17 @@ namespace Administracion.Services.Implementations.Autentication
 
         public Account Login(string userName, string password)
         {
-            //var result = IntegrationService.RestCall<Account>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.Login, RestMethod.Post, null, new RestParamList() {new RestParam("userName", userName), new RestParam("password", password) } );
+            var account = IntegrationService.RestCall<AccountResponse>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.Login, RestMethod.Post, new RestParamList() {new RestParam("email", userName, RestParamType.QueryString), new RestParam("password", password, RestParamType.QueryString) } );
+
             var result = new Account()
             {
-                Email = userName,
-                Id = 1,
-                Password = password,
-                Roles = DomainModel.Enum.Roles.Client,
-                UserName = userName
+                Email = account.Email,
+                Id = account.Id,
+                Password = account.Password,
+                Role = account.Role.Id == 1 ? DomainModel.Enum.Roles.Root : DomainModel.Enum.Roles.Client,
+                Name = account.User.Name + " " + account.User.Surname
             }; 
+
             return result;
             
         }

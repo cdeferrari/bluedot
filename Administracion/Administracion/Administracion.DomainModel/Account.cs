@@ -11,12 +11,15 @@ namespace Administracion.DomainModel
     {
         public int Id { get; set; }
 
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         public string Password { get; set; }
 
-        public virtual Roles Roles { get; set; }
+        public virtual Roles Role { get; set; }
 
         public virtual string Email { get; set; }
+
+
+       
     }
 }

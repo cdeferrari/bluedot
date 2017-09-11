@@ -15,7 +15,7 @@ namespace Administracion.Security
         public CustomPrincipal(Account account)
         {
             this.account = account;
-            this.Identity = new GenericIdentity(account.UserName);
+            this.Identity = new GenericIdentity(account.Name);
         }
 
         public IIdentity Identity

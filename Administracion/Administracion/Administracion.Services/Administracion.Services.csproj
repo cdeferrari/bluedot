@@ -58,6 +58,10 @@
       <Project>{2cd184c9-85ee-4ba6-bf93-d02a29c73e9d}</Project>
       <Name>Administracion.DomainModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Administracion.Dto\Administracion.Dto.csproj">
+      <Project>{cb83e765-8500-4fb2-8004-578df5c40325}</Project>
+      <Name>Administracion.Dto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Administracion.Integration\Administracion.Integration.csproj">
       <Project>{e799a22e-57ce-4877-8573-d0cbb2c45546}</Project>
       <Name>Administracion.Integration</Name>

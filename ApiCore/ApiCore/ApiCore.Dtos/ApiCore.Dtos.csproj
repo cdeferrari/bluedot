@@ -44,6 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\TicketRequest.cs" />
     <Compile Include="Request\UserRequest.cs" />
+    <Compile Include="Response\AccountResponse.cs" />
+    <Compile Include="Response\AccountTypeResponse.cs" />
+    <Compile Include="Response\ContactDataResponse.cs" />
     <Compile Include="Response\RoleResponse.cs" />
     <Compile Include="Response\PriorityResponse.cs" />
     <Compile Include="Response\TicketStatusResponse.cs" />

@@ -22,6 +22,9 @@ namespace ApiCore
                 cfg.CreateMap<TicketStatus, TicketStatusResponse>();
                 cfg.CreateMap<BacklogUser, BacklogUserResponse>();
                 cfg.CreateMap<User, UserResponse>();
+                cfg.CreateMap<ContactData, ContactDataResponse>();
+                cfg.CreateMap<Account, AccountResponse>();
+                cfg.CreateMap<AccountType, AccountTypeResponse>();
                 cfg.CreateMap<Worker, WorkerResponse>();
                 cfg.CreateMap<Role, RoleResponse>();
 

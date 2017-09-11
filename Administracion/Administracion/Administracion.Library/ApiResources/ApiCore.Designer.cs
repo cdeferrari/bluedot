@@ -79,7 +79,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Users/Login.
+        ///   Busca una cadena traducida similar a Account/Login.
         /// </summary>
         public static string Login {
             get {

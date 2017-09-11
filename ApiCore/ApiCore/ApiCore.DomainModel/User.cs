@@ -13,7 +13,7 @@ namespace ApiCore.DomainModel
          public virtual string Name { get; set; }
          public virtual string Surname { get; set; }
          public virtual ContactData ContactData {get; set;}
-         public virtual Account Account {get; set;}          
+         //public virtual Account Account {get; set;}          
          
     }
 }
