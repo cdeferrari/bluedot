@@ -259,6 +259,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\login-bkg.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -316,6 +317,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Backlog\CreateTicket.cshtml" />
     <Content Include="Views\Backlog\CreateSuccess.cshtml" />
+    <Content Include="Views\Backlog\Index.cshtml" />
+    <Content Include="Views\Shared\_FormLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

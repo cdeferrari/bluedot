@@ -14,6 +14,13 @@ namespace Administracion.Controllers
     public class BacklogController : Controller
     {
         public virtual ITicketService TicketService { get; set; }
+
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         // GET: Backlog
         public ActionResult CreateTicket()
         {

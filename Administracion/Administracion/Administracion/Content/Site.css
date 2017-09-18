@@ -5,7 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
+    padding-left: 12%;
+    margin-top: 10%;
     padding-right: 15px;
 }
 
@@ -777,6 +778,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
 
     .panel .panel-body {
         padding: 25px;
+        margin-left: 20%;
     }
 
         .panel .panel-body + .panel-footer {
@@ -1685,4 +1687,111 @@ body.single-page-inverse .single-page-block-header {
     padding: 9px 16px 7px;
     font-size: .875rem;
     line-height: 1.5;
+}
+
+
+/*
+    login
+
+*/
+.page-content-inner.login-content {
+    background-image: url(img/login-bkg.jpg);
+    background-size: cover
+}
+
+
+/*widgets*/
+.widget-seven.background-primary, .widget-seven.background-secondary, .widget-seven.background-default, .widget-seven.background-info, .widget-seven.background-danger, .widget-seven.background-warning, .widget-seven.background-info, .widget-seven.background-success {
+    color: #ffffff;
+}
+body .widget, body .panel, .widget-four .step-block {
+    margin-bottom: 16px;
+}
+
+.widget-seven {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-size: cover;
+    position: relative;
+}
+
+.widget {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    position: relative;
+    border: 1px solid #dfe4ed;
+}
+
+.widget-seven .widget-body {
+    padding: 30px 25px 35px;
+    height: 142px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.widget .widget-body {
+    display: block;
+    -webkit-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+.widget-seven .widget-body .widget-body-inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+}
+
+.widget-seven .widget-body h1, .widget-seven .widget-body h2, .widget-seven .widget-body h3, .widget-seven .widget-body h4, .widget-seven .widget-body h5, .widget-seven .widget-body h6, .widget-seven .widget-body .h1, .widget-seven .widget-body .h2, .widget-seven .widget-body .h3, .widget-seven .widget-body .h4, .widget-seven .widget-body .h5, .widget-seven .widget-body .h6 {
+    color: inherit;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.widget-seven h5 {
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.widget-seven.background-primary a, .widget-seven.background-primary .counter-icon, .widget-seven.background-primary .counter-count, .widget-seven.background-secondary a, .widget-seven.background-secondary .counter-icon, .widget-seven.background-secondary .counter-count, .widget-seven.background-default a, .widget-seven.background-default .counter-icon, .widget-seven.background-default .counter-count, .widget-seven.background-info a, .widget-seven.background-info .counter-icon, .widget-seven.background-info .counter-count, .widget-seven.background-danger a, .widget-seven.background-danger .counter-icon, .widget-seven.background-danger .counter-count, .widget-seven.background-warning a, .widget-seven.background-warning .counter-icon, .widget-seven.background-warning .counter-count, .widget-seven.background-info a, .widget-seven.background-info .counter-icon, .widget-seven.background-info .counter-count, .widget-seven.background-success a, .widget-seven.background-success .counter-icon, .widget-seven.background-success .counter-count {
+    color: #ffffff;
+}
+
+.widget-seven .counter-icon {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin-top: 18px;
+    display: inline-block;
+    color: #827ca1;
+    font-size: 36px;
+}
+
+.icmn-server:before {
+    content: "\ea92";
+}
+
+.widget-seven.background-primary a, .widget-seven.background-primary .counter-icon, .widget-seven.background-primary .counter-count, .widget-seven.background-secondary a, .widget-seven.background-secondary .counter-icon, .widget-seven.background-secondary .counter-count, .widget-seven.background-default a, .widget-seven.background-default .counter-icon, .widget-seven.background-default .counter-count, .widget-seven.background-info a, .widget-seven.background-info .counter-icon, .widget-seven.background-info .counter-count, .widget-seven.background-danger a, .widget-seven.background-danger .counter-icon, .widget-seven.background-danger .counter-count, .widget-seven.background-warning a, .widget-seven.background-warning .counter-icon, .widget-seven.background-warning .counter-count, .widget-seven.background-info a, .widget-seven.background-info .counter-icon, .widget-seven.background-info .counter-count, .widget-seven.background-success a, .widget-seven.background-success .counter-icon, .widget-seven.background-success .counter-count {
+    color: #ffffff;
+}
+
+.widget-seven .counter-count {
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
+    font-size: 42px;
+    color: #827ca1;
+}
+
+.background-default {
+    background-color: #acb7bf !important;
 }
