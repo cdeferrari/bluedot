@@ -11,21 +11,28 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    public class BacklogController : Controller
+    public class DataBaseController : Controller
     {
-        public virtual ITicketService TicketService { get; set; }
+        public virtual IDataBaseService DataBaseService { get; set; }
+        // GET: DataBase
 
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Backlog
-        public ActionResult CreateTicket()
+
+        public ActionResult CreateConsortium()
+        {
+            return redirect()
+        }
+
+        public ActionResult CreateUser()
         {
             return View();
         }
 
+        
         public ActionResult CreateNewTicket(TicketViewModel ticket)
         {
          
@@ -49,7 +56,7 @@ namespace Administracion.Controllers
         {
             var oTicket = this.TicketService.GetTicket(id);
             var ticket = Mapper.Map<TicketViewModel>(oTicket);            
-            return View("CreateTicket",ticket);
+            return View(ticket);
         }
 
         public ActionResult UpdateTicket(TicketViewModel ticket)
@@ -67,21 +74,6 @@ namespace Administracion.Controllers
             return View();
         }
         
-        public ActionResult List()
-        {         
-         
-            try
-            {
-                var tickets = this.TicketService.GetTickets();
-                return View(tickets);
-            }
-            catch (Exception ex)
-            {
-                return View("../Shared/Error");
-            }
-            
-        }
-
 
     }
 }

@@ -9,6 +9,8 @@ namespace Administracion.DomainModel
     public class Ticket 
     {
         public virtual int Id { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Description { get; set; }
         public virtual string Customer { get; set; }
         public virtual int ConsortiumId { get; set; }
         public virtual int StatusId { get; set; }

@@ -32,9 +32,15 @@ namespace Administracion.Services.Implementations.Tickets
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
         }
 
-        Ticket ITicketService.GetTicket(int ticketId)
+        public Ticket GetTicket(int ticketId)
         {
-            throw new NotImplementedException();
+            return IntegrationService.RestCall<Ticket>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
+            
+        }
+
+        public IList<Ticket> GetAll()
+        {
+            return IntegrationService.RestCall<IList<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Delete, null, null);                                    
         }
       
     }

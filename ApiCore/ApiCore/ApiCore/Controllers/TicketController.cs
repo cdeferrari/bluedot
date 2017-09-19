@@ -23,7 +23,27 @@ namespace ApiCore.Controllers
     {
 
         public ITicketService TicketService { get; set; }
-     
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve todos los tickets
+        /// </summary>        
+        /// <returns></returns>
+
+        [ResponseType(typeof(IList<TicketResponse>))]
+        public IHttpActionResult Get()
+        {
+            var tickets = TicketService.GetAll();
+
+            if (tickets == null)
+                throw new NotFoundException(ErrorMessages.TicketNoEncontrado);
+
+            var dto = Mapper.Map<IList<TicketResponse>>(tickets);
+            
+            return Ok(dto);
+        }
+
+
 
         // GET api/<controller>/5
         /// <summary>

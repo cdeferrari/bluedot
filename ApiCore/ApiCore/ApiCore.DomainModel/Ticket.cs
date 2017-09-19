@@ -9,6 +9,8 @@ namespace ApiCore.DomainModel
     public class Ticket : Entity
     {
         public virtual string Customer { get; set; }
+        public virtual string Description { get; set; }
+        public virtual string Title { get; set; }
         public virtual Consortium Consortium { get; set; }
         public virtual TicketStatus Status { get; set; }
         public virtual DateTime OpenDate { get; set; }

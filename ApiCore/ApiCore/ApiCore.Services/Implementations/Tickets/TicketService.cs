@@ -53,6 +53,16 @@ namespace ApiCore.Services.Implementations.Tickets
             var ticket = TicketRepository.GetById(ticketId);
             TicketRepository.Delete(ticket);
         }
+
+        [Transaction]
+        public IList<Ticket> GetAll()
+        {
+            var tickets = TicketRepository.GetAll();
+            if (tickets == null)
+                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
+
+            return tickets;
+        }
         
 
         private void MergeTicket(Ticket originalTicket, TicketRequest ticket)
