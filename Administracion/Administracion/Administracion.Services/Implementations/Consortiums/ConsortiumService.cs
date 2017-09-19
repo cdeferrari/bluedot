@@ -19,12 +19,12 @@ namespace Administracion.Services.Implementations.Consortiums
 
         public void CreateConsortium(Consortium consortium)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, new RestParamList { new RestParam("consortium", JsonConvert.SerializeObject(consortium)) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, new RestParamList { new RestParam("consortium", consortium) });                        
         }
 
         public void UpdateConsortium(Consortium consortium)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateConsortium, RestMethod.Put, null, new RestParamList {new RestParam("id", consortium.Id, new RestParam("consortium", JsonConvert.SerializeObject(consortium)) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateConsortium, RestMethod.Put, null, new RestParamList {new RestParam("id", consortium.Id, new RestParam("consortium", consortium) });                        
         }
 
         public void DeleteConsortium(int consortiumId)
