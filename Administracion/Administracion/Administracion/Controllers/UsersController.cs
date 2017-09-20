@@ -1,6 +1,7 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Models;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
 using System;
@@ -13,7 +14,7 @@ namespace Administracion.Controllers
 {
     public class UsersController : Controller
     {
-        public virtual IUserService TicketService { get; set; }
+        public virtual IUserService UserService { get; set; }
 
         public ActionResult Index()
         {
@@ -26,7 +27,7 @@ namespace Administracion.Controllers
             return View();
         }
 
-        public ActionResult CreateNewUser(UserViewModel ticket)
+        public ActionResult CreateNewUser(UserViewModel user)
         {
          
             var nuser = new User(); 
@@ -72,7 +73,7 @@ namespace Administracion.Controllers
          
             try
             {
-                var users = this.UserService.GetUsers();
+                var users = this.UserService.GetAll();
                 return View(users);
             }
             catch (Exception ex)

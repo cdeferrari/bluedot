@@ -11,7 +11,8 @@ using AutoMapper;
 using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
-using ApiCore.Services.Contracts.Consortium;
+using ApiCore.Services.Contracts.Consortiums;
+using ApiCore.Services.Contracts.Unit;
 
 namespace ApiCore.Controllers
 {
@@ -22,8 +23,9 @@ namespace ApiCore.Controllers
     public class UnitController : ApiController
     {
 
-        public IUnitService UnitService { get; set; }
-     
+        public virtual IUnitService UnitService { get; set; }
+        public virtual IConsortiumService ConsortiumService { get; set; }
+
 
         // GET api/<controller>/5
         /// <summary>
@@ -56,7 +58,7 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(Entidad))]
         public IHttpActionResult Post(ConsortiumRequest consortium)
         {
-            var result = ConsortiumService.CreateConsortiumconsortium);
+            var result = ConsortiumService.CreateConsortium(consortium);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 

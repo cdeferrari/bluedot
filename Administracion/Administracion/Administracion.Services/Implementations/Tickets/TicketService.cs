@@ -1,9 +1,6 @@
 ﻿using Administracion.Services.Contracts.Tickets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Administracion.DomainModel;
 using Administracion.Integration.Contracts;
 using Administracion.Integration.Model;
@@ -34,13 +31,13 @@ namespace Administracion.Services.Implementations.Tickets
 
         public Ticket GetTicket(int ticketId)
         {
-            return IntegrationService.RestCall<Ticket>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Delete, null, new RestParamList { new RestParam("id", ticketId) });                        
+            return IntegrationService.RestCall<Ticket>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Get, null, new RestParamList { new RestParam("id", ticketId) });                        
             
         }
 
         public IList<Ticket> GetAll()
         {
-            return IntegrationService.RestCall<IList<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Delete, null, null);                                    
+            return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Get, null, null);                                    
         }
       
     }

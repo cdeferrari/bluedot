@@ -11,7 +11,7 @@ using AutoMapper;
 using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
-using ApiCore.Services.Contracts.Consortium;
+using ApiCore.Services.Contracts.Consortiums;
 
 namespace ApiCore.Controllers
 {
@@ -56,7 +56,7 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(Entidad))]
         public IHttpActionResult Post(ConsortiumRequest consortium)
         {
-            var result = ConsortiumService.CreateConsortiumconsortium);
+            var result = ConsortiumService.CreateConsortium(consortium);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 

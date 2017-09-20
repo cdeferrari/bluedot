@@ -6,6 +6,7 @@ using ApiCore.Repository.Contracts;
 using ApiCore.Repository.Attributes;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
+using ApiCore.Services.Contracts.Consortiums;
 
 namespace ApiCore.Services.Implementations.Consortiums
 {
@@ -19,7 +20,7 @@ namespace ApiCore.Services.Implementations.Consortiums
         public IBacklogUserRepository BacklogUserRepository { get; set; }
 
         [Transaction]
-        public Consortium CreateTicket(ConsortiumRequest ticket)
+        public Consortium CreateConsortium(ConsortiumRequest consortium)
         {
             var entityToInsert = new Consortium() { };
             MergeConsortium(entityToInsert, consortium);

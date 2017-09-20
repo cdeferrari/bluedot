@@ -70,6 +70,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Consorcio no encontrado.
+        /// </summary>
+        public static string ConsorcioNoEncontrado {
+            get {
+                return ResourceManager.GetString("ConsorcioNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Forbidden.
         /// </summary>
         public static string Forbidden {
@@ -120,6 +129,15 @@ namespace ApiCore.Library.Mensajes {
         public static string Unauthorized {
             get {
                 return ResourceManager.GetString("Unauthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unidad no encontrada.
+        /// </summary>
+        public static string UnidadNoEncontrada {
+            get {
+                return ResourceManager.GetString("UnidadNoEncontrada", resourceCulture);
             }
         }
         

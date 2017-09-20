@@ -9,6 +9,7 @@ namespace Administracion.Services.Contracts.Consortiums
 {
     public interface IConsortiumService
     {
+        Consortium GetConsortium(int consortiumId);
         void CreateConsortium(Consortium consortium);
         void UpdateConsortium(Consortium consortium);
         void DeleteConsortium(int consortiumId);

@@ -2,6 +2,7 @@
 using Administracion.Models;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Implementations.Consortiums;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,27 @@ namespace Administracion.Controllers
 {
     public class ConsortiumController : Controller
     {
-        public IConsortiumService TicketService { get; set; }
+        public IConsortiumService ConsortiumService { get; set; }
         // GET: Backlog
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult CreateConsortium()
         {
             return View();
         }
 
+
+        [HttpPost]
         public ActionResult CreateConsortium(ConsortiumViewModel consortium)
         {
          
             var nConsortium = new Consortium();
             
-            var nConsortium = Mapper.Map<Consortium>(consortium);
+            nConsortium = Mapper.Map<Consortium>(consortium);
             this.ConsortiumService.CreateConsortium(nConsortium);            
             return View();
         }
@@ -41,7 +50,7 @@ namespace Administracion.Controllers
         {            
             var nConsortium = new Consortium();
             
-            var nConsortium = Mapper.Map<Consortium>(consortium);            
+            nConsortium = Mapper.Map<Consortium>(consortium);            
             this.ConsortiumService.UpdateConsortium(nConsortium);
             return View();
         }

@@ -240,15 +240,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BacklogController.cs" />
+    <Compile Include="Controllers\ConsortiumController.cs" />
+    <Compile Include="Controllers\DataBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressViewModel.cs" />
+    <Compile Include="Models\AdministrationViewModel.cs" />
+    <Compile Include="Models\ConsortiumViewModel.cs" />
+    <Compile Include="Models\DataContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OwnershipViewModel.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
@@ -257,11 +266,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\base.default.css" />
+    <Content Include="Content\base.responsive.css" />
+    <Content Include="Content\basic-form-elements.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts.css" />
+    <Content Include="Content\form-validation.css" />
     <Content Include="Content\img\login-bkg.jpg" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\icomoon-ultimate.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -269,6 +287,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\_reboot.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\icomoon-ultimate.eot" />
+    <Content Include="fonts\icomoon-ultimate.ttf" />
+    <Content Include="fonts\icomoon-ultimate.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -319,6 +346,14 @@
     <Content Include="Views\Backlog\CreateSuccess.cshtml" />
     <Content Include="Views\Backlog\Index.cshtml" />
     <Content Include="Views\Shared\_FormLayout.cshtml" />
+    <Content Include="Views\Backlog\_TicketItem.cshtml" />
+    <Content Include="Views\Backlog\List.cshtml" />
+    <Content Include="Views\Consortium\CreateConsortium.cshtml" />
+    <Content Include="Views\Users\CreateSuccess.cshtml" />
+    <Content Include="Views\Users\CreateUser.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\DataBase\Index.cshtml" />
+    <Content Include="Views\Consortium\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

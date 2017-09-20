@@ -10,6 +10,7 @@ using Administracion.Integration.Model;
 using System.Configuration;
 using Administracion.Library.ApiResources;
 using Newtonsoft.Json;
+using Administracion.Services.Contracts.Consortiums;
 
 namespace Administracion.Services.Implementations.Consortiums
 {
@@ -24,7 +25,7 @@ namespace Administracion.Services.Implementations.Consortiums
 
         public void UpdateConsortium(Consortium consortium)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateConsortium, RestMethod.Put, null, new RestParamList {new RestParam("id", consortium.Id, new RestParam("consortium", consortium) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateConsortium, RestMethod.Put, null, new RestParamList {new RestParam("id", consortium.Id), new RestParam("consortium", consortium) });                        
         }
 
         public void DeleteConsortium(int consortiumId)
@@ -32,5 +33,11 @@ namespace Administracion.Services.Implementations.Consortiums
             IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteConsortium, RestMethod.Delete, null, new RestParamList { new RestParam("id", consortiumId) });                        
         }
 
+        public Consortium GetConsortium(int consortiumId)
+        {
+
+            return IntegrationService.RestCall<Consortium>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetConsortium, RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+            
+        }
     }
 }

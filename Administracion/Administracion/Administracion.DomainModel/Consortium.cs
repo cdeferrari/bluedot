@@ -8,6 +8,7 @@ namespace Administracion.DomainModel
 {
     public class Consortium
     {
+        public virtual int Id { get; set; }
         public virtual string FriendlyName { get; set; }
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }

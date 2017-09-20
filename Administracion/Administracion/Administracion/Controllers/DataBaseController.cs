@@ -13,7 +13,8 @@ namespace Administracion.Controllers
 {
     public class DataBaseController : Controller
     {
-        public virtual IDataBaseService DataBaseService { get; set; }
+        //public virtual IDataBaseService DataBaseService { get; set; }
+        public virtual ITicketService TicketService { get; set; }
         // GET: DataBase
 
         public ActionResult Index()
@@ -24,7 +25,7 @@ namespace Administracion.Controllers
 
         public ActionResult CreateConsortium()
         {
-            return redirect()
+            return View();
         }
 
         public ActionResult CreateUser()

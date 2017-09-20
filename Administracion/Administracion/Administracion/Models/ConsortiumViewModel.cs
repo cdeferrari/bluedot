@@ -12,5 +12,6 @@ namespace Administracion.Models
         public virtual string MailingList { get; set; }
         public virtual AdministrationViewModel Administration {get; set;}
         public virtual OwnershipViewModel OwnershipId {get; set;}
+        public virtual AddressViewModel Address{ get; set; }
     }
 }

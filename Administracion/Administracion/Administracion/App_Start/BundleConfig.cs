@@ -25,6 +25,12 @@ namespace Administracion
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/_reboot.scss",
+                      "~/Content/base.default.css",
+                      "~/Content/base.responsive.css",
+                      "~/Content/fonts.css",
+                      "~/Content/form-validation.css",
+                      "~/Content/basic-form-elements.css",
                       "~/Content/Site.css"));
         }
     }

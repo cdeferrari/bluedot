@@ -6,6 +6,7 @@ using ApiCore.Repository.Contracts;
 using ApiCore.Repository.Attributes;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
+using System.Collections.Generic;
 
 namespace ApiCore.Services.Implementations.Tickets
 {
@@ -61,7 +62,14 @@ namespace ApiCore.Services.Implementations.Tickets
             if (tickets == null)
                 throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
 
-            return tickets;
+            var result = new List<Ticket>();
+            var enumerator = tickets.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                result.Add(enumerator.Current);
+
+            }
+            return result ;
         }
         
 

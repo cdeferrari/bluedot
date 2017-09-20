@@ -72,7 +72,7 @@ namespace Administracion.Controllers
          
             try
             {
-                var tickets = this.TicketService.GetTickets();
+                var tickets = this.TicketService.GetAll();
                 return View(tickets);
             }
             catch (Exception ex)

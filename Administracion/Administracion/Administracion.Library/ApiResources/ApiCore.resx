@@ -117,16 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreateConsortium" xml:space="preserve">
+    <value>Consortium/</value>
+  </data>
   <data name="CreateTicket" xml:space="preserve">
     <value>Tickets/</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>User/</value>
+  </data>
+  <data name="DeleteConsortium" xml:space="preserve">
+    <value>Consortium/</value>
   </data>
   <data name="DeleteTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>User/</value>
+  </data>
+  <data name="GetConsortium" xml:space="preserve">
+    <value>Consortium/</value>
+  </data>
+  <data name="GetTicket" xml:space="preserve">
+    <value>Tickets/</value>
+  </data>
+  <data name="GetUser" xml:space="preserve">
+    <value>User/</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Account/Login</value>
   </data>
+  <data name="UpdateConsortium" xml:space="preserve">
+    <value>Consortium/</value>
+  </data>
   <data name="UpdateTicket" xml:space="preserve">
     <value>Tickets/</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>User/</value>
   </data>
 </root>

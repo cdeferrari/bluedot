@@ -42,16 +42,19 @@
   <ItemGroup>
     <Compile Include="Entidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\ConsortiumRequest.cs" />
     <Compile Include="Request\TicketRequest.cs" />
     <Compile Include="Request\UserRequest.cs" />
     <Compile Include="Response\AccountResponse.cs" />
     <Compile Include="Response\AccountTypeResponse.cs" />
+    <Compile Include="Response\ConsortiumResponse.cs" />
     <Compile Include="Response\ContactDataResponse.cs" />
     <Compile Include="Response\RoleResponse.cs" />
     <Compile Include="Response\PriorityResponse.cs" />
     <Compile Include="Response\TicketStatusResponse.cs" />
     <Compile Include="Response\TicketResponse.cs" />
     <Compile Include="Response\BacklogUserResponse.cs" />
+    <Compile Include="Response\UnitResponse.cs" />
     <Compile Include="Response\WorkerResponse.cs" />
     <Compile Include="Response\UserResponse.cs" />
   </ItemGroup>

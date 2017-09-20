@@ -45,9 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
+    <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
+    <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Autentication\Authentication.cs" />
+    <Compile Include="Implementations\Consortiums\ConsortiumService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
+    <Compile Include="Implementations\Users\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

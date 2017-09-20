@@ -61,11 +61,38 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Consortium/.
+        /// </summary>
+        public static string CreateConsortium {
+            get {
+                return ResourceManager.GetString("CreateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tickets/.
         /// </summary>
         public static string CreateTicket {
             get {
                 return ResourceManager.GetString("CreateTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User/.
+        /// </summary>
+        public static string CreateUser {
+            get {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Consortium/.
+        /// </summary>
+        public static string DeleteConsortium {
+            get {
+                return ResourceManager.GetString("DeleteConsortium", resourceCulture);
             }
         }
         
@@ -79,6 +106,42 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a User/.
+        /// </summary>
+        public static string DeleteUser {
+            get {
+                return ResourceManager.GetString("DeleteUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Consortium/.
+        /// </summary>
+        public static string GetConsortium {
+            get {
+                return ResourceManager.GetString("GetConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tickets/.
+        /// </summary>
+        public static string GetTicket {
+            get {
+                return ResourceManager.GetString("GetTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User/.
+        /// </summary>
+        public static string GetUser {
+            get {
+                return ResourceManager.GetString("GetUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Account/Login.
         /// </summary>
         public static string Login {
@@ -88,11 +151,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Consortium/.
+        /// </summary>
+        public static string UpdateConsortium {
+            get {
+                return ResourceManager.GetString("UpdateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tickets/.
         /// </summary>
         public static string UpdateTicket {
             get {
                 return ResourceManager.GetString("UpdateTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User/.
+        /// </summary>
+        public static string UpdateUser {
+            get {
+                return ResourceManager.GetString("UpdateUser", resourceCulture);
             }
         }
     }

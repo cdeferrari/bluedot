@@ -1,13 +1,14 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /* padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 12%;
     margin-top: 10%;
-    padding-right: 15px;
+    /* padding-right: 15px;*/
+    width: 100%;
+    height: 100%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -777,8 +778,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
         }
 
     .panel .panel-body {
-        padding: 25px;
-        margin-left: 20%;
+        
     }
 
         .panel .panel-body + .panel-footer {

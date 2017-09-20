@@ -120,6 +120,9 @@
   <data name="BadRequest" xml:space="preserve">
     <value>BadRequest</value>
   </data>
+  <data name="ConsorcioNoEncontrado" xml:space="preserve">
+    <value>Consorcio no encontrado</value>
+  </data>
   <data name="Forbidden" xml:space="preserve">
     <value>Forbidden</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>Unauthorized</value>
+  </data>
+  <data name="UnidadNoEncontrada" xml:space="preserve">
+    <value>Unidad no encontrada</value>
   </data>
   <data name="UserNoEncontrado" xml:space="preserve">
     <value>Usuario no encontrado</value>
