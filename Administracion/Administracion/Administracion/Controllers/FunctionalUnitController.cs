@@ -13,9 +13,9 @@ using System.Web.Mvc;
 namespace Administracion.Controllers
 {
     [Authorize]
-    public class UsersController : Controller
+    public class FunctionalUnitController : Controller
     {
-        public virtual IUserService UserService { get; set; }
+        public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
 
         public ActionResult Index()
         {
@@ -24,21 +24,21 @@ namespace Administracion.Controllers
 
         // GET: Backlog
         [HttpGet]
-        public ActionResult CreateUser()
+        public ActionResult CreateFunctionalUnit()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateUser(UserViewModel user)
+        public ActionResult CreateFunctionalUnit(FunctionalUnitViewModel unit)
         {
          
-            var nuser = new User(); 
+            var nunit = new FunctionalUnit(); 
             
-            nuser = Mapper.Map<User>(user);
+            nunit = Mapper.Map<FunctionalUnit>(unit);
             try
             {
-                this.UserService.CreateUser(nuser);
+                this.FunctionalUnitService.CreateFunctionalUnit(nunit);
                 return View("CreateSuccess");
             }
             catch (Exception ex)
@@ -49,25 +49,25 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateUserById(int id)
+        public ActionResult UpdateFunctionalUnitById(int id)
         {
-            var oUser = this.UserService.GetUser(id);
-            var user = Mapper.Map<UserViewModel>(oUser);            
-            return View("CreateUser",user);
+            var oUnit = this.FunctionalUnitService.GetFunctionalUnit(id);
+            var unit = Mapper.Map<FunctionalUnitViewModel>(oUnit);            
+            return View("CreateFunctionalUnit",unit);
         }
 
-        public ActionResult UpdateUser(UserViewModel user)
+        public ActionResult UpdateFunctionalUnit(FunctionalUnitViewModel unit)
         {            
-            var nuser = new User();
+            var nunit = new FunctionalUnit();
             
-            nuser = Mapper.Map<User>(user);            
-            this.UserService.UpdateUser(nuser);
+            nunit = Mapper.Map<FunctionalUnit>(unit);            
+            this.FunctionalUnitService.UpdateFunctionalUnit(nunit);
             return View();
         }
 
-        public ActionResult DeleteUser(int id)
+        public ActionResult DeleteFunctionalUnit(int id)
         {                    
-            this.UserService.DeleteUser(id);
+            this.FunctionalUnitService.DeleteFunctionalUnit(id);
             return View();
         }
         
@@ -76,8 +76,8 @@ namespace Administracion.Controllers
          
             try
             {
-                var users = this.UserService.GetAll();
-                return View(users);
+                var units = this.FunctionalUnitService.GetAll();
+                return View(units);
             }
             catch (Exception ex)
             {

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
+    [Authorize]
     public class ConsortiumController : Controller
     {
         public IConsortiumService ConsortiumService { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Models;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
 using System;
@@ -12,9 +13,9 @@ using System.Web.Mvc;
 namespace Administracion.Controllers
 {
     [Authorize]
-    public class BacklogController : Controller
+    public class OwnerController : Controller
     {
-        public virtual ITicketService TicketService { get; set; }
+        public virtual IOwnerService OwnerService { get; set; }
 
         public ActionResult Index()
         {
@@ -22,20 +23,22 @@ namespace Administracion.Controllers
         }
 
         // GET: Backlog
-        public ActionResult CreateTicket()
+        [HttpGet]
+        public ActionResult CreateOwner()
         {
             return View();
         }
 
-        public ActionResult CreateNewTicket(TicketViewModel ticket)
+        [HttpPost]
+        public ActionResult CreateOwner(OwnerViewModel owner)
         {
          
-            var nticket = new Ticket(); 
-            //this.MapTicket(nticket, ticket);
-            nticket = Mapper.Map<Ticket>(ticket);
+            var nowner = new Owner(); 
+            
+            nowner = Mapper.Map<Owner>(owner);
             try
             {
-                this.TicketService.CreateTicket(nticket);
+                this.OwnerService.CreateOwner(nowner);
                 return View("CreateSuccess");
             }
             catch (Exception ex)
@@ -46,25 +49,25 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateTicketById(int id)
+        public ActionResult UpdateOwnerById(int id)
         {
-            var oTicket = this.TicketService.GetTicket(id);
-            var ticket = Mapper.Map<TicketViewModel>(oTicket);            
-            return View("CreateTicket",ticket);
+            var oOwner = this.OwnerService.GetOwner(id);
+            var owner = Mapper.Map<OwnerViewModel>(oOwner);            
+            return View("CreateOwner",owner);
         }
 
-        public ActionResult UpdateTicket(TicketViewModel ticket)
+        public ActionResult UpdateOwner(OwnerViewModel owner)
         {            
-            var nticket = new Ticket();
-            ///this.MapTicket(nticket, ticket);
-            nticket = Mapper.Map<Ticket>(ticket);            
-            this.TicketService.UpdateTicket(nticket);
+            var nOwner = new Owner();
+            
+            nOwner = Mapper.Map<Owner>(owner);            
+            this.OwnerService.UpdateOwner(nowner);
             return View();
         }
 
-        public ActionResult DeleteTicket(int id)
+        public ActionResult DeleteOwner(int id)
         {                    
-            this.TicketService.DeleteTicket(id);
+            this.OwnerService.DeleteOwner(id);
             return View();
         }
         
@@ -73,8 +76,8 @@ namespace Administracion.Controllers
          
             try
             {
-                var tickets = this.TicketService.GetAll();
-                return View(tickets);
+                var owners = this.OwnerService.GetAll();
+                return View(owners);
             }
             catch (Exception ex)
             {

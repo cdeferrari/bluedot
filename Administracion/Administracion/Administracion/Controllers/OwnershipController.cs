@@ -13,9 +13,9 @@ using System.Web.Mvc;
 namespace Administracion.Controllers
 {
     [Authorize]
-    public class UsersController : Controller
+    public class OwnershipController : Controller
     {
-        public virtual IUserService UserService { get; set; }
+        public virtual IOwnershipService OwnershipService { get; set; }
 
         public ActionResult Index()
         {
@@ -24,21 +24,21 @@ namespace Administracion.Controllers
 
         // GET: Backlog
         [HttpGet]
-        public ActionResult CreateUser()
+        public ActionResult CreateOwnership()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateUser(UserViewModel user)
+        public ActionResult CreateOwnership(OwnershipViewModel owner)
         {
          
-            var nuser = new User(); 
+            var nowner = new Ownership(); 
             
-            nuser = Mapper.Map<User>(user);
+            nowner = Mapper.Map<Ownership>(owner);
             try
             {
-                this.UserService.CreateUser(nuser);
+                this.OwnershipService.CreateOwnership(nowner);
                 return View("CreateSuccess");
             }
             catch (Exception ex)
@@ -49,25 +49,25 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateUserById(int id)
+        public ActionResult UpdateOwnershipById(int id)
         {
-            var oUser = this.UserService.GetUser(id);
-            var user = Mapper.Map<UserViewModel>(oUser);            
-            return View("CreateUser",user);
+            var oOwner = this.OwnershipService.GetOwnership(id);
+            var owner = Mapper.Map<OwnershipViewModel>(oOwner);            
+            return View("CreateOwnership",owner);
         }
 
-        public ActionResult UpdateUser(UserViewModel user)
+        public ActionResult UpdateOwnership(OwnershipViewModel owner)
         {            
-            var nuser = new User();
+            var nOwner = new Ownership();
             
-            nuser = Mapper.Map<User>(user);            
-            this.UserService.UpdateUser(nuser);
+            nOwner = Mapper.Map<Ownership>(owner);            
+            this.OwnershipService.UpdateOwnership(nowner);
             return View();
         }
 
-        public ActionResult DeleteUser(int id)
+        public ActionResult DeleteOwnership(int id)
         {                    
-            this.UserService.DeleteUser(id);
+            this.OwnershipService.DeleteOwnership(id);
             return View();
         }
         
@@ -76,8 +76,8 @@ namespace Administracion.Controllers
          
             try
             {
-                var users = this.UserService.GetAll();
-                return View(users);
+                var owners = this.OwnershipService.GetAll();
+                return View(owners);
             }
             catch (Exception ex)
             {
