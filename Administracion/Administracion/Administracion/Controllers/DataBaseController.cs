@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [Authorize]
+    
     public class DataBaseController : Controller
     {
         

@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
     <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
+    <Compile Include="Contracts\FunctionalUnits\IFunctionalUnitService.cs" />
+    <Compile Include="Contracts\Ownerships\IOwnershipService.cs" />
+    <Compile Include="Contracts\Owners\IOwnerService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Autentication\Authentication.cs" />

@@ -242,8 +242,11 @@
     <Compile Include="Controllers\BacklogController.cs" />
     <Compile Include="Controllers\ConsortiumController.cs" />
     <Compile Include="Controllers\DataBaseController.cs" />
+    <Compile Include="Controllers\FunctionalUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerController.cs" />
+    <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -255,6 +258,8 @@
     <Compile Include="Models\DataContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\FunctionalUnitViewModel.cs" />
+    <Compile Include="Models\OwnerViewModel.cs" />
     <Compile Include="Models\OwnershipViewModel.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />

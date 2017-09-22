@@ -1,13 +1,8 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Models;
-using Administracion.Services.Contracts.Tickets;
-using Administracion.Services.Contracts.Users;
-using Administracion.Services.Implementations.Tickets;
+using Administracion.Services.Contracts.Owners;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Administracion.Controllers
@@ -61,7 +56,7 @@ namespace Administracion.Controllers
             var nOwner = new Owner();
             
             nOwner = Mapper.Map<Owner>(owner);            
-            this.OwnerService.UpdateOwner(nowner);
+            this.OwnerService.UpdateOwner(nOwner);
             return View();
         }
 

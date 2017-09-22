@@ -1,5 +1,6 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Models;
+using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
@@ -61,7 +62,7 @@ namespace Administracion.Controllers
             var nOwner = new Ownership();
             
             nOwner = Mapper.Map<Ownership>(owner);            
-            this.OwnershipService.UpdateOwnership(nowner);
+            this.OwnershipService.UpdateOwnership(nOwner);
             return View();
         }
 
