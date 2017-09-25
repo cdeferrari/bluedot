@@ -61,6 +61,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Administration/.
+        /// </summary>
+        public static string CreateAdministration {
+            get {
+                return ResourceManager.GetString("CreateAdministration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consortium/.
         /// </summary>
         public static string CreateConsortium {
@@ -88,6 +97,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Administration/.
+        /// </summary>
+        public static string DeleteAdministration {
+            get {
+                return ResourceManager.GetString("DeleteAdministration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consortium/.
         /// </summary>
         public static string DeleteConsortium {
@@ -111,6 +129,24 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteUser {
             get {
                 return ResourceManager.GetString("DeleteUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Administration/.
+        /// </summary>
+        public static string GetAdministration {
+            get {
+                return ResourceManager.GetString("GetAdministration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Administration/.
+        /// </summary>
+        public static string GetAllAdministrations {
+            get {
+                return ResourceManager.GetString("GetAllAdministrations", resourceCulture);
             }
         }
         
@@ -147,6 +183,15 @@ namespace Administracion.Library.ApiResources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Administration/.
+        /// </summary>
+        public static string UpdateAdministration {
+            get {
+                return ResourceManager.GetString("UpdateAdministration", resourceCulture);
             }
         }
         

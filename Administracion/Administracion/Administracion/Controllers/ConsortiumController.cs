@@ -1,5 +1,6 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Models;
+using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Implementations.Consortiums;
 using AutoMapper;
@@ -11,19 +12,27 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ConsortiumController : Controller
     {
         public IConsortiumService ConsortiumService { get; set; }
+        public IAdministrationService AdministrationService { get; set; }
         // GET: Backlog
         public ActionResult Index()
         {
+            
             return View();
         }
 
         [HttpGet]
         public ActionResult CreateConsortium()
         {
+            var viewModel = new ConsortiumViewModel()
+            {
+                Administrations = Mapper.Map<List<AdministrationViewModel>>(this.AdministrationService.GetAll()),
+                //Ownerships =
+            };
+            
             return View();
         }
 
