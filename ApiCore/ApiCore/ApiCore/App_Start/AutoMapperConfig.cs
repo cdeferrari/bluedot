@@ -27,7 +27,8 @@ namespace ApiCore
                 cfg.CreateMap<AccountType, AccountTypeResponse>();
                 cfg.CreateMap<Worker, WorkerResponse>();
                 cfg.CreateMap<Role, RoleResponse>();
-
+                cfg.CreateMap<Ownership, OwnershipResponse>();
+                
             });
 
         }

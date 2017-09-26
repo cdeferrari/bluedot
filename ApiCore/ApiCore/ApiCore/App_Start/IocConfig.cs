@@ -18,6 +18,10 @@ using ApiCore.Repository.Implementatios;
 using Autofac.Extras.DynamicProxy2;
 using ApiCore.Services.Implementations.BacklogUser;
 using ApiCore.Services.Implementations.BacklogUsers;
+using ApiCore.Services.Contracts.Administrations;
+using ApiCore.Services.Implementations.Administrations;
+using ApiCore.Services.Contracts.Ownerships;
+using ApiCore.Services.Implementations.Ownerships;
 
 namespace ApiCore.App_Start
 {
@@ -63,18 +67,27 @@ namespace ApiCore.App_Start
             builder.RegisterType<BacklogUserService>().As<IBacklogUserService>().PropertiesAutowired().InstancePerRequest()
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
-            
+
+            builder.RegisterType<AdministrationService>().As<IAdministrationService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<OwnershipService>().As<IOwnershipService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+
 
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
-
             builder.RegisterType<FunctionalUnitRepository>().As<IFunctionalUnitRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<StatusRepository>().As<IStatusRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PriorityRepository>().As<IPriorityRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<BacklogUserRepository>().As<IBacklogUserRepository>().PropertiesAutowired().InstancePerRequest();
-            
-            
-    }
+            builder.RegisterType<AdministrationRepository>().As<IAdministrationRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<OwnershipRepository>().As<IOwnershipRepository>().PropertiesAutowired().InstancePerRequest();
+
+        }
 
     }
 }

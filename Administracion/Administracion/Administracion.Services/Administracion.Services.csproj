@@ -45,12 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
+    <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
     <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
     <Compile Include="Contracts\FunctionalUnits\IFunctionalUnitService.cs" />
     <Compile Include="Contracts\Ownerships\IOwnershipService.cs" />
     <Compile Include="Contracts\Owners\IOwnerService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Implementations\Administrations\AdministrationService.cs" />
     <Compile Include="Implementations\Autentication\Authentication.cs" />
     <Compile Include="Implementations\Consortiums\ConsortiumService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />

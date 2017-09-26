@@ -61,6 +61,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Administracion no encontrada.
+        /// </summary>
+        public static string AdministracionNoEncontrado {
+            get {
+                return ResourceManager.GetString("AdministracionNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a BadRequest.
         /// </summary>
         public static string BadRequest {
@@ -102,6 +111,15 @@ namespace ApiCore.Library.Mensajes {
         public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Propiedad no encontrada.
+        /// </summary>
+        public static string PropiedadNoEncontrada {
+            get {
+                return ResourceManager.GetString("PropiedadNoEncontrada", resourceCulture);
             }
         }
         

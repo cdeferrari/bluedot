@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ApiCore.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Administracion.DomainModel
+namespace ApiCore.Dtos.Request
 {
-    public class Ownership
-    {
-        public virtual int Id { get; set; }
+    public class OwnershipRequest
+    {        
         public virtual Address Address { get; set; }        
     }
 }

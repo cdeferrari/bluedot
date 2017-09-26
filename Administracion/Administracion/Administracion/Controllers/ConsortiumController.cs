@@ -2,6 +2,7 @@
 using Administracion.Models;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Implementations.Consortiums;
 using AutoMapper;
 using System;
@@ -17,6 +18,7 @@ namespace Administracion.Controllers
     {
         public IConsortiumService ConsortiumService { get; set; }
         public IAdministrationService AdministrationService { get; set; }
+        public IOwnershipService OwnershipService { get; set; }
         // GET: Backlog
         public ActionResult Index()
         {
@@ -27,13 +29,25 @@ namespace Administracion.Controllers
         [HttpGet]
         public ActionResult CreateConsortium()
         {
+            var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            var ownerships = this.OwnershipService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Address.Street + " " + x.Address.Number.ToString()
+            });
+
             var viewModel = new ConsortiumViewModel()
             {
-                Administrations = Mapper.Map<List<AdministrationViewModel>>(this.AdministrationService.GetAll()),
-                //Ownerships =
+                Administrations = new SelectList(administrations, "Value", "Text"),
+                Ownerships = new SelectList(ownerships, "Value", "Text"),
             };
             
-            return View();
+            return View(viewModel);
         }
 
 
