@@ -156,6 +156,10 @@
   <data name="GetAllOwnerships" xml:space="preserve">
     <value>Propiedad/All</value>
   </data>
+  <data name="GetAllTicket" xml:space="preserve">
+    <value>Tickets/</value>
+    <comment>i</comment>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
     <value>Consorcio/</value>
   </data>

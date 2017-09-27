@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class BacklogController : Controller
     {
         public virtual ITicketService TicketService { get; set; }
@@ -74,7 +74,8 @@ namespace Administracion.Controllers
             try
             {
                 var tickets = this.TicketService.GetAll();
-                return View(tickets);
+                var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
+                return View(ticketsViewModel);
             }
             catch (Exception ex)
             {

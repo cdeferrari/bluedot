@@ -29,7 +29,7 @@ namespace ApiCore.Controllers
         /// Devuelve todos los tickets
         /// </summary>        
         /// <returns></returns>
-
+        [Route("")]
         [ResponseType(typeof(IList<TicketResponse>))]
         public IHttpActionResult Get()
         {

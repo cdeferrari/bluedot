@@ -31,13 +31,13 @@ namespace Administracion.Services.Implementations.Tickets
 
         public Ticket GetTicket(int ticketId)
         {
-            return IntegrationService.RestCall<Ticket>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Get, null, new RestParamList { new RestParam("id", ticketId) });                        
+            return IntegrationService.RestCall<Ticket>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format("{0}{1}", ApiCore.GetTicket, ticketId.ToString()), RestMethod.Get, null, null);                        
             
         }
 
         public IList<Ticket> GetAll()
         {
-            return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetTicket, RestMethod.Get, null, null);                                    
+            return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllTicket, RestMethod.Get, null, null);                                    
         }
       
     }

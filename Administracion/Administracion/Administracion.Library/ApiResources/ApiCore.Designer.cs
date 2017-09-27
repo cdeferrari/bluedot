@@ -178,6 +178,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tickets/.
+        /// </summary>
+        public static string GetAllTicket {
+            get {
+                return ResourceManager.GetString("GetAllTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consorcio/.
         /// </summary>
         public static string GetConsortium {
