@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Consortium;
 using Administracion.Models;
 using AutoMapper;
 using System;
@@ -17,12 +18,13 @@ namespace Administracion.App_Start
                 cfg.CreateMap<Ticket, TicketViewModel>();
                 cfg.CreateMap<TicketViewModel, Ticket>();
                 cfg.CreateMap<ConsortiumViewModel, Consortium>();
+                cfg.CreateMap<ConsortiumViewModel, ConsortiumRequest>();
                 cfg.CreateMap<AddressViewModel, Address>();
                 cfg.CreateMap<OwnershipViewModel, Ownership>();
                 cfg.CreateMap<AdministrationViewModel, Administration>();
                 cfg.CreateMap<DataContactViewModel, DataContact>();
                 cfg.CreateMap<UserViewModel, User>();
-                cfg.CreateMap<Account, AccountViewModel>();
+                cfg.CreateMap<Account, AccountViewModel>();                
             });
 
         }

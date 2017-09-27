@@ -52,6 +52,7 @@
     <Compile Include="Contracts\Owners\IOwnerService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Implementations\Ownerships\OwnershipService.cs" />
     <Compile Include="Implementations\Administrations\AdministrationService.cs" />
     <Compile Include="Implementations\Autentication\Authentication.cs" />
     <Compile Include="Implementations\Consortiums\ConsortiumService.cs" />

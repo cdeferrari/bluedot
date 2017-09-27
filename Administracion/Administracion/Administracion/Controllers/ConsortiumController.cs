@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Consortium;
 using Administracion.Models;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Consortiums;
@@ -16,9 +17,9 @@ namespace Administracion.Controllers
     //[Authorize]
     public class ConsortiumController : Controller
     {
-        public IConsortiumService ConsortiumService { get; set; }
-        public IAdministrationService AdministrationService { get; set; }
-        public IOwnershipService OwnershipService { get; set; }
+        public virtual IConsortiumService ConsortiumService { get; set; }
+        public virtual IAdministrationService AdministrationService { get; set; }
+        public virtual IOwnershipService OwnershipService { get; set; }
         // GET: Backlog
         public ActionResult Index()
         {
@@ -55,11 +56,9 @@ namespace Administracion.Controllers
         public ActionResult CreateConsortium(ConsortiumViewModel consortium)
         {
          
-            var nConsortium = new Consortium();
-            
-            nConsortium = Mapper.Map<Consortium>(consortium);
+            var nConsortium = Mapper.Map<ConsortiumRequest>(consortium);
             this.ConsortiumService.CreateConsortium(nConsortium);            
-            return View();
+            return View("CreateSuccess");
         }
 
 

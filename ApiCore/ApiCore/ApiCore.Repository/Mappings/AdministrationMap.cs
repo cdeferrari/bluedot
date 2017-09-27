@@ -14,7 +14,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.StartDate).IsRequired().HasColumnName("start_date");
 
 
-            this.HasRequired(x => x.Address).WithMany().Map(x => x.MapKey("property_id"));
+            this.HasRequired(x => x.Address).WithMany().Map(x => x.MapKey("direction_id"));
 
         }
 

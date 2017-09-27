@@ -11,6 +11,7 @@ using System.Configuration;
 using Administracion.Library.ApiResources;
 using Newtonsoft.Json;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Dto.Consortium;
 
 namespace Administracion.Services.Implementations.Consortiums
 {
@@ -18,9 +19,9 @@ namespace Administracion.Services.Implementations.Consortiums
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateConsortium(Consortium consortium)
+        public void CreateConsortium(ConsortiumRequest consortium)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, new RestParamList { new RestParam("consortium", consortium) });                        
+            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, consortium);                        
         }
 
         public void UpdateConsortium(Consortium consortium)

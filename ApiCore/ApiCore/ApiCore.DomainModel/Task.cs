@@ -12,8 +12,8 @@ namespace ApiCore.DomainModel
         public virtual TicketStatus Status { get; set; }
         public virtual Priority Priority { get; set; }                
         public virtual string Description { get; set; }
-        public virtual Date OpenDate { get; set; }
-        public virtual Date CloseDate { get; set; }        
+        public virtual DateTime OpenDate { get; set; }
+        public virtual DateTime CloseDate { get; set; }        
         public virtual BacklogUser Worker { get; set; }
         public virtual BacklogUser Creator { get; set; }        
 

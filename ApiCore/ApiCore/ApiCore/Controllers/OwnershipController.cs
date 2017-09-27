@@ -65,6 +65,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="Ownership">Propiedad a modificar</param>
         /// <returns></returns>
+        [Route("{id}")]       
         public IHttpActionResult Put(int id, OwnershipRequest Ownership)
         {            
             var originalOwnership = OwnershipService.GetById(id);
@@ -81,6 +82,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="id">Propiedad a eliminar</param>
         /// <returns></returns>
+        [Route("{id}")]
         public IHttpActionResult Delete(int id)
         {
 
@@ -105,7 +107,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="consorcio">id del Consorcio</param>
         /// <returns></returns>
-        
+        [Route("all")]
         [ResponseType(typeof(IList<OwnershipResponse>))]
         public IHttpActionResult Get()
         {

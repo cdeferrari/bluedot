@@ -11,11 +11,11 @@ namespace Administracion.Models
         public virtual string FriendlyName { get; set; }
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }
-        public virtual AdministrationViewModel Administration {get; set;}
-        public virtual OwnershipViewModel OwnershipId {get; set;}
+        public virtual int AdministrationId {get; set;}
+        public virtual int OwnershipId {get; set;}
         public virtual AddressViewModel Address{ get; set; }
-        public virtual IEnumerable<SelectListItem> Administrations { get; set }
-        public virtual IEnumerable<SelectListItem> Ownerships { get; set }
+        public virtual IEnumerable<SelectListItem> Administrations { get; set; }
+        public virtual IEnumerable<SelectListItem> Ownerships { get; set; }
         
     }
 }

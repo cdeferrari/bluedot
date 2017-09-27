@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiCore.Dtos.Request
+namespace Administracion.Dto.Consortium
 {
     public class ConsortiumRequest
     {
@@ -12,7 +12,7 @@ namespace ApiCore.Dtos.Request
         public virtual string FriendlyName { get; set; }
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }
-        public virtual int AdministrationId {get; set;}
+        public virtual int AdministrationId { get; set; }
         public virtual int OwnershipId { get; set; }
     }
 }

@@ -121,7 +121,10 @@
     <value>Administration/</value>
   </data>
   <data name="CreateConsortium" xml:space="preserve">
-    <value>Consortium/</value>
+    <value>Consorcio/</value>
+  </data>
+  <data name="CreateOwnership" xml:space="preserve">
+    <value>Propiedad/</value>
   </data>
   <data name="CreateTicket" xml:space="preserve">
     <value>Tickets/</value>
@@ -135,6 +138,9 @@
   <data name="DeleteConsortium" xml:space="preserve">
     <value>Consortium/</value>
   </data>
+  <data name="DeleteOwnership" xml:space="preserve">
+    <value>Propiedad/</value>
+  </data>
   <data name="DeleteTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>
@@ -147,8 +153,14 @@
   <data name="GetAllAdministrations" xml:space="preserve">
     <value>Administration/</value>
   </data>
+  <data name="GetAllOwnerships" xml:space="preserve">
+    <value>Propiedad/All</value>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
-    <value>Consortium/</value>
+    <value>Consorcio/</value>
+  </data>
+  <data name="GetOwnership" xml:space="preserve">
+    <value>Propiedad/</value>
   </data>
   <data name="GetTicket" xml:space="preserve">
     <value>Tickets/</value>
@@ -163,7 +175,10 @@
     <value>Administration/</value>
   </data>
   <data name="UpdateConsortium" xml:space="preserve">
-    <value>Consortium/</value>
+    <value>Consorcio/</value>
+  </data>
+  <data name="UpdateOwnership" xml:space="preserve">
+    <value>Propiedad/</value>
   </data>
   <data name="UpdateTicket" xml:space="preserve">
     <value>Tickets/</value>

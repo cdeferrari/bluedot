@@ -89,7 +89,7 @@
     <Compile Include="Implementatios\TicketRepository.cs" />
     <Compile Include="Implementatios\UserRepository.cs" />
     <Compile Include="Interceptors\ServicesInterceptor.cs" />
-    <Compile Include="Mappings\AdministrationMap - Copia.cs" />
+    <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\OwnershipMap.cs" />
     <Compile Include="Mappings\AdministrationMap.cs" />
     <Compile Include="Mappings\ContactDataMap.cs" />

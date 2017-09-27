@@ -28,7 +28,11 @@ namespace ApiCore
                 cfg.CreateMap<Worker, WorkerResponse>();
                 cfg.CreateMap<Role, RoleResponse>();
                 cfg.CreateMap<Ownership, OwnershipResponse>();
-                
+                cfg.CreateMap<Administration, AdministrationResponse>();
+                cfg.CreateMap<ConsortiumRequest, Consortium>()
+                .ForMember(x => x.Administration, opt => opt.Ignore())
+                .ForMember(x => x.Ownership, opt => opt.Ignore());
+
             });
 
         }

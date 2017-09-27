@@ -7,6 +7,7 @@ using ApiCore.Repository.Attributes;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
+using AutoMapper;
 
 namespace ApiCore.Services.Implementations.Consortiums
 {
@@ -18,12 +19,14 @@ namespace ApiCore.Services.Implementations.Consortiums
         public IFunctionalUnitRepository FunctionalUnitRepository { get; set; }
         public IPriorityRepository PriorityRepository { get; set; }        
         public IBacklogUserRepository BacklogUserRepository { get; set; }
+        public IAdministrationRepository AdministrationRepository { get; set; }
+        public IOwnershipRepository OwnershipRepository { get; set; }
 
         [Transaction]
         public Consortium CreateConsortium(ConsortiumRequest consortium)
         {
-            var entityToInsert = new Consortium() { };
-            MergeConsortium(entityToInsert, consortium);
+            var entityToInsert = MergeConsortium(consortium);
+
             ConsortiumRepository.Insert(entityToInsert);
             return entityToInsert;
         }
@@ -41,7 +44,7 @@ namespace ApiCore.Services.Implementations.Consortiums
         [Transaction]
         public Consortium UpdateConsortium(Consortium originalConsortium, ConsortiumRequest consortium)
         {            
-            this.MergeConsortium(originalConsortium, consortium);
+            originalConsortium = this.MergeConsortium(consortium);
             ConsortiumRepository.Update(originalConsortium);
             return originalConsortium;
 
@@ -56,9 +59,13 @@ namespace ApiCore.Services.Implementations.Consortiums
         }
         
 
-        private void MergeConsortium(Consortium originalConsortium, ConsortiumRequest consortium)
+        private Consortium MergeConsortium(ConsortiumRequest consortium)
         {
-            
+            Consortium originalConsortium = new Consortium();
+            originalConsortium = Mapper.Map<Consortium>(consortium);
+            originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);
+            originalConsortium.Ownership = this.OwnershipRepository.GetById(consortium.OwnershipId);
+            return originalConsortium;
         }
         
     }

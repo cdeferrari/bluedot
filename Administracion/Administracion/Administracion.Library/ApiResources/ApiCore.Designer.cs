@@ -70,11 +70,20 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Consortium/.
+        ///   Busca una cadena traducida similar a Consorcio/.
         /// </summary>
         public static string CreateConsortium {
             get {
                 return ResourceManager.GetString("CreateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Propiedad/.
+        /// </summary>
+        public static string CreateOwnership {
+            get {
+                return ResourceManager.GetString("CreateOwnership", resourceCulture);
             }
         }
         
@@ -115,6 +124,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Propiedad/.
+        /// </summary>
+        public static string DeleteOwnership {
+            get {
+                return ResourceManager.GetString("DeleteOwnership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tickets/.
         /// </summary>
         public static string DeleteTicket {
@@ -151,11 +169,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Consortium/.
+        ///   Busca una cadena traducida similar a Propiedad/All.
+        /// </summary>
+        public static string GetAllOwnerships {
+            get {
+                return ResourceManager.GetString("GetAllOwnerships", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Consorcio/.
         /// </summary>
         public static string GetConsortium {
             get {
                 return ResourceManager.GetString("GetConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Propiedad/.
+        /// </summary>
+        public static string GetOwnership {
+            get {
+                return ResourceManager.GetString("GetOwnership", resourceCulture);
             }
         }
         
@@ -196,11 +232,20 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Consortium/.
+        ///   Busca una cadena traducida similar a Consorcio/.
         /// </summary>
         public static string UpdateConsortium {
             get {
                 return ResourceManager.GetString("UpdateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Propiedad/.
+        /// </summary>
+        public static string UpdateOwnership {
+            get {
+                return ResourceManager.GetString("UpdateOwnership", resourceCulture);
             }
         }
         

@@ -11,8 +11,8 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Street).IsRequired().HasColumnName("street");
             this.Property(x => x.Number).IsRequired().HasColumnName("number");
             
-            this.Property(x => x.Lat).IsOptional();
-            this.Property(x => x.Len).IsOptional();
+            this.Property(x => x.Lat).IsOptional().HasColumnName("latitud");
+            this.Property(x => x.Len).IsOptional().HasColumnName("longitud");
 
 
         }

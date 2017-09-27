@@ -46,10 +46,13 @@
     <Compile Include="BacklogUser.cs" />
     <Compile Include="Administration.cs" />
     <Compile Include="ContactData.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="FunctionalUnit.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Ownership.cs" />
     <Compile Include="Priority.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="TicketStatus.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Ticket.cs" />

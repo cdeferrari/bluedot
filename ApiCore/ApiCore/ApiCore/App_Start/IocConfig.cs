@@ -22,6 +22,8 @@ using ApiCore.Services.Contracts.Administrations;
 using ApiCore.Services.Implementations.Administrations;
 using ApiCore.Services.Contracts.Ownerships;
 using ApiCore.Services.Implementations.Ownerships;
+using ApiCore.Services.Implementations.Consortiums;
+using ApiCore.Services.Contracts.Consortiums;
 
 namespace ApiCore.App_Start
 {
@@ -76,7 +78,11 @@ namespace ApiCore.App_Start
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<ConsortiumService>().As<IConsortiumService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
 
+            
 
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
