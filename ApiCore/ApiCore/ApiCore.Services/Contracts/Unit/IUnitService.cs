@@ -10,5 +10,6 @@ namespace ApiCore.Services.Contracts.Unit
     public interface IUnitService
     {
         FunctionalUnit GetById(int unitId);
+        List<FunctionalUnit> GetAll();
     }
 }

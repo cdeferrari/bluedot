@@ -123,6 +123,9 @@
   <data name="CreateConsortium" xml:space="preserve">
     <value>Consorcio/</value>
   </data>
+  <data name="CreateFunctionalUnit" xml:space="preserve">
+    <value>Unidad/</value>
+  </data>
   <data name="CreateOwnership" xml:space="preserve">
     <value>Propiedad/</value>
   </data>
@@ -130,13 +133,19 @@
     <value>Tickets/</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
-    <value>User/</value>
+    <value>Users/</value>
+  </data>
+  <data name="CreateWorker" xml:space="preserve">
+    <value>Worker/</value>
   </data>
   <data name="DeleteAdministration" xml:space="preserve">
     <value>Administration/</value>
   </data>
   <data name="DeleteConsortium" xml:space="preserve">
     <value>Consortium/</value>
+  </data>
+  <data name="DeleteFunctionalUnit" xml:space="preserve">
+    <value>Unit/</value>
   </data>
   <data name="DeleteOwnership" xml:space="preserve">
     <value>Propiedad/</value>
@@ -147,6 +156,9 @@
   <data name="DeleteUser" xml:space="preserve">
     <value>User/</value>
   </data>
+  <data name="DeleteWorker" xml:space="preserve">
+    <value>Worker/</value>
+  </data>
   <data name="GetAdministration" xml:space="preserve">
     <value>Administration/</value>
   </data>
@@ -156,12 +168,24 @@
   <data name="GetAllOwnerships" xml:space="preserve">
     <value>Propiedad/All</value>
   </data>
+  <data name="GetAllPriorities" xml:space="preserve">
+    <value>Priority/</value>
+  </data>
+  <data name="GetAllStatus" xml:space="preserve">
+    <value>Status/</value>
+  </data>
   <data name="GetAllTicket" xml:space="preserve">
     <value>Tickets/</value>
     <comment>i</comment>
   </data>
+  <data name="GetAllWorkers" xml:space="preserve">
+    <value>Worker/</value>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
     <value>Consorcio/</value>
+  </data>
+  <data name="GetFunctionalUnit" xml:space="preserve">
+    <value>Unidad/</value>
   </data>
   <data name="GetOwnership" xml:space="preserve">
     <value>Propiedad/</value>
@@ -170,7 +194,10 @@
     <value>Tickets/</value>
   </data>
   <data name="GetUser" xml:space="preserve">
-    <value>User/</value>
+    <value>Users/</value>
+  </data>
+  <data name="GetWorker" xml:space="preserve">
+    <value>Worker/</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Account/Login</value>
@@ -181,6 +208,9 @@
   <data name="UpdateConsortium" xml:space="preserve">
     <value>Consorcio/</value>
   </data>
+  <data name="UpdateFunctionalUnit" xml:space="preserve">
+    <value>Unit/</value>
+  </data>
   <data name="UpdateOwnership" xml:space="preserve">
     <value>Propiedad/</value>
   </data>
@@ -189,5 +219,8 @@
   </data>
   <data name="UpdateUser" xml:space="preserve">
     <value>User/</value>
+  </data>
+  <data name="UpdateWorker" xml:space="preserve">
+    <value>Worker/</value>
   </data>
 </root>

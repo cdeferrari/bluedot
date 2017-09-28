@@ -6,7 +6,9 @@
 }
 
 <h2>Nuevo Ticket</h2>
-@using (Html.BeginForm("CreateNewTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
+@using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -47,36 +49,33 @@
             </div>
         </div>
 
+
         <div class="form-group row">
             <label class="control-label col-md-2">Consorcio</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConsortiumId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConsortiumId, "", new { @class = "text-danger" })                
+                @Html.DropDownListFor(model => model.Consortium.Id, Model.ConsortiumList, "-- Elija Consorcio --")
             </div>
         </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Status</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Status.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Status.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
 
         <div class="form-group row">
             <label class="control-label col-md-2">Unidad Funcional</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FunctionalUnitId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FunctionalUnitId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.FunctionalUnit.Id, Model.FunctionalUnitList, "-- Elija Unidad Funcional --")
             </div>
         </div>
+
 
         <div class="form-group row">
             <label class="control-label col-md-2">Prioridad</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Priority.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Priority.Id, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --")
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Status.Id, Model.StatusList, "-- Elija Estado --")
             </div>
         </div>
 
@@ -84,19 +83,17 @@
         <div class="form-group row">
             <label class="control-label col-md-2">Trabajador</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkerId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WorkerId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
             </div>
         </div>
 
         <div class="form-group row">
             <label class="control-label col-md-2">Creador</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatorId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Creator.Id, Model.UsersList, "-- Elija Creador --")
             </div>
         </div>
-      
+
         <div class="form-group row">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Crear Ticket" class="btn btn-success" />

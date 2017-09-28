@@ -79,6 +79,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Unidad/.
+        /// </summary>
+        public static string CreateFunctionalUnit {
+            get {
+                return ResourceManager.GetString("CreateFunctionalUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Propiedad/.
         /// </summary>
         public static string CreateOwnership {
@@ -97,11 +106,20 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a User/.
+        ///   Busca una cadena traducida similar a Users/.
         /// </summary>
         public static string CreateUser {
             get {
                 return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker/.
+        /// </summary>
+        public static string CreateWorker {
+            get {
+                return ResourceManager.GetString("CreateWorker", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteConsortium {
             get {
                 return ResourceManager.GetString("DeleteConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unit/.
+        /// </summary>
+        public static string DeleteFunctionalUnit {
+            get {
+                return ResourceManager.GetString("DeleteFunctionalUnit", resourceCulture);
             }
         }
         
@@ -151,6 +178,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Worker/.
+        /// </summary>
+        public static string DeleteWorker {
+            get {
+                return ResourceManager.GetString("DeleteWorker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Administration/.
         /// </summary>
         public static string GetAdministration {
@@ -178,6 +214,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Priority/.
+        /// </summary>
+        public static string GetAllPriorities {
+            get {
+                return ResourceManager.GetString("GetAllPriorities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Status/.
+        /// </summary>
+        public static string GetAllStatus {
+            get {
+                return ResourceManager.GetString("GetAllStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tickets/.
         /// </summary>
         public static string GetAllTicket {
@@ -187,11 +241,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Worker/.
+        /// </summary>
+        public static string GetAllWorkers {
+            get {
+                return ResourceManager.GetString("GetAllWorkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Consorcio/.
         /// </summary>
         public static string GetConsortium {
             get {
                 return ResourceManager.GetString("GetConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unidad/.
+        /// </summary>
+        public static string GetFunctionalUnit {
+            get {
+                return ResourceManager.GetString("GetFunctionalUnit", resourceCulture);
             }
         }
         
@@ -214,11 +286,20 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a User/.
+        ///   Busca una cadena traducida similar a Users/.
         /// </summary>
         public static string GetUser {
             get {
                 return ResourceManager.GetString("GetUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker/.
+        /// </summary>
+        public static string GetWorker {
+            get {
+                return ResourceManager.GetString("GetWorker", resourceCulture);
             }
         }
         
@@ -250,6 +331,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Unit/.
+        /// </summary>
+        public static string UpdateFunctionalUnit {
+            get {
+                return ResourceManager.GetString("UpdateFunctionalUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Propiedad/.
         /// </summary>
         public static string UpdateOwnership {
@@ -273,6 +363,15 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateUser {
             get {
                 return ResourceManager.GetString("UpdateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker/.
+        /// </summary>
+        public static string UpdateWorker {
+            get {
+                return ResourceManager.GetString("UpdateWorker", resourceCulture);
             }
         }
     }

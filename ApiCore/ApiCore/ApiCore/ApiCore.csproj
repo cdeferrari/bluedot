@@ -399,10 +399,12 @@
     <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Controllers\ConsortiumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PriorityController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
+    <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

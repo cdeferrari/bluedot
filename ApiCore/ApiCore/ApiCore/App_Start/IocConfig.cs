@@ -24,6 +24,15 @@ using ApiCore.Services.Contracts.Ownerships;
 using ApiCore.Services.Implementations.Ownerships;
 using ApiCore.Services.Implementations.Consortiums;
 using ApiCore.Services.Contracts.Consortiums;
+using ApiCore.Services.Implementations.TicketStatus;
+using ApiCore.Services.Contracts.TicketStatus;
+using ApiCore.Services.Contracts.Priorities;
+using ApiCore.Services.Implementations.Priorities;
+using ApiCore.Services.Implementations.Workers;
+using ApiCore.Services.Contracts.Workers;
+using ApiCore.Services.Contracts.Users;
+using ApiCore.Services.Implementations.Users;
+using ApiCore.Services.Contracts.Unit;
 
 namespace ApiCore.App_Start
 {
@@ -82,16 +91,38 @@ namespace ApiCore.App_Start
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
 
-            
+            builder.RegisterType<TicketStatusService>().As<ITicketStatusService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<PriorityService>().As<IPriorityService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<WorkerService>().As<IWorkerService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+
+            builder.RegisterType<UserService>().As<IUserService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<UnitService>().As<IUnitService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
 
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<FunctionalUnitRepository>().As<IFunctionalUnitRepository>().PropertiesAutowired().InstancePerRequest();
-            builder.RegisterType<StatusRepository>().As<IStatusRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PriorityRepository>().As<IPriorityRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<BacklogUserRepository>().As<IBacklogUserRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<AdministrationRepository>().As<IAdministrationRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<OwnershipRepository>().As<IOwnershipRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<WorkerRepository>().As<IWorkerRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<UserRepository>().As<IUserRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<StatusRepository>().As<IStatusRepository>().PropertiesAutowired().InstancePerRequest();
 
         }
 

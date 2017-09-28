@@ -76,6 +76,7 @@
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IConsortiumRepository.cs" />
     <Compile Include="Contracts\ITicketRepository.cs" />
+    <Compile Include="Contracts\IWorkerRepository.cs" />
     <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Implementatios\BacklogUserRepository.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Implementatios\Repository.cs" />
     <Compile Include="Implementatios\PriorityRepository.cs" />
     <Compile Include="Implementatios\TicketRepository.cs" />
+    <Compile Include="Implementatios\WorkerRepository.cs" />
     <Compile Include="Implementatios\UserRepository.cs" />
     <Compile Include="Interceptors\ServicesInterceptor.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Mappings\FunctionalUnitMap.cs" />
     <Compile Include="Mappings\TicketStatusMap.cs" />
     <Compile Include="Mappings\TicketMap.cs" />
+    <Compile Include="Mappings\WorkerrMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

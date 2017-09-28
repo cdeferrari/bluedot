@@ -9,12 +9,11 @@ namespace ApiCore.Dtos.Response
     public class UnitResponse
     {
         public virtual int Id { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Surname { get; set; }
-        public virtual string DNI { get; set; }
-        public virtual string CUIT { get; set; }        
-        public virtual ContactDataResponse ContactData { get; set; }
-        //public virtual AccountResponse Account { get; set; }
+        public virtual int OwnershipId { get; set; }
+        public virtual int Floor { get; set; }
+        public virtual int Dto { get; set; }
+        public virtual int OwnerId { get; set; }
+        public virtual int RenterId { get; set; }
 
     }
 }

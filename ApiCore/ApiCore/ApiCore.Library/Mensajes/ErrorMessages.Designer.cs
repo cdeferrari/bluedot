@@ -142,6 +142,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Trabajador No Encontrado.
+        /// </summary>
+        public static string TrabajadorNoEncontrado {
+            get {
+                return ResourceManager.GetString("TrabajadorNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unauthorized.
         /// </summary>
         public static string Unauthorized {

@@ -46,6 +46,7 @@
     <Compile Include="Request\AdministrationRequest.cs" />
     <Compile Include="Request\ConsortiumRequest.cs" />
     <Compile Include="Request\TicketRequest.cs" />
+    <Compile Include="Request\WorkerRequest.cs" />
     <Compile Include="Request\UserRequest.cs" />
     <Compile Include="Response\AccountResponse.cs" />
     <Compile Include="Response\AccountTypeResponse.cs" />

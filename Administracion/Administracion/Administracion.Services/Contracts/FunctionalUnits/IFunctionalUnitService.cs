@@ -11,8 +11,8 @@ namespace Administracion.Services.Contracts.FunctionalUnits
     {
         IList<FunctionalUnit> GetAll();
         FunctionalUnit GetFunctionalUnit(int functionalUnitId);
-        bool CreateFunctionalUnit(FunctionalUnit functionalUnit);
-        bool UpdateFunctionalUnit(FunctionalUnit functionalUnit);
-        bool DeleteFunctionalUnit(int functionalUnitId);
+        void CreateFunctionalUnit(FunctionalUnit functionalUnit);
+        void UpdateFunctionalUnit(FunctionalUnit functionalUnit);
+        void DeleteFunctionalUnit(int functionalUnitId);
     }
 }

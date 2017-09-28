@@ -10,6 +10,7 @@ namespace Administracion.Services.Contracts.Consortiums
 {
     public interface IConsortiumService
     {
+        List<Consortium> GetAll();
         Consortium GetConsortium(int consortiumId);
         void CreateConsortium(ConsortiumRequest consortium);
         void UpdateConsortium(Consortium consortium);

@@ -10,6 +10,7 @@ namespace ApiCore.Services.Contracts.Consortiums
 {
     public interface IConsortiumService
     {
+        List<Consortium> GetAll();
         Consortium CreateConsortium(ConsortiumRequest consortium);
         Consortium GetById(int consortiumId);
         Consortium UpdateConsortium(Consortium originalConsortium, ConsortiumRequest consortium);

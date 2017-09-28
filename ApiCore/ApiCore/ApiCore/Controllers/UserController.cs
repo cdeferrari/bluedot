@@ -23,7 +23,30 @@ namespace ApiCore.Controllers
     {
 
         public IUserService UserService { get; set; }
-     
+
+
+
+        // GET api/<controller>/5        
+        /// <summary>
+        /// Devuelve el usuario del id
+        /// </summary>
+        /// <param name="id">id del usuario</param>
+        /// <returns></returns>
+        [Route("")]
+        [ResponseType(typeof(List<UserResponse>))]
+        public IHttpActionResult Get()
+        {
+            var completeUserList = UserService.GetAll();
+
+            if (completeUserList == null)
+                throw new NotFoundException(ErrorMessages.UserNoEncontrado);
+
+            var dto = Mapper.Map<List<UserResponse>>(completeUserList);
+
+            return Ok(dto);
+        }
+
+
 
         // GET api/<controller>/5        
         /// <summary>

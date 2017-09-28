@@ -23,7 +23,30 @@ namespace ApiCore.Controllers
     {
 
         public IConsortiumService ConsortiumService { get; set; }
-     
+
+
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve un consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("")]
+        [ResponseType(typeof(List<ConsortiumResponse>))]
+        public IHttpActionResult Get()
+        {
+            var completeConsortium = ConsortiumService.GetAll();
+
+            if (completeConsortium == null)
+                throw new NotFoundException(ErrorMessages.ConsorcioNoEncontrado);
+
+            var dto = Mapper.Map<List<ConsortiumResponse>>(completeConsortium);
+
+            return Ok(dto);
+        }
+
 
         // GET api/<controller>/5
         /// <summary>
@@ -33,7 +56,7 @@ namespace ApiCore.Controllers
         /// <returns></returns>
 
         [Route("{id}")]        
-        [ResponseType(typeof(TicketResponse))]
+        [ResponseType(typeof(ConsortiumResponse))]
         public IHttpActionResult Get(int id)
         {
             var completeConsortium = ConsortiumService.GetById(id);

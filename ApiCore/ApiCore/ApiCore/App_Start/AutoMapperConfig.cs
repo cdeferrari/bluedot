@@ -33,6 +33,9 @@ namespace ApiCore
                 .ForMember(x => x.Administration, opt => opt.Ignore())
                 .ForMember(x => x.Ownership, opt => opt.Ignore());
 
+                cfg.CreateMap<Consortium, ConsortiumResponse>();
+                cfg.CreateMap<FunctionalUnit, UnitResponse>();
+
             });
 
         }

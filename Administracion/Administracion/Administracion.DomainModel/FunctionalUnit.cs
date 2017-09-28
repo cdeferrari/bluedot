@@ -8,6 +8,7 @@ namespace Administracion.DomainModel
 {
     public class FunctionalUnit
     {
+        public virtual int Id { get; set; }
         public virtual Address Address { get; set; }        
     }
 }

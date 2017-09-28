@@ -34,6 +34,29 @@ namespace ApiCore.Controllers
         /// <param name="consorcio">id del Consorcio</param>
         /// <returns></returns>
 
+        [Route("")]
+        [ResponseType(typeof(List<UnitResponse>))]
+        public IHttpActionResult Get()
+        {
+            var completeUnit = UnitService.GetAll();
+
+            if (completeUnit == null)
+                throw new NotFoundException(ErrorMessages.UnidadNoEncontrada);
+
+            var dto = Mapper.Map<List<UnitResponse>>(completeUnit);
+
+            return Ok(dto);
+        }
+
+
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve un consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
         [Route("{id}")]        
         [ResponseType(typeof(UnitResponse))]
         public IHttpActionResult Get(int id)

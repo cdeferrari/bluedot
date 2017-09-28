@@ -3,13 +3,23 @@ using Administracion.Integration.Implementations;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.Priorities;
+using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.Users;
+using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Administrations;
 using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Consortiums;
+using Administracion.Services.Implementations.FunctionalUnits;
 using Administracion.Services.Implementations.Ownerships;
+using Administracion.Services.Implementations.Priorities;
+using Administracion.Services.Implementations.Status;
 using Administracion.Services.Implementations.Tickets;
+using Administracion.Services.Implementations.Users;
+using Administracion.Services.Implementations.Workers;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using Autofac.Integration.Mvc;
@@ -49,7 +59,14 @@ namespace Administracion.App_Start
             builder.RegisterType<AdministrationService>().As<IAdministrationService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<OwnershipService>().As<IOwnershipService>().SingleInstance().PropertiesAutowired();
 
-            
+            builder.RegisterType<WorkerService>().As<IWorkerService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<UserService>().As<IUserService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<PriorityService>().As<IPriorityService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<StatusService>().As<IStatusService>().SingleInstance().PropertiesAutowired();
+
+            builder.RegisterType<FunctionalUnitService>().As<IFunctionalUnitService>().SingleInstance().PropertiesAutowired();
+
+
 
 
 

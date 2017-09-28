@@ -41,7 +41,7 @@ namespace Administracion.Services.Implementations.Users
 
         public IList<User> GetAll()
         {
-            return IntegrationService.RestCall<List<User>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetUser, RestMethod.Delete, null, null);                                    
+            return IntegrationService.RestCall<List<User>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetUser, RestMethod.Get, null, null);                                    
         }
       
     }

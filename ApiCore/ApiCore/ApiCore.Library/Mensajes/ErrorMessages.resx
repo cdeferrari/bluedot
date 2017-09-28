@@ -144,6 +144,9 @@
   <data name="TicketNoEncontrado" xml:space="preserve">
     <value>Ticket no encontrado</value>
   </data>
+  <data name="TrabajadorNoEncontrado" xml:space="preserve">
+    <value>Trabajador No Encontrado</value>
+  </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>Unauthorized</value>
   </data>
