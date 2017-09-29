@@ -52,5 +52,23 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+
+            $('.datepicker-only-init').datetimepicker({
+                widgetPositioning: {
+                    horizontal: 'left'
+                },
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                format: 'LL'
+            });
+        });
+    </script>
+
 </body>
 </html>

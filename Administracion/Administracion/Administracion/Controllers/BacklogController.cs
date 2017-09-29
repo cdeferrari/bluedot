@@ -72,7 +72,7 @@ namespace Administracion.Controllers
             var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Address.Street+" "+ x.Address.Number
+                Text = x.Dto.ToString()
             });
 
 
@@ -82,8 +82,11 @@ namespace Administracion.Controllers
             {
                 PriorityList = priorityList,
                 StatusList = statusList,
-                WorkersList= workersList,
-                UsersList = userList
+                WorkersList = workersList,
+                UsersList = userList,
+                ConsortiumList = consortiumList,
+                FunctionalUnitList = functionalUnitList
+
             };
 
             return View(viewModel);
@@ -139,7 +142,17 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
+            var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.FriendlyName
+            });
 
+            var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Dto.ToString()
+            });
 
             var oTicket = this.TicketService.GetTicket(id);
             var ticket = Mapper.Map<TicketViewModel>(oTicket);
@@ -147,6 +160,8 @@ namespace Administracion.Controllers
             ticket.PriorityList = priorityList;
             ticket.WorkersList = workersList;
             ticket.UsersList = userList;
+            ticket.ConsortiumList = consortiumList;
+            ticket.FunctionalUnitList = functionalUnitList;
             return View("CreateTicket",ticket);
         }
 
