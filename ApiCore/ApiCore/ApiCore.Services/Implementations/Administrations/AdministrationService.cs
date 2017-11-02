@@ -62,7 +62,10 @@ namespace ApiCore.Services.Implementations.Administrations
 
         private void MergeAdministration(Administration originalAdministration, AdministrationRequest Administration)
         {
-            
+            originalAdministration.Address = Administration.Address;
+            originalAdministration.CUIT = Administration.CUIT;
+            originalAdministration.Name = Administration.Name;
+            originalAdministration.StartDate = Administration.StartDate;            
         }
 
 

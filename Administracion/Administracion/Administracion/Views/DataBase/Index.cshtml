@@ -2,81 +2,34 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="dashboard-container">
 
-    <div class="row">
-        <div class="col-md-6" onclick="location.href = '/Consortium/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Consorcios</h5>
-                        <i class="counter-icon icmn-server"></i>
-                        
-                    </div>
-                </div>
-            </div>
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li class="active">
+                    <a href="javascript:void(0)"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="/Users/Index"><i class="gi gi-group"></i> Propietarios / Inqulinos</a>
+                </li>                
+                <li>
+                    <a href="/Providers/Index"><i class="gi gi-group"></i> Proveedores</a>
+                </li>                
+                <li>
+                    <a href="/Consortium/Index"><i class="gi gi-building"></i> Consorcios</a>
+                </li>
+                <li>
+                    <a href="/Backlog/Index"><i class="fa fa-ticket"></i> Tickets</a>
+                </li>
+
+            </ul>
         </div>
 
-        <div class="col-md-6" onclick="location.href = '/User/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Owner/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Propietarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Inquilinos</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Ownership/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Propiedades</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/FunctionalUnit/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Unidades Funcionales</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+    
     </div>
+    
 </div>
+

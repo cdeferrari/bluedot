@@ -1,0 +1,9 @@
+﻿@model Administracion.Models.OwnershipViewModel
+
+        <tr>            
+            <td>@Model.Address.Street</td>                              
+            <td>@Model.Address.Number</td>                                    
+            
+            <td>@Html.ActionLink("Editar", "UpdateOwnershipById", new { id = Model.Id }) | @Html.ActionLink("Borrar", "DeleteOwnership", new { id = Model.Id })</td>        
+            
+        </tr>

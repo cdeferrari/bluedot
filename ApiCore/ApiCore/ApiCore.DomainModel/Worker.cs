@@ -9,6 +9,6 @@ namespace ApiCore.DomainModel
     public class Worker : Entity
     {
         public virtual User User {get; set;}
-        public virtual int AdministrationId {get; set;}        
+        public virtual Administration Administration {get; set;}        
     }   
 }

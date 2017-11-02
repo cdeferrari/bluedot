@@ -1,0 +1,262 @@
+﻿@model Administracion.Models.ConsortiumDetailsViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div id="page-content">
+
+            <div class="content-header">
+                <ul class="nav-horizontal text-center">
+                    <li>
+                        <a href="page_ecom_dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="page_ecom_customer_view.html"><i class="gi gi-building"></i> Consorcios</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="breadcrumb breadcrumb-top">
+                <li>Consorcios</li>
+                <li><a href="carman-consorcios-lista">Listar</a></li>
+                <li><a href="">@Model.FriendlyName</a></li>
+            </ul>
+            <!-- END Datatables Header -->
+
+            <div class="row text-center">
+                <div class="col-lg-6">
+                    <!-- Shipping Address Block -->
+                    <div class="block">
+                        <!-- Shipping Address Title -->
+                        <div class="block-title">
+                            <h1><strong>@Model.FriendlyName</strong></h1>
+                        </div>
+                        <!-- END Shipping Address Title -->
+                        <!-- Shipping Address Content -->
+                        <address>
+                            @Model.Ownership.Address.Street  @Model.Ownership.Address.Number<br>
+                            <i class="fa fa-phone"></i> (54911) 11111111<br>
+                            <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">@Model.MailingList</a>
+                        </address>
+                        <!-- END Shipping Address Content -->
+                    </div>
+                    <!-- END Shipping Address Block -->
+                </div>
+
+
+
+                <div class="col-sm-6 col-lg-3">
+                    <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                        <div class="widget-extra themed-background">
+                            <h4 class="widget-content-light"><strong>Tickets</strong> Abiertos</h4>
+                        </div>
+                        <div class="widget-extra-full"><span class="h2 animation-expandOpen">-</span></div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                        <div class="widget-extra themed-background-dark">
+                            <h4 class="widget-content-light"><strong>Reclamos </strong> este mes</h4>
+                        </div>
+                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">-</span></div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                        <div class="widget-extra themed-background-dark">
+                            <h4 class="widget-content-light"><strong>Porcentaje</strong> Cobrado</h4>
+                        </div>
+                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">-</span></div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                        <div class="widget-extra themed-background-dark">
+                            <h4 class="widget-content-light"><strong>Recaudacion </strong>del Mes</h4>
+                        </div>
+                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">-</span></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Latest Orders Block -->
+                    <div class="block">
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">
+                            <div class="block-options pull-right">
+                                <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                            </div>
+                            <h2><strong>Unidades</strong> Funcionales</h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        <table class="table table-borderless table-striped table-vcenter table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><strong>PISO</strong></td>
+                                    <td class="text-center"><strong>UF</strong></td>
+                                    <td class="text-center"><strong>Inquilino</strong></td>
+                                    <td class="text-center"><strong>%</strong></td>
+                                    <td class="text-center">Estado</td>
+                                </tr>
+
+                                @foreach (var unit in Model.Ownership.FunctionalUnits)
+                                {
+                                    <tr>
+                                        <td class="text-center" style="width: 100px;"><a href="javascript:void(0)"><strong>@unit.Floor</strong></a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@unit.Dto</a></td>
+                                        @if (unit.Renter != null)
+                                        {
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)">
+
+                                                    @unit.Renter.User.Name @unit.Renter.User.Surname
+
+                                                </a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td class="text-right"><strong>$65,00</strong></td>
+                                        <td class="text-center"><span class="label label-success">Cobrado</span></td>
+                                    </tr>
+
+                                }                               
+
+                            </tbody>
+                        </table>
+                        <!-- END Latest Orders Content -->
+                    </div>
+                    <!-- END Latest Orders Block -->
+                </div>
+                <div class="col-lg-6">
+                    <!-- Top Products Block -->
+                    <div class="block">
+                        <!-- Top Products Title -->
+                        <div class="block-title">
+                            <div class="block-options pull-right">
+                                <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                <a href="/Consortium/CreateChecklist/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                            </div>
+                            <h2><strong>CHECKLIST</strong> Semanal</h2>
+                        </div>
+                        <!-- END Top Products Title -->
+                        <!-- Top Products Content -->
+                        <table class="table table-borderless table-striped table-vcenter table-bordered">
+                            @if (Model.Checklists != null)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" style="width: 100px;"><strong>FECHA</strong></td>
+                                        <td>Resultado</td>
+                                        <td class="text-center">Encargado</td>
+                                        <td class="hidden-xs text-center">
+                                            Estado
+                                        </td>
+                                    </tr>
+                                    @foreach (var list in Model.Checklists)
+                                    {
+                                        <tr>
+                                            <td class="text-center" style="width: 100px;"><a href="#"><strong>@list.OpenDate.ToShortDateString()</strong></a></td>
+
+                                            @if (list.Tasks.TrueForAll(x => x.Status.Description.Equals("closed")))
+                                            {
+                                                <td><a href="/Consortium/UpdateChecklist/@list.Id">INCOMPLETA</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td><a href="/Consortium/UpdateChecklist/@list.Id">OK</a></td>                                                
+                                            }
+
+                                    <td class="text-center">@list.Customer</td>
+                                    <td class="hidden-xs text-center">
+                                    
+                                        @Html.Partial("_Calification", list.Tasks)
+                                        
+
+                                    </td>
+                                </tr>
+                                    }                               
+                            </tbody>
+                            }
+                            
+                        </table>
+                        <!-- END Top Products Content -->
+                    </div>
+                    <!-- END Top Products Block -->
+                </div>    <!-- END Quick Stats -->
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Latest Orders Block -->
+                    <div class="block">
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">
+                            <div class="block-options pull-right">
+                                <a href="/Users/Create" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Empleado"><i class="fa fa-plus"></i></a>
+                                <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+
+                            </div>
+                            <h2><strong>Empleados</strong> </h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        <table class="table table-borderless table-striped table-vcenter table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><strong>Id.</strong></td>
+                                    <td class="text-center"><strong>Nombre</strong></td>
+                                    <td class="text-center"><strong>Teléfono</strong></td>
+                                    <td class="text-center"><strong>Obra Social</strong></td>
+                                    <td class="text-center"><strong>Talle Ropa</strong></td>
+                                    <td class="text-center">CUIT</td>
+                                </tr>
+                                @foreach (var employee in Model.Workers)
+                                {
+                                    <tr>
+                                        <td class="text-center"><a href="javascript:void(0)"><strong>@employee.Id</strong></a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@employee.User.Name @employee.User.Surname</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@employee.User.ContactData.Telephone</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)"></a>-</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">@employee.User.CUIT</td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <!-- END Latest Orders Content -->
+                    </div>
+                    <!-- END Latest Orders Block -->
+                </div>
+                <!-- END Page Content -->
+                <!-- Footer -->
+                <footer class="clearfix">
+                    <div class="pull-right">
+                        Creado por <a href="http://www.bluedot.com.ar" _blank">Bluedot</a>
+                    </div>
+                    <div class="pull-left">
+                        Software Version 1.0
+                    </div>
+                </footer>
+                <!-- END Footer -->
+            </div>
+
+
+        </div>
+    </div>
+    
+</div>

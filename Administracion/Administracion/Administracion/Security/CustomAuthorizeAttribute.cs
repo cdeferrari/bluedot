@@ -1,5 +1,6 @@
 ﻿using Administracion.DomainModel.Enum;
 using Administracion.Security;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
@@ -7,7 +8,9 @@ namespace Administracion.Security
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {        
-        private Roles allowRoles;     
+        private Roles allowRoles;
+
+        
 
         public CustomAuthorizeAttribute(Roles allowRoles)
         {
@@ -20,7 +23,7 @@ namespace Administracion.Security
 
             if (SessionPersister.isAuthenticated)
             {
-                authorize = SessionPersister.Account.Role == allowRoles;
+                authorize =  (allowRoles==SessionPersister.Account.Role) || (allowRoles.Equals(DomainModel.Enum.Roles.All)) ;
             }
 
             return authorize;

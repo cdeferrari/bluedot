@@ -26,7 +26,8 @@ namespace ApiCore.Services.Implementations.Consortiums
         [Transaction]
         public Consortium CreateConsortium(ConsortiumRequest consortium)
         {
-            var entityToInsert = MergeConsortium(consortium);
+            Consortium originalConsortium = new Consortium();
+            var entityToInsert = MergeConsortium(originalConsortium, consortium);
 
             ConsortiumRepository.Insert(entityToInsert);
             return entityToInsert;
@@ -45,7 +46,7 @@ namespace ApiCore.Services.Implementations.Consortiums
         [Transaction]
         public Consortium UpdateConsortium(Consortium originalConsortium, ConsortiumRequest consortium)
         {            
-            originalConsortium = this.MergeConsortium(consortium);
+            originalConsortium = this.MergeConsortium(originalConsortium, consortium);
             ConsortiumRepository.Update(originalConsortium);
             return originalConsortium;
 
@@ -60,12 +61,13 @@ namespace ApiCore.Services.Implementations.Consortiums
         }
         
 
-        private Consortium MergeConsortium(ConsortiumRequest consortium)
+        private Consortium MergeConsortium(Consortium originalConsortium, ConsortiumRequest consortium)
         {
-            Consortium originalConsortium = new Consortium();
-            originalConsortium = Mapper.Map<Consortium>(consortium);
-            originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);
-            originalConsortium.Ownership = this.OwnershipRepository.GetById(consortium.OwnershipId);
+                       
+            originalConsortium.CUIT = consortium.CUIT;
+            originalConsortium.FriendlyName = consortium.FriendlyName;
+            originalConsortium.MailingList = consortium.MailingList;
+            originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);           
             return originalConsortium;
         }
 

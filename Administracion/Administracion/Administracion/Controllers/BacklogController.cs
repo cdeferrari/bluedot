@@ -1,5 +1,10 @@
 ﻿using Administracion.DomainModel;
+using Administracion.DomainModel.Enum;
+using Administracion.Dto.List;
+using Administracion.Dto.Ticket;
 using Administracion.Models;
+using Administracion.Security;
+using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Priorities;
@@ -17,13 +22,14 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    //[Authorize]
+    [CustomAuthorize(Roles.All)]
     public class BacklogController : Controller
     {
         public virtual ITicketService TicketService { get; set; }
         public virtual IStatusService StatusService { get; set; }
         public virtual IPriorityService PriorityService { get; set; }
         public virtual IUserService UserService { get; set; }
+        public virtual IAuthentication AuthenticationService { get; set; }
         public virtual IWorkerService WorkerService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
@@ -32,7 +38,18 @@ namespace Administracion.Controllers
 
         public ActionResult Index()
         {
-            return View();
+
+            try
+            {
+                var tickets = this.TicketService.GetAll();
+                var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
+                return View("List",ticketsViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+            
         }
 
         // GET: Backlog
@@ -51,10 +68,10 @@ namespace Administracion.Controllers
             });
 
 
-            var userList = this.UserService.GetAll().Select(x => new SelectListItem()
+            var userList = this.AuthenticationService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Name + " " + x.Surname
+                Text = x.Name
             });
 
             var workersList = this.WorkerService.GetAll().Select(x => new SelectListItem()
@@ -95,18 +112,26 @@ namespace Administracion.Controllers
         [HttpPost]
         public ActionResult CreateUpdateTicket(TicketViewModel ticket)
         {                     
-            var nticket = Mapper.Map<Ticket>(ticket);
+            var nticket = Mapper.Map<TicketRequest>(ticket);
             try
             {
-                if (nticket.Id != 0)
+                var result = false;
+                if (nticket.Id == 0)
                 {
-                    this.TicketService.CreateTicket(nticket);
+                    result = this.TicketService.CreateTicket(nticket);
                 }
                 else
                 {
-                    this.TicketService.UpdateTicket(nticket);
+                    result = this.TicketService.UpdateTicket(nticket);
                 }
-                return View("CreateSuccess");
+                if (result)
+                {
+                    return Redirect("/Backlog/Index");
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
             }
             catch (Exception ex)
             {
@@ -114,7 +139,8 @@ namespace Administracion.Controllers
             }
             
         }
-
+        
+        
 
         public ActionResult UpdateTicketById(int id)
         {
@@ -130,10 +156,10 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
-            var userList = this.UserService.GetAll().Select(x => new SelectListItem()
+            var userList = this.AuthenticationService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Name+" "+x.Surname
+                Text = x.Name
             });
 
             var workersList = this.WorkerService.GetAll().Select(x => new SelectListItem()
@@ -166,10 +192,8 @@ namespace Administracion.Controllers
         }
 
         public ActionResult UpdateTicket(TicketViewModel ticket)
-        {            
-            var nticket = new Ticket();
-            ///this.MapTicket(nticket, ticket);
-            nticket = Mapper.Map<Ticket>(ticket);            
+        {                        
+            var nticket = Mapper.Map<TicketRequest>(ticket);            
             this.TicketService.UpdateTicket(nticket);
             return View();
         }
@@ -177,7 +201,8 @@ namespace Administracion.Controllers
         public ActionResult DeleteTicket(int id)
         {                    
             this.TicketService.DeleteTicket(id);
-            return View();
+
+            return Redirect("/Backlog/Index");
         }
         
         public ActionResult List()

@@ -23,7 +23,7 @@ namespace ApiCore.Repository.Mappings
             this.HasRequired(x => x.Consortium).WithMany().Map(x => x.MapKey("consortium_id"));
             this.HasRequired(x => x.Status).WithMany().Map(x => x.MapKey("status_id"));
             this.HasRequired(x => x.FunctionalUnit).WithMany().Map(x => x.MapKey("functional_unit_id"));
-            this.HasRequired(x => x.Worker).WithMany().Map(x => x.MapKey("worker_id"));
+            this.HasOptional(x => x.Worker).WithMany().Map(x => x.MapKey("worker_id"));
             this.HasRequired(x => x.Creator).WithMany().Map(x => x.MapKey("creator_id"));
 
         }

@@ -120,14 +120,29 @@
   <data name="CreateAdministration" xml:space="preserve">
     <value>Administration/</value>
   </data>
+  <data name="CreateChecklist" xml:space="preserve">
+    <value>Lista/</value>
+  </data>
   <data name="CreateConsortium" xml:space="preserve">
     <value>Consorcio/</value>
   </data>
   <data name="CreateFunctionalUnit" xml:space="preserve">
     <value>Unidad/</value>
   </data>
+  <data name="CreateMultimedia" xml:space="preserve">
+    <value>Multimedia/</value>
+  </data>
+  <data name="CreateOwner" xml:space="preserve">
+    <value>Owner/</value>
+  </data>
   <data name="CreateOwnership" xml:space="preserve">
     <value>Propiedad/</value>
+  </data>
+  <data name="CreateProvider" xml:space="preserve">
+    <value>Provider/</value>
+  </data>
+  <data name="CreateRenter" xml:space="preserve">
+    <value>Renter/</value>
   </data>
   <data name="CreateTicket" xml:space="preserve">
     <value>Tickets/</value>
@@ -139,37 +154,73 @@
     <value>Worker/</value>
   </data>
   <data name="DeleteAdministration" xml:space="preserve">
-    <value>Administration/</value>
+    <value>Administration/{0}</value>
+  </data>
+  <data name="DeleteChecklist" xml:space="preserve">
+    <value>Lista/{0}</value>
   </data>
   <data name="DeleteConsortium" xml:space="preserve">
-    <value>Consortium/</value>
+    <value>Consortium/{0}</value>
   </data>
   <data name="DeleteFunctionalUnit" xml:space="preserve">
-    <value>Unit/</value>
+    <value>Unit/{0}</value>
+  </data>
+  <data name="DeleteOwner" xml:space="preserve">
+    <value>Owner/{0}</value>
   </data>
   <data name="DeleteOwnership" xml:space="preserve">
-    <value>Propiedad/</value>
+    <value>Propiedad/{0}</value>
+  </data>
+  <data name="DeleteProvider" xml:space="preserve">
+    <value>Provider/{0}</value>
+  </data>
+  <data name="DeleteRenter" xml:space="preserve">
+    <value>Renter/{0}</value>
   </data>
   <data name="DeleteTicket" xml:space="preserve">
-    <value>Tickets/</value>
+    <value>Ticket/{0}</value>
   </data>
   <data name="DeleteUser" xml:space="preserve">
-    <value>User/</value>
+    <value>User/{0}</value>
   </data>
   <data name="DeleteWorker" xml:space="preserve">
-    <value>Worker/</value>
+    <value>Worker/{0}</value>
   </data>
   <data name="GetAdministration" xml:space="preserve">
-    <value>Administration/</value>
+    <value>Administration/{0}</value>
+  </data>
+  <data name="GetAllAccounts" xml:space="preserve">
+    <value>Account/</value>
   </data>
   <data name="GetAllAdministrations" xml:space="preserve">
     <value>Administration/</value>
+  </data>
+  <data name="GetAllChecklist" xml:space="preserve">
+    <value>Lista/</value>
+  </data>
+  <data name="GetAllConsortium" xml:space="preserve">
+    <value>Consorcio/</value>
+  </data>
+  <data name="GetAllFunctionalUnits" xml:space="preserve">
+    <value>Unidad/</value>
+  </data>
+  <data name="GetAllItems" xml:space="preserve">
+    <value>Items/</value>
+  </data>
+  <data name="GetAllOwners" xml:space="preserve">
+    <value>Owner/</value>
   </data>
   <data name="GetAllOwnerships" xml:space="preserve">
     <value>Propiedad/All</value>
   </data>
   <data name="GetAllPriorities" xml:space="preserve">
     <value>Priority/</value>
+  </data>
+  <data name="GetAllProviders" xml:space="preserve">
+    <value>Provider/</value>
+  </data>
+  <data name="GetAllRenter" xml:space="preserve">
+    <value>Renter/</value>
   </data>
   <data name="GetAllStatus" xml:space="preserve">
     <value>Status/</value>
@@ -178,49 +229,79 @@
     <value>Tickets/</value>
     <comment>i</comment>
   </data>
+  <data name="GetAllUsers" xml:space="preserve">
+    <value>Users/</value>
+  </data>
   <data name="GetAllWorkers" xml:space="preserve">
     <value>Worker/</value>
   </data>
+  <data name="GetChecklist" xml:space="preserve">
+    <value>Lista/{0}</value>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
-    <value>Consorcio/</value>
+    <value>Consorcio/{0}</value>
   </data>
   <data name="GetFunctionalUnit" xml:space="preserve">
-    <value>Unidad/</value>
+    <value>Unidad/{0}</value>
+  </data>
+  <data name="GetMultimedia" xml:space="preserve">
+    <value>Multimedia/{0}</value>
+  </data>
+  <data name="GetOwner" xml:space="preserve">
+    <value>Owner/{0}</value>
   </data>
   <data name="GetOwnership" xml:space="preserve">
-    <value>Propiedad/</value>
+    <value>Propiedad/{0}</value>
+  </data>
+  <data name="GetProvider" xml:space="preserve">
+    <value>Provider/{0}</value>
+  </data>
+  <data name="GetRenter" xml:space="preserve">
+    <value>Renter/{0}</value>
   </data>
   <data name="GetTicket" xml:space="preserve">
-    <value>Tickets/</value>
+    <value>Tickets/{0}</value>
   </data>
   <data name="GetUser" xml:space="preserve">
-    <value>Users/</value>
+    <value>Users/{0}</value>
   </data>
   <data name="GetWorker" xml:space="preserve">
-    <value>Worker/</value>
+    <value>Worker/{0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Account/Login</value>
   </data>
   <data name="UpdateAdministration" xml:space="preserve">
-    <value>Administration/</value>
+    <value>Administration/{0}</value>
+  </data>
+  <data name="UpdateChecklist" xml:space="preserve">
+    <value>Lista/{0}</value>
   </data>
   <data name="UpdateConsortium" xml:space="preserve">
-    <value>Consorcio/</value>
+    <value>Consortium/{0}</value>
   </data>
   <data name="UpdateFunctionalUnit" xml:space="preserve">
-    <value>Unit/</value>
+    <value>Unit/{0}</value>
+  </data>
+  <data name="UpdateOwner" xml:space="preserve">
+    <value>Owner/{0}</value>
   </data>
   <data name="UpdateOwnership" xml:space="preserve">
-    <value>Propiedad/</value>
+    <value>Propiedad/{0}</value>
+  </data>
+  <data name="UpdateProvider" xml:space="preserve">
+    <value>Provider/{0}</value>
+  </data>
+  <data name="UpdateRenter" xml:space="preserve">
+    <value>Renter/{0}</value>
   </data>
   <data name="UpdateTicket" xml:space="preserve">
-    <value>Tickets/</value>
+    <value>Ticket/{0}</value>
   </data>
   <data name="UpdateUser" xml:space="preserve">
-    <value>User/</value>
+    <value>User/{0}</value>
   </data>
   <data name="UpdateWorker" xml:space="preserve">
-    <value>Worker/</value>
+    <value>Worker/{0}</value>
   </data>
 </root>

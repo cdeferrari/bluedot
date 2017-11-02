@@ -1,0 +1,11 @@
+﻿@model Administracion.Models.FunctionalUnitViewModel
+
+        <tr>
+
+            
+            <td>@Model.Dto</td>                              
+            <td>@Model.Floor</td>                                    
+            
+            <td>@Html.ActionLink("Editar", "UpdateFunctionalUnitById", new { id = Model.Id }) | @Html.ActionLink("Borrar", "DeleteFunctionalUnit", new { id = Model.Id })</td>        
+            
+        </tr>

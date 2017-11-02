@@ -8,6 +8,7 @@ namespace Administracion.DomainModel
 {
     public class Owner
     {
-        public virtual Address Address { get; set; }        
+        public virtual int Id { get; set; }
+        public virtual User User { get; set; }        
     }
 }

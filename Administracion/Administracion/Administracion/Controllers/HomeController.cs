@@ -13,7 +13,7 @@ namespace Administracion.Controllers
         [CustomAuthorize(Roles.Root)]
         public ActionResult Index()
         {
-            return View();
+            return Redirect("DataBase/Index");
         }
 
         public ActionResult About()

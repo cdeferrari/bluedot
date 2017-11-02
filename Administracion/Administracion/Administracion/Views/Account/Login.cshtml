@@ -4,70 +4,144 @@
     ViewBag.Title = "Log in";
 }
 
-        <section id="loginForm" class="page-content2">
-            <div class="page-content-inner login-content" >
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div id="login-alt-container">
+                <!-- Title -->
+                <h1 class="push-top-bottom">
+                    <strong>ADMINISTRACION CARMAN</strong><br>
+                    <small>Bienvenido al Sistema de Gestión</small>
+                </h1>
+                <!-- END Title -->
+                <!-- Key Features -->
+                <ul class="fa-ul text-muted">
+                    <li><i class="fa fa-check fa-li text-success"></i> Cargar consorcios, propietarios &amp; inquilinos</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Cargar tickets&amp; Reclamos</li>
 
-                <div class="single-page-block">
-                    <div class="single-page-block-inner effect-3d-element">
-                        <div class="blur-placeholder"><!-- --></div>
-                        <div class="single-page-block-form">
-                            <h3 class="text-center">
-                                <i class="icmn-enter margin-right-10"></i>
-                                Login
-                            </h3>
-                            <br />
-
-                            @using (Html.BeginForm("Login", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                             {
-                                @Html.AntiForgeryToken()
-                                <hr />
+                </ul>
+                <!-- END Key Features -->
+                <!-- Footer -->
+                <footer class="text-muted push-top-bottom">
+                    <small> 2017&copy; <a href="www.bluedot.com.ar" target="_blank">Bluedot</a></small>
+                </footer>
+                <!-- END Footer -->
+            </div>
+        </div>
+        <div class="col-md-5">
+            <!-- Login Container -->
+            <div id="login-container">
+                <!-- Login Title -->
+                <div class="login-title text-center">
+                    <h1><strong>Login</strong>  <strong></strong></h1>
+                </div>
+                <!-- END Login Title -->
+                <!-- Login Block -->
+                <div class="block push-bit">
+                    <!-- Login Form -->
+                    
+                    @using (Html.BeginForm("Login", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <div class="checkbox">
-                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe)
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder="Email"  })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                            
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in" class="btn btn-default" />
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeholder="Password" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                                                        
+                                        </div>
                                     </div>
                                 </div>
-                                <p>
-                                    @Html.ActionLink("Register as a new user", "Register")
-                                </p>
-                                @* Enable this once you have account confirmation enabled for password reset functionality
-                            <p>
-                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                            </p>*@
-                            }
-                        </div>
-                    </div>
+
+
+                                <div class="form-group form-actions">
+                                    <div class="col-xs-4">
+                                        <label class="switch switch-primary" data-toggle="tooltip" title="Recordarme?">                                            
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-8 text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Ingresar</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 text-center">
+                                        @*<a href="javascript:void(0)" id="link-reminder-login"><small>Olvidaste tu password?</small></a> -
+                                        <a href="javascript:void(0)" id="link-register-login"><small>Crear nueva cuenta</small></a>*@
+
+                                        @Html.ActionLink("Olvidaste tu password?", "ForgotPassword")
+                                        @Html.ActionLink("Crear nueva cuenta", "Register")
+
+                                    </div>
+                                </div>
+                                
+                    }
+
+
+
                 </div>
-
+                <!-- END Login Block -->
             </div>
-</section>
-        <div class="main-backdrop"><!-- --></div>
+            <!-- END Login Container -->
+        </div>
+    </div>
+</div>
+<!-- END Login Alternative Row -->
+<!-- Modal Terms -->
+<div id="modal-terms" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Terms &amp; Conditions</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Title</h4>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>Title</h4>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>Title</h4>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal Terms -->
+<!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
+@*<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/app.js"></script>*@
 
+<!-- Load and execute javascript code used only in this page -->
+@*<script src="js/pages/login.js"></script>
+<script>$(function(){ Login.init(); });</script>*@
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
 }
 
 

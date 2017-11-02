@@ -10,6 +10,8 @@ namespace ApiCore.Repository.Mappings
 
             this.HasRequired(x => x.Address).WithMany().Map(x => x.MapKey("direction_id"));
 
+            this.HasMany(x => x.FunctionalUnits).WithRequired(x => x.Ownership).Map(x => x.MapKey("property_id"));
+
         }
 
     }

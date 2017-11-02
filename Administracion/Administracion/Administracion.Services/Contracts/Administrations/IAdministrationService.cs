@@ -10,9 +10,9 @@ namespace Administracion.Services.Contracts.Administrations
     public interface IAdministrationService
     {
         Administration GetAdministration(int administrationId);
-        void CreateAdministration(Administration administration);
-        void UpdateAdministration(Administration administration);
-        void DeleteAdministration(int administrationId);
+        bool CreateAdministration(Administration administration);
+        bool UpdateAdministration(Administration administration);
+        bool DeleteAdministration(int administrationId);
         IList<Administration> GetAll();
     }
 }

@@ -396,6 +396,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\TaskListController.cs" />
+    <Compile Include="Controllers\MultimediaController.cs" />
     <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Controllers\ConsortiumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -403,6 +406,9 @@
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
+    <Compile Include="Controllers\OwnerController.cs" />
+    <Compile Include="Controllers\RenterController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">

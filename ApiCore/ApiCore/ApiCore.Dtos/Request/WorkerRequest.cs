@@ -8,7 +8,7 @@ namespace ApiCore.Dtos.Request
 {
     public class WorkerRequest
     {
-        public virtual int AdministrationId { get; set; }
+        public virtual int ConsortiumId { get; set; }
         public virtual int UserId { get; set; }
         public virtual int Id { get; set; }
     }

@@ -18,30 +18,30 @@ namespace Administracion.Services.Implementations.Users
     {
         public ISync IntegrationService { get; set; }
 
-        public bool CreateUser(User user)
+        public User CreateUser(User user)
         {
-          return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateUser, RestMethod.Post, null, user);                        
+          return  IntegrationService.RestCall<User>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateUser, RestMethod.Post, null, user);                        
         }
 
         public bool UpdateUser(User user)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateUser, RestMethod.Put, null, new RestParamList { new RestParam("id", user.Id) , new RestParam("User", user) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateUser, user.Id), RestMethod.Put, null, user);                        
         }
 
         public bool DeleteUser(int userId)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteUser, RestMethod.Delete, null, new RestParamList { new RestParam("id", userId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteUser, userId), RestMethod.Delete, null, new RestParamList { new RestParam("id", userId) });                        
         }
 
         public User GetUser(int userId)
         {
-            return IntegrationService.RestCall<User>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetUser, RestMethod.Delete, null, new RestParamList { new RestParam("id", userId) });                        
+            return IntegrationService.RestCall<User>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetUser, userId) , RestMethod.Get, null, new RestParamList { new RestParam("id", userId) });                        
             
         }
 
         public IList<User> GetAll()
         {
-            return IntegrationService.RestCall<List<User>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetUser, RestMethod.Get, null, null);                                    
+            return IntegrationService.RestCall<List<User>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllUsers, RestMethod.Get, null, null);                                    
         }
       
     }

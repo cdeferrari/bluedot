@@ -68,6 +68,44 @@
                 format: 'LL'
             });
         });
+
+        $(document).ready(function () {
+
+            var isUserCreation = document.getElementById('IsWorker') != null;
+            if (isUserCreation) {
+                if (document.getElementById('IsWorker').checked) {
+                    $("#adminsitrationSelection").show();
+                } else {
+                    $("#adminsitrationSelection").hide();
+                }
+
+                if (document.getElementById('IsRenter').checked) {
+                    $("#pagosSelection").show();
+                } else {
+                    $("#pagosSelection").hide();
+                }
+
+                $('#IsRenter').click(function () {
+                    if (!$(this).is(':checked')) {
+                        $("#pagosSelection").hide();
+                    } else {
+                        $("#pagosSelection").show();
+                    }
+                });
+
+                $('#IsWorker').click(function () {
+                    if (!$(this).is(':checked')) {
+                        $("#adminsitrationSelection").hide();
+                    } else {
+                        $("#adminsitrationSelection").show();
+                    }
+                });
+
+            }
+
+
+            
+        });
     </script>
 
 </body>

@@ -18,25 +18,25 @@ namespace Administracion.Services.Implementations.Administrations
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateAdministration(Administration administration)
+        public bool CreateAdministration(Administration administration)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateAdministration, RestMethod.Post, null, new RestParamList { new RestParam("administration", administration) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateAdministration, RestMethod.Post, null, administration);                        
         }
 
-        public void UpdateAdministration(Administration administration)
+        public bool UpdateAdministration(Administration administration)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateAdministration, RestMethod.Put, null, new RestParamList {new RestParam("id", administration.Id), new RestParam("Administration", administration) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateAdministration, administration.Id), RestMethod.Put, null, administration);                        
         }
 
-        public void DeleteAdministration(int administrationId)
+        public bool DeleteAdministration(int administrationId)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteAdministration, RestMethod.Delete, null, new RestParamList { new RestParam("id", administrationId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteAdministration, administrationId), RestMethod.Delete, null, new RestParamList { new RestParam("id", administrationId) });                        
         }
 
         public Administration GetAdministration(int administrationId)
         {
 
-            return IntegrationService.RestCall<Administration>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAdministration, RestMethod.Get, null, new RestParamList { new RestParam("id", administrationId) });
+            return IntegrationService.RestCall<Administration>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetAdministration, administrationId), RestMethod.Get, null, new RestParamList { new RestParam("id", administrationId) });
             
         }
 

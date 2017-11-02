@@ -1,26 +1,33 @@
 ﻿@model Administracion.Models.TicketViewModel
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-4">
-
+        <tr>
+                        
+            <td>@Model.Id</td>                              
+            <td>@switch(Model.Priority.Id)
+            {
+                case 1:
+                    <span class="label label-success">@Model.Priority.Description</span>
+                    break;
+                case 2:
+                    <span class="label label-success">@Model.Priority.Description</span>
+                    break;
+                case 3:
+                    <span class="label label-danger">@Model.Priority.Description</span>
+                    break;
+                case 4:
+                    <span class="label label-danger">@Model.Priority.Description</span>
+                    break;                
+            }
             
-            <h4>@Model.Title</h4>                  
-            <br />  
-            <div class="margin-bottom-10">            
-            <p>@Model.Description</p>
-            <p>@Model.Customer</p>
-            <p>@Model.Priority.Description</p>          
-            <p>@Model.Status.Description</p>          
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    @Html.ActionLink("Editar", "UpdateTicketById", new { id = Model.Id }) |
-                    @Html.ActionLink("Borrar", "DeleteTicket", new { id = Model.Id })
-                    
+            </td>
+            <td>@Model.Title</td>
+            <td>@Model.Customer</td>          
+            <td>-</td>          
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateTicketById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="DeleteTicket/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                 </div>
-            </div>
-        
-        </div>
-    </div>
-</div>
+            </td>            
+            
+        </tr>

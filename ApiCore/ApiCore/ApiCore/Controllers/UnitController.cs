@@ -79,9 +79,9 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public IHttpActionResult Post(ConsortiumRequest consortium)
+        public IHttpActionResult Post(FunctionalUnitRequest unit)
         {
-            var result = ConsortiumService.CreateConsortium(consortium);
+            var result = UnitService.CreateUnit(unit);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 
@@ -93,11 +93,11 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="consortium">Consorcio a modificar</param>
         /// <returns></returns>
-        public IHttpActionResult Put(int id, ConsortiumRequest consortium)
+        public IHttpActionResult Put(int id, FunctionalUnitRequest unit)
         {            
-            var originalConsortium = ConsortiumService.GetById(id);
+            var originalUnit = UnitService.GetById(id);
             
-            var ret = ConsortiumService.UpdateConsortium(originalConsortium, consortium);
+            var ret = UnitService.UpdateUnit(originalUnit, unit);
 
             return Ok();
             
@@ -117,7 +117,7 @@ namespace ApiCore.Controllers
             
             try
             {
-               ConsortiumService.DeleteConsortium(id);
+               UnitService.DeleteUnit(id);
                 return Ok();
             }
             catch (Exception ex)

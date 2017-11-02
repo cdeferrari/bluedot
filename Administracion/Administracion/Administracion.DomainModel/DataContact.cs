@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Administracion.DomainModel
 {
-    public class DataContact
+    public class ContactData
     {    
         public virtual string Telephone { get; set; }
         public virtual string Cellphone { get; set; }

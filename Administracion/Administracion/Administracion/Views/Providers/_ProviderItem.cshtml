@@ -1,0 +1,28 @@
+﻿@model Administracion.Models.ProviderViewModel
+
+        <tr>
+    
+    <th class="text-center">@Model.Id</th>
+    <th class="text-center">@Model.Item</th>
+    <th class="text-center">@Model.User.CUIT</th>
+    <th>@Model.User.Name</th>
+            @if (Model.Address != null)
+            {
+                <th>@Model.Address.Street @Model.Address.Number, @Model.Address.City</th>
+            }
+            else
+            {
+                <th></th>
+            }
+    
+    <th>@Model.User.ContactData.Telephone</th>
+    <th>@Model.User.ContactData.Email</th>
+    
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateProviderById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="DeleteProvider/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+            
+        </tr>

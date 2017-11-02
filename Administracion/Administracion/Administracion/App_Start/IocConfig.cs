@@ -4,18 +4,28 @@ using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
+using Administracion.Services.Contracts.Lists;
+using Administracion.Services.Contracts.Multimedias;
+using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.Priorities;
+using Administracion.Services.Contracts.Providers;
+using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Administrations;
 using Administracion.Services.Implementations.Autentication;
+using Administracion.Services.Implementations.Checklists;
 using Administracion.Services.Implementations.Consortiums;
 using Administracion.Services.Implementations.FunctionalUnits;
+using Administracion.Services.Implementations.Multimedias;
+using Administracion.Services.Implementations.Owners;
 using Administracion.Services.Implementations.Ownerships;
 using Administracion.Services.Implementations.Priorities;
+using Administracion.Services.Implementations.Providers;
+using Administracion.Services.Implementations.Renters;
 using Administracion.Services.Implementations.Status;
 using Administracion.Services.Implementations.Tickets;
 using Administracion.Services.Implementations.Users;
@@ -57,14 +67,20 @@ namespace Administracion.App_Start
             builder.RegisterType<TicketService>().As<ITicketService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ConsortiumService>().As<IConsortiumService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<AdministrationService>().As<IAdministrationService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<MultimediaService>().As<IMultimediaService>().SingleInstance().PropertiesAutowired();
+
             builder.RegisterType<OwnershipService>().As<IOwnershipService>().SingleInstance().PropertiesAutowired();
 
             builder.RegisterType<WorkerService>().As<IWorkerService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<RenterService>().As<IRenterService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ProviderService>().As<IProviderService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<OwnerService>().As<IOwnerService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<UserService>().As<IUserService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PriorityService>().As<IPriorityService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<StatusService>().As<IStatusService>().SingleInstance().PropertiesAutowired();
 
             builder.RegisterType<FunctionalUnitService>().As<IFunctionalUnitService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ChecklistService>().As<IChecklistService>().SingleInstance().PropertiesAutowired();
 
 
 

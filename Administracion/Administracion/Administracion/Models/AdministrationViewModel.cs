@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Administracion.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace Administracion.Models
     {
         public virtual string Name { get; set; }
         public virtual string CUIT { get; set; }
-        public virtual AddressViewModel Address { get; set; }        
+        public virtual AddressViewModel Address { get; set; }
+        public virtual List<Worker> Employees { get; set; }
     }
 }

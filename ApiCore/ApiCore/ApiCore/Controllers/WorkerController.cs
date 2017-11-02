@@ -104,6 +104,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="id">Usuario a eliminar</param>
         /// <returns></returns>
+        [Route("{id}")]
         public IHttpActionResult Delete(int id)
         {
 

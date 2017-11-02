@@ -19,31 +19,31 @@ namespace Administracion.Services.Implementations.Consortiums
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateConsortium(ConsortiumRequest consortium)
+        public bool CreateConsortium(ConsortiumRequest consortium)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, consortium);                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortium, RestMethod.Post, null, consortium);                        
         }
 
-        public void UpdateConsortium(Consortium consortium)
-        {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateConsortium, RestMethod.Put, null, new RestParamList {new RestParam("id", consortium.Id), new RestParam("consortium", consortium) });                        
+        public bool UpdateConsortium(ConsortiumRequest consortium)
+        {            
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateConsortium, consortium.Id), RestMethod.Put, null, consortium);
         }
 
-        public void DeleteConsortium(int consortiumId)
+        public bool DeleteConsortium(int consortiumId)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteConsortium, RestMethod.Delete, null, new RestParamList { new RestParam("id", consortiumId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteConsortium, consortiumId), RestMethod.Delete, null, new RestParamList { new RestParam("id", consortiumId) });                        
         }
 
         public Consortium GetConsortium(int consortiumId)
         {
 
-            return IntegrationService.RestCall<Consortium>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetConsortium, RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+            return IntegrationService.RestCall<Consortium>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConsortium, consortiumId), RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
             
         }
 
         public List<Consortium> GetAll()
         {
-            return IntegrationService.RestCall<List<Consortium>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetConsortium, RestMethod.Get, null, null);
+            return IntegrationService.RestCall<List<Consortium>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllConsortium, RestMethod.Get, null, null);
             
         }
     }

@@ -1,106 +1,184 @@
-﻿@model Administracion.Models.TicketViewModel
+﻿@model Administracion.Models.UserViewModel
 @using Administracion.Models;
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_FormLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nuevo Ticket</h2>
-@using (Html.BeginForm("CreateNewTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Ingrese los datos del Usuario a Crear</h4>
-        <hr />
 
-        @Html.ValidationMessage("", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(model => model.OpenDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class='col-md-10 '>
-                @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
-                @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-group"></i> Usuarios</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Inquilinos -Propietarios</a></li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVOS </strong> INQUILINOS / PROPIETARIOS</h2>
+                    </div>
+                    @using (Html.BeginForm("CreateUpdateUser", "Users", FormMethod.Post , htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Id)
+
+
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="Nombre" } })
+                                <span class="help-block">Coloque el nombre completo</span>
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })                                                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido" } })
+                                <span class="help-block">Coloque el apellido completo</span>
+                                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">Telefono / Celular</label>
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.ContactData.Telephone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono" } })                                
+                                <span class="help-block">Coloque el numero de tel.</span>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactData.Cellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular" } })                                
+                                <span class="help-block">Coloque el celular.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">DOCUMENTACION</label>
+                            <div class="col-md-5">                                
+                                @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", @placeholder = "DNI" } })
+                                
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "form-control", @placeholder = "CUIT" } })                                
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">CONSORCIO/UF</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.FunctionalUnitId,  Model.FunctionalUnitList, "-- ELIJA CONSORCIO / UF --",new { @class = "form-control" })                                
+                            </div>
+                            
+                            @*<div class="col-md-5">
+                                @Html.DropDownListFor(model => model.AdministrationId, Model.Administrations, "-- ELIJA UNIDAD FUNCIONAL --",  new { @class = "form-control" } )
+                                
+                            </div>*@
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactData.Email, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.ContactData.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                <span class="help-block">Coloque el nombre email</span>
+                                @Html.ValidationMessageFor(model => model.ContactData.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-textarea-input">Comentarios</label>
+                                            <div class="col-md-9">
+                                                <textarea id="example-textarea-input" name="example-textarea-input" disabled rows="9" class="form-control" placeholder="Escriba aqui comentarios "></textarea>
+                                            </div>
+                                        </div>                                        
+
+                                        <div class="form-group " id="pagosSelection">
+                                            <label class="control-label col-md-3">Medio de pago</label>
+                                            <div class="col-md-9">
+                                                @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentTypes, "-- Por favor elja --", new { @class = "form-control", @size="1" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Tipo</label>
+                                            <div class="col-md-9">
+                                                <label class="checkbox-inline" for="example-inline-checkbox1">
+                                                    @Html.CheckBoxFor(model => model.IsRenter) Inquilino
+                                                </label>
+                                                <label class="checkbox-inline" for="example-inline-checkbox2">
+                                                    @Html.CheckBoxFor(model => model.IsOwner) Propietario
+                                                </label>
+                                                <label class="checkbox-inline" for="example-inline-checkbox3">
+                                                    <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3" value="option3"> Otro
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-file-input">Foto</label>
+                                            <div class="col-md-9">
+                                                <input disabled type="file" id="example-file-input" name="example-file-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                            </div>
+                                        </div>
+
+
+
+                    }
+
+
+
+                </div>
+                
             </div>
+
+            
+            </div>
+
+        
         </div>
 
-        <div class="form-group  row">
-            @Html.LabelFor(model => model.CloseDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CloseDate, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
-                @Html.ValidationMessageFor(model => model.CloseDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group  row">
-            @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
-                @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Consumidor</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Consorcio</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ConsortiumId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConsortiumId, "", new { @class = "text-danger" })                
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Status</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StatusId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Unidad Funcional</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FunctionalUnitId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FunctionalUnitId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Prioridad</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PriorityId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PriorityId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Trabajador</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkerId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WorkerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Creador</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatorId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-      
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear Ticket" class="btn btn-success" />
-            </div>
-        </div>
+    
     </div>
-}
+  <!-- Footer -->
+<footer class="clearfix">
+    <div class="pull-right">
+        Creado por <a href="http://www.bluedot.com.ar" _blank">Bluedot</a>
+    </div>
+    <div class="pull-left">
+        Software Version 1.0
+    </div>
+</footer>
+<!-- END Footer -->

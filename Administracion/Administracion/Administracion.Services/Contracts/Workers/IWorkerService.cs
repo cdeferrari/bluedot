@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Worker;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Administracion.Services.Contracts.Workers
     {
         IList<Worker> GetAll();
         Worker GetWorker(int WorkerId);
-        bool CreateWorker(Worker Worker);
+        bool CreateWorker(WorkerRequest Worker);
         bool UpdateWorker(Worker Worker);
         bool DeleteWorker(int WorkerId);
     }

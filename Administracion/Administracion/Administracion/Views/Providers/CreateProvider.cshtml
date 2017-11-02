@@ -1,0 +1,167 @@
+﻿@model Administracion.Models.ProviderViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-group"></i> Proveedores</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Proveedores</a></li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVOS </strong> PROVEEDORES</h2>
+                    </div>
+                    @using (Html.BeginForm("CreateUpdateProvider", "Providers", FormMethod.Post , htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.User.Id)
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+                        <div class="form-group">                                                        
+                            <label class="col-md-3 control-label" for="item">RAZON SOCIAL</label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="Razon Social" } })
+                                <span class="help-block">Coloque el nombre completo</span>
+                                @Html.ValidationMessageFor(model => model.User.Name, "", new { @class = "text-danger" })                                                                
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
+                                <span class="help-block">Coloque la direccon completa</span>
+                                @Html.ValidationMessageFor(model => model.Address.Street, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Address.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
+                                <span class="help-block">Coloque la altura.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">CP</label>
+                            <div class="col-md-3">                                
+                                @Html.EditorFor(model => model.Address.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
+                                <span class="help-block">Coloque el codigo postal</span>
+                            </div> <div class="col-md-3">                                      
+                                @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ciudad" } })                                
+                                <span class="help-block">Coloque la ciudad</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">Telefono / Celular</label>
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.User.ContactData.Telephone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono" } })                                
+                                <span class="help-block">Coloque el numero de tel.</span>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.User.ContactData.Cellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular" } })                                
+                                <span class="help-block">Coloque el celular.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">DOCUMENTACION</label>
+                            <div class="col-md-5">                                
+                                @Html.EditorFor(model => model.User.DNI, new { htmlAttributes = new { @class = "form-control", @placeholder = "DNI" } })
+                                
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.User.CUIT, new { htmlAttributes = new { @class = "form-control", @placeholder = "CUIT" } })                                
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Item, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Item, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rubro" } })
+                                <span class="help-block">Coloque el nombre rubro</span>
+                                @Html.ValidationMessageFor(model => model.Item, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.User.ContactData.Email, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.User.ContactData.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                <span class="help-block">Coloque el nombre email</span>
+                                @Html.ValidationMessageFor(model => model.User.ContactData.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-textarea-input">Comentarios</label>
+                                            <div class="col-md-9">
+                                                <textarea id="example-textarea-input" name="example-textarea-input" disabled rows="9" class="form-control" placeholder="Escriba aqui comentarios "></textarea>
+                                            </div>
+                                        </div>                                        
+
+                                        
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                            </div>
+                                        </div>
+
+
+
+                    }
+
+
+
+                </div>
+                
+            </div>
+
+            
+            </div>
+
+        
+        </div>
+
+    
+    </div>
+  <!-- Footer -->
+<footer class="clearfix">
+    <div class="pull-right">
+        Creado por <a href="http://www.bluedot.com.ar" _blank">Bluedot</a>
+    </div>
+    <div class="pull-left">
+        Software Version 1.0
+    </div>
+</footer>
+<!-- END Footer -->

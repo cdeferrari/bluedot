@@ -12,6 +12,8 @@ namespace ApiCore.DomainModel
         public virtual int Number { get; set; }
         public virtual double? Lat { get; set; }
         public virtual double? Len { get; set; }
+        public virtual string PostalCode { get; set; }
+        public virtual string City { get; set; }
 
     }
 }

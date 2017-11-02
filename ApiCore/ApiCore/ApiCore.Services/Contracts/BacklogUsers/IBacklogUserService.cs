@@ -11,5 +11,6 @@ namespace ApiCore.Services.Implementations.BacklogUsers
     public interface IBacklogUserService
     {
          DomainModel.BacklogUser GetByEmailAndPassword(string email, string password);
+        List<DomainModel.BacklogUser> GetAll();
     }
 }

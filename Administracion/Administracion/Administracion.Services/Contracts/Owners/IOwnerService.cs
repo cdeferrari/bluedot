@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Administracion.Services.Contracts.Owners
     {
         IList<Owner> GetAll();
         Owner GetOwner(int ownerId);
-        bool CreateOwner(Owner owner);
+        bool CreateOwner(OwnerRequest owner);
         bool UpdateOwner(Owner owner);
         bool DeleteOwner(int ownerId);
     }

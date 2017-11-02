@@ -11,6 +11,7 @@ using System.Configuration;
 using Administracion.Library.ApiResources;
 using Newtonsoft.Json;
 using Administracion.Services.Contracts.Workers;
+using Administracion.Dto.Worker;
 
 namespace Administracion.Services.Implementations.Workers
 {
@@ -18,24 +19,24 @@ namespace Administracion.Services.Implementations.Workers
     {
         public ISync IntegrationService { get; set; }
 
-        public bool CreateWorker(Worker Worker)
+        public bool CreateWorker(WorkerRequest Worker)
         {
           return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateWorker, RestMethod.Post, null, Worker);                        
         }
 
         public bool UpdateWorker(Worker Worker)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateWorker, RestMethod.Put, null, new RestParamList { new RestParam("id", Worker.Id) , new RestParam("Worker", Worker) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"],string.Format(ApiCore.UpdateWorker, Worker.Id), RestMethod.Put, null, Worker);                        
         }
 
         public bool DeleteWorker(int WorkerId)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteWorker, RestMethod.Delete, null, new RestParamList { new RestParam("id", WorkerId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteWorker, WorkerId), RestMethod.Delete, null, new RestParamList { new RestParam("id", WorkerId) });                        
         }
 
         public Worker GetWorker(int WorkerId)
         {
-            return IntegrationService.RestCall<Worker>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetWorker, RestMethod.Delete, null, new RestParamList { new RestParam("id", WorkerId) });                        
+            return IntegrationService.RestCall<Worker>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetWorker, WorkerId) , RestMethod.Get, null, new RestParamList { new RestParam("id", WorkerId) });                        
             
         }
 

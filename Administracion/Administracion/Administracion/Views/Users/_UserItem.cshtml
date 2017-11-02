@@ -1,0 +1,52 @@
+﻿@model Administracion.Models.UserViewModel
+
+        <tr>
+    
+    <th class="text-center">@Model.Id</th>
+    <th class="text-center">@Model.DNI</th>
+    <th>@Model.Surname</th>
+    <th>@Model.Name</th>    
+    <th>@Model.ContactData.Telephone</th>
+    <th>@Model.ContactData.Email</th>
+    @if (Model.IsOwner)
+    {
+        <th>
+            Dueño
+        </th>
+    }
+    else
+    {
+        if (Model.IsProvider)
+        {
+            <th>
+                Proveedor
+            </th>
+        }
+        else
+        {
+            if (Model.IsRenter)
+            {
+                <th>
+                    Inquilino
+                </th>
+            }
+            else
+            {
+                <th>
+                    Empleado
+                </th>
+            }
+
+        }
+
+    }
+
+
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateUserById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="DeleteUser/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+            
+        </tr>

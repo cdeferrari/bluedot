@@ -13,6 +13,8 @@ namespace Administracion.DomainModel
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }
         public virtual Administration Administration {get; set;}
-        public virtual Ownership Ownership {get; set;}
+        public virtual Ownership Ownership {get; set;}        
+        public virtual IList<Worker> Workers { get; set; }
+        
     }
 }

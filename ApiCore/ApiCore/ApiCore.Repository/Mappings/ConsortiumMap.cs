@@ -16,6 +16,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.MailingList).IsRequired().HasColumnName("mailing_list");            
             this.HasRequired(x => x.Ownership).WithMany().Map(x => x.MapKey("ownership_id"));
             this.HasRequired(x => x.Administration).WithMany().Map(x => x.MapKey("administration_id"));
+            this.HasMany(x => x.Managers).WithRequired(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
         }
 
     }

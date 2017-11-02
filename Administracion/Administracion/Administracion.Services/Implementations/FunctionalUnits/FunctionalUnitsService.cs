@@ -19,31 +19,31 @@ namespace Administracion.Services.Implementations.FunctionalUnits
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateFunctionalUnit(FunctionalUnit FunctionalUnit)
+        public bool CreateFunctionalUnit(FunctionalUnit FunctionalUnit)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateFunctionalUnit, RestMethod.Post, null, FunctionalUnit);                        
+           return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateFunctionalUnit, RestMethod.Post, null, FunctionalUnit);                        
         }
 
-        public void UpdateFunctionalUnit(FunctionalUnit FunctionalUnit)
+        public bool UpdateFunctionalUnit(FunctionalUnit FunctionalUnit)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateFunctionalUnit, RestMethod.Put, null, new RestParamList {new RestParam("id", FunctionalUnit.Id), new RestParam("FunctionalUnit", FunctionalUnit) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateFunctionalUnit, FunctionalUnit.Id), RestMethod.Put, null, FunctionalUnit);                        
         }
 
-        public void DeleteFunctionalUnit(int FunctionalUnitId)
+        public bool DeleteFunctionalUnit(int FunctionalUnitId)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteFunctionalUnit, RestMethod.Delete, null, new RestParamList { new RestParam("id", FunctionalUnitId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteFunctionalUnit, FunctionalUnitId), RestMethod.Delete, null, new RestParamList { new RestParam("id", FunctionalUnitId) });                        
         }
 
         public FunctionalUnit GetFunctionalUnit(int FunctionalUnitId)
         {
 
-            return IntegrationService.RestCall<FunctionalUnit>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetFunctionalUnit, RestMethod.Get, null, new RestParamList { new RestParam("id", FunctionalUnitId) });
+            return IntegrationService.RestCall<FunctionalUnit>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetFunctionalUnit, FunctionalUnitId), RestMethod.Get, null, new RestParamList { new RestParam("id", FunctionalUnitId) });
             
         }
 
         public IList<FunctionalUnit> GetAll()
         {
-            return IntegrationService.RestCall<List<FunctionalUnit>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetFunctionalUnit, RestMethod.Get, null, null);
+            return IntegrationService.RestCall<List<FunctionalUnit>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllFunctionalUnits, RestMethod.Get, null, null);
             
         }
     }

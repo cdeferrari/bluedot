@@ -2,123 +2,329 @@
 @if (SessionPersister.isAuthenticated)
 {
 
-    <nav class="left-menu" left-menu>
-        <div class="logo-container">
-            <a href="index.html" class="logo">
-                <img src="img/logo.png" alt="Administracion" />
-                <img class="logo-inverse" src="../assets/common/img/logo-inverse.png" alt="Administracion" />
-            </a>
+      <!-- Used only if page preloader is enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
+    <div class="preloader themed-background">
+        <h1 class="push-top-bottom text-light text-center"><strong>Administración</strong>Carman</h1>
+        <div class="inner">
+            <h3 class="text-light visible-lt-ie10"><strong>Cargando	..</strong></h3>
+            <div class="preloader-spinner hidden-lt-ie10"></div>
         </div>
-        <div class="left-menu-inner scroll-pane">
-            <ul class="left-menu-list left-menu-list-root list-unstyled">
+    </div>
 
-                <li class="left-menu-list-active">
-                    <a class="left-menu-link" href="bunge-index.html">
-                        <i class="left-menu-link-icon icmn-home2"><!-- --></i>
-                        <span class="menu-top-hidden">HOME</span>
-                    </a>
-                </li>
+    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations" >
 
-                <li class="left-menu-list-separator"><!-- --></li>
-                <li class="left-menu-list-submenu">
-                    <a class="left-menu-link" href="javascript: void(0);">
-                        <i class="left-menu-link-icon icmn-toggle-on"><!-- --></i>  Tableros de Tickets
-                    </a>
-                    @*<ul class="left-menu-list list-unstyled">
+         <div id="sidebar">
+                    <!-- Wrapper for scrolling functionality -->
+                    <div id="sidebar-scroll">
+                        <!-- Sidebar Content -->
+                        <div class="sidebar-content">
+                            <!-- Brand -->
+                            <a href="index.html" class="sidebar-brand">
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Adm.</strong>Carman</span>
+                            </a>
+                            <!-- END Brand -->
+                            <!-- User Info -->
+                            <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                                <div class="sidebar-user-avatar">
+                                    <a href="page_ready_user_profile.html">                                        
+                                        <img src="~/Content/img/avatar.jpg" />
+                                    </a>
+                                </div>
+                                <div class="sidebar-user-name">I.Carman</div>
+                                <div class="sidebar-user-links">
+                                    <a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Perfil"><i class="gi gi-user"></i></a>
+                                    <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
+                                    <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
+                                    <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Mis Datos" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
+                                    <a href="login.html" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                                </div>
+                            </div>
+                            <!-- END User Info -->
+                            <!-- Theme Colors -->
+                            <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
+                            <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
+                                <!-- You can also add the default color theme
+                                <li class="active">
+                                    <a href="javascript:void(0)" class="themed-background-dark-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default Blue"></a>
+                                </li>
+                                -->
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-modern themed-border-modern" data-theme="css/themes/modern.css" data-toggle="tooltip" title="Modern"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-flatie themed-border-flatie" data-theme="css/themes/flatie.css" data-toggle="tooltip" title="Flatie"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-spring themed-border-spring" data-theme="css/themes/spring.css" data-toggle="tooltip" title="Spring"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-fancy themed-border-fancy" data-theme="css/themes/fancy.css" data-toggle="tooltip" title="Fancy"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-coral themed-border-coral" data-theme="css/themes/coral.css" data-toggle="tooltip" title="Coral"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-lake themed-border-lake" data-theme="css/themes/lake.css" data-toggle="tooltip" title="Lake"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-forest themed-border-forest" data-theme="css/themes/forest.css" data-toggle="tooltip" title="Forest"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-waterlily themed-border-waterlily" data-theme="css/themes/waterlily.css" data-toggle="tooltip" title="Waterlily"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" title="Emerald"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="themed-background-dark-blackberry themed-border-blackberry" data-theme="css/themes/blackberry.css" data-toggle="tooltip" title="Blackberry"></a>
+                                </li>
+                            </ul>
+                            <!-- END Theme Colors -->
+                            <!-- Sidebar Navigation -->
+                            <ul class="sidebar-nav">
+                                <li>
+                                    <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Consortium/Index">Ver Consorcios</a>
+                                        </li>
+
+
+
+                                    </ul>                                    
+                                </li>        
+
                             <li>
-                                <a class="left-menu-link" href="bunge-bo-crud-eventos">
-                                    Dia del Niño
+                                <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Inqulinos / Propietarios</span></a>
+                            </li>
+
+
+
+
+                                                <li>
+                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_forms_general.html">Crear Nuevo Checklist</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_forms_components.html">Ver Checklists</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_forms_general.html">Nuevo Gasto</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_forms_components.html">Cargar Factura</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_forms_general.html">Cargar Nuevo Empleado</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_forms_components.html">Ver empleados</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="page_forms_general.html">Cargar Nuevo Proveedor</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="page_forms_components.html">Ver proveedores</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="sidebar-header">
+                                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                                    <span class="sidebar-header-title">Soporte</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/Backlog/Create">Nuevo Ticket</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/Backlog/Index">Ver Tickets</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="sidebar-header">
+                                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
+                                                    <span class="sidebar-header-title">Documentación</span>
+                                                </li>
+                                                <li>
+                                                    <a href="index2.html"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="index2.html"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
+                                                </li>
+
+                                            </ul>
+                                            <!-- END Sidebar Navigation -->
+
+                                            <!-- Sidebar Notifications -->
+                                                <div class="sidebar-header sidebar-nav-mini-hide">
+                                                    <span class="sidebar-header-options clearfix">
+                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="Refresh"><i class="gi gi-refresh"></i></a>
+                                                    </span>
+                                                    <span class="sidebar-header-title">Actividad</span>
+                                                </div>
+                                                <div class="sidebar-section sidebar-nav-mini-hide">
+                                                    <div class="alert alert-success alert-alt">
+                                                        <small>5 min </small><br>
+                                                        <i class="fa fa-thumbs-up fa-fw"></i> No hay actividades todavía
+                                                    </div>
+                                                </div>
+                                            <!-- END Sidebar Notifications -->
+                                            </div>
+                                        <!-- END Sidebar Content -->
+                     </div>
+                                    <!-- END Wrapper for scrolling functionality -->
+        </div>
+            <div id="main-container">
+
+            <header class="navbar navbar-default">
+                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+                    <!-- Main Sidebar Toggle Button -->
+                    <li>
+                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                            <i class="fa fa-bars fa-fw"></i>
+                        </a>
+                    </li>
+                    <!-- END Main Sidebar Toggle Button -->
+
+
+                </ul>
+                <!-- END Left Header Navigation -->
+                <!-- Right Header Navigation -->
+                <ul class="nav navbar-nav-custom pull-right">
+                    <!-- Alternative Sidebar Toggle Button -->
+                    <!-- END Alternative Sidebar Toggle Button -->
+                    <!-- User Dropdown -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                            
+                            <img src="~/Content/img/avatar.jpg" /><i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                            <li class="dropdown-header text-center">Mis Datos</li>
+                            <li>
+                                <a href="page_ready_timeline.html">
+                                    <i class="fa fa-clock-o fa-fw pull-right"></i>
+                                    <span class="badge pull-right">10</span>
+                                    Mis Tareas
+                                </a>
+                                <a href="page_ready_inbox.html">
+                                    <i class="fa fa-envelope-o fa-fw pull-right"></i>
+                                    <span class="badge pull-right">5</span>
+                                    Mensajes
+                                </a>
+
+                                <a href="page_ready_faq.html">
+                                    <i class="fa fa-question fa-fw pull-right"></i>
+                                    <span class="badge pull-right">11</span>
+                                    FAQS
                                 </a>
                             </li>
+                            <li class="divider"></li>
                             <li>
-                                <a class="left-menu-link" href="#">
-                                    Evento2
+
+                                <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
+                                <a href="#modal-user-settings" data-toggle="modal">
+                                    <i class="fa fa-cog fa-fw pull-right"></i>
+                                    Mis datos
                                 </a>
                             </li>
+                            <li class="divider"></li>
                             <li>
-                                <a class="left-menu-link" href="#">
-                                    Evento3
-                                </a>
+                                <a href="/Account/LogOff"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+
+                                @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                }*@
+
+
+
+
                             </li>
-                        </ul>*@
-                </li>
-                <li class="left-menu-list-separator"><!-- --></li>
 
+                        </ul>
+                    </li>
+                    <!-- END User Dropdown -->
+                </ul>
+                <!-- END Right Header Navigation --><!-- Horizontal Menu + Search -->
+                <div id="horizontal-menu-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="javascript:void(0)">Home</a>
+                        </li>
 
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Contactos </a>
 
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Calendario </a>
 
-                <li>
-                    <a class="left-menu-link" href="bunge-bo-colaboradores.html">
-                        <i class="left-menu-link-icon icmn-address-book"><!-- --></i>
-                        Administrar Tickets
-                    </a>
-                </li>
-                <li>
-                    <a class="left-menu-link" href="bunge-bo-crud-regalos.html">
-                        <i class="left-menu-link-icon icmn-gift"><!-- --></i>
-                        Administrar Consorcios
-                    </a>
-                </li>
-                <li>
-                    <a class="left-menu-link" href="bunge-bo-crud-eventos.html">
-                        <i class="left-menu-link-icon icmn-calendar"><!-- --></i>
-                        Administrar Usuarios
-                    </a>
-                </li>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Mensajes(1) </a>
 
-
-
-
-
-                <li class="left-menu-list-separator"><!-- --></li>
-
-
-            </ul>
-        </div>
-    </nav>
-
-
-    <nav class="top-menu">
-        <div class="menu-icon-container hidden-md-up">
-            <div class="animate-menu-button left-menu-toggle">
-                <div><!-- --></div>
-            </div>
-        </div>
-        <div class="menu">
-            <div class="menu-user-block">
-                <div class="dropdown dropdown-avatar">
-                    <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class="avatar" href="javascript:void(0);">
-                            <img src="../assets/common/img/temp/avatars/1.jpg" alt="Alternative text to the image">
-                        </span>
-                    </a>
-                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                    {
-                    @Html.AntiForgeryToken()
-
-
-
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-user"></i> Mis datos</a>
-
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()" s><i class="dropdown-icon icmn-exit"></i> Logout</a>
+                        </li>
                     </ul>
-
-
-                    }
+                    <form action="page_ready_search_results.html" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Buscar..">
+                        </div>
+                    </form>
                 </div>
+                <!-- END Horizontal Menu + Search -->
+            </header>
+            <!-- END Header -->
+
             </div>
-
         </div>
-    </nav>
-
-
-
-
-
-
-
-
-
-}
+        }

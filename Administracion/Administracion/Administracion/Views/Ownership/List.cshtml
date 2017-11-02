@@ -1,0 +1,59 @@
+﻿@model List<Administracion.Models.OwnershipViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="margin-bottom-50">
+
+
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-2">                        
+                        <input value="PROPIEDADES" class="btn btn-default" />
+                    </div>
+                    <div class="col-md-2">
+                        <input onclick="location.href = '/Ownership/CreateOwnership'" value="NUEVO!" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="panel panel-with-borders">
+                    <div class="panel-body">
+                        <div class="nav-tabs-horizontal margin-bottom-20">
+                            
+                        </div>
+                        @if (Model.Count() > 0)
+                        {
+
+
+                            <table class="table table-hover nowrap margin-bottom-0" id="example1" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Calle</td>
+                                        <td>Numero</td>                                                                                
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var consortium in Model)
+                                    {
+                                        @Html.Partial("_OwnershipItem", consortium)
+                                    }
+                                </tbody>
+                            </table>
+                            
+                        }
+                        else
+                        {
+                            @Html.Partial("_EmptyBacklog")
+                        }
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>

@@ -12,6 +12,7 @@ using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
+using ApiCore.Services.Contracts.Lists;
 
 namespace ApiCore.Controllers
 {
@@ -23,6 +24,7 @@ namespace ApiCore.Controllers
     {
 
         public IConsortiumService ConsortiumService { get; set; }
+        public IListService ListService { get; set; }
 
 
 
@@ -107,6 +109,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="id">Consorcio a eliminar</param>
         /// <returns></returns>
+
         public IHttpActionResult Delete(int id)
         {
 

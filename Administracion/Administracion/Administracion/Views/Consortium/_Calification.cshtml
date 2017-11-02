@@ -1,0 +1,114 @@
+﻿@model IList<Administracion.DomainModel.TaskList>
+
+@{
+
+    var succeced = Model.Select(x => x.Result.Description.Equals("success")).Count();
+
+ }
+
+
+
+@switch (succeced)
+{
+
+    case 0:
+        <div class="text-warning">
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+
+        break;
+    case 1:
+        <div class="text-warning">
+            <i class="fa fa-star-half-empty"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 2:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 3:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-empty"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 4:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 5:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-empty"></i>            
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 6:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 7:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-empty"></i>            
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 8:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        break;
+    case 9:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-empty"></i>            
+        </div>
+        break;
+            case 10:
+        <div class="text-warning">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+        </div>
+        break;
+}

@@ -1,5 +1,4 @@
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csprojResolveAssemblyReference.cache
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CoreCompileInputs.cache
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApplicationInsights.config
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\roslyn\csc.exe
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -116,7 +115,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Domain
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Dtos.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Library.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Repository.pdb
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Repository.dll.config
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Autofac.Extras.CommonServiceLocator.xml

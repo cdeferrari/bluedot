@@ -51,7 +51,7 @@ namespace Administracion.Controllers
                 {
                     account.HasErrors = true;
                     account.MessageError = "El usuario/password ingresado es Invalido, por favor vuelva a internarlo";
-                    return View(account);
+                    return View("../Account/Login", account);
                 }
             }
 
@@ -67,7 +67,6 @@ namespace Administracion.Controllers
             SessionPersister.LogOut();
             return RedirectToAction("Login");
         }
-
 
         private string MD5Hash(string text)
         {
@@ -89,6 +88,7 @@ namespace Administracion.Controllers
 
             return strBuilder.ToString();
         }
+
 
     }
 }

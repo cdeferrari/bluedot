@@ -1,0 +1,57 @@
+﻿@model Administracion.Models.FunctionalUnitViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+<h2>Consorcio</h2>
+@using (Html.BeginForm("CreateUpdateFunctionalUnit", "FunctionalUnit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=> x.Id)
+    <div class="form-horizontal">
+        <h4>Ingrese los siguientes datos</h4>
+        <hr />
+
+        @Html.ValidationMessage("", new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Dto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class='col-md-10 '>
+                @Html.EditorFor(model => model.Dto, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
+                @Html.ValidationMessageFor(model => model.Dto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
+                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Propiedad</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.OwnershipId, Model.Ownerships, "-- Elija Propiedad --")                
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Popietario</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.OwnerId, Model.Owners, "-- Elija Propietario --")
+            </div>
+        </div>
+        
+
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

@@ -2,81 +2,25 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="dashboard-container">
+<div id="page-content">
 
-    <div class="row">
-        <div class="col-md-6" onclick="location.href = '/Consortium/CreateConsortium';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Crear</h5>
-                        <i class="counter-icon icmn-server"></i>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="content-header">
+        <ul class="nav-horizontal text-center">
+            <li>
+                <a href="page_ecom_dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+            </li>
 
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6" onclick="location.href = '/Backlog/Index';">
-            <div class="widget widget-seven background-default">
-                <div class="widget-body">
-                    <div href="javascript: void(0);" class="widget-body-inner">
-                        <h5 class="text-uppercase">Usuarios</h5>
-                        <i class="counter-icon icmn-server"></i>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+            <li class="active">
+                <a href="page_ecom_customer_view.html"><i class="gi gi-building"></i> Consorcios</a>
+            </li>
+        </ul>
     </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Consorcios</li>
+        <li><a href="carman-consorcios-lista">Listar</a></li>
+        <li><a href="">Consorcio 1</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+
 </div>

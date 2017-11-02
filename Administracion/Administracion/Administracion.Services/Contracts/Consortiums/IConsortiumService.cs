@@ -12,8 +12,8 @@ namespace Administracion.Services.Contracts.Consortiums
     {
         List<Consortium> GetAll();
         Consortium GetConsortium(int consortiumId);
-        void CreateConsortium(ConsortiumRequest consortium);
-        void UpdateConsortium(Consortium consortium);
-        void DeleteConsortium(int consortiumId);
+        bool CreateConsortium(ConsortiumRequest consortium);
+        bool UpdateConsortium(ConsortiumRequest consortium);
+        bool DeleteConsortium(int consortiumId);
     }
 }

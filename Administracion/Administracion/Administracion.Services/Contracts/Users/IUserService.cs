@@ -11,7 +11,7 @@ namespace Administracion.Services.Contracts.Users
     {
         IList<User> GetAll();
         User GetUser(int userId);
-        bool CreateUser(User user);
+        User CreateUser(User user);
         bool UpdateUser(User user);
         bool DeleteUser(int userId);
     }

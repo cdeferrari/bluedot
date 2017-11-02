@@ -18,25 +18,25 @@ namespace Administracion.Services.Implementations.Ownerships
     {
         public ISync IntegrationService { get; set; }
 
-        public void CreateOwnership(Ownership Ownership)
+        public Entidad CreateOwnership(Ownership Ownership)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateOwnership, RestMethod.Post, null, new RestParamList { new RestParam("Ownership", Ownership) });                        
+            return IntegrationService.RestCall<Entidad>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateOwnership, RestMethod.Post, null, Ownership);                        
         }
 
-        public void UpdateOwnership(Ownership Ownership)
+        public bool UpdateOwnership(Ownership Ownership)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.UpdateOwnership, RestMethod.Put, null, new RestParamList {new RestParam("id", Ownership.Id), new RestParam("Ownership", Ownership) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateOwnership, Ownership.Id), RestMethod.Put, null,Ownership);                        
         }
 
-        public void DeleteOwnership(int OwnershipId)
+        public bool DeleteOwnership(int OwnershipId)
         {
-            IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.DeleteOwnership, RestMethod.Delete, null, new RestParamList { new RestParam("id", OwnershipId) });                        
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteOwnership, OwnershipId), RestMethod.Delete, null, new RestParamList { new RestParam("id", OwnershipId) });                        
         }
 
         public Ownership GetOwnership(int OwnershipId)
         {
 
-            return IntegrationService.RestCall<Ownership>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetOwnership, RestMethod.Get, null, new RestParamList { new RestParam("id", OwnershipId) });
+            return IntegrationService.RestCall<Ownership>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetOwnership, OwnershipId), RestMethod.Get, null, new RestParamList { new RestParam("id", OwnershipId) });
             
         }
 

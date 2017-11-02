@@ -19,7 +19,8 @@ namespace Administracion.Integration.Implementations
             {
                 case HttpStatusCode.OK:
                     break;
-
+                case HttpStatusCode.Created:
+                    break;
                 case HttpStatusCode.BadRequest:
                     throw new BadRequestException(response.Content);
 

@@ -1,0 +1,79 @@
+﻿@model List<Administracion.Models.UserViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-group"></i> Inquilinos y Propietarios</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Inquilinos -Propietarios</a></li>
+        </ul>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Listado de</strong> Inquilinos y Propietarios</h2>
+            </div>
+            <p>Acá podrás encontrar toda la información de los inquilinos y propietarios</p>
+
+
+            <div class="panel-heading">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        @*<input onclick="location.href = 'CreateUser'" value="NUEVO!" class="btn btn-success" />*@
+                        <button onclick="location.href = 'CreateUser'" class="btn btn-info "><i class="fa fa-plus" pull-right></i> AGREGAR NUEVO</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive">
+                @if (Model.Count() > 0)
+                {
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center">Id</th>
+                                <th class="text-center">DNI</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>                                
+                                <th>Telefono</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var consortium in Model)
+                            {
+                                @Html.Partial("_UserItem", consortium)
+                            }
+                        </tbody>
+                    </table>
+
+                }
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

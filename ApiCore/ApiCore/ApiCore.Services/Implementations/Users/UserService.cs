@@ -13,11 +13,32 @@ namespace ApiCore.Services.Implementations.Users
     public class UserService : IUserService
     {
         public IUserRepository UserRepository { get; set; }
+        public IContactDataRepository ContactDataRepository { get; set; }
 
         [Transaction]
         public User CreateUser(UserRequest user)
         {
-            var entityToInsert = new User() { };
+
+            var entityToInsert = new User()
+            {
+                CUIT = user.CUIT,
+                DNI = user.DNI,
+                Name = user.Name,
+                Surname = user.Surname                
+            };
+
+            if (user.ContactData != null)
+            {
+                var ndata = new ContactData()
+                {
+                    Cellphone = user.ContactData.Cellphone,
+                    Email = user.ContactData.Email,
+                    Telephone = user.ContactData.Telephone
+                };
+                ContactDataRepository.Insert(ndata);
+                entityToInsert.ContactData = ndata;
+            }
+
             UserRepository.Insert(entityToInsert);
             return entityToInsert;
         }
@@ -55,7 +76,11 @@ namespace ApiCore.Services.Implementations.Users
 
         private void MergeUser(User originalUser, UserRequest User)
         {
-        
+            originalUser.ContactData = User.ContactData;
+            originalUser.CUIT = User.CUIT;
+            originalUser.DNI = User.DNI;
+            originalUser.Name = User.Name;
+            originalUser.Surname = User.Surname;            
         }
 
 
@@ -77,3 +102,4 @@ namespace ApiCore.Services.Implementations.Users
         }
     }
 }
+

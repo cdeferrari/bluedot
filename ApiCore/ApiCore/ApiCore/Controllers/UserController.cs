@@ -12,6 +12,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using AutoMapper;
 using ApiCore.Services.Contracts.Users;
+using ApiCore.DomainModel;
 
 namespace ApiCore.Controllers
 {
@@ -75,12 +76,12 @@ namespace ApiCore.Controllers
         /// <param name="user">Usuario a insertar</param>
         /// <returns></returns>
         [Route("")]
-        [ResponseType(typeof(Entidad))]
+        [ResponseType(typeof(User))]
         public IHttpActionResult Post(UserRequest user)
         {
             var result = UserService.CreateUser(user);
 
-            return Created<Entidad>("", new Entidad { Id = result.Id });
+            return Created<User>("", result);
 
         }
 

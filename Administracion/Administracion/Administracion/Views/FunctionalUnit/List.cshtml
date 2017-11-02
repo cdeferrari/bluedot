@@ -1,0 +1,68 @@
+﻿@model List<Administracion.Models.FunctionalUnitViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="margin-bottom-50">
+
+
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-2">                        
+                        <input value="Unidad Funcional" class="btn btn-default" />
+                    </div>
+                    <div class="col-md-2">
+                        <input onclick="location.href = '/FunctionalUnit/CreateFunctionalUnit'" value="NUEVO!" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="panel panel-with-borders">
+                    <div class="panel-body">
+                        <div class="nav-tabs-horizontal margin-bottom-20">
+                            @*<ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#h1" role="tab">Tickets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="/Backlog/CreateTicket" data-toggle="tab" data-target="#h1" role="tab">Nuevo</a>
+                                </li>
+
+                            </ul>*@
+                        </div>
+                        @if (Model.Count() > 0)
+                        {
+
+
+                            <table class="table table-hover nowrap margin-bottom-0" id="example1" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Departamento</td>
+                                        <td>Piso</td>                                        
+                                        
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var FunctionalUnit in Model)
+                                    {
+                                        @Html.Partial("_FunctionalUnitItem", FunctionalUnit)
+                                    }
+                                </tbody>
+                            </table>
+                            
+                        }
+                        else
+                        {
+                            @Html.Partial("_EmptyBacklog")
+                        }
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>

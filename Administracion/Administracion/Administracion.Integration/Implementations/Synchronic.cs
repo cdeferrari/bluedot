@@ -50,7 +50,7 @@ namespace Administracion.Integration.Implementations
         public bool RestCallNoReturn(string urlBase, string url, RestMethod method, IEnumerable<RestParam> parameters = null, object body = null)
         {
             var response = GetRestResponse(urlBase, url, method, parameters, body);
-            return response.StatusCode == HttpStatusCode.OK;
+            return response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created;
         }
 
         public JObject GetJsonRestResponse(string urlBase, string url, RestMethod method, IEnumerable<RestParam> parameters = null, object body = null)

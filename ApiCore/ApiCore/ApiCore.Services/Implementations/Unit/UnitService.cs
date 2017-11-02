@@ -8,13 +8,17 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.Unit;
+using AutoMapper;
 
 namespace ApiCore.Services.Implementations.Users
 {
     public class UnitService : IUnitService
     {
         public IFunctionalUnitRepository UnitRepository { get; set; }
-       
+        public IOwnershipRepository OwnershipRepository { get; set; }
+        public IOwnerRepository OwnerRepository { get; set; }
+        public IRenterRepository RenterRepository { get; set; }
+
         FunctionalUnit IUnitService.GetById(int unitId)
         {
             return this.UnitRepository.GetById(unitId);
@@ -34,6 +38,38 @@ namespace ApiCore.Services.Implementations.Users
 
             }
             return result;
+        }
+
+        public FunctionalUnit CreateUnit(FunctionalUnitRequest request)
+        {
+            var unitToInsert = new FunctionalUnit();
+            var entityToInsert = MergeUnit(unitToInsert, request);
+
+            UnitRepository.Insert(entityToInsert);
+            return entityToInsert;
+        }
+
+        private FunctionalUnit MergeUnit(FunctionalUnit originalUnit,  FunctionalUnitRequest unit)
+        {
+            originalUnit.Dto = unit.Dto;
+            originalUnit.Floor = unit.Floor;            
+            originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);            
+            
+            return originalUnit;
+        }
+
+        public FunctionalUnit UpdateUnit(FunctionalUnit originalFunctionalUnit, FunctionalUnitRequest unit)
+        {
+            this.MergeUnit(originalFunctionalUnit, unit);
+            UnitRepository.Update(originalFunctionalUnit);
+            return originalFunctionalUnit;
+        }
+
+        [Transaction]
+        public void DeleteUnit(int unitId)
+        {
+            var unit = UnitRepository.GetById(unitId);
+            UnitRepository.Delete(unit);
         }
     }
 }

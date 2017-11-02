@@ -8,6 +8,7 @@ namespace Administracion.DomainModel.Enum
 {
     public enum Roles
     {
+        All,
         Root,        
         Client
     }

@@ -201,7 +201,7 @@ nav.top-menu {
     }
 
     nav.top-menu + .page-content {
-        margin-top: 80px;
+        margin-top: 100px;
     }
 
     nav.top-menu .menu-icon-container {
@@ -1794,4 +1794,8 @@ body .widget, body .panel, .widget-four .step-block {
 
 .background-default {
     background-color: #acb7bf !important;
+}
+
+.dropdown-menu-right {
+    right:0;
 }

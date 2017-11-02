@@ -1,0 +1,30 @@
+﻿@model Administracion.Models.ConsortiumViewModel
+
+        <tr>
+
+            <td class="text-center">@Model.Id</td>
+            <td class="text-center">@Model.CUIT</td>
+            <td><a href="Details/@Model.Id">@Model.FriendlyName</a></td>
+            <td>@Model.MailingList</td>
+            @*<td>Av. general Las Heras 1133</td>*@
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateConsortium/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="DeleteConsortium/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+
+
+
+
+
+            @*<td></td>                              
+            <td>@Model.CUIT</td>
+            <td>@Model.FriendlyName</td>                                          
+            <td>@Model.MailingList</td>
+            @*<td>@Model.Ownerships.Where(x=>x.Id== Mo)</td>*@
+                        
+            
+            
+            
+        </tr>

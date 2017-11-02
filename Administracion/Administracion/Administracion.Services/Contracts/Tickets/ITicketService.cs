@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Ticket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace Administracion.Services.Contracts.Tickets
     {
         IList<Ticket> GetAll();
         Ticket GetTicket(int ticketId);
-        bool CreateTicket(Ticket ticket);
-        bool UpdateTicket(Ticket ticket);
+        bool CreateTicket(TicketRequest ticket);
+        bool UpdateTicket(TicketRequest ticket);
         bool DeleteTicket(int ticketId);
     }
 }

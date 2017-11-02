@@ -14,5 +14,6 @@ namespace ApiCore.Dtos.Response
         public virtual string CUIT { get; set; }
         public virtual Address Address { get; set; }
         public virtual DateTime StartDate { get; set; }
+        public virtual List<WorkerResponse> Workers { get; set; }
     }
 }

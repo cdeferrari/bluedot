@@ -1,0 +1,94 @@
+﻿@model Administracion.Models.CheckListViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var itemCnt = 0;
+}
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="javascript:void(0)"><i class="fa fa-home"></i> HOME</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-notes_2"></i> CHECKLIST</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="">Home</a></li>
+            <li>Alta Checklist</li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVO </strong>CHECKLIST</h2>
+                    </div>
+                    @using (Html.BeginForm("CreateUpdateChecklist", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" id="Customer" name="Customer" value="@Model.Customer" >
+                        <input type="hidden" id="ConsortiumId" name="ConsortiumId" value="@Model.ConsortiumId">
+
+                        foreach (var task in Model.Tasks)
+                        {
+
+
+                            <label class="col-md-3 control-label" for="example-email-input">@task.Description </label>
+                            <input type="hidden" id="Tasks[@itemCnt].Description" name="Tasks[@itemCnt].Description" value="@task.Description">
+                            <input type="hidden" id="Tasks[@itemCnt].Id" name="Tasks[@itemCnt].Id" value="@task.Id">
+                            <div class="form-group">
+                                <div class="col-md-1">
+                                    <label class="switch switch-primary" for='@task.IsSuccess'>                                        
+                                        <input id="Tasks[@itemCnt].IsSuccess" name="Tasks[@itemCnt].IsSuccess" type="checkbox" value="true" @(task.IsSuccess ? "checked=\"checked\"" : "") />                                                                                                                        
+                                        <span data-toggle="tooltip" title="OK"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                            
+                                    <input type="text" id="Tasks[@itemCnt].Coments" name="Tasks[@itemCnt].Coments" class="form-control" placeholder="Comentarios">
+                                </div>
+
+                            </div>
+                            itemCnt++;
+                        }
+
+
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.Coments, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">                                
+                                @Html.EditorFor(model => model.Coments, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escriba aqui comentarios" , @rows="9"} })
+                                
+                            </div>
+                        </div>
+
+
+
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                </div>
+                            </div>
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+                
+    </div>
+            
+</div>

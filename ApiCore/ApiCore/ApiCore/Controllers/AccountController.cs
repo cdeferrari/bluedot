@@ -92,6 +92,18 @@ namespace ApiCore.Controllers
             return Ok(dto);
         }
 
+        // POST api/Account/Login
+        [Route("")]
+        public IHttpActionResult Get()
+        {
+            var users = this.UserService.GetAll();
+
+            var dto = Mapper.Map<List<BacklogUserResponse>>(users);
+
+            return Ok(dto);
+        }
+
+
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]

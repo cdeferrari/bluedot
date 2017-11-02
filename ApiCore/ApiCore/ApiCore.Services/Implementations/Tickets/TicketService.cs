@@ -18,6 +18,7 @@ namespace ApiCore.Services.Implementations.Tickets
         public IFunctionalUnitRepository FunctionalUnitRepository { get; set; }
         public IPriorityRepository PriorityRepository { get; set; }        
         public IBacklogUserRepository BacklogUserRepository { get; set; }
+        public IWorkerRepository WorkerRepository { get; set; }
 
         [Transaction]
         public Ticket CreateTicket(TicketRequest ticket)
@@ -83,8 +84,10 @@ namespace ApiCore.Services.Implementations.Tickets
             originalTicket.LimitDate = ticket.LimitDate;
             originalTicket.FunctionalUnit = this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId);
             originalTicket.Priority = this.PriorityRepository.GetById(ticket.PriorityId);
-            originalTicket.Worker = this.BacklogUserRepository.GetById(ticket.WorkerId);
+            originalTicket.Worker = this.WorkerRepository.GetById(ticket.WorkerId);
             originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
+            originalTicket.Title = ticket.Title;
+            originalTicket.Description = ticket.Description;
         }
         
     }

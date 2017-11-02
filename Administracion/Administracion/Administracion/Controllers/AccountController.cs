@@ -9,10 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Administracion.Models;
+using Administracion.Security;
 
 namespace Administracion.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -387,12 +387,14 @@ namespace Administracion.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            SessionPersister.LogOut();
+            return RedirectToAction("Login");
+            //return RedirectToAction("Login", "Account");
         }
 
         //

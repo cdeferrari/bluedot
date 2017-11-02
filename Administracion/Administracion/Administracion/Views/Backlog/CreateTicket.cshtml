@@ -2,129 +2,154 @@
 @using Administracion.Models;
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_FormLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nuevo Ticket</h2>
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="block full">
+            <h2>Ticket</h2>
 
 
-@using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+            @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Ingrese los datos del Ticket a Crear</h4>
-        <hr />
+                <div class="form-horizontal">
+                    <h4>Ingrese los siguientes datos</h4>
+                    <hr />
 
-        @Html.ValidationMessage("", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(model => model.OpenDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class='col-md-2 '>
-                
-                    <label class="input-group datepicker-only-init">
-                        @*<input type="text" class="form-control" placeholder="Select Date">*@
-                        @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control" } })
-                        <span class="input-group-addon">
-                            <i class="icmn-calendar"></i>
-                        </span>
-                    </label>
+                    @Html.HiddenFor(model => model.Id)
 
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class='col-md-2 '>
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessage("", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-
-                @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class='col-md-2 '>
 
 
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessage("", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.OpenDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class='col-md-2 '>
+
+                            <label class="input-group datepicker-only-init">
+                                @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <i class="icmn-calendar"></i>
+                                </span>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group  row">
+                        @Html.LabelFor(model => model.CloseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            <label class="input-group datepicker-only-init">
+                                @*<input type="text" class="form-control" placeholder="Select Date">*@
+                                @Html.EditorFor(model => model.CloseDate, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">
+                                    <i class="icmn-calendar"></i>
+                                </span>
+                            </label>
+
+                            @Html.ValidationMessageFor(model => model.CloseDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group  row">
+                        @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            <label class="input-group datepicker-only-init">
+                                @*<input type="text" class="form-control" placeholder="Select Date">*@
+                                @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">
+                                    <i class="icmn-calendar"></i>
+                                </span>
+                            </label>
+
+                            @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Consumidor</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Consorcio</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- Elija Consorcio --")
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Unidad Funcional</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.FunctionalUnitId, Model.FunctionalUnitList, "-- Elija Unidad Funcional --")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Prioridad</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --")
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Estado</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Status.Id, Model.StatusList, "-- Elija Estado --")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Trabajador</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Creador</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Creator.Id, Model.UsersList, "-- Elija Creador --")
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+
+            }
             </div>
         </div>
-
-        <div class="form-group  row">
-            @Html.LabelFor(model => model.CloseDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                <label class="input-group datepicker-only-init">
-                    @*<input type="text" class="form-control" placeholder="Select Date">*@
-                    @Html.EditorFor(model => model.CloseDate, new { htmlAttributes = new { @class = "form-control" } })
-                    <span class="input-group-addon">
-                        <i class="icmn-calendar"></i>
-                    </span>
-                </label>
-
-                @Html.ValidationMessageFor(model => model.CloseDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group  row">
-            @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                <label class="input-group datepicker-only-init">
-                    @*<input type="text" class="form-control" placeholder="Select Date">*@
-                    @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
-                    <span class="input-group-addon">
-                        <i class="icmn-calendar"></i>
-                    </span>
-                </label>
-
-                @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Consumidor</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Consorcio</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Consortium.Id, Model.ConsortiumList, "-- Elija Consorcio --")
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Unidad Funcional</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.FunctionalUnit.Id, Model.FunctionalUnitList, "-- Elija Unidad Funcional --")
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Prioridad</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --")
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Estado</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Status.Id, Model.StatusList, "-- Elija Estado --")
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Trabajador</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Creador</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Creator.Id, Model.UsersList, "-- Elija Creador --")
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear Ticket" class="btn btn-success" />
-            </div>
-        </div>
-    </div>
-   
-}
+</div>

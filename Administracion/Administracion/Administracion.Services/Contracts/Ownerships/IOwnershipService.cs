@@ -11,8 +11,8 @@ namespace Administracion.Services.Contracts.Ownerships
     {
         IList<Ownership> GetAll();
         Ownership GetOwnership(int ownershipId);
-        void CreateOwnership(Ownership ownership);
-        void UpdateOwnership(Ownership ownership);
-        void DeleteOwnership(int ownershipId);
+        Entidad CreateOwnership(Ownership ownership);
+        bool UpdateOwnership(Ownership ownership);
+        bool DeleteOwnership(int ownershipId);
     }
 }

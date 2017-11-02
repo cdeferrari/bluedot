@@ -26,18 +26,37 @@ namespace ApiCore
                 cfg.CreateMap<Account, AccountResponse>();
                 cfg.CreateMap<AccountType, AccountTypeResponse>();
                 cfg.CreateMap<Worker, WorkerResponse>();
+                cfg.CreateMap<Renter, RenterResponse>();
+                cfg.CreateMap<Renter, UnitRenterResponse>();
+
+                cfg.CreateMap<Provider, ProviderResponse>();
                 cfg.CreateMap<Role, RoleResponse>();
                 cfg.CreateMap<Ownership, OwnershipResponse>();
+                cfg.CreateMap<Ownership, OwnershipUnitResponse>();
+                cfg.CreateMap<Owner, OwnerResponse>();
+                cfg.CreateMap<Owner, UnitOwnerResponse>();
+
                 cfg.CreateMap<Administration, AdministrationResponse>();
                 cfg.CreateMap<ConsortiumRequest, Consortium>()
                 .ForMember(x => x.Administration, opt => opt.Ignore())
                 .ForMember(x => x.Ownership, opt => opt.Ignore());
 
+                cfg.CreateMap<ManagerRequest, Manager>()
+                .ForMember(x => x.Consortium, opt => opt.Ignore())
+                                .ForMember(x => x.Consortium, opt => opt.Ignore())
+                .ForMember(x => x.LaborUnion, opt => opt.Ignore());
+
+                cfg.CreateMap<FunctionalUnitRequest, FunctionalUnit>();
                 cfg.CreateMap<Consortium, ConsortiumResponse>();
                 cfg.CreateMap<FunctionalUnit, UnitResponse>();
+                cfg.CreateMap<FunctionalUnit, FunctionalUnitResponse>();
 
+                cfg.CreateMap<List, ListResponse>();
+                cfg.CreateMap<Address,AddressResponse>();
+                cfg.CreateMap<TaskList, TaskListResponse>();
             });
 
         }
     }
 }
+

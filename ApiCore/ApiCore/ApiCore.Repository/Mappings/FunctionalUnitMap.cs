@@ -12,10 +12,8 @@ namespace ApiCore.Repository.Mappings
         public FunctionalUnitMap() : base("unidad")
         {                        
             this.Property(x => x.Floor).IsRequired().HasColumnName("piso");
-            this.Property(x => x.Dto).IsOptional().HasColumnName("dto");
-            this.Property(x => x.OwnerId).IsRequired().HasColumnName("owner_id");
-            this.Property(x => x.RenterId).IsRequired().HasColumnName("renter_id");
-            this.Property(x => x.OwnershipId).IsRequired().HasColumnName("property_id");
+            this.Property(x => x.Dto).IsOptional().HasColumnName("dto");            
+            
         }
 
     }

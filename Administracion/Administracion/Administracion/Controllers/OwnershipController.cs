@@ -1,26 +1,40 @@
 ﻿using Administracion.DomainModel;
+using Administracion.DomainModel.Enum;
 using Administracion.Models;
+using Administracion.Security;
+using Administracion.Services.Contracts.Multimedias;
 using Administracion.Services.Contracts.Ownerships;
-using Administracion.Services.Contracts.Tickets;
-using Administracion.Services.Contracts.Users;
-using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [Authorize]
+    [CustomAuthorize(Roles.Root)]
     public class OwnershipController : Controller
     {
         public virtual IOwnershipService OwnershipService { get; set; }
+        public virtual IMultimediaService MultimediaService { get; set; }
+
+        
 
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                var owners = this.OwnershipService.GetAll();
+                var ownershipViewModel = Mapper.Map<List<OwnershipViewModel>>(owners);
+                return View("List", ownershipViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+
         }
 
         // GET: Backlog
@@ -31,22 +45,54 @@ namespace Administracion.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateOwnership(OwnershipViewModel owner)
+        public ActionResult CreateUpdateOwnership(OwnershipViewModel owner)
         {
          
-            var nowner = new Ownership(); 
-            
-            nowner = Mapper.Map<Ownership>(owner);
+            var nowner = Mapper.Map<Ownership>(owner);            
+
             try
             {
-                this.OwnershipService.CreateOwnership(nowner);
-                return View("CreateSuccess");
+                var result = false;
+                if (nowner.Id == 0)
+                {                    
+                    var entity = this.OwnershipService.CreateOwnership(nowner);
+                    result = entity.Id != 0;
+
+                    if (Request.Files.Count > 0)
+                    {
+                        var file = Request.Files[0];
+
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                            file.SaveAs(path);
+                            this.MultimediaService.CreateMultimedia(new Multimedia()
+                            {
+                                MultimediaTypeId = (int)TipoMultimedia.Foto,
+                                Url = fileName,
+                                OwnershipId = entity.Id
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    result = this.OwnershipService.UpdateOwnership(nowner);
+                }
+                if (result)
+                {
+                    return View("CreateSuccess");
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
             }
             catch (Exception ex)
             {
                 return View("../Shared/Error");
             }
-            
         }
 
 
@@ -69,7 +115,7 @@ namespace Administracion.Controllers
         public ActionResult DeleteOwnership(int id)
         {                    
             this.OwnershipService.DeleteOwnership(id);
-            return View();
+            return View("DeleteSuccess");
         }
         
         public ActionResult List()

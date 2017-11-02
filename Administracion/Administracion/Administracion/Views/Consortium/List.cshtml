@@ -1,0 +1,78 @@
+﻿@model List<Administracion.Models.ConsortiumViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+
+                <li class="active">
+                    <a href="#"><i class="gi gi-building"></i> Consorcios</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Consorcio</a></li>
+        </ul>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Listado de</strong> Consorcios</h2>
+            </div>
+            <p>Acá podrás encontrar toda la información de los consorcios</p>
+
+
+            <div class="panel-heading">
+                <div class="row">
+                    
+                    <div class="col-md-2">
+                        @*<input onclick="location.href = 'CreateConsortium'" value="NUEVO!" class="btn btn-success" />*@
+                        <button onclick="location.href = 'CreateConsortium'" class="btn btn-info "><i class="fa fa-plus" pull-right></i> AGREGAR NUEVO</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive">
+                @if (Model.Count() > 0)
+                {
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center">Id</th>
+                                <th class="text-center">CUIT</th>
+                                <th>Consorcio</th>
+                                <th>List</th>
+                                @*<th>Dirección</th>*@
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var consortium in Model)
+                            {
+                                @Html.Partial("_ConsortiumItem", consortium)
+                            }
+                        </tbody>
+                    </table>
+
+                }
+                
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

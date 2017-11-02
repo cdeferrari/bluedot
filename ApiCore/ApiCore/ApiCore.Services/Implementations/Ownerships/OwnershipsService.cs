@@ -60,6 +60,7 @@ namespace ApiCore.Services.Implementations.Ownerships
 
         private void MergeOwnership(Ownership originalOwnership, OwnershipRequest Ownership)
         {
+            originalOwnership.Address = Ownership.Address;
             
         }
 

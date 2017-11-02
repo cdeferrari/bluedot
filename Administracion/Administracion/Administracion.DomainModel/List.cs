@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Administracion.DomainModel
+{
+    public class List
+    {
+        public virtual int Id { get; set; }
+        public virtual string Customer { get; set; }        
+        public virtual int ConsortiumId { get; set; }
+        public virtual DateTime OpenDate { get; set; }
+        public virtual List<TaskList> Tasks { get; set; }
+        public virtual string Coments { get; set; }
+    }
+}

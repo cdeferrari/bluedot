@@ -1,0 +1,47 @@
+﻿@model Administracion.Models.OwnershipViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+
+<h2>Propiedades</h2>
+@using (Html.BeginForm("CreateUpdateOwnership", "Ownership", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=> x.Id)
+    <div class="form-horizontal">
+        <h4>Ingrese los siguientes datos</h4>
+        <hr />
+
+        @Html.ValidationMessage("", new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class='col-md-10 '>
+                @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Street, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Address.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Foto</label>
+            <div class="col-md-10">
+                <input class="form-control" type="file" name="Image" id="Image" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

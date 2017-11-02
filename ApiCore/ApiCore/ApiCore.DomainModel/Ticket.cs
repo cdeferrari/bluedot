@@ -18,7 +18,7 @@ namespace ApiCore.DomainModel
         public virtual DateTime LimitDate { get; set; }
         public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual Priority Priority { get; set; }
-        public virtual BacklogUser Worker { get; set; }
+        public virtual Worker Worker { get; set; }
         public virtual BacklogUser Creator { get; set; }        
 
     }
