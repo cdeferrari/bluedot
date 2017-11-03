@@ -67,7 +67,8 @@ namespace ApiCore.Services.Implementations.Consortiums
             originalConsortium.CUIT = consortium.CUIT;
             originalConsortium.FriendlyName = consortium.FriendlyName;
             originalConsortium.MailingList = consortium.MailingList;
-            originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);           
+            originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);
+            originalConsortium.Ownership = this.OwnershipRepository.GetById(consortium.OwnershipId);
             return originalConsortium;
         }
 

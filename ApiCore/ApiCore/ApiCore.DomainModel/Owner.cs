@@ -9,6 +9,6 @@ namespace ApiCore.DomainModel
     public class Owner : Entity
     {
         public virtual User User {get; set;}  
-        public virtual FunctionalUnit FunctionalUnit { get; set; }      
+        public virtual int? FunctionalUnitId { get; set; }      
     }   
 }

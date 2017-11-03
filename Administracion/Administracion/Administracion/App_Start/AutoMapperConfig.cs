@@ -1,6 +1,8 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Dto.Consortium;
 using Administracion.Dto.Ticket;
+using Administracion.Dto.Unit;
+using Administracion.Dto.Worker;
 using Administracion.Models;
 using AutoMapper;
 using System;
@@ -38,7 +40,11 @@ namespace Administracion.App_Start
                 cfg.CreateMap<Ownership, OwnershipViewModel>();
 
                 cfg.CreateMap<FunctionalUnit, FunctionalUnitViewModel>();
-                cfg.CreateMap<FunctionalUnitViewModel, FunctionalUnit>();
+                cfg.CreateMap<FunctionalUnit, FunctionalUnitRequest>()
+                .ForMember(x => x.OwnershipId, o=> o.MapFrom(y => y.Ownership.Id));
+
+                cfg.CreateMap<FunctionalUnitViewModel, FunctionalUnit>()
+                .ForMember(x => x.Ownership, o=> o.Ignore());
 
                 cfg.CreateMap<AdministrationViewModel, Administration>();
                 cfg.CreateMap<Administration, AdministrationViewModel>();

@@ -1,4 +1,5 @@
 ﻿using Administracion.DomainModel;
+using Administracion.Dto.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace Administracion.Services.Contracts.FunctionalUnits
     {
         IList<FunctionalUnit> GetAll();
         FunctionalUnit GetFunctionalUnit(int functionalUnitId);
-        bool CreateFunctionalUnit(FunctionalUnit functionalUnit);
-        bool UpdateFunctionalUnit(FunctionalUnit functionalUnit);
+        Entidad CreateFunctionalUnit(FunctionalUnitRequest functionalUnit);
+        bool UpdateFunctionalUnit(FunctionalUnitRequest functionalUnit);
         bool DeleteFunctionalUnit(int functionalUnitId);
     }
 }

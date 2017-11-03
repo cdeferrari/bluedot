@@ -17,6 +17,6 @@ namespace Administracion.Models
         public virtual OwnershipViewModel Ownership { get; set; }     
         public virtual AdministrationViewModel Administration { get; set; }
         public virtual IList<List> Checklists { get; set; }
-        public virtual IList<Worker> Workers { get; set; }
+        public virtual IList<Manager> Managers { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Administracion.Services.Contracts.Owners
         IList<Owner> GetAll();
         Owner GetOwner(int ownerId);
         bool CreateOwner(OwnerRequest owner);
-        bool UpdateOwner(Owner owner);
+        bool UpdateOwner(OwnerRequest owner);
         bool DeleteOwner(int ownerId);
     }
 }

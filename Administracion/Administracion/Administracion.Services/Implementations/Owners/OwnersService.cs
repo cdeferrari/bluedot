@@ -24,7 +24,7 @@ namespace Administracion.Services.Implementations.Owners
           return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateOwner, RestMethod.Post, null, Owner);                        
         }
 
-        public bool UpdateOwner(Owner Owner)
+        public bool UpdateOwner(OwnerRequest Owner)
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"],string.Format(ApiCore.UpdateOwner, Owner.Id), RestMethod.Put, null, Owner);                        
         }
@@ -36,7 +36,7 @@ namespace Administracion.Services.Implementations.Owners
 
         public Owner GetOwner(int OwnerId)
         {
-            return IntegrationService.RestCall<Owner>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetOwner, RestMethod.Delete, null, new RestParamList { new RestParam("id", OwnerId) });                        
+            return IntegrationService.RestCall<Owner>(ConfigurationManager.AppSettings["ApiCoreUrl"],string.Format(ApiCore.GetOwner, OwnerId), RestMethod.Get, null, new RestParamList { new RestParam("id", OwnerId) });                        
             
         }
 

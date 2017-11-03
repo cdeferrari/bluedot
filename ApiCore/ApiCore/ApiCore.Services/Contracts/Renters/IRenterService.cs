@@ -13,6 +13,7 @@ namespace ApiCore.Services.Contracts.Renters
         Renter CreateRenter(RenterRequest Renter);
         Renter GetById(int RenterId);        
         Renter UpdateRenter(Renter originalRenter, RenterRequest Renter);
+        Renter Update(Renter renter);
         void DeleteRenter(int RenterId);
         List<Renter> GetAll();
     }

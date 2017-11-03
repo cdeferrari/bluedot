@@ -23,10 +23,16 @@ namespace ApiCore.Services.Implementations.Renters
             var entityToInsert = new Renter()
             {
                 User = this.UserRepository.GetById(Renter.UserId),
-                FunctionalUnit = this.FunctionalUnitRepository.GetById(Renter.FunctionalUnitId),
+            
                 PaymentTypeId =Renter.PaymentTypeId
                 
             };
+
+            if (Renter.FunctionalUnitId != 0)
+            {
+                entityToInsert.FunctionalUnitId = Renter.FunctionalUnitId;
+            }
+
             RenterRepository.Insert(entityToInsert);
             return entityToInsert;
         }
@@ -63,6 +69,8 @@ namespace ApiCore.Services.Implementations.Renters
         private void MergeRenter(Renter originalRenter, RenterRequest Renter)
         {            
             originalRenter.User = this.UserRepository.GetById(Renter.UserId);
+            originalRenter.FunctionalUnitId = Renter.FunctionalUnitId;//this.FunctionalUnitRepository.GetById(Renter.FunctionalUnitId);
+            originalRenter.PaymentTypeId = Renter.PaymentTypeId;            
         }
 
         [Transaction]
@@ -82,5 +90,11 @@ namespace ApiCore.Services.Implementations.Renters
             return result;
         }
 
+        [Transaction]
+        public Renter Update(Renter renter)
+        {
+            this.RenterRepository.Update(renter);
+            return renter;
+        }
     }
 }

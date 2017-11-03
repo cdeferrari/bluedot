@@ -14,6 +14,7 @@ namespace ApiCore.DomainModel
         public virtual double? Len { get; set; }
         public virtual string PostalCode { get; set; }
         public virtual string City { get; set; }
+        public virtual string Province { get; set; }
 
     }
 }

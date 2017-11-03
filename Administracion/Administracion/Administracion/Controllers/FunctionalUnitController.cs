@@ -1,10 +1,15 @@
 ﻿using Administracion.DomainModel;
 using Administracion.DomainModel.Enum;
+using Administracion.Dto.Owner;
+using Administracion.Dto.Renter;
+using Administracion.Dto.Unit;
 using Administracion.Models;
 using Administracion.Security;
+using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
@@ -23,6 +28,8 @@ namespace Administracion.Controllers
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
         public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IOwnerService OwnersService { get; set; }
+        public virtual IRenterService RenterService { get; set; }
+        public virtual IConsortiumService ConsortiumService { get; set; }
 
         public ActionResult Index()
         {
@@ -40,13 +47,9 @@ namespace Administracion.Controllers
 
         // GET: Backlog
         [HttpGet]
-        public ActionResult CreateFunctionalUnit()
+        public ActionResult CreateFunctionalUnit(int id)
         {
-            var ownerships = this.OwnershipService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Address.Street + " " + x.Address.Number.ToString()
-            });
+            var consortium = this.ConsortiumService.GetConsortium(id);
 
             var owners = this.OwnersService.GetAll().Select(x => new SelectListItem()
             {
@@ -55,13 +58,18 @@ namespace Administracion.Controllers
             });
 
 
+            var renters = this.RenterService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
 
             var viewModel = new FunctionalUnitViewModel()
             {
-                Ownerships = new SelectList(ownerships, "Value", "Text"),
+                ConsortiumId = consortium.Id,
+               Renters = new SelectList(renters, "Value", "Text"),
                 Owners = new SelectList(owners, "Value", "Text")
             };
-
 
             return View(viewModel);
         }
@@ -69,23 +77,68 @@ namespace Administracion.Controllers
         [HttpPost]
         public ActionResult CreateUpdateFunctionalUnit(FunctionalUnitViewModel unit)
         {
-         
-            var nunit = Mapper.Map<FunctionalUnit>(unit);           
+
+            var consortium = this.ConsortiumService.GetConsortium(unit.ConsortiumId);            
+            var nunit = Mapper.Map<FunctionalUnit>(unit);
+            nunit.Ownership = consortium.Ownership;
+            Renter Renter = null;
+            if (unit.RenterId != 0)
+            {
+                Renter = this.RenterService.GetRenter(unit.RenterId);
+            }
+
+            Owner Owner = null;
+            if(unit.OwnerId!= 0)
+            {
+                Owner = this.OwnersService.GetOwner(unit.OwnerId);
+            }
+            
 
             try
             {
                 var result = false;
+                var entity = Mapper.Map<FunctionalUnitRequest>(nunit);
                 if (nunit.Id == 0)
                 {
-                    result = this.FunctionalUnitService.CreateFunctionalUnit(nunit);
+                    
+                    var entidad = this.FunctionalUnitService.CreateFunctionalUnit(entity);
+                    if (entidad.Id >0)
+                    {
+
+                        if (Renter != null)
+                        {
+                            var renterRequest = new RenterRequest()
+                            {
+                                Id = Renter.Id,
+                                FunctionalUnitId = entidad.Id,
+                                UserId = Renter.User.Id,
+                                PaymentTypeId = 1
+                            };
+
+                            this.RenterService.UpdateRenter(renterRequest);
+                        }
+
+                        if (Owner != null)
+                        {
+                            var ownerRequest = new OwnerRequest()
+                            {
+                                Id = Owner.Id,
+                                FunctionalUnitId = entidad.Id,
+                                UserId = Owner.User.Id
+                            };
+                            this.OwnersService.UpdateOwner(ownerRequest);
+                        }
+                        
+                        result = true;
+                    }
                 }
                 else
                 {
-                    result = this.FunctionalUnitService.UpdateFunctionalUnit(nunit);
+                    result = this.FunctionalUnitService.UpdateFunctionalUnit(entity);
                 }
                 if (result)
                 {
-                    return View("CreateSuccess");
+                    return Redirect(string.Format( "/Consortium/Details/{0}",consortium.Id));
                 }
                 else
                 {
@@ -128,8 +181,9 @@ namespace Administracion.Controllers
         {            
             var nunit = new FunctionalUnit();
             
-            nunit = Mapper.Map<FunctionalUnit>(unit);            
-            this.FunctionalUnitService.UpdateFunctionalUnit(nunit);
+            nunit = Mapper.Map<FunctionalUnit>(unit);
+            var entity = Mapper.Map<FunctionalUnitRequest>(nunit);
+            this.FunctionalUnitService.UpdateFunctionalUnit(entity);
             return View();
         }
 

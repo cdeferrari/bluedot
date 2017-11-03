@@ -11,18 +11,18 @@ using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using AutoMapper;
-using ApiCore.Services.Contracts.Owners;
+using ApiCore.Services.Contracts.Managers;
 
 namespace ApiCore.Controllers
 {
     /// <summary>
     /// Controlador de tickets
     /// </summary>
-    [RoutePrefix("owner")]
-    public class OwnerController : ApiController
+    [RoutePrefix("manager")]
+    public class ManagerController : ApiController
     {
 
-        public IOwnerService OwnerService { get; set; }
+        public IManagerService ManagerService { get; set; }
 
 
         // GET api/<controller>/5        
@@ -32,15 +32,15 @@ namespace ApiCore.Controllers
         /// <param name="id">id del usuario</param>
         /// <returns></returns>
         [Route("")]
-        [ResponseType(typeof(List<OwnerResponse>))]
+        [ResponseType(typeof(List<ManagerResponse>))]
         public IHttpActionResult Get()
         {
-            var completeUserList = OwnerService.GetAll();
+            var completeUserList = ManagerService.GetAll();
 
             if (completeUserList == null)
                 throw new NotFoundException(ErrorMessages.TrabajadorNoEncontrado);
 
-            var dto = Mapper.Map<List<OwnerResponse>>(completeUserList);
+            var dto = Mapper.Map<List<ManagerResponse>>(completeUserList);
 
             return Ok(dto);
         }
@@ -53,15 +53,15 @@ namespace ApiCore.Controllers
         /// <param name="id">id del usuario</param>
         /// <returns></returns>
         [Route("{id}")]        
-        [ResponseType(typeof(OwnerResponse))]
+        [ResponseType(typeof(ManagerResponse))]
         public IHttpActionResult Get(int id)
         {
-            var completeOwner = OwnerService.GetById(id);
+            var completeManager = ManagerService.GetById(id);
 
-            if (completeOwner == null)
+            if (completeManager == null)
                 throw new NotFoundException(ErrorMessages.TrabajadorNoEncontrado);
 
-            var dto = Mapper.Map<OwnerResponse>(completeOwner);
+            var dto = Mapper.Map<ManagerResponse>(completeManager);
             
             return Ok(dto);
         }
@@ -70,13 +70,13 @@ namespace ApiCore.Controllers
         /// <summary>
         /// Inserta un usuario
         /// </summary>
-        /// <param name="Owner">Usuario a insertar</param>
+        /// <param name="Manager">Usuario a insertar</param>
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public IHttpActionResult Post(OwnerRequest Owner)
+        public IHttpActionResult Post(ManagerRequest Manager)
         {
-            var result = OwnerService.CreateOwner(Owner);
+            var result = ManagerService.CreateManager(Manager);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 
@@ -86,14 +86,13 @@ namespace ApiCore.Controllers
         /// <summary>
         /// Modifica un usuario
         /// </summary>
-        /// <param name="Owner">Usuario a modificar</param>
+        /// <param name="Manager">Usuario a modificar</param>
         /// <returns></returns>
-        [Route("{id}")]
-        public IHttpActionResult Put(int id, OwnerRequest Owner)
+        public IHttpActionResult Put(int id, ManagerRequest Manager)
         {            
-            var originalOwner = OwnerService.GetById(id);
+            var originalManager = ManagerService.GetById(id);
             
-            var ret = OwnerService.UpdateOwner(originalOwner, Owner);
+            var ret = ManagerService.UpdateManager(originalManager, Manager);
 
             return Ok();
             
@@ -114,7 +113,7 @@ namespace ApiCore.Controllers
             
             try
             {
-               OwnerService.DeleteOwner(id);
+               ManagerService.DeleteManager(id);
                 return Ok();
             }
             catch (Exception ex)

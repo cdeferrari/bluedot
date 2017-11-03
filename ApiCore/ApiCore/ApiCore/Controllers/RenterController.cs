@@ -88,6 +88,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="Renter">Usuario a modificar</param>
         /// <returns></returns>
+        [Route("{id}")]
         public IHttpActionResult Put(int id, RenterRequest Renter)
         {            
             var originalRenter = RenterService.GetById(id);

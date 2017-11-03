@@ -15,6 +15,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Len).IsOptional().HasColumnName("longitud");
             this.Property(x => x.PostalCode).IsOptional().HasColumnName("postal_code");
             this.Property(x => x.City).IsOptional().HasColumnName("city");
+            this.Property(x => x.Province).IsOptional().HasColumnName("province");
 
         }
 

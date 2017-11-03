@@ -11,7 +11,7 @@ using System.Configuration;
 using Administracion.Library.ApiResources;
 using Newtonsoft.Json;
 using Administracion.Services.Contracts.FunctionalUnits;
-
+using Administracion.Dto.Unit;
 
 namespace Administracion.Services.Implementations.FunctionalUnits
 {
@@ -19,12 +19,12 @@ namespace Administracion.Services.Implementations.FunctionalUnits
     {
         public ISync IntegrationService { get; set; }
 
-        public bool CreateFunctionalUnit(FunctionalUnit FunctionalUnit)
+        public Entidad CreateFunctionalUnit(FunctionalUnitRequest FunctionalUnit)
         {
-           return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateFunctionalUnit, RestMethod.Post, null, FunctionalUnit);                        
+            return IntegrationService.RestCall<Entidad>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateFunctionalUnit, RestMethod.Post, null, FunctionalUnit);                        
         }
 
-        public bool UpdateFunctionalUnit(FunctionalUnit FunctionalUnit)
+        public bool UpdateFunctionalUnit(FunctionalUnitRequest FunctionalUnit)
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateFunctionalUnit, FunctionalUnit.Id), RestMethod.Put, null, FunctionalUnit);                        
         }

@@ -7,7 +7,9 @@ using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.Lists;
+using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Implementations.Consortiums;
 using AutoMapper;
@@ -28,6 +30,8 @@ namespace Administracion.Controllers
         public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IStatusService StatusService { get; set; }
         public virtual IChecklistService ChecklistService { get; set; }
+        public virtual IOwnerService OwnersService { get; set; }
+        public virtual IRenterService RenterService { get; set; }
         // GET: Backlog
         public ActionResult Index()
         {
@@ -121,12 +125,9 @@ namespace Administracion.Controllers
                 }
 
             }
-                  
-
+            
             return View(checklistvm);
         }
-
-
         
 
         [HttpPost]
@@ -204,6 +205,7 @@ namespace Administracion.Controllers
                     if (nresult.Id > 0)
                     {
                         nConsortium.OwnershipId = nresult.Id;
+                        nConsortium.AdministrationId = 1;
                         result = this.ConsortiumService.CreateConsortium(nConsortium);
 
                     }
@@ -216,7 +218,7 @@ namespace Administracion.Controllers
                 }
                 if (result)
                 {
-                    return Redirect("/Consortum/Index");
+                    return Redirect("/Consortium/Index");
                 }
                 else
                 {
@@ -238,8 +240,21 @@ namespace Administracion.Controllers
           
             var consortium = Mapper.Map<ConsortiumDetailsViewModel>(oConsortium);
 
+            var owners = this.OwnersService.GetAll();
+
+            var renters = this.RenterService.GetAll();
+
+
             consortium.Checklists = this.ChecklistService
                 .GetAll().Where(x => x.ConsortiumId.Equals(id)).OrderByDescending(x => x.OpenDate).Take(10).ToList();
+
+            consortium.Ownership.FunctionalUnits.ForEach(x =>
+            x.Owner = owners.Where(y => y.FunctionalUnitId.Equals(x.Id)).FirstOrDefault()
+            );
+
+            consortium.Ownership.FunctionalUnits.ForEach(x =>
+            x.Renter = renters.Where(y => y.FunctionalUnitId.Equals(x.Id)).FirstOrDefault()
+            );
 
             return View(consortium);
         }
@@ -281,7 +296,7 @@ namespace Administracion.Controllers
         public ActionResult DeleteConsortium(int id)
         {                    
             this.ConsortiumService.DeleteConsortium(id);
-            return Redirect("/Consortum/Index");
+            return Redirect("/Consortium/Index");
             
         }
     }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Administracion.DomainModel
 {
-    public class Owner
+    public class LaboralUnion
     {
+        public virtual string Description { get; set; }
         public virtual int Id { get; set; }
-        public virtual int FunctionalUnitId { get; set; }
-        public virtual User User { get; set; }        
     }
 }

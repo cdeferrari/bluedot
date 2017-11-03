@@ -13,6 +13,8 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
 using ApiCore.Services.Contracts.Unit;
+using ApiCore.Services.Contracts.Owners;
+using ApiCore.Services.Contracts.Renters;
 
 namespace ApiCore.Controllers
 {
@@ -25,6 +27,8 @@ namespace ApiCore.Controllers
 
         public virtual IUnitService UnitService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
+        public virtual IOwnerService OwnerService { get; set; }
+        public virtual IRenterService RenterService { get; set; }
 
 
         // GET api/<controller>/5
@@ -82,6 +86,18 @@ namespace ApiCore.Controllers
         public IHttpActionResult Post(FunctionalUnitRequest unit)
         {
             var result = UnitService.CreateUnit(unit);
+
+            //var owner = this.OwnerService.GetById(unit.OwnerId);
+            //var renter = this.RenterService.GetById(unit.RenterId);
+
+            //owner.FunctionalUnit = result;
+            //renter.FunctionalUnit = result;
+            //result.Owner = owner;
+            //result.Renter = renter;
+
+            //this.OwnerService.Update(owner);
+            ////this.RenterService.Update(renter);
+            //this.UnitService.Update(result);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 

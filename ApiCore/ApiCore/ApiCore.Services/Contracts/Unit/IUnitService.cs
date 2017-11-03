@@ -11,9 +11,11 @@ namespace ApiCore.Services.Contracts.Unit
     public interface IUnitService
     {
         FunctionalUnit GetById(int unitId);
+        FunctionalUnit Update(FunctionalUnit unit);
         FunctionalUnit CreateUnit(FunctionalUnitRequest request);
         void DeleteUnit(int unitId);
         FunctionalUnit UpdateUnit(FunctionalUnit originalFunctionalUnit, FunctionalUnitRequest unit);
         List<FunctionalUnit> GetAll();
+
     }
 }

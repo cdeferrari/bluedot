@@ -24,7 +24,7 @@ namespace Administracion.Services.Implementations.Renters
           return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateRenter, RestMethod.Post, null, Renter);                        
         }
 
-        public bool UpdateRenter(Renter Renter)
+        public bool UpdateRenter(RenterRequest Renter)
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"],string.Format(ApiCore.UpdateRenter, Renter.Id), RestMethod.Put, null, Renter);                        
         }

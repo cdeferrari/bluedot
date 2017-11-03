@@ -13,7 +13,7 @@ namespace Administracion.Services.Contracts.Renters
         IList<Renter> GetAll();
         Renter GetRenter(int RenterId);
         bool CreateRenter(RenterRequest Renter);
-        bool UpdateRenter(Renter Renter);
+        bool UpdateRenter(RenterRequest Renter);
         bool DeleteRenter(int RenterId);
     }
 }

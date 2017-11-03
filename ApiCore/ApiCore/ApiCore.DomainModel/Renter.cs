@@ -10,6 +10,6 @@ namespace ApiCore.DomainModel
     {
         public virtual User User {get; set;}
         public virtual int PaymentTypeId { get; set; }
-        public virtual FunctionalUnit FunctionalUnit { get; set; }
+        public virtual int? FunctionalUnitId { get; set; }
     }   
 }

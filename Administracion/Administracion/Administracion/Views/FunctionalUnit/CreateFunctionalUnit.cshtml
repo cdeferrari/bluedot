@@ -2,56 +2,112 @@
 @using Administracion.Models;
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_FormLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Consorcio</h2>
-@using (Html.BeginForm("CreateUpdateFunctionalUnit", "FunctionalUnit", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x=> x.Id)
-    <div class="form-horizontal">
-        <h4>Ingrese los siguientes datos</h4>
-        <hr />
 
-        @Html.ValidationMessage("", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Dto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class='col-md-10 '>
-                @Html.EditorFor(model => model.Dto, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
-                @Html.ValidationMessageFor(model => model.Dto, "", new { @class = "text-danger" })
-            </div>
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-building"></i> Consorcio</a>
+                </li>
+            </ul>
         </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Consorcio</a></li>
+        </ul>
 
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
-                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVA </strong> UF</h2>
+                    </div>
+
+                    @using (Html.BeginForm("CreateUpdateFunctionalUnit", "FunctionalUnit", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*@Html.HiddenFor(x => x.Id)*@
+                        <input type="hidden" name="Id" id="Id" value="@Model.Id"  />
+
+                        @Html.HiddenFor(x => x.ConsortiumId)
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Dto, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class='col-md-9 '>
+                                @Html.EditorFor(model => model.Dto, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de unidad" } })
+                                <span class="help-block">Coloque el numero de la unidad</span>
+                                @Html.ValidationMessageFor(model => model.Dto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Floor, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class='col-md-9 '>
+                                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nonmbre" } })
+                                <span class="help-block">Coloque el piso de la unidad</span>
+                                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">CONSORCIO/UF</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.OwnerId, Model.Owners, "-- ELIJA PROPIETARIO --", new { @class = "form-control" })
+                            </div>
+
+                            @*<div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.AdministrationId, Model.Administrations, "-- ELIJA UNIDAD FUNCIONAL --",  new { @class = "form-control" } )
+
+                                </div>*@
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">CONSORCIO/UF</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.RenterId, Model.Renters, "-- ELIJA INQUILINO --", new { @class = "form-control" })
+                            </div>
+
+                            @*<div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.AdministrationId, Model.Administrations, "-- ELIJA UNIDAD FUNCIONAL --",  new { @class = "form-control" } )
+
+                                </div>*@
+                        </div>
+
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                    <button  type="button" onclick="location.href = '/Users/CreateUser'" class="btn btn-info "><i class="fa fa-plus" pull-right></i> AGREGAR NUEVO INQUILINO/PROPIETARIO</button>
+                                </div>
+                            </div>
+
+                    }
+
+                </div>
+
+                </div>
+
+
             </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Propiedad</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.OwnershipId, Model.Ownerships, "-- Elija Propiedad --")                
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="control-label col-md-2">Popietario</label>
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.OwnerId, Model.Owners, "-- Elija Propietario --")
-            </div>
-        </div>
         
-
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-success" />
-            </div>
-        </div>
     </div>
-}
+    
+</div>
+

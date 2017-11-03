@@ -10,8 +10,8 @@ namespace ApiCore.DomainModel
     {
         public virtual Ownership Ownership {get; set;}
         public virtual int Floor { get; set; }
-        public virtual int Dto { get; set; }
-        public virtual Owner Owner { get; set; }
-        public virtual Renter Renter { get; set; }
+        public virtual string Dto { get; set; }
+        //public virtual Owner Owner { get; set; }
+        //public virtual Renter Renter { get; set; }
     }
 }

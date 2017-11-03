@@ -14,7 +14,7 @@ namespace Administracion.DomainModel
         public virtual string MailingList { get; set; }
         public virtual Administration Administration {get; set;}
         public virtual Ownership Ownership {get; set;}        
-        public virtual IList<Worker> Workers { get; set; }
+        public virtual IList<Manager> Managers { get; set; }
         
     }
 }

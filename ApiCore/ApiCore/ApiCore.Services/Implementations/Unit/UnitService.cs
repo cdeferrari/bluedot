@@ -40,12 +40,15 @@ namespace ApiCore.Services.Implementations.Users
             return result;
         }
 
+        [Transaction]
         public FunctionalUnit CreateUnit(FunctionalUnitRequest request)
         {
             var unitToInsert = new FunctionalUnit();
+
             var entityToInsert = MergeUnit(unitToInsert, request);
 
-            UnitRepository.Insert(entityToInsert);
+            UnitRepository.Insert(entityToInsert);            
+
             return entityToInsert;
         }
 
@@ -53,11 +56,12 @@ namespace ApiCore.Services.Implementations.Users
         {
             originalUnit.Dto = unit.Dto;
             originalUnit.Floor = unit.Floor;            
-            originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);            
+            originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);
             
             return originalUnit;
         }
 
+        [Transaction]
         public FunctionalUnit UpdateUnit(FunctionalUnit originalFunctionalUnit, FunctionalUnitRequest unit)
         {
             this.MergeUnit(originalFunctionalUnit, unit);
@@ -70,6 +74,14 @@ namespace ApiCore.Services.Implementations.Users
         {
             var unit = UnitRepository.GetById(unitId);
             UnitRepository.Delete(unit);
+        }
+
+        [Transaction]
+        public FunctionalUnit Update(FunctionalUnit unit)
+        {
+            this.UnitRepository.Update(unit);
+            return unit;
+
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Enum\Roles.cs" />
     <Compile Include="Enum\TipoMultimedia.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="LaboralUnion.cs" />
     <Compile Include="TaskList .cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="List.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="TicketStatus.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Provider.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Worker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

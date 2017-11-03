@@ -43,6 +43,8 @@ using ApiCore.Services.Implementations.Multimedias;
 using ApiCore.Services.Contracts.Multimedias;
 using ApiCore.Services.Implementations.Lists;
 using ApiCore.Services.Contracts.Lists;
+using ApiCore.Services.Contracts.Managers;
+using ApiCore.Services.Implementations.Managers;
 
 namespace ApiCore.App_Start
 {
@@ -147,6 +149,10 @@ namespace ApiCore.App_Start
               .EnableInterfaceInterceptors()
               .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<ManagerService>().As<IManagerService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MultimediaRepository>().As<IMultimediaRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
@@ -165,6 +171,9 @@ namespace ApiCore.App_Start
             builder.RegisterType<ListRepository>().As<IListRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TaskResultRepository>().As<ITaskResultRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ItemsRepository>().As<IItemsRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<LaboralUnionRepository>().As<ILaboralUnionRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<ManagerRepository>().As<IManagerRepository>().PropertiesAutowired().InstancePerRequest();
+
 
         }
 

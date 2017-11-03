@@ -13,6 +13,7 @@ namespace ApiCore.Services.Contracts.Owners
         Owner CreateOwner(OwnerRequest Owner);
         Owner GetById(int OwnerId);        
         Owner UpdateOwner(Owner originalOwner, OwnerRequest Owner);
+        Owner Update(Owner owner);
         void DeleteOwner(int OwnerId);
         List<Owner> GetAll();
     }

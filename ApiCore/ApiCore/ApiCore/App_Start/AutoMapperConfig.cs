@@ -43,7 +43,6 @@ namespace ApiCore
 
                 cfg.CreateMap<ManagerRequest, Manager>()
                 .ForMember(x => x.Consortium, opt => opt.Ignore())
-                                .ForMember(x => x.Consortium, opt => opt.Ignore())
                 .ForMember(x => x.LaborUnion, opt => opt.Ignore());
 
                 cfg.CreateMap<FunctionalUnitRequest, FunctionalUnit>();
@@ -54,6 +53,8 @@ namespace ApiCore
                 cfg.CreateMap<List, ListResponse>();
                 cfg.CreateMap<Address,AddressResponse>();
                 cfg.CreateMap<TaskList, TaskListResponse>();
+                cfg.CreateMap<Manager, ManagerResponse>();
+
             });
 
         }

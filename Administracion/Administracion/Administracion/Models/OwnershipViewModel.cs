@@ -11,6 +11,6 @@ namespace Administracion.Models
         public virtual int Id { get; set; }
         public virtual AddressViewModel Address { get; set; }
         public virtual HttpPostedFileBase Image { get; set; }
-        public virtual List<FunctionalUnit> FunctionalUnits { get; set; }
+        public virtual List<FunctionalUnitViewModel> FunctionalUnits { get; set; }
     }
 }

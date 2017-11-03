@@ -12,11 +12,11 @@
             <div class="content-header">
                 <ul class="nav-horizontal text-center">
                     <li>
-                        <a href="page_ecom_dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                        <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
 
                     <li class="active">
-                        <a href="page_ecom_customer_view.html"><i class="gi gi-building"></i> Consorcios</a>
+                        <a href="/Consortium/Index"><i class="gi gi-building"></i> Consorcios</a>
                     </li>
                 </ul>
             </div>
@@ -90,8 +90,7 @@
                         <!-- Latest Orders Title -->
                         <div class="block-title">
                             <div class="block-options pull-right">
-                                <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                <a href="/FunctionalUnit/CreateFunctionalUnit/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar UF"><i class="fa fa-plus"></i></a>
                             </div>
                             <h2><strong>Unidades</strong> Funcionales</h2>
                         </div>
@@ -145,7 +144,7 @@
                         <div class="block-title">
                             <div class="block-options pull-right">
                                 <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                <a href="/Consortium/CreateChecklist/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                <a href="/Consortium/CreateChecklist/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Checklist"><i class="fa fa-plus"></i></a>
                             </div>
                             <h2><strong>CHECKLIST</strong> Semanal</h2>
                         </div>
@@ -223,15 +222,15 @@
                                     <td class="text-center"><strong>Talle Ropa</strong></td>
                                     <td class="text-center">CUIT</td>
                                 </tr>
-                                @foreach (var employee in Model.Workers)
+                                @foreach (var manager in Model.Managers)
                                 {
                                     <tr>
-                                        <td class="text-center"><a href="javascript:void(0)"><strong>@employee.Id</strong></a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@employee.User.Name @employee.User.Surname</a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@employee.User.ContactData.Telephone</a></td>
-                                        <td class="text-center"><a href="javascript:void(0)"></a>-</td>
+                                        <td class="text-center"><a href="javascript:void(0)"><strong>@manager.Id</strong></a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@manager.User.Name @manager.User.Surname</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@manager.User.ContactData.Telephone</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)"></a>@manager.LaborUnion.Description</td>
                                         <td class="text-center">-</td>
-                                        <td class="text-center">@employee.User.CUIT</td>
+                                        <td class="text-center">@manager.User.CUIT</td>
                                     </tr>
                                 }
 

@@ -21,12 +21,26 @@ namespace ApiCore.Services.Implementations.Owners
         {
             var entityToInsert = new Owner()
             {
-                User = this.UserRepository.GetById(Owner.UserId),
-                FunctionalUnit = this.FunctionalUnitRepository.GetById(Owner.FunctionalUnitId)
+                User = this.UserRepository.GetById(Owner.UserId)
             };
+
+            if (Owner.FunctionalUnitId != 0)
+            {
+                entityToInsert.FunctionalUnitId = Owner.FunctionalUnitId;
+            }
+
             OwnerRepository.Insert(entityToInsert);
             return entityToInsert;
         }
+
+
+        [Transaction]
+        public Owner Update(Owner Owner)
+        {            
+            OwnerRepository.Update(Owner);
+            return Owner;
+        }
+
 
         public Owner GetById(int OwnerId)
         {
@@ -59,7 +73,8 @@ namespace ApiCore.Services.Implementations.Owners
 
         private void MergeOwner(Owner originalOwner, OwnerRequest Owner)
         {
-            originalOwner.User = this.UserRepository.GetById(Owner.UserId);        
+            originalOwner.User = this.UserRepository.GetById(Owner.UserId);
+            originalOwner.FunctionalUnitId = Owner.FunctionalUnitId;// this.FunctionalUnitRepository.GetById(Owner.FunctionalUnitId);
         }
 
         [Transaction]
