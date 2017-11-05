@@ -9,6 +9,6 @@ namespace ApiCore.Repository.Contracts
 {
     public interface IListRepository : IRepository<List>
     {
-        
+     	IList<List> GetByConsortium(int id);
     }
 }

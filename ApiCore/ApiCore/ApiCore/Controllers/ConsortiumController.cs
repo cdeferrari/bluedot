@@ -71,6 +71,30 @@ namespace ApiCore.Controllers
             return Ok(dto);
         }
 
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve checklists del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/Checklists")]        
+        [ResponseType(typeof(List<ListResponse>))]
+        public IHttpActionResult Get(int id)
+        {
+
+            var completeTaskList = ListService.GetByConsortium(id);
+
+            if (completeTaskList == null)
+                throw new NotFoundException(ErrorMessages.ConsorcioNoEncontrado);
+
+            var dto = Mapper.Map<List<ListResponse>>(completeTaskList);
+
+            return Ok(dto);
+        }
+
+
         // POST api/<controller>
         /// <summary>
         /// Inserta un consorcio

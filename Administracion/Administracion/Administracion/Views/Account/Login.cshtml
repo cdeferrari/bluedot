@@ -71,13 +71,15 @@
 
 
                                 <div class="form-group form-actions">
+
                                     <div class="col-xs-4">
-                                        <label class="switch switch-primary" data-toggle="tooltip" title="Recordarme?">                                            
-                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe)
-                                            <span></span>
+                                        
+                                            <label class="switch switch-primary" data-toggle="tooltip" title="Recordarme?">
+                                            <input id="Model.IsSuccess" name="Model.IsSuccess" type="checkbox" value="true" @(model.IsSuccess ? "checked=\"checked\"" : "") />                                                         <label class="switch switch-primary" for='@Model.RememberMe'>                                                                                            
+                                            <span data-toggle="tooltip" title="OK"></span>
                                         </label>
                                     </div>
+
                                     <div class="col-xs-8 text-right">
                                         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Ingresar</button>
                                     </div>

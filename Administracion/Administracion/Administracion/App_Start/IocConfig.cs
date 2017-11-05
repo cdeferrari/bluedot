@@ -78,12 +78,11 @@ namespace Administracion.App_Start
             builder.RegisterType<UserService>().As<IUserService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PriorityService>().As<IPriorityService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<StatusService>().As<IStatusService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<TaskResultService>().As<ITaskResultService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<LaboralUnionService>().As<ILaboralUnionService>().SingleInstance().PropertiesAutowired();
 
             builder.RegisterType<FunctionalUnitService>().As<IFunctionalUnitService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ChecklistService>().As<IChecklistService>().SingleInstance().PropertiesAutowired();
-
-
-
 
 
         }

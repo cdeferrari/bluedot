@@ -29,6 +29,7 @@ namespace Administracion.Controllers
         public virtual IAdministrationService AdministrationService { get; set; }
         public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IStatusService StatusService { get; set; }
+        public virtual ITaskResultService TaskResultService { get; set; }
         public virtual IChecklistService ChecklistService { get; set; }
         public virtual IOwnerService OwnersService { get; set; }
         public virtual IRenterService RenterService { get; set; }
@@ -83,12 +84,12 @@ namespace Administracion.Controllers
             };
             checklistvm.Tasks = new List<TaskListViewModel>();
             var items = this.ChecklistService.GetItems();
-            var TaskResults = new List<SelectListItem>()
+            var TaskResults = this.TaskResultService.GetAll().Select(x => new SelectListItem()
             {
-                new SelectListItem() { Value = 1.ToString(), Text = "Ok" },
-                new SelectListItem() { Value = 2.ToString(), Text = "Error" },
-                new SelectListItem() { Value = 3.ToString(), Text = "Indefinido" }
-            };
+                Value = x.Id.ToString(),
+                Text = x.Description
+            }
+            
 
             var statusList = this.StatusService.GetAll().Select(x => new SelectListItem()
             {
@@ -207,10 +208,7 @@ namespace Administracion.Controllers
                         nConsortium.OwnershipId = nresult.Id;
                         nConsortium.AdministrationId = 1;
                         result = this.ConsortiumService.CreateConsortium(nConsortium);
-
                     }
-
-
                 }
                 else
                 {
@@ -245,8 +243,8 @@ namespace Administracion.Controllers
             var renters = this.RenterService.GetAll();
 
 
-            consortium.Checklists = this.ChecklistService
-                .GetAll().Where(x => x.ConsortiumId.Equals(id)).OrderByDescending(x => x.OpenDate).Take(10).ToList();
+            consortium.Checklists = this.ConsortiumService
+                .GetAllChecklists().OrderByDescending(x => x.OpenDate).Take(10).ToList();
 
             consortium.Ownership.FunctionalUnits.ForEach(x =>
             x.Owner = owners.Where(y => y.FunctionalUnitId.Equals(x.Id)).FirstOrDefault()

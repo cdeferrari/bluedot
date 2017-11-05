@@ -63,6 +63,10 @@ namespace Administracion.App_Start
                 cfg.CreateMap<List, CheckListViewModel>();
                 cfg.CreateMap<TaskList, TaskListViewModel>();
 
+                cfg.CreateMap<ManagerViewModel, ManagerRequest>()
+                .ForMember(x => x.OwnershipId, o=> o.MapFrom(y => y.Ownership.Id));
+
+
             });
 
         }

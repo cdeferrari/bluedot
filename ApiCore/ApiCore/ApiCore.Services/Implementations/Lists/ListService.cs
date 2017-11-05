@@ -70,6 +70,29 @@ namespace ApiCore.Services.Implementations.Lists
             }
             return result ;
         }
+
+
+        [Transaction]
+        public IList<List> GetByConsortium(int id)
+        {
+            var Lists = ListRepository.GetByConsortium(id);
+            if (Lists == null)
+                throw new BadRequestException(ErrorMessages.ListaNoEncontrada);
+
+            var result = new List<List>();
+            var enumerator = Lists.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                result.Add(enumerator.Current);
+
+            }
+            return result ;
+        }
+
+
+
+
+
         
 
         private void MergeList(List originalList, ListRequest List)

@@ -10,5 +10,12 @@ namespace ApiCore.Repository.Implementatios
 {
     public class ListRepository : Repository<List>, IListRepository
     {
+    	public IList<List> GetByConsortium(int id)
+    	{
+    		var result = this.Context.Set<List>().Where(x => x.Consortium.Equals(id))
+                .FirstOrDefault();
+            return result;
+
+    	}
     }
 }

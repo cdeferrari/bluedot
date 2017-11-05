@@ -46,5 +46,12 @@ namespace Administracion.Services.Implementations.Consortiums
             return IntegrationService.RestCall<List<Consortium>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllConsortium, RestMethod.Get, null, null);
             
         }
+
+        public IList<List> GetAllChecklists(int consortiumId)
+        {
+            return IntegrationService.RestCall<List<Consortium>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetChecklistsByConsortium, RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+            
+        }
+
     }
 }

@@ -93,8 +93,6 @@ namespace Administracion.Controllers
             });
 
 
-
-
             var viewModel = new TicketViewModel()
             {
                 PriorityList = priorityList,
