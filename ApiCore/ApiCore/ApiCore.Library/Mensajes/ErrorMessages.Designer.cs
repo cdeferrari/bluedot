@@ -79,6 +79,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cuenta no encontrada.
+        /// </summary>
+        public static string BankAccountNoEncontrado {
+            get {
+                return ResourceManager.GetString("BankAccountNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio no encontrado.
         /// </summary>
         public static string ConsorcioNoEncontrado {

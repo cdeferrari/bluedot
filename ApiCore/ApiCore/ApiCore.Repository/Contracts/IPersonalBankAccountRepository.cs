@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiCore.Repository.Contracts
 {
-    public interface IBankAccountRepository : IRepository<BankAccount>
+    public interface IPersonalBankAccountRepository : IRepository<PersonalBankAccount>
     {
         
     }

@@ -11,6 +11,7 @@ using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Status;
+using Administracion.Services.Contracts.TaskResult;
 using Administracion.Services.Implementations.Consortiums;
 using AutoMapper;
 using System;
@@ -88,7 +89,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
-            }
+            });
             
 
             var statusList = this.StatusService.GetAll().Select(x => new SelectListItem()
@@ -243,8 +244,11 @@ namespace Administracion.Controllers
             var renters = this.RenterService.GetAll();
 
 
-            consortium.Checklists = this.ConsortiumService
-                .GetAllChecklists().OrderByDescending(x => x.OpenDate).Take(10).ToList();
+            consortium.Checklists = this.ChecklistService
+                .GetAll().Where(x => x.ConsortiumId.Equals(id))
+                .OrderByDescending(x => x.OpenDate).Take(10).ToList();
+            //consortium.Checklists = this.ConsortiumService
+            //    .GetAllChecklists(id).OrderByDescending(x => x.OpenDate).Take(10).ToList();
 
             consortium.Ownership.FunctionalUnits.ForEach(x =>
             x.Owner = owners.Where(y => y.FunctionalUnitId.Equals(x.Id)).FirstOrDefault()

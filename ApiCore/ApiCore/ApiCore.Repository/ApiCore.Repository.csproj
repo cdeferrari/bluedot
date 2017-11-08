@@ -66,11 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\TransactionAttributes.cs" />
+    <Compile Include="Contracts\IAdministrationBankAccountRepository.cs" />
+    <Compile Include="Contracts\IBankAccountRepository.cs" />
     <Compile Include="Contracts\IMultimediaRepository.cs" />
     <Compile Include="Contracts\IOwnershipRepository.cs" />
     <Compile Include="Contracts\IBacklogUserRepository.cs" />
     <Compile Include="Contracts\IFunctionalUnitRepository.cs" />
     <Compile Include="Contracts\IContactDataRepository.cs" />
+    <Compile Include="Contracts\IPersonalBankAccountRepository.cs" />
     <Compile Include="Contracts\IProviderRepository.cs" />
     <Compile Include="Contracts\IItemsRepository.cs" />
     <Compile Include="Contracts\ILaboralUnionRepository.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="Implementatios\BacklogUserRepository.cs" />
     <Compile Include="Implementatios\AdministrationRepository.cs" />
+    <Compile Include="Implementatios\BankAccountRepository.cs" />
     <Compile Include="Implementatios\MultimediaRepository.cs" />
     <Compile Include="Implementatios\OwnershipRepository.cs" />
     <Compile Include="Implementatios\ConsortiumRepository.cs" />
@@ -112,11 +116,14 @@
     <Compile Include="Implementatios\UserRepository.cs" />
     <Compile Include="Interceptors\ServicesInterceptor.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
+    <Compile Include="Mappings\AdministrationAccountMap.cs" />
+    <Compile Include="Mappings\BankAccountMap.cs" />
     <Compile Include="Mappings\MultimediaMap.cs" />
     <Compile Include="Mappings\OwnershipMap.cs" />
     <Compile Include="Mappings\AdministrationMap.cs" />
     <Compile Include="Mappings\ContactDataMap.cs" />
     <Compile Include="Mappings\EntityMap.cs" />
+    <Compile Include="Mappings\PersonalAccountMap.cs" />
     <Compile Include="Mappings\PriorityMap.cs" />
     <Compile Include="Mappings\BacklogUserMap.cs" />
     <Compile Include="Mappings\ProviderMap.cs" />

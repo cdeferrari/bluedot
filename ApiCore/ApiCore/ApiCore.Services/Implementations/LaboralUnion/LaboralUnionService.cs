@@ -13,7 +13,7 @@ namespace ApiCore.Services.Implementations.LaboralUnion
 {
     public class LaboralUnionService : ILaboralUnionService
     {
-        public IStatusRepository LaboralUnionRepository { get; set; }
+        public ILaboralUnionRepository LaboralUnionRepository { get; set; }
         
         
         [Transaction]

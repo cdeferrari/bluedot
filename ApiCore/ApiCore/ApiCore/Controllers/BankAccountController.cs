@@ -11,7 +11,7 @@ using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using AutoMapper;
-using ApiCore.Services.Contracts.Users;
+using ApiCore.Services.Contracts.BankAccounts;
 using ApiCore.DomainModel;
 
 namespace ApiCore.Controllers
@@ -19,11 +19,11 @@ namespace ApiCore.Controllers
     /// <summary>
     /// Controlador de tickets
     /// </summary>
-    [RoutePrefix("Users")]
-    public class UserController : ApiController
+    [RoutePrefix("BankAccounts")]
+    public class BankAccountController : ApiController
     {
 
-        public IUserService UserService { get; set; }
+        public IBankAccountService BankAccountService { get; set; }
 
 
 
@@ -34,15 +34,15 @@ namespace ApiCore.Controllers
         /// <param name="id">id del usuario</param>
         /// <returns></returns>
         [Route("")]
-        [ResponseType(typeof(List<UserResponse>))]
+        [ResponseType(typeof(List<BankAccountResponse>))]
         public IHttpActionResult Get()
         {
-            var completeUserList = UserService.GetAll();
+            var completeBankAccountList = BankAccountService.GetAll();
 
-            if (completeUserList == null)
-                throw new NotFoundException(ErrorMessages.UserNoEncontrado);
+            if (completeBankAccountList == null)
+                throw new NotFoundException(ErrorMessages.BankAccountNoEncontrado);
 
-            var dto = Mapper.Map<List<UserResponse>>(completeUserList);
+            var dto = Mapper.Map<List<BankAccountResponse>>(completeBankAccountList);
 
             return Ok(dto);
         }
@@ -56,15 +56,15 @@ namespace ApiCore.Controllers
         /// <param name="id">id del usuario</param>
         /// <returns></returns>
         [Route("{id}")]        
-        [ResponseType(typeof(UserResponse))]
+        [ResponseType(typeof(BankAccountResponse))]
         public IHttpActionResult Get(int id)
         {
-            var completeUser = UserService.GetById(id);
+            var completeBankAccount = BankAccountService.GetById(id);
 
-            if (completeUser == null)
-                throw new NotFoundException(ErrorMessages.UserNoEncontrado);
+            if (completeBankAccount == null)
+                throw new NotFoundException(ErrorMessages.BankAccountNoEncontrado);
 
-            var dto = Mapper.Map<UserResponse>(completeUser);
+            var dto = Mapper.Map<BankAccountResponse>(completeBankAccount);
             
             return Ok(dto);
         }
@@ -73,15 +73,15 @@ namespace ApiCore.Controllers
         /// <summary>
         /// Inserta un usuario
         /// </summary>
-        /// <param name="user">Usuario a insertar</param>
+        /// <param name="BankAccount">Usuario a insertar</param>
         /// <returns></returns>
         [Route("")]
-        [ResponseType(typeof(User))]
-        public IHttpActionResult Post(UserRequest user)
+        [ResponseType(typeof(BankAccount))]
+        public IHttpActionResult Post(BankAccountRequest BankAccount)
         {
-            var result = UserService.CreateUser(user);
+            var result = BankAccountService.CreateBankAccount(BankAccount);
 
-            return Created<User>("", result);
+            return Created<BankAccount>("", result);
 
         }
 
@@ -89,13 +89,13 @@ namespace ApiCore.Controllers
         /// <summary>
         /// Modifica un usuario
         /// </summary>
-        /// <param name="user">Usuario a modificar</param>
+        /// <param name="BankAccount">Usuario a modificar</param>
         /// <returns></returns>
-        public IHttpActionResult Put(int id, UserRequest user)
+        public IHttpActionResult Put(int id, BankAccountRequest BankAccount)
         {            
-            var originalUser = UserService.GetById(id);
+            var originalBankAccount = BankAccountService.GetById(id);
             
-            var ret = UserService.UpdateUser(originalUser, user);
+            var ret = BankAccountService.UpdateBankAccount(originalBankAccount, BankAccount);
 
             return Ok();
             
@@ -115,7 +115,7 @@ namespace ApiCore.Controllers
             
             try
             {
-               UserService.DeleteUser(id);
+               BankAccountService.DeleteBankAccount(id);
                 return Ok();
             }
             catch (Exception ex)

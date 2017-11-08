@@ -1,5 +1,6 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Dto.Consortium;
+using Administracion.Dto.Manager;
 using Administracion.Dto.Ticket;
 using Administracion.Dto.Unit;
 using Administracion.Dto.Worker;
@@ -63,8 +64,8 @@ namespace Administracion.App_Start
                 cfg.CreateMap<List, CheckListViewModel>();
                 cfg.CreateMap<TaskList, TaskListViewModel>();
 
-                cfg.CreateMap<ManagerViewModel, ManagerRequest>()
-                .ForMember(x => x.OwnershipId, o=> o.MapFrom(y => y.Ownership.Id));
+                cfg.CreateMap<ManagerViewModel, ManagerRequest>();
+                cfg.CreateMap<Manager, ManagerViewModel>();
 
 
             });

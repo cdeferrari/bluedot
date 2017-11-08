@@ -88,6 +88,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="Manager">Usuario a modificar</param>
         /// <returns></returns>
+        [Route("{id}")]
         public IHttpActionResult Put(int id, ManagerRequest Manager)
         {            
             var originalManager = ManagerService.GetById(id);

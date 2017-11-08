@@ -43,15 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\AdministrationBankAccounts\IAdministrationBankAccountService.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationsService.cs" />
+    <Compile Include="Contracts\BankAccounts\IBankAccountService.cs" />
+    <Compile Include="Contracts\LaboralUnion\ILaboralUnionService.cs" />
     <Compile Include="Contracts\Multiemdias\IMultimediaService.cs" />
     <Compile Include="Contracts\Managers\IManagerService.cs" />
     <Compile Include="Contracts\Ownerships\IOwnershipService.cs" />
     <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
+    <Compile Include="Contracts\PersonalBankAccounts\IPersonalBankAccountService.cs" />
     <Compile Include="Contracts\Priorities\IPriorityService.cs" />
     <Compile Include="Contracts\Providers\IProviderService.cs" />
     <Compile Include="Contracts\Lists\IListService.cs" />
     <Compile Include="Contracts\Items\IItemsService.cs" />
+    <Compile Include="Contracts\TaskResults\ITaskResultService.cs" />
     <Compile Include="Contracts\TicketStatus\ITicketStatusService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\Unit\IUnitService.cs" />
@@ -60,15 +65,20 @@
     <Compile Include="Contracts\Workers\IWorkerService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Contracts\BacklogUsers\IBacklogUserService.cs" />
+    <Compile Include="Implementations\AdministrationBankAccounts\AdministrationBankAccountService.cs" />
+    <Compile Include="Implementations\BankAccounts\BankAccountService.cs" />
+    <Compile Include="Implementations\LaboralUnion\LaboralUnionService.cs" />
     <Compile Include="Implementations\Multimedias\MultimediaService.cs" />
     <Compile Include="Implementations\Ownerships\OwnershipsService.cs" />
     <Compile Include="Implementations\BacklogUser\BacklogUserService.cs" />
     <Compile Include="Implementations\Administrations\AdministrationService.cs" />
     <Compile Include="Implementations\Consortiums\ConsortiumService.cs" />
+    <Compile Include="Implementations\PersonalBankAccounts\PersonalBankAccountService.cs" />
     <Compile Include="Implementations\Priorities\PriorityService.cs" />
     <Compile Include="Implementations\Providers\ProviderService.cs" />
     <Compile Include="Implementations\Lists\ListService.cs" />
     <Compile Include="Implementations\Items\ItemsService.cs" />
+    <Compile Include="Implementations\TaskResult\TaskResultService.cs" />
     <Compile Include="Implementations\TicketStatus\TicketStatusService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Implementations\Unit\UnitService.cs" />

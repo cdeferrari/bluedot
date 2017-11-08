@@ -13,7 +13,7 @@ namespace ApiCore.Services.Contracts.Lists
         List CreateList(ListRequest List);
         List GetById(int ListId);
         IList<List> GetAll();
-        IList<List> GetByConsortium(id);
+        IList<List> GetByConsortium(int id);
         List UpdateList(List originalList, ListRequest List);
         void DeleteList(int ListId);
     }

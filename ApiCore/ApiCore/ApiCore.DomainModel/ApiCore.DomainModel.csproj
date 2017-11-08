@@ -43,8 +43,10 @@
     <Compile Include="AccountType.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="AdministrationBankAccount.cs" />
     <Compile Include="BacklogUser.cs" />
     <Compile Include="Administration.cs" />
+    <Compile Include="BankAccount.cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="ContactData.cs" />
     <Compile Include="Employee.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="FunctionalUnit.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Ownership.cs" />
+    <Compile Include="PersonalBankAccount.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Provider.cs" />
     <Compile Include="List.cs" />

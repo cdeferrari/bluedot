@@ -30,9 +30,9 @@
                 <!-- Basic Form Elements Block -->
                 <div class="block">
                     <div class="block-title">
-                        <h2><strong>ALTA NUEVOS </strong> ENCARGADPS</h2>
+                        <h2><strong>ALTA NUEVOS </strong> ENCARGADOS</h2>
                     </div>
-                    @using (Html.BeginForm("CreateUpdateManager", "Manager", FormMethod.Post , htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    @using (Html.BeginForm("CreateUpdateManager", "Managers", FormMethod.Post , htmlAttributes: new { @class = "form-horizontal form-bordered" }))
                     {
                         
                         @Html.AntiForgeryToken()
@@ -78,20 +78,20 @@
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="example-text-input">DOMICILIO</label>
-                            @Html.LabelFor(model => model.Home.Street, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-5">
+                            @Html.LabelFor(model => model.Home.Street, htmlAttributes: new { @class = "col-md-1 control-label" })
+                            <div class="col-md-3">
                                 @Html.EditorFor(model => model.Home.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
                                 <span class="help-block">Coloque la direccon completa</span>
                                 @Html.ValidationMessageFor(model => model.Home.Street, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.Home.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
                                 <span class="help-block">Coloque la altura.</span>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-text-input">CP</label>
+                            <label class="col-md-4 control-label" for="example-text-input">CP</label>
                             <div class="col-md-3">                                
                                 @Html.EditorFor(model => model.Home.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
                                 <span class="help-block">Coloque el codigo postal</span>
@@ -104,20 +104,20 @@
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="example-text-input">TRABAJO</label>
-                            @Html.LabelFor(model => model.JobDomicile.Street, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-5">
+                            @Html.LabelFor(model => model.JobDomicile.Street, htmlAttributes: new { @class = "col-md-1 control-label" })
+                            <div class="col-md-3">
                                 @Html.EditorFor(model => model.JobDomicile.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
                                 <span class="help-block">Coloque la direccon completa</span>
                                 @Html.ValidationMessageFor(model => model.JobDomicile.Street, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.JobDomicile.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
                                 <span class="help-block">Coloque la altura.</span>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-text-input">CP</label>
+                            <label class="col-md-4 control-label" for="example-text-input">CP</label>
                             <div class="col-md-3">                                
                                 @Html.EditorFor(model => model.JobDomicile.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
                                 <span class="help-block">Coloque el codigo postal</span>
@@ -128,7 +128,7 @@
                         </div>
 
                     <div class="form-group row">
-                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class='col-md-2 '>
 
                             <label class="input-group datepicker-only-init">

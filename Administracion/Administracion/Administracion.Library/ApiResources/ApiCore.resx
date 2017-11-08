@@ -129,6 +129,9 @@
   <data name="CreateFunctionalUnit" xml:space="preserve">
     <value>Unidad/</value>
   </data>
+  <data name="CreateManager" xml:space="preserve">
+    <value>Manager/</value>
+  </data>
   <data name="CreateMultimedia" xml:space="preserve">
     <value>Multimedia/</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="DeleteFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>
+  </data>
+  <data name="DeleteManager" xml:space="preserve">
+    <value>Manager/{0}</value>
   </data>
   <data name="DeleteOwner" xml:space="preserve">
     <value>Owner/{0}</value>
@@ -207,6 +213,12 @@
   <data name="GetAllItems" xml:space="preserve">
     <value>Items/</value>
   </data>
+  <data name="GetAllLaboralUnion" xml:space="preserve">
+    <value>LaboralUnion/</value>
+  </data>
+  <data name="GetAllManagers" xml:space="preserve">
+    <value>Manager/</value>
+  </data>
   <data name="GetAllOwners" xml:space="preserve">
     <value>Owner/</value>
   </data>
@@ -225,6 +237,9 @@
   <data name="GetAllStatus" xml:space="preserve">
     <value>Status/</value>
   </data>
+  <data name="GetAllTaskResult" xml:space="preserve">
+    <value>TaskResult/</value>
+  </data>
   <data name="GetAllTicket" xml:space="preserve">
     <value>Tickets/</value>
     <comment>i</comment>
@@ -238,11 +253,17 @@
   <data name="GetChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
   </data>
+  <data name="GetChecklistsByConsortium" xml:space="preserve">
+    <value>Consorcio/{0}/Checklists</value>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
     <value>Consorcio/{0}</value>
   </data>
   <data name="GetFunctionalUnit" xml:space="preserve">
     <value>Unidad/{0}</value>
+  </data>
+  <data name="GetManager" xml:space="preserve">
+    <value>Manager/{0}</value>
   </data>
   <data name="GetMultimedia" xml:space="preserve">
     <value>Multimedia/{0}</value>
@@ -282,6 +303,9 @@
   </data>
   <data name="UpdateFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>
+  </data>
+  <data name="UpdateManager" xml:space="preserve">
+    <value>Manager/{0}</value>
   </data>
   <data name="UpdateOwner" xml:space="preserve">
     <value>Owner/{0}</value>

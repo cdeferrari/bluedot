@@ -7,98 +7,35 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
+using ApiCore.Services.Contracts.BankAccounts;
 
 namespace ApiCore.Services.Implementations.Users
 {
-    public class UserService : IUserService
+    public class BankAccountService : IBankAccountService
     {
-        public IUserRepository UserRepository { get; set; }
-        public IContactDataRepository ContactDataRepository { get; set; }
-
-        [Transaction]
-        public User CreateUser(UserRequest user)
+        public BankAccount CreateBankAccount(BankAccountRequest BankAccount)
         {
-
-            var entityToInsert = new User()
-            {
-                CUIT = user.CUIT,
-                DNI = user.DNI,
-                Name = user.Name,
-                Surname = user.Surname                
-            };
-
-            if (user.ContactData != null)
-            {
-                var ndata = new ContactData()
-                {
-                    Cellphone = user.ContactData.Cellphone,
-                    Email = user.ContactData.Email,
-                    Telephone = user.ContactData.Telephone
-                };
-                ContactDataRepository.Insert(ndata);
-                entityToInsert.ContactData = ndata;
-            }
-
-            UserRepository.Insert(entityToInsert);
-            return entityToInsert;
+            throw new NotImplementedException();
         }
 
-
-        [Transaction]
-        public User GetById(int userId)
+        public void DeleteBankAccount(int BankAccountId)
         {
-            var user = UserRepository.GetById(userId);
-            if (user == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-            
-            return user;
-
-        }
-        
-
-        [Transaction]
-        public User UpdateUser(User originalUser, UserRequest user)
-        {            
-            this.MergeUser(originalUser, user);
-            UserRepository.Update(originalUser);
-            return originalUser;
-
-        }
-        
-
-        [Transaction]
-        public void DeleteUser(int userId)
-        {
-            var user = UserRepository.GetById(userId);
-            UserRepository.Delete(user);
-        }
-        
-
-        private void MergeUser(User originalUser, UserRequest User)
-        {
-            originalUser.ContactData = User.ContactData;
-            originalUser.CUIT = User.CUIT;
-            originalUser.DNI = User.DNI;
-            originalUser.Name = User.Name;
-            originalUser.Surname = User.Surname;            
+            throw new NotImplementedException();
         }
 
-
-        [Transaction]
-        public List<User> GetAll()
+        public List<BankAccount> GetAll()
         {
-            var users = UserRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
+            throw new NotImplementedException();
+        }
 
-            var result = new List<User>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
+        public BankAccount GetById(int BankAccountId)
+        {
+            throw new NotImplementedException();
+        }
 
-            }
-            return result;
+        public BankAccount UpdateBankAccount(BankAccount originalBankAccount, BankAccountRequest BankAccount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

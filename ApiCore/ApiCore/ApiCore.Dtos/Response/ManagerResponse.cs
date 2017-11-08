@@ -9,6 +9,7 @@ namespace ApiCore.Dtos.Response
 {
     public class ManagerResponse
     {
+        public virtual int Id { get; set; }
         public virtual AddressResponse Home { get; set; }
         public virtual AddressResponse JobDomicile { get; set; }
         public virtual UserResponse User { get; set; }

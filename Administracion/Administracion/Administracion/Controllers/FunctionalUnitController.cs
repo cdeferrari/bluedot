@@ -67,7 +67,7 @@ namespace Administracion.Controllers
             var viewModel = new FunctionalUnitViewModel()
             {
                 ConsortiumId = consortium.Id,
-               Renters = new SelectList(renters, "Value", "Text"),
+                Renters = new SelectList(renters, "Value", "Text"),
                 Owners = new SelectList(owners, "Value", "Text")
             };
 
@@ -135,6 +135,32 @@ namespace Administracion.Controllers
                 else
                 {
                     result = this.FunctionalUnitService.UpdateFunctionalUnit(entity);
+                    if (Renter != null)
+                    {
+                        var renterRequest = new RenterRequest()
+                        {
+                            Id = Renter.Id,
+                            FunctionalUnitId = nunit.Id,
+                            UserId = Renter.User.Id,
+                            PaymentTypeId = 1
+                        };
+
+                        this.RenterService.UpdateRenter(renterRequest);
+                    }
+
+                    if (Owner != null)
+                    {
+                        var ownerRequest = new OwnerRequest()
+                        {
+                            Id = Owner.Id,
+                            FunctionalUnitId = nunit.Id,
+                            UserId = Owner.User.Id
+                        };
+                        this.OwnersService.UpdateOwner(ownerRequest);
+                    }
+
+                    result = true;
+
                 }
                 if (result)
                 {
@@ -154,7 +180,7 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateFunctionalUnitById(int id)
+        public ActionResult UpdateFunctionalUnitById(int id, int consortiumId)
         {
             var oUnit = this.FunctionalUnitService.GetFunctionalUnit(id);
             var ownerships = this.OwnershipService.GetAll().Select(x => new SelectListItem()
@@ -170,10 +196,17 @@ namespace Administracion.Controllers
                 Text = x.User.Name+ " " + x.User.Surname
             });
 
+            var renters = this.RenterService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
 
             var unit = Mapper.Map<FunctionalUnitViewModel>(oUnit);
             unit.Ownerships = ownerships;
             unit.Owners = owners;
+            unit.Renters = renters;
+            unit.ConsortiumId = consortiumId;
             return View("CreateFunctionalUnit",unit);
         }
 
@@ -187,10 +220,10 @@ namespace Administracion.Controllers
             return View();
         }
 
-        public ActionResult DeleteFunctionalUnit(int id)
+        public ActionResult DeleteFunctionalUnit(int id, int consortiumId)
         {                    
             this.FunctionalUnitService.DeleteFunctionalUnit(id);
-            return View("DeleteSuccess");
+            return Redirect(string.Format("/Consortium/Details/{0}", consortiumId));
         }
         
         public ActionResult List()

@@ -89,7 +89,7 @@ namespace Administracion.Controllers
             var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Dto.ToString()
+                Text = x.Dto != null ? x.Dto.ToString() : "-"
             });
 
 

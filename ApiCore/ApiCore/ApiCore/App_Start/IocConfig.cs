@@ -45,6 +45,10 @@ using ApiCore.Services.Implementations.Lists;
 using ApiCore.Services.Contracts.Lists;
 using ApiCore.Services.Contracts.Managers;
 using ApiCore.Services.Implementations.Managers;
+using ApiCore.Services.Implementations.LaboralUnion;
+using ApiCore.Services.Contracts.LaboralUnion;
+using ApiCore.Services.Implementations.TaskResult;
+using ApiCore.Services.Contracts.TaskResult;
 
 namespace ApiCore.App_Start
 {
@@ -145,11 +149,19 @@ namespace ApiCore.App_Start
               .EnableInterfaceInterceptors()
               .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<TaskResultService>().As<ITaskResultService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<ItemsService>().As<IItemsService>().PropertiesAutowired().InstancePerRequest()
               .EnableInterfaceInterceptors()
               .InterceptedBy(typeof(ServicesInterceptor));
 
             builder.RegisterType<ManagerService>().As<IManagerService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<LaboralUnionService>().As<ILaboralUnionService>().PropertiesAutowired().InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 

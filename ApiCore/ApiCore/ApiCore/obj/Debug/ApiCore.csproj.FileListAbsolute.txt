@@ -198,3 +198,5 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.Http.WebHost.resources.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.pdb
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Repository.dll.config
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CoreCompileInputs.cache

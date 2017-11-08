@@ -58,7 +58,8 @@ namespace Administracion.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            var model = new LoginViewModel();
+            return View(model);
         }
 
         //

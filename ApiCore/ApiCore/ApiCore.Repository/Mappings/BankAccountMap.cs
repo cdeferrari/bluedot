@@ -7,17 +7,13 @@ using ApiCore.DomainModel;
 
 namespace ApiCore.Repository.Mappings
 {
-    public class UserMap : EntityMap<User>
+    public class BankAccountMap : EntityMap<BankAccount>
     {
-        public UserMap() : base("usuario")
-        {
-            
-            this.Property(x => x.DNI).IsRequired().HasColumnName("dni");
-            this.Property(x => x.CUIT).IsRequired().HasColumnName("cuit");
-            this.Property(x => x.Name).IsRequired().HasColumnName("name");
-            this.Property(x => x.Surname).IsOptional().HasColumnName("surname");                                
-            this.HasRequired(x => x.ContactData).WithMany().Map(x => x.MapKey("data_contact_id"));
-            
+        public BankAccountMap() : base("cuenta")
+        {            
+            this.Property(x => x.CBU).IsRequired().HasColumnName("CBU");
+            this.Property(x => x.AccountNumber).IsRequired().HasColumnName("account_number");            
+            this.HasRequired(x => x.AccountType).WithMany().Map(x => x.MapKey("account_type_id"));            
         }
 
     }

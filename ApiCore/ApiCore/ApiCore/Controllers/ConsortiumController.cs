@@ -81,7 +81,7 @@ namespace ApiCore.Controllers
 
         [Route("{id}/Checklists")]        
         [ResponseType(typeof(List<ListResponse>))]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult GetChecklist(int id)
         {
 
             var completeTaskList = ListService.GetByConsortium(id);

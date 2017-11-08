@@ -49,7 +49,7 @@ namespace Administracion.Services.Implementations.Consortiums
 
         public IList<List> GetAllChecklists(int consortiumId)
         {
-            return IntegrationService.RestCall<List<Consortium>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetChecklistsByConsortium, RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+            return IntegrationService.RestCall<List<List>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetChecklistsByConsortium, RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
             
         }
 

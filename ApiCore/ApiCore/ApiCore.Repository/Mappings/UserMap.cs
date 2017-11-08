@@ -16,7 +16,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.CUIT).IsRequired().HasColumnName("cuit");
             this.Property(x => x.Name).IsRequired().HasColumnName("name");
             this.Property(x => x.Surname).IsOptional().HasColumnName("surname");                                
-            this.HasRequired(x => x.ContactData).WithMany().Map(x => x.MapKey("data_contact_id"));
+            this.HasOptional(x => x.ContactData).WithMany().Map(x => x.MapKey("data_contact_id"));
             
         }
 

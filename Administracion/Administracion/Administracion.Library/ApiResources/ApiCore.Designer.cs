@@ -97,6 +97,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manager/.
+        /// </summary>
+        public static string CreateManager {
+            get {
+                return ResourceManager.GetString("CreateManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multimedia/.
         /// </summary>
         public static string CreateMultimedia {
@@ -201,6 +210,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteFunctionalUnit {
             get {
                 return ResourceManager.GetString("DeleteFunctionalUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager/{0}.
+        /// </summary>
+        public static string DeleteManager {
+            get {
+                return ResourceManager.GetString("DeleteManager", resourceCulture);
             }
         }
         
@@ -331,6 +349,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LaboralUnion/.
+        /// </summary>
+        public static string GetAllLaboralUnion {
+            get {
+                return ResourceManager.GetString("GetAllLaboralUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager/.
+        /// </summary>
+        public static string GetAllManagers {
+            get {
+                return ResourceManager.GetString("GetAllManagers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner/.
         /// </summary>
         public static string GetAllOwners {
@@ -385,6 +421,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TaskResult/.
+        /// </summary>
+        public static string GetAllTaskResult {
+            get {
+                return ResourceManager.GetString("GetAllTaskResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets/.
         /// </summary>
         public static string GetAllTicket {
@@ -421,6 +466,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/Checklists.
+        /// </summary>
+        public static string GetChecklistsByConsortium {
+            get {
+                return ResourceManager.GetString("GetChecklistsByConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio/{0}.
         /// </summary>
         public static string GetConsortium {
@@ -435,6 +489,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetFunctionalUnit {
             get {
                 return ResourceManager.GetString("GetFunctionalUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager/{0}.
+        /// </summary>
+        public static string GetManager {
+            get {
+                return ResourceManager.GetString("GetManager", resourceCulture);
             }
         }
         
@@ -552,6 +615,15 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateFunctionalUnit {
             get {
                 return ResourceManager.GetString("UpdateFunctionalUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager/{0}.
+        /// </summary>
+        public static string UpdateManager {
+            get {
+                return ResourceManager.GetString("UpdateManager", resourceCulture);
             }
         }
         

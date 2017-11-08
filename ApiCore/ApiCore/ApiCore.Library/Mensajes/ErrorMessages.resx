@@ -123,6 +123,9 @@
   <data name="BadRequest" xml:space="preserve">
     <value>BadRequest</value>
   </data>
+  <data name="BankAccountNoEncontrado" xml:space="preserve">
+    <value>Cuenta no encontrada</value>
+  </data>
   <data name="ConsorcioNoEncontrado" xml:space="preserve">
     <value>Consorcio no encontrado</value>
   </data>

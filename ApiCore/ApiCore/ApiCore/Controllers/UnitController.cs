@@ -86,19 +86,6 @@ namespace ApiCore.Controllers
         public IHttpActionResult Post(FunctionalUnitRequest unit)
         {
             var result = UnitService.CreateUnit(unit);
-
-            //var owner = this.OwnerService.GetById(unit.OwnerId);
-            //var renter = this.RenterService.GetById(unit.RenterId);
-
-            //owner.FunctionalUnit = result;
-            //renter.FunctionalUnit = result;
-            //result.Owner = owner;
-            //result.Renter = renter;
-
-            //this.OwnerService.Update(owner);
-            ////this.RenterService.Update(renter);
-            //this.UnitService.Update(result);
-
             return Created<Entidad>("", new Entidad { Id = result.Id });
 
         }
@@ -111,12 +98,9 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         public IHttpActionResult Put(int id, FunctionalUnitRequest unit)
         {            
-            var originalUnit = UnitService.GetById(id);
-            
+            var originalUnit = UnitService.GetById(id);            
             var ret = UnitService.UpdateUnit(originalUnit, unit);
-
-            return Ok();
-            
+            return Ok();            
         }
 
         // DELETE api/<controller>/5

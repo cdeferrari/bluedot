@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ApiCore.Services.Contracts.BankAccounts
 {
-    public interface IBankAccountService
+    public interface IPersonalBankAccountService
     {
-        BankAccount CreateBankAccount(BankAccountRequest BankAccount);
+        BankAccount CreateBankAccount(PersonalBankAccountRequest BankAccount);
         BankAccount GetById(int BankAccountId);        
-        BankAccount UpdateBankAccount(BankAccount originalBankAccount, BankAccountRequest BankAccount);
+        BankAccount UpdateBankAccount(PersonalBankAccount originalBankAccount, PersonalBankAccountRequest BankAccount);
         void DeleteBankAccount(int BankAccountId);
         List<BankAccount> GetAll();
     }

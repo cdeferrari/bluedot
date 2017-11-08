@@ -104,6 +104,7 @@
                                     <td class="text-center"><strong>Inquilino</strong></td>
                                     <td class="text-center"><strong>%</strong></td>
                                     <td class="text-center">Estado</td>
+                                    <td class="text-center">Acciones</td>
                                 </tr>
 
                                 @foreach (var unit in Model.Ownership.FunctionalUnits)
@@ -127,6 +128,12 @@
                                         }
                                         <td class="text-right"><strong>$65,00</strong></td>
                                         <td class="text-center"><span class="label label-success">Cobrado</span></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="/FunctionalUnit/UpdateFunctionalUnitById?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                                <a href="/FunctionalUnit/DeleteFunctionalUnit?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                 }                               
@@ -143,7 +150,7 @@
                         <!-- Top Products Title -->
                         <div class="block-title">
                             <div class="block-options pull-right">
-                                <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                @*<a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>*@
                                 <a href="/Consortium/CreateChecklist/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Checklist"><i class="fa fa-plus"></i></a>
                             </div>
                             <h2><strong>CHECKLIST</strong> Semanal</h2>
@@ -204,8 +211,8 @@
                         <!-- Latest Orders Title -->
                         <div class="block-title">
                             <div class="block-options pull-right">
-                                <a href="/Users/Create" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Empleado"><i class="fa fa-plus"></i></a>
-                                <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                <a href="/Managers/CreateManager/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Empleado"><i class="fa fa-plus"></i></a>
+                                @*<a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>*@
 
                             </div>
                             <h2><strong>Empleados</strong> </h2>
@@ -221,16 +228,31 @@
                                     <td class="text-center"><strong>Obra Social</strong></td>
                                     <td class="text-center"><strong>Talle Ropa</strong></td>
                                     <td class="text-center">CUIT</td>
+                                    <td class="text-center">Acciones</td>
                                 </tr>
                                 @foreach (var manager in Model.Managers)
                                 {
                                     <tr>
                                         <td class="text-center"><a href="javascript:void(0)"><strong>@manager.Id</strong></a></td>
                                         <td class="text-center"><a href="javascript:void(0)">@manager.User.Name @manager.User.Surname</a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@manager.User.ContactData.Telephone</a></td>
+                                        @if (manager.User.ContactData != null)
+                                        {
+                                            <td class="text-center"><a href="javascript:void(0)">@manager.User.ContactData.Telephone</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center"><a href="javascript:void(0)">-</a></td>
+                                        }
+                                        
                                         <td class="text-center"><a href="javascript:void(0)"></a>@manager.LaborUnion.Description</td>
                                         <td class="text-center">-</td>
                                         <td class="text-center">@manager.User.CUIT</td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="/Managers/UpdateManagerById?id=@manager.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                                <a href="/Managers/DeleteManager?id=@manager.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 }
 

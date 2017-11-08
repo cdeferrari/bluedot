@@ -46,26 +46,26 @@
                 @if (Model.Count() > 0)
                 {
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">                    
 
-                        <thead>
-                            <tr>
-                                <th class="text-center">Id</th>
-                                <th class="text-center">CUIT</th>
-                                <th>Consorcio</th>
-                                <th>List</th>
-                                @*<th>Dirección</th>*@
-                                <th class="text-center">Acciones</th>
-                            </tr>
-                        </thead>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">CUIT</th>
+                                    <th>Consorcio</th>
+                                    <th>List</th>
+                                    @*<th>Dirección</th>*@
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            @foreach (var consortium in Model)
-                            {
-                                @Html.Partial("_ConsortiumItem", consortium)
-                            }
-                        </tbody>
-                    </table>
+                            <tbody>
+                                @foreach (var consortium in Model)
+                                {
+                                    @Html.Partial("_ConsortiumItem", consortium)
+                                }
+                            </tbody>
+                        </table>
 
                 }
                 

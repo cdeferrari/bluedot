@@ -12,8 +12,8 @@ namespace ApiCore.Repository.Implementatios
     {
     	public IList<List> GetByConsortium(int id)
     	{
-    		var result = this.Context.Set<List>().Where(x => x.Consortium.Equals(id))
-                .FirstOrDefault();
+    		var result = this.Context.Set<List>().Where(x => x.Consortium.Id == id)
+                .ToList();
             return result;
 
     	}

@@ -11,6 +11,10 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Administracion.Services.Contracts.LaboralUnion;
+using Administracion.Services.Contracts.Users;
+using Administracion.Services.Contracts.Consortiums;
+using Administracion.Dto.Manager;
 
 namespace Administracion.Controllers
 {
@@ -19,6 +23,7 @@ namespace Administracion.Controllers
     {
         public virtual IManagerService ManagerService { get; set; }
         public virtual IUserService UserService { get; set; }
+        public virtual IConsortiumService ConsortiumService { get; set; }
         public virtual ILaboralUnionService LaboralUnionService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
 
@@ -79,17 +84,16 @@ namespace Administracion.Controllers
 
                     if(manager.User.Id==0)
                     {
-                        nuser = this.UserService.CreateUser(nmanager.User);
+                        nuser = this.UserService.CreateUser(Mapper.Map<User>(manager.User));
                     }
                     else
                     {
-                        nuser = manager.User;
-                    }
-                        
+                        nuser = Mapper.Map<User>(manager.User);
                     }
 
-                    if(nuser.Id > 0)
+                    if (nuser.Id > 0)
                     {
+                        nmanager.UserId = nuser.Id;
                         var entity = this.ManagerService.CreateManager(nmanager);
                         result = entity.Id != 0;
                     }
@@ -116,30 +120,37 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateManagerById(int id)
+        public ActionResult UpdateManagerById(int id, int consortiumId)
         {
             var omanager = this.ManagerService.GetManager(id);
-            var manager = Mapper.Map<ManagerViewModel>(omanager);            
+            var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
+
+            var manager = Mapper.Map<ManagerViewModel>(omanager);
+            manager.ConsortiumId = consortiumId;
+            manager.LaboralUnionList = laboralUnions;
             return View("CreateManager",manager);
         }
 
         public ActionResult UpdateManager(ManagerViewModel manager)
-        {            
-            var nmanager = new Manager();
-            
-            nmanager = Mapper.Map<Manager>(manager);            
+        {       
+            var nmanager = Mapper.Map<ManagerRequest>(manager);            
             this.ManagerService.UpdateManager(nmanager);
             return View();
         }
 
-        public ActionResult DeleteManager(int id)
+        public ActionResult DeleteManager(int id, int consortiumId)
         {                    
             var manager = this.ManagerService.GetManager(id);
 
             this.ManagerService.DeleteManager(id);
 
             this.UserService.DeleteUser(manager.User.Id);
-            return View("DeleteSuccess");
+
+            return Redirect(string.Format("/Consortium/Details/{0}", consortiumId));
         }
         
         public ActionResult List()

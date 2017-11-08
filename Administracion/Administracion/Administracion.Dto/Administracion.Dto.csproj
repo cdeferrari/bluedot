@@ -46,6 +46,7 @@
     <Compile Include="Account\WorkerResponse.cs" />
     <Compile Include="Consortium\ConsortiumRequest.cs" />
     <Compile Include="List\TaskListRequest.cs" />
+    <Compile Include="Manager\ManagerRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Owner\OwnerRequest.cs" />
     <Compile Include="List\ListRequest.cs" />

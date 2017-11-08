@@ -9,6 +9,7 @@ using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.Unit;
 using AutoMapper;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Users
 {
@@ -18,6 +19,7 @@ namespace ApiCore.Services.Implementations.Users
         public IOwnershipRepository OwnershipRepository { get; set; }
         public IOwnerRepository OwnerRepository { get; set; }
         public IRenterRepository RenterRepository { get; set; }
+        public ITicketRepository TicketRepository { get; set; }
 
         FunctionalUnit IUnitService.GetById(int unitId)
         {
@@ -72,6 +74,28 @@ namespace ApiCore.Services.Implementations.Users
         [Transaction]
         public void DeleteUnit(int unitId)
         {
+
+            var tickets = TicketRepository.GetAll().Where(x => x.FunctionalUnit.Id == unitId).ToList();
+            foreach (var ticket in tickets)
+            {
+                TicketRepository.Delete(ticket);
+            }
+
+            var renters = RenterRepository.GetAll().Where(x => x.FunctionalUnitId.HasValue && x.FunctionalUnitId.Value == unitId).ToList();
+            foreach (var renter in renters)
+            {
+                renter.FunctionalUnitId = null;
+                RenterRepository.Update(renter);
+            }
+
+
+            var owners = OwnerRepository.GetAll().Where(x => x.FunctionalUnitId.HasValue && x.FunctionalUnitId.Value == unitId).ToList();
+            foreach (var owner in owners)
+            {
+                owner.FunctionalUnitId = null;
+                OwnerRepository.Update(owner);
+            }
+
             var unit = UnitRepository.GetById(unitId);
             UnitRepository.Delete(unit);
         }

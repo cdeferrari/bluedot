@@ -37,7 +37,7 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(List<UserResponse>))]
         public IHttpActionResult Get()
         {
-            var completeUserList = UserService.GetAll();
+            var completeUserList = this.UserService.GetAll();
 
             if (completeUserList == null)
                 throw new NotFoundException(ErrorMessages.UserNoEncontrado);
