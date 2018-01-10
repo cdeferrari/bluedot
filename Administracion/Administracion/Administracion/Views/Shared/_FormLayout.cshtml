@@ -55,17 +55,14 @@
     <script>
         $(function () {
 
-            $('.datepicker-only-init').datetimepicker({
-                widgetPositioning: {
-                    horizontal: 'left'
-                },
+            $('.datepicker-only-init')..datetimepicker({
+                format: 'YYYY-MM-DD',
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
-                },
-                format: 'LL'
+                }
             });
         });
 
@@ -102,9 +99,7 @@
                 });
 
             }
-
-
-            
+           
         });
     </script>
 

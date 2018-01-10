@@ -242,11 +242,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BacklogController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\ConsortiumController.cs" />
     <Compile Include="Controllers\DataBaseController.cs" />
     <Compile Include="Controllers\FunctionalUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ConsortiumSecureController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\MultimediaController.cs" />
     <Compile Include="Controllers\OwnershipController.cs" />
@@ -257,7 +260,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FastUpdateViewModel.cs" />
+    <Compile Include="Models\ConsortiumSecureViewModel.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\ManagerViewModel.cs" />
+    <Compile Include="Models\IdDescriptionViewModel.cs" />
+    <Compile Include="Models\SystemModel.cs" />
     <Compile Include="Models\TaskListViewModel.cs" />
     <Compile Include="Models\CheckListViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
@@ -392,7 +400,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -472,6 +482,18 @@
     <Content Include="Views\Managers\CreateSuccess.cshtml" />
     <Content Include="Views\Managers\DeleteSuccess.cshtml" />
     <Content Include="Views\Managers\Index.cshtml" />
+    <Content Include="Views\ConsortiumSecure\CreateConsortiumSecure.cshtml" />
+    <Content Include="Views\ConsortiumSecure\CreateSuccess.cshtml" />
+    <Content Include="Views\ConsortiumSecure\DeleteSuccess.cshtml" />
+    <Content Include="Views\ConsortiumSecure\Index.cshtml" />
+    <Content Include="Views\DataBase\User.cshtml" />
+    <Content Include="Views\Managers\List.cshtml" />
+    <Content Include="Views\Managers\_ManagerItem.cshtml" />
+    <Content Include="Views\System\Index.cshtml" />
+    <Content Include="Views\System\CreatePaymentType.cshtml" />
+    <Content Include="Views\System\CreateLaboralUnion.cshtml" />
+    <Content Include="Views\System\CreateProvince.cshtml" />
+    <Content Include="Views\System\CreateCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

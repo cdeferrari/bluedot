@@ -12,7 +12,7 @@ namespace ApiCore.Repository.Mappings
         public ProviderMap() : base("proveedor")
         {
             this.HasRequired(x => x.User).WithMany().Map(x => x.MapKey("user_id"));
-            this.Property(x => x.Item).IsRequired().HasColumnName("item");
+            this.Property(x => x.Item).IsOptional().HasColumnName("item");
             this.HasOptional(x => x.Address).WithMany().Map(x => x.MapKey("address_id"));
         }
 

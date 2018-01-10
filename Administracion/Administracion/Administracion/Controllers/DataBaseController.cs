@@ -13,11 +13,18 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [CustomAuthorize(Roles.Root)]
+
     public class DataBaseController : Controller
     {
-        
+
+        [CustomAuthorize(Roles.All)]
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [CustomAuthorize(Roles.All)]
+        public ActionResult User()
         {
             return View();
         }

@@ -19,7 +19,7 @@ namespace Administracion.Library.ApiResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ApiCore {
@@ -79,11 +79,38 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City/.
+        /// </summary>
+        public static string CreateCity {
+            get {
+                return ResourceManager.GetString("CreateCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CommonData/.
+        /// </summary>
+        public static string CreateCommonData {
+            get {
+                return ResourceManager.GetString("CreateCommonData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio/.
         /// </summary>
         public static string CreateConsortium {
             get {
                 return ResourceManager.GetString("CreateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumSecure/.
+        /// </summary>
+        public static string CreateConsortiumSecure {
+            get {
+                return ResourceManager.GetString("CreateConsortiumSecure", resourceCulture);
             }
         }
         
@@ -97,11 +124,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LaboralUnion/.
+        /// </summary>
+        public static string CreateLaboralUnion {
+            get {
+                return ResourceManager.GetString("CreateLaboralUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager/.
         /// </summary>
         public static string CreateManager {
             get {
                 return ResourceManager.GetString("CreateManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message/.
+        /// </summary>
+        public static string CreateMessage {
+            get {
+                return ResourceManager.GetString("CreateMessage", resourceCulture);
             }
         }
         
@@ -133,11 +178,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PaymentType/.
+        /// </summary>
+        public static string CreatePaymentType {
+            get {
+                return ResourceManager.GetString("CreatePaymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provider/.
         /// </summary>
         public static string CreateProvider {
             get {
                 return ResourceManager.GetString("CreateProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province/.
+        /// </summary>
+        public static string CreateProvince {
+            get {
+                return ResourceManager.GetString("CreateProvince", resourceCulture);
             }
         }
         
@@ -196,11 +259,38 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City/{0}.
+        /// </summary>
+        public static string DeleteCity {
+            get {
+                return ResourceManager.GetString("DeleteCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CommonData/{0}.
+        /// </summary>
+        public static string DeleteCommonData {
+            get {
+                return ResourceManager.GetString("DeleteCommonData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consortium/{0}.
         /// </summary>
         public static string DeleteConsortium {
             get {
                 return ResourceManager.GetString("DeleteConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumSecure/{0}.
+        /// </summary>
+        public static string DeleteConsortiumSecure {
+            get {
+                return ResourceManager.GetString("DeleteConsortiumSecure", resourceCulture);
             }
         }
         
@@ -214,11 +304,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LaboralUnion/{0}.
+        /// </summary>
+        public static string DeleteLaboralUnion {
+            get {
+                return ResourceManager.GetString("DeleteLaboralUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager/{0}.
         /// </summary>
         public static string DeleteManager {
             get {
                 return ResourceManager.GetString("DeleteManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message/{0}.
+        /// </summary>
+        public static string DeleteMessage {
+            get {
+                return ResourceManager.GetString("DeleteMessage", resourceCulture);
             }
         }
         
@@ -241,11 +349,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PaymentType/{0}.
+        /// </summary>
+        public static string DeletePaymentType {
+            get {
+                return ResourceManager.GetString("DeletePaymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provider/{0}.
         /// </summary>
         public static string DeleteProvider {
             get {
                 return ResourceManager.GetString("DeleteProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province/{0}.
+        /// </summary>
+        public static string DeleteProvince {
+            get {
+                return ResourceManager.GetString("DeleteProvince", resourceCulture);
             }
         }
         
@@ -322,11 +448,47 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City/.
+        /// </summary>
+        public static string GetAllCities {
+            get {
+                return ResourceManager.GetString("GetAllCities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CommonData/.
+        /// </summary>
+        public static string GetAllCommonData {
+            get {
+                return ResourceManager.GetString("GetAllCommonData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CommonDataItem/.
+        /// </summary>
+        public static string GetAllCommonDataItems {
+            get {
+                return ResourceManager.GetString("GetAllCommonDataItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio/.
         /// </summary>
         public static string GetAllConsortium {
             get {
                 return ResourceManager.GetString("GetAllConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumSecure/.
+        /// </summary>
+        public static string GetAllConsortiumSecure {
+            get {
+                return ResourceManager.GetString("GetAllConsortiumSecure", resourceCulture);
             }
         }
         
@@ -367,6 +529,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message/.
+        /// </summary>
+        public static string GetAllMessages {
+            get {
+                return ResourceManager.GetString("GetAllMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner/.
         /// </summary>
         public static string GetAllOwners {
@@ -381,6 +552,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllOwnerships {
             get {
                 return ResourceManager.GetString("GetAllOwnerships", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PaymentType/.
+        /// </summary>
+        public static string GetAllPaymentTypes {
+            get {
+                return ResourceManager.GetString("GetAllPaymentTypes", resourceCulture);
             }
         }
         
@@ -403,11 +583,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Province/.
+        /// </summary>
+        public static string GetAllProvinces {
+            get {
+                return ResourceManager.GetString("GetAllProvinces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renter/.
         /// </summary>
         public static string GetAllRenter {
             get {
                 return ResourceManager.GetString("GetAllRenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SecureStatus/.
+        /// </summary>
+        public static string GetAllSecureStatus {
+            get {
+                return ResourceManager.GetString("GetAllSecureStatus", resourceCulture);
             }
         }
         
@@ -457,6 +655,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/Tickets.
+        /// </summary>
+        public static string GetByConsortiumId {
+            get {
+                return ResourceManager.GetString("GetByConsortiumId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lista/{0}.
         /// </summary>
         public static string GetChecklist {
@@ -475,11 +682,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CommonData/{0}.
+        /// </summary>
+        public static string GetCommonData {
+            get {
+                return ResourceManager.GetString("GetCommonData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio/{0}.
         /// </summary>
         public static string GetConsortium {
             get {
                 return ResourceManager.GetString("GetConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumSecure/{0}.
+        /// </summary>
+        public static string GetConsortiumSecure {
+            get {
+                return ResourceManager.GetString("GetConsortiumSecure", resourceCulture);
             }
         }
         
@@ -498,6 +723,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetManager {
             get {
                 return ResourceManager.GetString("GetManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message/{0}.
+        /// </summary>
+        public static string GetMessage {
+            get {
+                return ResourceManager.GetString("GetMessage", resourceCulture);
             }
         }
         
@@ -538,6 +772,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country/{0}/Provinces.
+        /// </summary>
+        public static string GetProvincesByCountry {
+            get {
+                return ResourceManager.GetString("GetProvincesByCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renter/{0}.
         /// </summary>
         public static string GetRenter {
@@ -552,6 +795,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetTicket {
             get {
                 return ResourceManager.GetString("GetTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Propiedad/{0}/Unidades.
+        /// </summary>
+        public static string GetUnits {
+            get {
+                return ResourceManager.GetString("GetUnits", resourceCulture);
             }
         }
         
@@ -601,11 +853,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CommonData/{0}.
+        /// </summary>
+        public static string UpdateCommonData {
+            get {
+                return ResourceManager.GetString("UpdateCommonData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consortium/{0}.
         /// </summary>
         public static string UpdateConsortium {
             get {
                 return ResourceManager.GetString("UpdateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumSecure/{0}.
+        /// </summary>
+        public static string UpdateConsortiumSecure {
+            get {
+                return ResourceManager.GetString("UpdateConsortiumSecure", resourceCulture);
             }
         }
         

@@ -29,13 +29,19 @@ namespace ApiCore.Services.Implementations.Managers
             var entityToInsert = new Manager()
             {
                 User = this.UserRepository.GetById(Manager.UserId),
-                Consortium = this.ConsortiumRepository.GetById(Manager.ConsortiumId),
+                Consortium = Manager.ConsortiumId != 0 ? this.ConsortiumRepository.GetById(Manager.ConsortiumId) : null,
                 Home = Manager.Home,
+                Schedule = Manager.Schedule,
                 IsAlternate = Manager.IsAlternate,
-                JobDomicile = Manager.JobDomicile,
+                Male = Manager.Male,
                 LaborUnion = this.LaboralUnionRepository.GetById(Manager.LaborUnionId),
                 Salary = Manager.Salary,
                 StartDate = Manager.StartDate,
+                BirthDate = Manager.BirthDate,
+                ExtraHourValue = Manager.ExtraHourValue,
+                PantsWaist = Manager.PantsWaist,
+                ShirtWaist = Manager.ShirtWaist,
+                FootwearWaist = Manager.FootwearWaist,
                 WorkInsurance = Manager.WorkInsurance
             };
 
@@ -73,14 +79,20 @@ namespace ApiCore.Services.Implementations.Managers
         private void MergeManager(Manager originalManager, ManagerRequest Manager)
         {
             originalManager.User = this.UserRepository.GetById(Manager.UserId);
-            originalManager.Consortium = this.ConsortiumRepository.GetById(Manager.ConsortiumId);
+            originalManager.Consortium = Manager.ConsortiumId != 0 ? this.ConsortiumRepository.GetById(Manager.ConsortiumId) : null;
             originalManager.Home = Manager.Home;
             originalManager.IsAlternate = Manager.IsAlternate;
-            originalManager.JobDomicile = Manager.JobDomicile;
+            originalManager.Male = Manager.Male;
             originalManager.LaborUnion = this.LaboralUnionRepository.GetById(Manager.LaborUnionId);
             originalManager.Salary = Manager.Salary;
             originalManager.StartDate = Manager.StartDate;
+            originalManager.BirthDate = Manager.BirthDate;
             originalManager.WorkInsurance = Manager.WorkInsurance;
+            originalManager.ExtraHourValue = Manager.ExtraHourValue;
+            originalManager.PantsWaist = Manager.PantsWaist;
+            originalManager.ShirtWaist = Manager.ShirtWaist;
+            originalManager.FootwearWaist = Manager.FootwearWaist;
+            originalManager.Schedule = Manager.Schedule;
         }
 
         [Transaction]

@@ -43,6 +43,20 @@ namespace ApiCore.Controllers
             return Ok(dto);
         }
 
+        [Route("{id}/Unidades")]
+        [ResponseType(typeof(List<FunctionalUnitResponse>))]
+        public IHttpActionResult GetUnits(int id)
+        {
+            var completeOwnership = OwnershipService.GetById(id);
+
+            if (completeOwnership == null)
+                throw new NotFoundException(ErrorMessages.PropiedadNoEncontrada);
+
+            var dto = Mapper.Map<List<FunctionalUnitResponse>>(completeOwnership.FunctionalUnits);
+
+            return Ok(dto);
+        }
+
         // POST api/<controller>
         /// <summary>
         /// Inserta una propiedad

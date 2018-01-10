@@ -12,6 +12,6 @@ namespace ApiCore.DomainModel
          public virtual string CUIT { get; set; }
          public virtual Address Address{ get; set; }
          public virtual DateTime StartDate{ get; set; }
-        public virtual IList<Worker> Workers { get; set; }
+        
     }
 }

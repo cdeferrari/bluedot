@@ -11,8 +11,11 @@ namespace Administracion.Models
     public class UserViewModel
     {
         public virtual int Id { get; set; }
+
+        [Required]
         [DisplayName("Nombre")]
         public virtual string Name { get; set; }
+        [Required]
         [DisplayName("Apellido")]
         public virtual string Surname { get; set; }
         public virtual string DNI { get; set; }
@@ -24,12 +27,16 @@ namespace Administracion.Models
         public virtual bool IsRenter { get; set; }
         public virtual bool IsProvider { get; set; }
 
+        public virtual string CallbackUrl { get; set; }
+
         public virtual IEnumerable<SelectListItem> Administrations { get; set; }
         public virtual IEnumerable<SelectListItem> PaymentTypes { get; set; }
+        public virtual IEnumerable<SelectListItem> OwnershipList { get; set; }
         public virtual IEnumerable<SelectListItem> FunctionalUnitList { get; set; }
         public virtual int AdministrationId { get; set; }
         public virtual int PaymentTypeId { get; set; }
         public virtual int FunctionalUnitId { get; set; }
+        public virtual int OwnershipId { get; set; }
 
 
     }

@@ -11,7 +11,16 @@
     <div id="main-container">
 
         <div class="block full">
-            <h2>Ticket</h2>
+             @if (Model.Id > 0)
+            {
+                <h2>@Model.Title</h2>
+             }
+             else
+             {
+                <h2>Pedido</h2>
+             }
+
+
 
 
             @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -19,24 +28,38 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>Ingrese los siguientes datos</h4>
+                    @*<h4>Ingrese los siguientes datos</h4>*@
                     <hr />
 
-                    @Html.HiddenFor(model => model.Id)
+                    @if (Model.Id > 0)
+                    {
+                        <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@Model.Status.Description</strong></div>
+                        <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Asignar este ticket</a>
+                        <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a> <a href="javascript:void(0)" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Resolver Ticket</a>
+                        <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Marcar como urgente</a>
+                        <hr>
+                    }
+                    
 
+
+                    @Html.HiddenFor(model => model.Id)
+                    @if (Model.Id == 0)
+                    {
                     <div class="form-group row">
                         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class='col-md-2 '>
+                        <div class='col-md-8'>
+                     
                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+ 
                             @Html.ValidationMessage("", new { @class = "text-danger" })
                             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    }
 
                     <div class="form-group row">
                         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class='col-md-2 '>
-
+                        <div class='col-md-8'>
 
                             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessage("", new { @class = "text-danger" })
@@ -44,54 +67,21 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        @Html.LabelFor(model => model.OpenDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class='col-md-2 '>
-
-                            <label class="input-group datepicker-only-init">
-                                @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessage("", new { @class = "text-danger" })
-                                <span class="input-group-addon">
-                                    <i class="icmn-calendar"></i>
-                                </span>
-                            </label>
-                            @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group  row">
-                        @Html.LabelFor(model => model.CloseDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-2">
-                            <label class="input-group datepicker-only-init">
-                                @*<input type="text" class="form-control" placeholder="Select Date">*@
-                                @Html.EditorFor(model => model.CloseDate, new { htmlAttributes = new { @class = "form-control" } })
-                                <span class="input-group-addon">
-                                    <i class="icmn-calendar"></i>
-                                </span>
-                            </label>
-
-                            @Html.ValidationMessageFor(model => model.CloseDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
                     <div class="form-group  row">
                         @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-2">
-                            <label class="input-group datepicker-only-init">
-                                @*<input type="text" class="form-control" placeholder="Select Date">*@
+                        <div class="col-md-4">
+                            <div class='input-group date' >
                                 @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
                                 <span class="input-group-addon">
-                                    <i class="icmn-calendar"></i>
+                                    <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </label>
+                            </div>
 
                             @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-
-                    <div class="form-group row">
                         <label class="control-label col-md-2">Consumidor</label>
-                        <div class="col-md-10">
+                        <div class="col-md-2">
                             @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
                         </div>
@@ -100,56 +90,131 @@
 
                     <div class="form-group row">
                         <label class="control-label col-md-2">Consorcio</label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                             @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- Elija Consorcio --")
                         </div>
-                    </div>
-
-                    <div class="form-group row">
                         <label class="control-label col-md-2">Unidad Funcional</label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                             @Html.DropDownListFor(model => model.FunctionalUnitId, Model.FunctionalUnitList, "-- Elija Unidad Funcional --")
                         </div>
                     </div>
 
-
                     <div class="form-group row">
                         <label class="control-label col-md-2">Prioridad</label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                             @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --")
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Estado</label>
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Status.Id, Model.StatusList, "-- Elija Estado --")
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
                         <label class="control-label col-md-2">Trabajador</label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                             @Html.DropDownListFor(model => model.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Creador</label>
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.Creator.Id, Model.UsersList, "-- Elija Creador --")
-                        </div>
-                    </div>
 
                     <div class="form-group row">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Guardar" class="btn btn-success" />
                         </div>
                     </div>
+
+                    @if (Model.Id > 0)
+                    {
+                        <ul class="media-list media-feed push">
+
+                        @foreach (var message in Model.Messages)
+                        {
+                            <li class="media">
+                                <a href="page_ready_user_profile.html" class="pull-left">
+                                    <img src="~/Content/img/avatar.jpg" alt="Avatar" class="img-circle">
+                                </a>
+                                <div class="media-body">
+                                    <p class="push-bit">
+                                        <span class="text-muted pull-right">
+                                            hace
+                                            @{var restTime = message.Date - DateTime.Now;}
+                                            <small> @Math.Round(restTime.TotalDays) dias</small>
+                                            <small>@Math.Round(restTime.TotalHours) horas</small>
+                                        </span>
+                                        @*<small><a href="page_ready_user_profile.html">Inquilino1</a> a través de <a href="javascript:void(0)">llamado</a></small>*@
+                                    </p>
+                                    @*<h4><strong>Can you help me with the installation?</strong></h4>*@
+
+                                    <p>
+                                        @{ var consortium = Model.Consortium != null ?
+                                                   Model.Consortium.Ownership.Id.ToString() + " - " + Model.Consortium.Ownership.Address.Street.ToString() + " " + Model.Consortium.Ownership.Address.Number : "-";
+                                            var uf = Model.FunctionalUnit != null ? Model.FunctionalUnit.Number.ToString() : "-";
+                                            }
+
+                                        Consorcio: @consortium<BR>
+                                        Unidad Funcional: @uf<BR>
+                                        @message.Content
+                                    </p>
+                                    
+                                </div>
+
+                            </li>
+
+
+                        }
+                        </ul>
+                        
+                        <div class="form-group row">
+                            <div class="col-md-offset-2 col-md-10">
+                                
+                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Mensaje" value="Agregar Mensaje" class="btn btn-success">Agregar Mensaje</a>
+                            </div>
+                        </div>
+
+
+                                                }
+
                 </div>
 
             }
             </div>
         </div>
+</div>
+
+
+
+<div id="modal-add-message" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO MENSAJE</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
+
+                    @using (Html.BeginForm("CreateMessage", "Messages", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                    {
+
+
+                    <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Mensaje</label>
+                        <div>
+                            <input name="Content" id="Content" type="text" class="col-md-10" />                            
+                        </div>
+                    </div>
+
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            
+                            @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                        </div>
+                    </div>
+                }
+                @*</form>*@
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
 </div>

@@ -11,5 +11,7 @@ namespace Administracion.DomainModel
         public virtual int Id { get; set; }
         public virtual int FunctionalUnitId { get; set; }
         public virtual User User { get; set; }
+
+        public int PaymentTypeId { get; set; }
     }
 }

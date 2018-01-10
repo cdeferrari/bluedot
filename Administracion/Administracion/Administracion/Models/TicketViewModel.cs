@@ -19,6 +19,7 @@ namespace Administracion.Models
         public virtual DateTime CloseDate { get; set; }
         public virtual DateTime LimitDate { get; set; }
         public virtual int FunctionalUnitId { get; set; }
+        public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual Priority Priority { get; set; }
         public virtual IEnumerable<SelectListItem> StatusList { get; set; }
         public virtual IEnumerable<SelectListItem> PriorityList { get; set; }
@@ -28,7 +29,7 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> FunctionalUnitList { get; set; }
         public virtual Worker Worker { get; set; }
         public virtual User Creator { get; set; }
-        
-
+        public virtual Consortium Consortium { get; set; }
+        public virtual IList<MessageViewModel> Messages { get; set; }
     }
 }

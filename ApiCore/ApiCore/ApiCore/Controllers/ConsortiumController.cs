@@ -13,6 +13,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
 using ApiCore.Services.Contracts.Lists;
+using ApiCore.Services.Contracts.Tickets;
 
 namespace ApiCore.Controllers
 {
@@ -26,7 +27,7 @@ namespace ApiCore.Controllers
         public IConsortiumService ConsortiumService { get; set; }
         public IListService ListService { get; set; }
 
-
+        public ITicketService TicketService { get; set; }
 
         // GET api/<controller>/5
         /// <summary>
@@ -90,6 +91,30 @@ namespace ApiCore.Controllers
                 throw new NotFoundException(ErrorMessages.ConsorcioNoEncontrado);
 
             var dto = Mapper.Map<List<ListResponse>>(completeTaskList);
+
+            return Ok(dto);
+        }
+
+
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve tickets del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/Tickets")]
+        [ResponseType(typeof(List<TicketResponse>))]
+        public IHttpActionResult GetTickets(int id)
+        {
+
+            var completeTaskList = TicketService.GetByConsortiumId(id);
+
+            if (completeTaskList == null)
+                throw new NotFoundException(ErrorMessages.TicketNoEncontrado);
+
+            var dto = Mapper.Map<List<TicketResponse>>(completeTaskList);
 
             return Ok(dto);
         }

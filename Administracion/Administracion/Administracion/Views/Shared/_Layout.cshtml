@@ -13,11 +13,7 @@
 
     @Html.Partial("_LoginPartial")
    
-
-    
-        @RenderBody()
-
-    
+      @RenderBody()
     
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -28,6 +24,173 @@
     @RenderSection("scripts", required: false)
 
     <script>$(function(){ TablesDatatables.init(); });</script>
+
+    <script>
+ $(function () {
+     var bindDatePicker = function () {
+         
+                $(".date").datetimepicker({
+                    format: 'DD-MM-YYYY',
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-arrow-up",
+                        down: "fa fa-arrow-down"
+                    }
+                }).find('input:first').on("blur", function () {
+                    // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+                    // update the format if it's yyyy-mm-dd
+                    //var date = parseDate($(this).val());
+                    var date =$(this).val();
+
+                    //if (!isValidDate(date)) {
+                    //    //create date based on momentjs (we have that)
+                    //    date = moment().format('DD-MM-YYYY');
+                    //}
+
+                    $(this).val(date);
+                });
+            }
+
+            var isValidDate = function (value, format) {
+                format = format || false;
+                // lets parse the date to the best of our knowledge
+                if (format) {
+                    value = parseDate(value);
+                }
+
+                var timestamp = Date.parse(value);
+
+                return isNaN(timestamp) == false;
+            }
+
+            var parseDate = function (value) {
+                var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+                if (m)
+                    value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+                return value;
+            }
+
+            bindDatePicker();
+        });</script>
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        //Dropdownlist Selectedchange event
+        $("#ConsortiumId").change(function () {
+            $("#FunctionalUnitId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetFunctionalUnitsByConsortium", "FunctionalUnit")', // we are calling json method
+
+                dataType: 'json',
+
+                data: { id: $("#ConsortiumId").val() },
+                // here we are get value of selected country and passing same value
+
+                success: function (units) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+                    $.each(units, function (i, unit) {
+                        $("#FunctionalUnitId").append('<option value="' + unit.Value + '">' +
+                            unit.Text + '</option>');
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve units.' + ex);
+                }
+            });
+            return false;
+        });
+
+        $('#edit-list').click(function () {
+            
+            var text = $('.list-to-edit').text();
+            var input = "<input id='MailingList' style='width:44%; margin-left:1%; display: inline-block;' name='MailingList' type='text' class='form-control' value='" + text + "'  />";
+            $('.list-to-edit').text('').append(input);
+
+            $('.fast-save-button').show();
+            $('#edit-list').hide();
+        });
+
+        $('#edit-telephone').click(function () {
+
+            var text = $('.telephone-to-edit').text();
+            var input = "<input id='Telephone' style='width:44%; margin-left:1%; display: inline-block;' name='Telephone' type='text' class='form-control' value='" + text + "'  />";
+            $('.telephone-to-edit').text('').append(input);
+
+            $('.fast-save-button').show();
+            $('#edit-telephone').hide();
+        });
+
+        $('#edit-address').click(function () {
+            
+            var text = $.trim($('.address-to-edit').text()).split(" ");
+            var number = text[text.length - 1];
+            var street = "";
+            for (var i = 0; i < text.length - 1; i++) {
+                if (i > 0) {
+                    if (text[i] != " ") {
+                        street += " " + text[i];
+                    }
+                }
+                else {
+                    if (text[i] != " ") {
+                        street += text[i];
+                    }
+                    
+                }
+                
+            }
+            var inputstreet = "<input id='Addess.Street' style='width:30%; margin-left:20%; float: left;' name='Address.Street' type='text' class='form-control' value='" + street + "'  />";
+            var inputnumber = "<input id='Addess.Number' style='width:30%; margin-right:20%; float: left;' name='Address.Number' type='text' class='form-control' value='" + number + "'  />";
+
+            $('.address-to-edit').text('').append(inputstreet).append(inputnumber);
+            //$('.address-to-edit').text('');
+            $('.fast-save-button').show();
+            $('#edit-address').hide();
+        });
+
+    });
+    </script>   
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        //Evento del combo cuando selecciona un item
+        $("#OwnershipId").change(function () {
+            $("#FunctionalUnitId").empty();
+            
+            var oid = $("#OwnershipId").val();
+            $.ajax({
+                type: 'GET',
+                url: '/Users/GetUnitsByOwnership/' + oid,                 
+                dataType: 'json',                
+                contentType: "application/json; charset=utf-8",
+                
+                success: function (unidades) {
+                            
+                    $.each(unidades, function (i, unidad) {
+                        $("#FunctionalUnitId").append('<option value="' + unidad.Value + '">' +
+                             unidad.Text + '</option>');                        
+
+                    });
+                },
+                error: function (ex) {
+                    alert('El recibo de unidades falló.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+    </script>
+
+
 </body>
 
 </html>

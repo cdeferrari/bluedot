@@ -12,6 +12,7 @@ namespace Administracion.Dto.Consortium
         public virtual string FriendlyName { get; set; }
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }
+        public virtual string Telephone { get; set; }
         public virtual int AdministrationId { get; set; }
         public virtual int OwnershipId { get; set; }
     }

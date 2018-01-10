@@ -55,7 +55,9 @@ namespace Administracion.Controllers
         // GET: Backlog
         public ActionResult CreateTicket()
         {
-            var statusList = this.StatusService.GetAll().Select(x => new SelectListItem()
+            var statusList = this.StatusService.GetAll();
+            var statusSelectList = statusList
+                .Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
@@ -91,26 +93,31 @@ namespace Administracion.Controllers
                 Value = x.Id.ToString(),
                 Text = x.Dto != null ? x.Dto.ToString() : "-"
             });
-
-
+            
             var viewModel = new TicketViewModel()
             {
                 PriorityList = priorityList,
-                StatusList = statusList,
+                StatusList = statusSelectList,
                 WorkersList = workersList,
                 UsersList = userList,
                 ConsortiumList = consortiumList,
                 FunctionalUnitList = functionalUnitList
 
             };
-
+            viewModel.Status = new Status() { Id = statusList.Where(x => x.Description.Equals("open")).FirstOrDefault().Id };
+            viewModel.LimitDate = DateTime.Now;
             return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult CreateUpdateTicket(TicketViewModel ticket)
-        {                     
+        {
+            var statusList = this.StatusService.GetAll();
             var nticket = Mapper.Map<TicketRequest>(ticket);
+            nticket.CreatorId = SessionPersister.Account.Id;
+            nticket.OpenDate = DateTime.Now;
+            nticket.StatusId = statusList.Where(x => x.Description.Equals("open")).FirstOrDefault().Id;
+
             try
             {
                 var result = false;
@@ -166,7 +173,9 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
-            var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
+            var allConsortiums = this.ConsortiumService.GetAll();
+
+            var consortiumList = allConsortiums.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.FriendlyName
@@ -186,6 +195,12 @@ namespace Administracion.Controllers
             ticket.UsersList = userList;
             ticket.ConsortiumList = consortiumList;
             ticket.FunctionalUnitList = functionalUnitList;
+            ticket.Consortium = oTicket.Consortium;
+            ticket.ConsortiumId = oTicket.Consortium != null ? oTicket.Consortium.Id : 0;
+            ticket.FunctionalUnit = oTicket.FunctionalUnit;
+            ticket.FunctionalUnitId = oTicket.FunctionalUnit != null ? oTicket.FunctionalUnit.Id : 0;
+            
+
             return View("CreateTicket",ticket);
         }
 
@@ -218,6 +233,28 @@ namespace Administracion.Controllers
             }
             
         }
+
+        public ActionResult CloseTicket(int id)
+        {
+            var ticket = this.TicketService.GetTicket(id);
+            var statusList = this.StatusService.GetAll();
+            ticket.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
+            ticket.CloseDate = DateTime.Now;
+            var nticket = Mapper.Map<TicketRequest>(ticket);
+            this.TicketService.UpdateTicket(nticket);
+            return Redirect("/Backlog/UpdateTicketById/"+id);
+        }
+
+        public ActionResult SetTicketBlocker(int id)
+        {
+            var ticket = this.TicketService.GetTicket(id);
+            var statusList = this.PriorityService.GetAll();
+            ticket.Priority.Id = statusList.Where(x => x.Description.Equals("bloqueante")).FirstOrDefault().Id;
+            var nticket = Mapper.Map<TicketRequest>(ticket);
+            this.TicketService.UpdateTicket(nticket);
+            return Redirect("/Backlog/Index");
+        }
+
 
 
     }

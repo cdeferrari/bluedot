@@ -19,7 +19,7 @@ namespace Administracion.DomainModel
 
         public virtual string Email { get; set; }
 
-
+        public virtual User User { get; set; }
        
     }
 }

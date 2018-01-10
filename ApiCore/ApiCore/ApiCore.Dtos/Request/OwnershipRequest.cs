@@ -9,6 +9,7 @@ namespace ApiCore.Dtos.Request
 {
     public class OwnershipRequest
     {        
+        public virtual string Category { get; set; }
         public virtual Address Address { get; set; }        
     }
 }

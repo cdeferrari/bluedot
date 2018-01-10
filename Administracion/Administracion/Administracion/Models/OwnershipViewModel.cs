@@ -10,7 +10,9 @@ namespace Administracion.Models
     {
         public virtual int Id { get; set; }
         public virtual AddressViewModel Address { get; set; }
+        public virtual string Category { get; set; }
         public virtual HttpPostedFileBase Image { get; set; }
         public virtual List<FunctionalUnitViewModel> FunctionalUnits { get; set; }
+        public virtual List<CommonData> CommonData { get; set; }
     }
 }

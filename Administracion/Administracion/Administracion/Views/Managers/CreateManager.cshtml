@@ -36,7 +36,8 @@
                     {
                         
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(x => x.ConsortiumId)
+                        
+
                         @Html.HiddenFor(x => x.User.Id)
                         <input type="hidden" name="Id" id="Id" value="@Model.Id"  />
 
@@ -51,7 +52,12 @@
                         <div class="form-group">                            
                             @Html.LabelFor(model => model.User.Name, htmlAttributes: new { @class = "col-md-3 control-label" })
                             <div class="col-md-9">
-                                @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="Nombre" } })
+                                @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="Nombre",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese nombre')",
+                               @oninput = "setCustomValidity('')"
+
+                           } })
                                 <span class="help-block">Coloque el nombre completo</span>
                                 @Html.ValidationMessageFor(model => model.User.Name, "", new { @class = "text-danger" })                                                                
                             </div>
@@ -59,9 +65,26 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "col-md-3 control-label" })
                             <div class="col-md-9">
-                                @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido" } })
+                                @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese apellido')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque el apellido completo</span>
                                 @Html.ValidationMessageFor(model => model.User.Surname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">Telefono / Celular</label>
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.User.ContactData.Telephone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono" } })
+                                <span class="help-block">Coloque el numero de tel.</span>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.User.ContactData.Cellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular" } })
+                                <span class="help-block">Coloque el celular.</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,12 +103,20 @@
                             <label class="col-md-3 control-label" for="example-text-input">DOMICILIO</label>
                             @Html.LabelFor(model => model.Home.Street, htmlAttributes: new { @class = "col-md-1 control-label" })
                             <div class="col-md-3">
-                                @Html.EditorFor(model => model.Home.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
+                                @Html.EditorFor(model => model.Home.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese calle')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque la direccon completa</span>
                                 @Html.ValidationMessageFor(model => model.Home.Street, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.Home.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
+                                @Html.EditorFor(model => model.Home.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese numero')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque la altura.</span>
                             </div>
                         </div>
@@ -100,84 +131,168 @@
                                 <span class="help-block">Coloque la ciudad</span>
                             </div>
                         </div>
-
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-text-input">TRABAJO</label>
-                            @Html.LabelFor(model => model.JobDomicile.Street, htmlAttributes: new { @class = "col-md-1 control-label" })
-                            <div class="col-md-3">
-                                @Html.EditorFor(model => model.JobDomicile.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
-                                <span class="help-block">Coloque la direccon completa</span>
-                                @Html.ValidationMessageFor(model => model.JobDomicile.Street, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.JobDomicile.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
-                                <span class="help-block">Coloque la altura.</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="example-text-input">CP</label>
-                            <div class="col-md-3">                                
-                                @Html.EditorFor(model => model.JobDomicile.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
-                                <span class="help-block">Coloque el codigo postal</span>
-                            </div> <div class="col-md-3">                                      
-                                @Html.EditorFor(model => model.JobDomicile.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ciudad" } })                                
-                                <span class="help-block">Coloque la ciudad</span>
-                            </div>
-                        </div>
+                  
 
                     <div class="form-group row">
                         @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class='col-md-2 '>
+                        <div class='col-md-4 '>
 
-                            <label class="input-group datepicker-only-init">
-                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class='input-group date'>
+                            @Html.EditorFor(model => model.StartDate, new
+                                                   {
+                                                       htmlAttributes = new
+                                                       {
+                                                           @class = "form-control",
+                                                           @required = "required",
+                                                           @oninvalid = "this.setCustomValidity('Ingrese fecha de inicio')",
+                                                           @oninput = "setCustomValidity('')"
+                                                       }
+                                                   })
+                            @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class='col-md-4 '>
+
+                            <div class='input-group date'>
+                                @Html.EditorFor(model => model.BirthDate, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese fecha de nacimiento')",
+                               @oninput = "setCustomValidity('')"
+                           }
+                       })
                                 @Html.ValidationMessage("", new { @class = "text-danger" })
                                 <span class="input-group-addon">
-                                    <i class="icmn-calendar"></i>
+                                    <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </label>
+                            </div>
                             @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
 
+
                     <div class="form-group">
                             <label class="col-md-3 control-label" for="example-select">SINDICATO</label>
                             <div class="col-md-9">
-                                @Html.DropDownListFor(model => model.LaborUnionId,  Model.LaboralUnionList, "-- ELIJA SINDICATO --",new { @class = "form-control" })                                
+                                @Html.DropDownListFor(model => model.LaborUnionId,  Model.LaboralUnionList, "-- ELIJA SINDICATO --",new { @class = "form-control",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Elija sindicato')",
+                               @oninput = "setCustomValidity('')"
+                           })                                
                             </div>                                        
                     </div>
 
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="example-select">CONSORCIO</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- ELIJA CONSORCIO --", new
+                           {
+                               @class = "form-control"
+                           })
+                        </div>
+                    </div>
+
+
+
+
+
                     <div class="form-group row">
                             @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class='col-md-9 '>
-                                @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre" } })
+                            <div class='col-md-3 '>
+                                @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Salario",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese salario')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque el salario</span>
                                 @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
                             </div>
+
+                        @Html.LabelFor(model => model.ExtraHourValue, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class='col-md-3 '>
+                            @Html.EditorFor(model => model.ExtraHourValue, new { htmlAttributes = new { @class = "form-control", @placeholder = "Horas extras" } })
+                            <span class="help-block">Coloque el costo de las horas extra</span>
+                            @Html.ValidationMessageFor(model => model.ExtraHourValue, "", new { @class = "text-danger" })
+                        </div>
+
+
                     </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="example-text-input">TALLES INDUMENTARIA</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.FootwearWaist, new { htmlAttributes = new { @class = "form-control", @placeholder = "Talle Calzado" } })
+
+                        </div>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.PantsWaist, new { htmlAttributes = new { @class = "form-control", @placeholder = "Talle Pantalon" } })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.ShirtWaist, new { htmlAttributes = new { @class = "form-control", @placeholder = "Talle Camisa" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Schedule, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Schedule, new { htmlAttributes = new { @class = "form-control", @placeholder = "Horarios" } })
+
+                        </div>
+                    </div>
+
+
+
 
                     <div class="form-group row">
                             @Html.LabelFor(model => model.WorkInsurance, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class='col-md-9 '>
-                                @Html.EditorFor(model => model.WorkInsurance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre" } })
-                                <span class="help-block">Coloque obra social</span>
+                                @Html.EditorFor(model => model.WorkInsurance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese seguro laboral')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 @Html.ValidationMessageFor(model => model.WorkInsurance, "", new { @class = "text-danger" })
                             </div>
                     </div>
 
+             
 
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Tipo</label>
-                                            <div class="col-md-9">
-                                                <label class="checkbox-inline" for="example-inline-checkbox1">
-                                                    @Html.CheckBoxFor(model => model.IsAlternate) Suplente
-                                                </label>                                                
-                                            </div>
-                                        </div>
-                                        
+                    <div  class="form-group">
+                        <label class="col-md-3 control-label">Femenino/Masculino</label>
+                        <label class="switch switch-primary" data-toggle="tooltip" title="" data-original-title="Genero">
+                            <input id="Male" name="Male" type="checkbox" value="true" @(Model.Male ? "checked=\"checked\"" : "")  />
+
+                            <span data-toggle="tooltip" title="Masculino"></span>
+                            
+                        </label>                       
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Titular/Suplente</label>
+                        <label class="switch switch-primary" data-toggle="tooltip" title="" data-original-title="Suplente?">
+                            <input id="IsAlternate" name="IsAlternate" type="checkbox" value="true" @(Model.IsAlternate ? "checked=\"checked\"" : "") />
+
+                            <span data-toggle="tooltip" title="Suplente?"></span>
+
+                        </label>
+
+
+                    </div>
+                    
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-3">
                                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
@@ -202,10 +317,5 @@
     </div>
 </footer>
 <!-- END Footer -->
-
-
-
-
-
 
 

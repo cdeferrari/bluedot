@@ -57,7 +57,8 @@ namespace ApiCore.Services.Implementations.Users
         private FunctionalUnit MergeUnit(FunctionalUnit originalUnit,  FunctionalUnitRequest unit)
         {
             originalUnit.Dto = unit.Dto;
-            originalUnit.Floor = unit.Floor;            
+            originalUnit.Floor = unit.Floor;
+            originalUnit.Number = unit.Number;
             originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);
             
             return originalUnit;

@@ -46,5 +46,10 @@ namespace Administracion.Services.Implementations.Ownerships
             return IntegrationService.RestCall<List<Ownership>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllOwnerships, RestMethod.Get, null, null);
 
         }
+
+        public IList<FunctionalUnit> GetUnits(int OwnershipId)
+        {
+            return IntegrationService.RestCall<List<FunctionalUnit>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetUnits, OwnershipId), RestMethod.Get, null, new RestParamList { new RestParam("id", OwnershipId) });
+        }
     }
 }

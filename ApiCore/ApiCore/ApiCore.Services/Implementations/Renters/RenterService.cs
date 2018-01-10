@@ -23,10 +23,14 @@ namespace ApiCore.Services.Implementations.Renters
             var entityToInsert = new Renter()
             {
                 User = this.UserRepository.GetById(Renter.UserId),
-            
                 PaymentTypeId =Renter.PaymentTypeId
-                
             };
+
+            if (Renter.FunctionalUnitId != 0)
+            {
+                entityToInsert.FunctionalUnitId = Renter.FunctionalUnitId;
+            }
+            
 
             if (Renter.FunctionalUnitId != 0)
             {

@@ -28,7 +28,7 @@ namespace ApiCore.Services.Implementations.Ownerships
         {
             var Ownership = OwnershipRepository.GetById(OwnershipId);
             if (Ownership == null)
-                throw new BadRequestException(ErrorMessages.AdministracionNoEncontrado);
+                throw new BadRequestException(ErrorMessages.PropiedadNoEncontrada);
 
             return Ownership;
         }
@@ -61,7 +61,7 @@ namespace ApiCore.Services.Implementations.Ownerships
         private void MergeOwnership(Ownership originalOwnership, OwnershipRequest Ownership)
         {
             originalOwnership.Address = Ownership.Address;
-            
+            originalOwnership.Category = Ownership.Category;
         }
 
 

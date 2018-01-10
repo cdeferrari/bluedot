@@ -10,7 +10,7 @@ namespace ApiCore.DomainModel
     {
          public virtual string Url { get; set; }
          public virtual int MultimediaTypeId { get; set; }
-         public virtual int OwnershipId { get; set; }
-         
+        public virtual Ownership Ownership { get; set; }
+
     }
 }

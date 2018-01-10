@@ -1,18 +1,7 @@
 ﻿@using Administracion.Security
 @if (SessionPersister.isAuthenticated)
 {
-
-      <!-- Used only if page preloader is enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
-    <div class="preloader themed-background">
-        <h1 class="push-top-bottom text-light text-center"><strong>Administración</strong>Carman</h1>
-        <div class="inner">
-            <h3 class="text-light visible-lt-ie10"><strong>Cargando	..</strong></h3>
-            <div class="preloader-spinner hidden-lt-ie10"></div>
-        </div>
-    </div>
-
-    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations" >
-
+    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations" style="overflow: visible;">
          <div id="sidebar">
                     <!-- Wrapper for scrolling functionality -->
                     <div id="sidebar-scroll">
@@ -36,7 +25,7 @@
                                     <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
                                     <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
                                     <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Mis Datos" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
-                                    <a href="login.html" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                                    <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
                                 </div>
                             </div>
                             <!-- END User Info -->
@@ -93,115 +82,231 @@
                             </ul>
                             <!-- END Theme Colors -->
                             <!-- Sidebar Navigation -->
-                            <ul class="sidebar-nav">
-                                <li>
-                                    <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
-                                </li>
-                                <li>
-                                    <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
-                                    <ul>
-                                        <li>
-                                            <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Consortium/Index">Ver Consorcios</a>
-                                        </li>
+                            @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)
+                            {
+                                <ul class="sidebar-nav">
+                                    <li>
+                                        <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Consortium/Index">Ver Consorcios</a>
+                                            </li>
 
 
 
-                                    </ul>                                    
-                                </li>        
+                                        </ul>
+                                    </li>
 
-                            <li>
-                                <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Inqulinos / Propietarios</span></a>
-                            </li>
-
-
+                                    <li>
+                                        <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Inqulinos / Propietarios</span></a>
+                                    </li>
 
 
+
+
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
+                                        @*<ul>
                                                 <li>
-                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
-                                                    @*<ul>
-                                                        <li>
-                                                            <a href="page_forms_general.html">Crear Nuevo Checklist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="page_forms_components.html">Ver Checklists</a>
-                                                        </li>
-
-                                                    </ul>*@
+                                                    <a href="page_forms_general.html">Crear Nuevo Checklist</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
-                                                    @*<ul>
-                                                        <li>
-                                                            <a href="page_forms_general.html">Nuevo Gasto</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="page_forms_components.html">Cargar Factura</a>
-                                                        </li>
+                                                    <a href="page_forms_components.html">Ver Checklists</a>
+                                                </li>
 
-                                                    </ul>*@
+                                            </ul>*@
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
+                                        @*<ul>
+                                                <li>
+                                                    <a href="page_forms_general.html">Nuevo Gasto</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
-                                                    @*<ul>
-                                                        <li>
-                                                            <a href="page_forms_general.html">Cargar Nuevo Empleado</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="page_forms_components.html">Ver empleados</a>
-                                                        </li>
+                                                    <a href="page_forms_components.html">Cargar Factura</a>
+                                                </li>
 
-                                                    </ul>*@
+                                            </ul>*@
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Managers/Index">Ver empleados</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Providers/Index">Ver proveedores</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-header">
+                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                        <span class="sidebar-header-title">Soporte</span>
+                                    </li>
+                                    <li>
+                                        <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Backlog/Index">Ver Tickets</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-header">
+                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
+                                        <span class="sidebar-header-title">Documentación</span>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
+                                    </li>
+
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="sidebar-nav">
+                                    <li>
+                                        <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Consortium/Index">Ver Consorcios</a>
+                                            </li>
+
+
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Inqulinos / Propietarios</span></a>
+                                    </li>
+
+
+
+
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
+                                        @*<ul>
+                                                <li>
+                                                    <a href="page_forms_general.html">Crear Nuevo Checklist</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/Providers/Index">Ver proveedores</a>
-                                                        </li>
-
-                                                    </ul>
+                                                    <a href="page_forms_components.html">Ver Checklists</a>
                                                 </li>
-                                                <li class="sidebar-header">
-                                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
-                                                    <span class="sidebar-header-title">Soporte</span>
+
+                                            </ul>*@
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
+                                        @*<ul>
+                                                <li>
+                                                    <a href="page_forms_general.html">Nuevo Gasto</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/Backlog/Index">Ver Tickets</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </li>
-                                                <li class="sidebar-header">
-                                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
-                                                    <span class="sidebar-header-title">Documentación</span>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                                                    <a href="page_forms_components.html">Cargar Factura</a>
                                                 </li>
 
-                                                <li>
-                                                    <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
-                                                </li>
+                                            </ul>*@
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Managers/Index">Ver empleados</a>
+                                            </li>
 
-                                            </ul>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Providers/Index">Ver proveedores</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-header">
+                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                        <span class="sidebar-header-title">Soporte</span>
+                                    </li>
+                                    <li>
+                                        <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                        <ul>
+                                            <li>
+                                                <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Backlog/Index">Ver Tickets</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-header">
+                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
+                                        <span class="sidebar-header-title">Documentación</span>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
+                                    </li>
+
+                                </ul>
+
+                            }
                                             <!-- END Sidebar Navigation -->
 
                                             <!-- Sidebar Notifications -->
@@ -245,24 +350,24 @@
                     <!-- END Alternative Sidebar Toggle Button -->
                     <!-- User Dropdown -->
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">                            
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                            
                             <img src="~/Content/img/avatar.jpg" /><i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li class="dropdown-header text-center">Mis Datos</li>
                             <li>
-                                <a href="page_ready_timeline.html">
+                                <a href="#">
                                     <i class="fa fa-clock-o fa-fw pull-right"></i>
                                     <span class="badge pull-right">10</span>
                                     Mis Tareas
                                 </a>
-                                <a href="page_ready_inbox.html">
+                                <a href="#">
                                     <i class="fa fa-envelope-o fa-fw pull-right"></i>
                                     <span class="badge pull-right">5</span>
                                     Mensajes
                                 </a>
 
-                                <a href="page_ready_faq.html">
+                                <a href="#">
                                     <i class="fa fa-question fa-fw pull-right"></i>
                                     <span class="badge pull-right">11</span>
                                     FAQS
@@ -272,7 +377,7 @@
                             <li>
 
                                 <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                <a href="#modal-user-settings" data-toggle="modal">
+                                <a href="#" data-toggle="modal">
                                     <i class="fa fa-cog fa-fw pull-right"></i>
                                     Mis datos
                                 </a>
@@ -315,7 +420,7 @@
 
                         </li>
                     </ul>
-                    <form action="page_ready_search_results.html" class="navbar-form navbar-left">
+                    <form action="#" class="navbar-form navbar-left">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Buscar..">
                         </div>
@@ -325,6 +430,7 @@
             </header>
             <!-- END Header -->
 
+
             </div>
-        </div>
+    </div>
         }

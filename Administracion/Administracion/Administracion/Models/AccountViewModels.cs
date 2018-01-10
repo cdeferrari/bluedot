@@ -119,6 +119,8 @@ namespace Administracion.Models
     {
         public int Id { get; set; }
 
+        public UserViewModel User { get; set; }
+
         [Display(Name ="Usuario")]
         [Required(ErrorMessage = "Debe seleccionar un Nombre de Usuario")]
         public string UserName { get; set; }

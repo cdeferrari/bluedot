@@ -12,6 +12,7 @@ namespace ApiCore.Dtos.Response
         public virtual OwnershipUnitResponse Ownership { get; set; }
         public virtual int Floor { get; set; }
         public virtual string Dto { get; set; }
+        public virtual int Number { get; set; }
         //public virtual int OwnerId { get; set; }
         //public virtual int RenterId { get; set; }
 

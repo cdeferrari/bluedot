@@ -18,7 +18,7 @@ using Administracion.Dto.Manager;
 
 namespace Administracion.Controllers
 {
-    [CustomAuthorize(Roles.Root)]
+    [CustomAuthorize(Roles.All)]
     public class ManagersController : Controller
     {
         public virtual IManagerService ManagerService { get; set; }
@@ -46,10 +46,17 @@ namespace Administracion.Controllers
 
         // GET: Backlog
         [HttpGet]
-        public ActionResult CreateManager(int id)
+        public ActionResult CreateManager(int? id)
         {
-            var consortium = this.ConsortiumService.GetConsortium(id);
-            
+
+            var consortium = id.HasValue ? this.ConsortiumService.GetConsortium(id.Value) : null;
+
+            var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.FriendlyName
+            });
+
 
             var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
             {
@@ -59,19 +66,22 @@ namespace Administracion.Controllers
 
             var viewModel = new ManagerViewModel()
             {
-                ConsortiumId = consortium.Id,
-                LaboralUnionList = laboralUnions
-               
+                ConsortiumId = consortium != null ? consortium.Id : 0,
+                LaboralUnionList = laboralUnions,
+                ConsortiumList = consortiumList
             };
 
+            viewModel.Male = true;
+            viewModel.StartDate = DateTime.Now;
+            viewModel.BirthDate = DateTime.Now;
             return View(viewModel);            
         }
 
         [HttpPost]
         public ActionResult CreateUpdateManager(ManagerViewModel manager)
         {
-         
-            var consortium = this.ConsortiumService.GetConsortium(manager.ConsortiumId);            
+            
+            var consortium = manager.ConsortiumId != 0 ? this.ConsortiumService.GetConsortium(manager.ConsortiumId):null;            
             var nmanager = Mapper.Map<ManagerRequest>(manager);                        
 
             try
@@ -89,6 +99,7 @@ namespace Administracion.Controllers
                     else
                     {
                         nuser = Mapper.Map<User>(manager.User);
+                        this.UserService.UpdateUser(nuser);
                     }
 
                     if (nuser.Id > 0)
@@ -101,12 +112,22 @@ namespace Administracion.Controllers
                 }
                 else
                 {
-                    result = this.ManagerService.UpdateManager(nmanager);
+                    nuser = Mapper.Map<User>(manager.User);
+                    result = this.UserService.UpdateUser(nuser);
+                    if(result)
+                        result = this.ManagerService.UpdateManager(nmanager);
                 }
                 
                 if (result)
                 {
-                    return Redirect(string.Format( "/Consortium/Details/{0}",consortium.Id));
+                    if (consortium != null)
+                    {
+                        return Redirect(string.Format("/Consortium/Details/{0}", consortium.Id));
+                    }
+                    else
+                    {
+                        return Redirect("/Managers/Index");
+                    }
                 }
                 else
                 {
@@ -120,8 +141,10 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateManagerById(int id, int consortiumId)
+        public ActionResult UpdateManagerById(int id, int? consortiumId)
         {
+            var consortium = consortiumId.HasValue ? this.ConsortiumService.GetConsortium(consortiumId.Value) : null;
+
             var omanager = this.ManagerService.GetManager(id);
             var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
             {
@@ -129,8 +152,16 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
+            var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.FriendlyName
+            });
+
+
             var manager = Mapper.Map<ManagerViewModel>(omanager);
-            manager.ConsortiumId = consortiumId;
+            manager.ConsortiumId =  consortiumId.HasValue ? consortiumId.Value : 0;
+            manager.ConsortiumList = consortiumList;
             manager.LaboralUnionList = laboralUnions;
             return View("CreateManager",manager);
         }

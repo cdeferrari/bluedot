@@ -12,8 +12,8 @@ namespace ApiCore.Repository.Mappings
         public UserMap() : base("usuario")
         {
             
-            this.Property(x => x.DNI).IsRequired().HasColumnName("dni");
-            this.Property(x => x.CUIT).IsRequired().HasColumnName("cuit");
+            this.Property(x => x.DNI).IsOptional().HasColumnName("dni");
+            this.Property(x => x.CUIT).IsOptional().HasColumnName("cuit");
             this.Property(x => x.Name).IsRequired().HasColumnName("name");
             this.Property(x => x.Surname).IsOptional().HasColumnName("surname");                                
             this.HasOptional(x => x.ContactData).WithMany().Map(x => x.MapKey("data_contact_id"));

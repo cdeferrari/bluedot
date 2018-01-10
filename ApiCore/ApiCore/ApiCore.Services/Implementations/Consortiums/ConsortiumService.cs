@@ -57,7 +57,7 @@ namespace ApiCore.Services.Implementations.Consortiums
         public void DeleteConsortium(int consortiumId)
         {
             var consortium = ConsortiumRepository.GetById(consortiumId);
-            ConsortiumRepository.Delete(consortium);
+            ConsortiumRepository.LogicDelete(consortium);
         }
         
 
@@ -67,6 +67,7 @@ namespace ApiCore.Services.Implementations.Consortiums
             originalConsortium.CUIT = consortium.CUIT;
             originalConsortium.FriendlyName = consortium.FriendlyName;
             originalConsortium.MailingList = consortium.MailingList;
+            originalConsortium.Telephone = consortium.Telephone;
             originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);
             originalConsortium.Ownership = this.OwnershipRepository.GetById(consortium.OwnershipId);
             return originalConsortium;
@@ -74,7 +75,7 @@ namespace ApiCore.Services.Implementations.Consortiums
 
         public List<Consortium> GetAll()
         {
-            var consortiums = ConsortiumRepository.GetAll();
+            var consortiums = ConsortiumRepository.GetAllActives();
             if (consortiums == null)
                 throw new BadRequestException(ErrorMessages.ConsorcioNoEncontrado);
 

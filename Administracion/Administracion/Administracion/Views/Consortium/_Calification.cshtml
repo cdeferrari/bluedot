@@ -2,7 +2,7 @@
 
 @{
 
-    var succeced = Model.Select(x => x.Result.Description.Equals("success")).Count();
+    var succeced = Model.Where(x => x.Result.Description.Equals("success")).Count();
 
  }
 

@@ -19,7 +19,7 @@ namespace ApiCore.Library.Mensajes {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ErrorMessages {
@@ -88,6 +88,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ciudad no Encontrada.
+        /// </summary>
+        public static string CiudadNoEncontrada {
+            get {
+                return ResourceManager.GetString("CiudadNoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio no encontrado.
         /// </summary>
         public static string ConsorcioNoEncontrado {
@@ -124,11 +133,29 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mensaje no encontrado.
+        /// </summary>
+        public static string MensajeNoEncontrado {
+            get {
+                return ResourceManager.GetString("MensajeNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NotFound.
         /// </summary>
         public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo de pago no encontrado.
+        /// </summary>
+        public static string PaymentTypeNotFound {
+            get {
+                return ResourceManager.GetString("PaymentTypeNotFound", resourceCulture);
             }
         }
         
@@ -142,11 +169,11 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Provincia no encontrada.
         /// </summary>
-        public static string String1 {
+        public static string ProvinciaNoEncontrada {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("ProvinciaNoEncontrada", resourceCulture);
             }
         }
         

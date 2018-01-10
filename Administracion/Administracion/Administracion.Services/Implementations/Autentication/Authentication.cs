@@ -54,7 +54,8 @@ namespace Administracion.Services.Implementations.Autentication
                 Id = response.Id,
                 Password = response.Password,
                 Role = response.Role.Id == 1 ? DomainModel.Enum.Roles.Root : DomainModel.Enum.Roles.Client,
-                Name = response.User.Name + " " + response.User.Surname
+                Name = response.User.Name + " " + response.User.Surname,
+                User = new User() { Id = response.User.Id }
             };
 
             return result;

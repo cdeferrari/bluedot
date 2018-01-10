@@ -31,10 +31,15 @@
                     <div class="block-title">
                         <h2><strong>ALTA NUEVOS </strong> CONSORCIOS</h2>
                     </div>
-                    @using (Html.BeginForm("CreateUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    @using (Html.BeginForm("CreateUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" , enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(x => x.Id)
+
+                        if (Model.Ownership != null)
+                        {
+                            <input type="hidden" id="Ownership.Id" name="Ownership.Id" value="@Model.Ownership.Id">
+                        }
 
 
                         <div class="form-group">
@@ -47,7 +52,11 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.FriendlyName, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class='col-md-9 '>
-                                @Html.EditorFor(model => model.FriendlyName, new { htmlAttributes = new { @class = "form-control", @placeholder="Nonmbre" } })
+                                @Html.EditorFor(model => model.FriendlyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese nombre')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque el nombre completo</span>
                                 @Html.ValidationMessageFor(model => model.FriendlyName, "", new { @class = "text-danger" })
                             </div>
@@ -56,14 +65,23 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Ownership.Address.Street, htmlAttributes: new { @class = "col-md-3 control-label" })
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Ownership.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
-                                <span class="help-block">Coloque la direccon completa</span>
+                                @Html.EditorFor(model => model.Ownership.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Calle",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese calle')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque la calle</span>
                                 @Html.ValidationMessageFor(model => model.Ownership.Address.Street, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.Ownership.Address.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro" } })
+                                @Html.EditorFor(model => model.Ownership.Address.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "nro",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese numero')",
+                               @oninput = "setCustomValidity('')"
+                           } })
                                 <span class="help-block">Coloque la altura.</span>
                             </div>
+                            
                         </div>
 
                         <div class="form-group">
@@ -72,43 +90,113 @@
                                 @Html.EditorFor(model => model.Ownership.Address.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
                                 <span class="help-block">Coloque el codigo postal</span>
                             </div> <div class="col-md-3">
-                                @Html.EditorFor(model => model.Ownership.Address.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ciudad" } })
+
+                                       @Html.DropDownListFor(model => model.Ownership.Address.City, Model.Cities, "-- ELIJA CIUDAD  --", new { @class = "form-control" })
+                                       
+                                @*@Html.EditorFor(model => model.Ownership.Address.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ciudad" } })*@
                                 <span class="help-block">Coloque la ciudad</span>
                             </div>
                         </div>
-                      
+
                           <div class="form-group">
                             <label class="col-md-3 control-label" for="example-text-input">Provincia</label>
                             <div class="col-md-3">
-                                @Html.EditorFor(model => model.Ownership.Address.Province, new { htmlAttributes = new { @class = "form-control", @placeholder = "Provincia" } })
+                                @*@Html.EditorFor(model => model.Ownership.Address.Province, new { htmlAttributes = new { @class = "form-control", @placeholder = "Provincia", @value = "Buenos Aires" } })*@
+                                @Html.DropDownListFor(model => model.Ownership.Address.Province, Model.Provinces, "-- ELIJA PROVINCIA  --", new { @class = "form-control" })
                                 <span class="help-block">Coloque la provincia</span>
                             </div> 
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-text-input">DOCUMENTACION</label>                            
+                            <label class="col-md-3 control-label" for="example-text-input">CATEGORÍA</label>
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "form-control", @placeholder = "CUIT" } })
+                                @Html.EditorFor(model => model.Ownership.Category, new { htmlAttributes = new { @class = "form-control", @placeholder = "Categoría" } })
                             </div>
                         </div>
 
-
-                         <div class="form-group row">
-                                @Html.LabelFor(model => model.MailingList, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.MailingList, new { htmlAttributes = new { @class = "form-control" , @placeholder="Lista de email" } })
-                                    @Html.ValidationMessageFor(model => model.MailingList, "", new { @class = "text-danger" })
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-text-input">DOCUMENTACION</label>                            
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "form-control", @placeholder = "CUIT",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese Cuit')",
+                               @oninput = "setCustomValidity('')"
+                           }
+                           })
                             </div>
-                            
-                            <!--       <div class="form-group">
-                                <label class="col-md-3 control-label" for="example-select">ADMINISTRACION</label>
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.AdministrationId, Model.Administrations, "-- ELIJA ADMNISTACION --", new { @class = "form-control" })
+                        </div>
+
+                        {var itemCnt = 0;
+
+                            foreach (var item in Model.CommonDataItems)
+                            {
+
+
+                            <label class="col-md-3 control-label" for="example-email-input">@item.Text </label>
+                            <input type="hidden" id="Ownership.CommonData[@itemCnt].Item.Description" name="Ownership.CommonData[@itemCnt].Item.Description" value="@item.Text">
+                            <input type="hidden" id="Ownership.CommonData[@itemCnt].Item.Id" name="Ownership.CommonData[@itemCnt].Item.Id" value="@item.Value">
+                            <div class="form-group">
+                                <div class="col-md-1">
+                                    <label class="switch switch-primary" for='Ownership.CommonData[@itemCnt].Have'>
+                                        @if (Model.Ownership.CommonData != null && Model.Ownership.CommonData.Count > 0)
+                                        {
+                                            <input type="hidden" id="Ownership.CommonData[@itemCnt].Id" name="Ownership.CommonData[@itemCnt].Id" value="@Model.Ownership.CommonData[itemCnt].Id">
+                                            <input id="Ownership.CommonData[@itemCnt].Have" name="Ownership.CommonData[@itemCnt].Have" type="checkbox" value="true" @(Model.Ownership.CommonData[itemCnt].Have ? "checked=\"checked\"" : "") />
+                                        }
+                                        else
+                                        {
+                                            <input id="Ownership.CommonData[@itemCnt].Have" name="Ownership.CommonData[@itemCnt].Have" type="checkbox" value="true"  />
+                                        }
+
+                                        <span data-toggle="tooltip" title="Tiene?"></span>
+                                    </label>
                                 </div>
                                 
-                            </div>-->
-                            
+                            </div>
+                                    itemCnt++;
+                                }
+                            }
+
+
+
+
+
+
+                         <div class="form-group row">
+                                @Html.LabelFor(model => model.MailingList, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.MailingList, new { htmlAttributes = new { @class = "form-control" , @placeholder="Lista de email",
+                                   @required = "required",
+                                   @oninvalid = "this.setCustomValidity('Ingrese lista de email')",
+                                   @oninput = "setCustomValidity('')"
+                               }
+                               })
+                                    @Html.ValidationMessageFor(model => model.MailingList, "", new { @class = "text-danger" })
+                                </div>
+                             @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                             <div class="col-md-4">
+                                 @Html.EditorFor(model => model.Telephone, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control",
+                                       @placeholder = "Teléfono",
+                                       @required = "required",
+                                       @oninvalid = "this.setCustomValidity('Ingrese teléfono')",
+                                       @oninput = "setCustomValidity('')"
+                                   }
+                               })
+                                 @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                             </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-2">Foto</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="file" name="Image" id="Image" />
+                                </div>
+                            </div>
+
 
                             <div class="form-group form-actions">
                                 <div class="col-md-9 col-md-offset-3">
@@ -116,7 +204,6 @@
                                     <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
                                 </div>
                             </div>
-
                     }
 
                 </div>

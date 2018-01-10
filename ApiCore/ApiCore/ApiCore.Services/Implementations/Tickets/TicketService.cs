@@ -77,18 +77,33 @@ namespace ApiCore.Services.Implementations.Tickets
         private void MergeTicket(Ticket originalTicket, TicketRequest ticket)
         {
             originalTicket.Customer = ticket.Customer;
-            originalTicket.Consortium = this.ConsortiumRepository.GetById(ticket.ConsortiumId);
+            originalTicket.Consortium = ticket.ConsortiumId.HasValue ? this.ConsortiumRepository.GetById(ticket.ConsortiumId.Value) : null;
             originalTicket.Status = this.StatusRepository.GetById(ticket.StatusId);
             originalTicket.OpenDate = ticket.OpenDate;
             originalTicket.CloseDate = ticket.CloseDate;
             originalTicket.LimitDate = ticket.LimitDate;
-            originalTicket.FunctionalUnit = this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId);
+            originalTicket.FunctionalUnit = ticket.FunctionalUnitId.HasValue ? this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId.Value) : null ;
             originalTicket.Priority = this.PriorityRepository.GetById(ticket.PriorityId);
-            originalTicket.Worker = this.WorkerRepository.GetById(ticket.WorkerId);
+            originalTicket.Worker = ticket.WorkerId.HasValue ? this.WorkerRepository.GetById(ticket.WorkerId.Value):null;
             originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
             originalTicket.Title = ticket.Title;
             originalTicket.Description = ticket.Description;
         }
-        
+
+        public IList<Ticket> GetByConsortiumId(int consortiumId)
+        {
+            var tickets = TicketRepository.GetByConsortiumId(consortiumId);
+            if (tickets == null)
+                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
+
+            var result = new List<Ticket>();
+            var enumerator = tickets.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                result.Add(enumerator.Current);
+
+            }
+            return result;
+        }
     }
 }

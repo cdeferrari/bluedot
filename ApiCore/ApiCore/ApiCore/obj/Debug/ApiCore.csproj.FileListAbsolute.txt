@@ -157,7 +157,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Exte
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Extensions.Primitives.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Extensions.WebEncoders.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Net.Http.Headers.xml
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Practices.ServiceLocation.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Practices.ServiceLocation.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Newtonsoft.Json.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\NLog.xml
@@ -200,3 +199,8 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.pdb
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Repository.dll.config
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CoreCompileInputs.cache
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.dll.config

@@ -44,7 +44,7 @@ namespace Administracion.Controllers
                     if (SessionPersister.Account.Role == Roles.Root)
                         return RedirectToAction("Index", "Home");
                     if (SessionPersister.Account.Role == Roles.Client)
-                        return RedirectToAction("Index", "Client");
+                        return RedirectToAction("User", "Home");
             
                 }
                 else

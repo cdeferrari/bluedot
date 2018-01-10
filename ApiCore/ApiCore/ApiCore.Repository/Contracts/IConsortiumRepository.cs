@@ -9,6 +9,7 @@ namespace ApiCore.Repository.Contracts
 {
     public interface IConsortiumRepository : IRepository<Consortium>
     {
-        
+        IQueryable<Consortium> GetAllActives();
+        void LogicDelete(Consortium consortium);
     }
 }

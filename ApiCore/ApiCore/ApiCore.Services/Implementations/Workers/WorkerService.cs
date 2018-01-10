@@ -24,8 +24,7 @@ namespace ApiCore.Services.Implementations.Workers
         {
             var entityToInsert = new Worker()
             {
-                User = this.UserRepository.GetById(Worker.UserId),
-                Administration = this.AdministrationRepository.GetById(Worker.ConsortiumId)
+                User = this.UserRepository.GetById(Worker.UserId)
             };
             WorkerRepository.Insert(entityToInsert);
             return entityToInsert;
@@ -60,8 +59,7 @@ namespace ApiCore.Services.Implementations.Workers
 
         private void MergeWorker(Worker originalWorker, WorkerRequest Worker)
         {
-
-            originalWorker.Administration = this.AdministrationRepository.GetById(Worker.ConsortiumId);
+            
             originalWorker.User = this.UserRepository.GetById(Worker.UserId);
         }
 
