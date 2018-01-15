@@ -9,6 +9,7 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Multimedias;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Multimedias
 {
@@ -67,18 +68,8 @@ namespace ApiCore.Services.Implementations.Multimedias
 
         public List<Multimedia> GetAll()
         {
-            var Multimedias = MultimediaRepository.GetAll();
-            if (Multimedias == null)
-                throw new BadRequestException(ErrorMessages.ConsorcioNoEncontrado);
-
-            var result = new List<Multimedia>();
-            var enumerator = Multimedias.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return MultimediaRepository.GetAll().ToList();
+            
         }
     }
 }

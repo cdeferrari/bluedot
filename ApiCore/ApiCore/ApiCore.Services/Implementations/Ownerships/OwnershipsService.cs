@@ -7,13 +7,15 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Ownerships;
 using System.Collections.Generic;
 using System.Linq;
+using ApiCore.Services.Contracts.Consortiums;
 
 namespace ApiCore.Services.Implementations.Ownerships
 {
     public class OwnershipService : IOwnershipService
     {
         
-        public IOwnershipRepository OwnershipRepository { get; set; }                
+        public IOwnershipRepository OwnershipRepository { get; set; }
+        public IConsortiumService ConsortiumService { get; set; }
 
         [Transaction]
         public Ownership CreateOwnership(OwnershipRequest Ownership)
@@ -54,7 +56,8 @@ namespace ApiCore.Services.Implementations.Ownerships
         [Transaction]
         public IList<Ownership> GetAll()
         {
-            return this.OwnershipRepository.GetAll().ToList();
+            var consortiums = this.ConsortiumService.GetAll();
+            return consortiums.Select(x => x.Ownership).Distinct().ToList();
         }
 
 

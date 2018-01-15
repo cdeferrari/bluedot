@@ -7,6 +7,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Owners
 {
@@ -21,7 +22,9 @@ namespace ApiCore.Services.Implementations.Owners
         {
             var entityToInsert = new Owner()
             {
-                User = this.UserRepository.GetById(Owner.UserId)
+                User = this.UserRepository.GetById(Owner.UserId),
+                PaymentTypeId = Owner.PaymentTypeId
+                
             };
 
             if (Owner.FunctionalUnitId != 0)
@@ -75,23 +78,14 @@ namespace ApiCore.Services.Implementations.Owners
         {
             originalOwner.User = this.UserRepository.GetById(Owner.UserId);
             originalOwner.FunctionalUnitId = Owner.FunctionalUnitId;// this.FunctionalUnitRepository.GetById(Owner.FunctionalUnitId);
+            originalOwner.PaymentTypeId = Owner.PaymentTypeId;
         }
 
         [Transaction]
         public List<Owner> GetAll()
         {
-            var users = OwnerRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<Owner>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return OwnerRepository.GetAll().ToList();            
+            
         }
 
     }

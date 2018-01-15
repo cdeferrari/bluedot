@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using ApiCore.Services.Contracts.TicketStatus;
 using ApiCore.Services.Contracts.Priorities;
 using ApiCore.Services.Contracts.Cities;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Citys
 {
@@ -19,6 +20,7 @@ namespace ApiCore.Services.Implementations.Citys
         public ICityRepository CityRepository { get; set; }
         public IProvinceRepository ProvinceRepository { get; set; }
 
+        [Transaction]
         public City CreateCity(CityRequest City)
         {
             var entity = new DomainModel.City()
@@ -31,6 +33,7 @@ namespace ApiCore.Services.Implementations.Citys
             
         }
 
+        [Transaction]
         public void Delete(int CityId)
         {
             var entity = this.CityRepository.GetById(CityId);
@@ -40,18 +43,7 @@ namespace ApiCore.Services.Implementations.Citys
         [Transaction]
         public IList<City> GetAll()
         {
-            var Citys = CityRepository.GetAll();
-            if (Citys == null)
-                throw new BadRequestException(ErrorMessages.ProvinciaNoEncontrada);
-
-            var result = new List<DomainModel.City>();
-            var enumerator = Citys.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return CityRepository.GetAll().ToList();
 
         }
         

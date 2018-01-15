@@ -1,7 +1,9 @@
 ﻿using Administracion.App_Start;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -21,5 +23,14 @@ namespace Administracion
             AutoMapperConfig.Configure();
 
         }
+
+        //protected void Application_BeginRequest(Object sender, EventArgs e)
+        //{
+        //    CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+        //    newCulture.DateTimeFormat.ShortDatePattern = "dd-mm-yyyy";
+        //    newCulture.DateTimeFormat.LongDatePattern = "dd-mm-yyyy hh:mm:ss";
+        //    newCulture.DateTimeFormat.DateSeparator = "-";
+        //    Thread.CurrentThread.CurrentCulture = newCulture;
+        //}
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Administracion.DomainModel;
 using Administracion.DomainModel.Enum;
 using Administracion.Dto;
+using Administracion.Dto.City;
 using Administracion.Dto.CommonData;
 using Administracion.Dto.Consortium;
 using Administracion.Dto.List;
+using Administracion.Dto.Province;
 using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
@@ -82,13 +84,110 @@ namespace Administracion.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateCity()
+        {
+            var viewModel = new CityViewModel();
+            var provinces = this.ProvinceService.GetAllProvinces().Select(x => new SelectListItem()
+            {
+                Text = x.Description,
+                Value = x.Id.ToString()
+            });
+            
+            viewModel.ProvincesList = provinces;
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult CreateProvince()
+        {
+            var viewModel = new ProvinceViewModel();
+            var countryList = new List<SelectListItem>() { new SelectListItem()
+            {
+                Text = "Argentina",
+                Value = ConfigurationManager.AppSettings["default_country_id"]
+            }};
+
+            viewModel.CountriesList = countryList;
+            return View(viewModel);
+        }
+
+        [HttpGet]
         public ActionResult CreatePaymentType()
         {
             var viewModel = new IdDescriptionViewModel();
             return View(viewModel);
         }
 
-        
+        [HttpPost]
+        public ActionResult CreateProvince(ProvinceViewModel province)
+        {
+
+            var nprov = new ProvinceRequest()
+            {
+                Description = province.Description,
+                CountryId = province.CountryId
+            };
+
+            try
+            {
+                var result = false;
+                if (province.Id == 0)
+                {
+                    result = this.ProvinceService.CreateProvince(nprov);
+                }
+
+                if (result)
+                {
+                    return Redirect("/System/Index");
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult CreateCity(CityViewModel city)
+        {
+
+            var ncity = new CityRequest()
+            {
+                Description = city.Description,
+                ProvinceId = city.ProvinceId
+            };
+
+            try
+            {
+                var result = false;
+                if (city.Id == 0)
+                {
+                    result = this.CityService.CreateCity(ncity);
+                }
+
+                if (result)
+                {
+                    return Redirect("/System/Index");
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+
+        }
+
+
         [HttpPost]
         public ActionResult CreatePaymentType(IdDescriptionViewModel paymentType)
         {
@@ -167,6 +266,16 @@ namespace Administracion.Controllers
             return Redirect("/System/Index");
         }
 
+        public ActionResult DeleteCity(int id)
+        {
+            this.CityService.DeleteCity(id);
+            return Redirect("/System/Index");
+        }
 
+        public ActionResult DeleteProvince(int id)
+        {
+            this.ProvinceService.DeleteProvince(id);
+            return Redirect("/System/Index");
+        }
     }
 }

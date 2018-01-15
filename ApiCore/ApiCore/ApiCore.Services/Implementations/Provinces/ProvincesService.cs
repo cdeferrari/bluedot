@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using ApiCore.Services.Contracts.TicketStatus;
 using ApiCore.Services.Contracts.Priorities;
 using ApiCore.Services.Contracts.Provinces;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Provinces
 {
@@ -17,7 +18,7 @@ namespace ApiCore.Services.Implementations.Provinces
     {
         public ICountryRepository CountryRepository { get; set; }
         public IProvinceRepository ProvinceRepository { get; set; }
-
+        [Transaction]
         public Province CreateProvince(ProvinceRequest province)
         {
             var entity = new DomainModel.Province()
@@ -29,7 +30,7 @@ namespace ApiCore.Services.Implementations.Provinces
             return entity;
             
         }
-
+        [Transaction]
         public void Delete(int provinceId)
         {
             var entity = this.ProvinceRepository.GetById(provinceId);
@@ -39,37 +40,15 @@ namespace ApiCore.Services.Implementations.Provinces
         [Transaction]
         public IList<Province> GetAll()
         {
-            var provinces = ProvinceRepository.GetAll();
-            if (provinces == null)
-                throw new BadRequestException(ErrorMessages.ProvinciaNoEncontrada);
-
-            var result = new List<DomainModel.Province>();
-            var enumerator = provinces.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
-
+            return ProvinceRepository.GetAll().ToList();
+            
         }
 
 
         [Transaction]        
         public IList<Province> GetByCountryId(int id)
         {
-            var provinces = ProvinceRepository.GetByCountryId(id);
-            if (provinces == null)
-                throw new BadRequestException(ErrorMessages.ProvinciaNoEncontrada);
-
-            var result = new List<DomainModel.Province>();
-            var enumerator = provinces.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;            
+            return ProvinceRepository.GetByCountryId(id).ToList();            
         }
     }
 }

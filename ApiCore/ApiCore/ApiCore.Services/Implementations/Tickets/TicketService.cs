@@ -7,6 +7,7 @@ using ApiCore.Repository.Attributes;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Tickets
 {
@@ -92,18 +93,8 @@ namespace ApiCore.Services.Implementations.Tickets
 
         public IList<Ticket> GetByConsortiumId(int consortiumId)
         {
-            var tickets = TicketRepository.GetByConsortiumId(consortiumId);
-            if (tickets == null)
-                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
-
-            var result = new List<Ticket>();
-            var enumerator = tickets.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return TicketRepository.GetByConsortiumId(consortiumId).ToList();
+            
         }
     }
 }

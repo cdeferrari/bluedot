@@ -7,6 +7,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Messages
 {
@@ -86,18 +87,8 @@ namespace ApiCore.Services.Implementations.Messages
         [Transaction]
         public List<Message> GetAll()
         {
-            var users = MessageRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.MensajeNoEncontrado);
-
-            var result = new List<Message>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return MessageRepository.GetAll().ToList();
+            
         }
 
     }

@@ -8,6 +8,7 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.ConsortiumSecures;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.ConsortiumSecures
 {
@@ -74,18 +75,7 @@ namespace ApiCore.Services.Implementations.ConsortiumSecures
         [Transaction]
         public List<ConsortiumSecure> GetAll()
         {
-            var secure = ConsortiumSecureRepository.GetAll();
-            if (secure == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<ConsortiumSecure>();
-            var enumerator = secure.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return ConsortiumSecureRepository.GetAll().ToList();
         }
 
     }

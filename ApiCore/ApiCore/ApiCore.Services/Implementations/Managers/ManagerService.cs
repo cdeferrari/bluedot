@@ -8,6 +8,7 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.Managers;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Managers
 {
@@ -98,18 +99,7 @@ namespace ApiCore.Services.Implementations.Managers
         [Transaction]
         public List<Manager> GetAll()
         {
-            var users = ManagerRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<Manager>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return ManagerRepository.GetAll().ToList();
         }
 
     }

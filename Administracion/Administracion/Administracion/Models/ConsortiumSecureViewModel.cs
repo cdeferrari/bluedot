@@ -19,6 +19,7 @@ namespace Administracion.Models
         [DisplayName("Marca")]
         public virtual string Brand { get; set; }
         [DisplayName("Vencimiento")]
+       
         public virtual DateTime LimitDate { get; set; }        
         public virtual int ConsortiumId { get; set; }        
     }

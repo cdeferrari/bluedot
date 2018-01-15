@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using ApiCore.Services.Contracts.TaskResult;
 using ApiCore.Services.Contracts.PaymentTypes;
 using ApiCore.Dtos;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.TaskResult
 {
@@ -36,18 +37,8 @@ namespace ApiCore.Services.Implementations.TaskResult
         [Transaction]
         public IList<DomainModel.PaymentType> GetAll()
         {
-            var status = PaymentTypeRepository.GetAll();
-            if (status == null)
-                throw new BadRequestException(ErrorMessages.PaymentTypeNotFound);
-
-            var result = new List<PaymentType>();
-            var enumerator = status.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result ;
+            return PaymentTypeRepository.GetAll().ToList();
+            
         }
         
 

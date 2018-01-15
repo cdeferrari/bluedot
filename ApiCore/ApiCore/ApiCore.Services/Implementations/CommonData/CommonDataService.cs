@@ -57,18 +57,7 @@ namespace ApiCore.Services.Implementations.CommonDatas
         [Transaction]
         public IList<CommonData> GetAll()
         {
-            var CommonDatas = CommonDataRepository.GetAll();
-            if (CommonDatas == null)
-                throw new BadRequestException(ErrorMessages.PropiedadNoEncontrada);
-
-            var result = new List<CommonData>();
-            var enumerator = CommonDatas.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result ;
+            return CommonDataRepository.GetAll().ToList();
         }
 
 

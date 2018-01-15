@@ -1,4 +1,4 @@
-﻿@model Administracion.Models.IdDescriptionViewModel
+﻿@model Administracion.Models.CityViewModel
 @using Administracion.Models;
 @{
     ViewBag.Title = "Create";
@@ -21,7 +21,7 @@
         </div>
         <ul class="breadcrumb breadcrumb-top">
             <li><a href="/home">Home</a></li>
-            <li><a href="">Provincia</a></li>
+            <li><a href="">Ciudad</a></li>
         </ul>
 
 
@@ -43,6 +43,13 @@
                             @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
                             <div class="col-md-9">
                                 <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">PROVINCIA</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.ProvinceId, Model.ProvincesList, "-- ELIJA PROVINCIA --", new { @class = "form-control" })
                             </div>
                         </div>
 

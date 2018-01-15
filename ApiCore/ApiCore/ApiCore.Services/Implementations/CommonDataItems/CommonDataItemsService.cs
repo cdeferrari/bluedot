@@ -5,6 +5,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.CommonDataItems;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.CommonDataItems
 {
@@ -16,18 +17,7 @@ namespace ApiCore.Services.Implementations.CommonDataItems
         [Transaction]
         public IList<CommonDataItem> GetAll()
         {
-            var status = CommonDataItemsRepository.GetAll();
-            if (status == null)
-                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
-
-            var result = new List<CommonDataItem>();
-            var enumerator = status.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result ;
+            return CommonDataItemsRepository.GetAll().ToList();
         }
         
 

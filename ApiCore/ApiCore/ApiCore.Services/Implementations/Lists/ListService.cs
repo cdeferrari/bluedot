@@ -57,18 +57,8 @@ namespace ApiCore.Services.Implementations.Lists
         [Transaction]
         public IList<List> GetAll()
         {
-            var Lists = ListRepository.GetAll();
-            if (Lists == null)
-                throw new BadRequestException(ErrorMessages.ListaNoEncontrada);
-
-            var result = new List<List>();
-            var enumerator = Lists.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result ;
+            return ListRepository.GetAll().ToList();
+            
         }
 
 

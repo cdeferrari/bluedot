@@ -112,7 +112,7 @@ namespace Administracion.Controllers
                                 Id = Renter.Id,
                                 FunctionalUnitId = entidad.Id,
                                 UserId = Renter.User.Id,
-                                PaymentTypeId = 1
+                                PaymentTypeId = Renter.PaymentTypeId
                             };
 
                             this.RenterService.UpdateRenter(renterRequest);
@@ -124,7 +124,8 @@ namespace Administracion.Controllers
                             {
                                 Id = Owner.Id,
                                 FunctionalUnitId = entidad.Id,
-                                UserId = Owner.User.Id
+                                UserId = Owner.User.Id,
+                                PaymentTypeId = Owner.PaymentTypeId
                             };
                             this.OwnersService.UpdateOwner(ownerRequest);
                         }

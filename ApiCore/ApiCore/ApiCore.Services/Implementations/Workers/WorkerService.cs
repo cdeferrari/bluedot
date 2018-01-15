@@ -7,6 +7,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Workers
 {
@@ -66,18 +67,8 @@ namespace ApiCore.Services.Implementations.Workers
         [Transaction]
         public List<Worker> GetAll()
         {
-            var users = WorkerRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<Worker>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return WorkerRepository.GetAll().ToList();
+            
         }
 
     }

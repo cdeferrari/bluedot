@@ -17,12 +17,12 @@ namespace Administracion.Services.Implementations.Province
 
         public bool CreateCity(CityRequest city)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateProvince, RestMethod.Post, null, city);
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateCity, RestMethod.Post, null, city);
         }
 
         public bool DeleteCity(int id)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteProvince, id), RestMethod.Delete, null, new RestParamList { new RestParam("id", id) });
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteCity, id), RestMethod.Delete, null, new RestParamList { new RestParam("id", id) });
         }
 
         public IList<City> GetAll()

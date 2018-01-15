@@ -9,6 +9,7 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Consortiums
 {
@@ -75,18 +76,7 @@ namespace ApiCore.Services.Implementations.Consortiums
 
         public List<Consortium> GetAll()
         {
-            var consortiums = ConsortiumRepository.GetAllActives();
-            if (consortiums == null)
-                throw new BadRequestException(ErrorMessages.ConsorcioNoEncontrado);
-
-            var result = new List<DomainModel.Consortium>();
-            var enumerator = consortiums.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return ConsortiumRepository.GetAllActives().ToList();
         }
     }
 }

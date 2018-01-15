@@ -87,6 +87,8 @@ namespace Administracion.App_Start
 
                 cfg.CreateMap<PaymentType, IdDescriptionViewModel>();
                 cfg.CreateMap<LaboralUnion, IdDescriptionViewModel>();
+                cfg.CreateMap<Province, IdDescriptionViewModel>();
+                cfg.CreateMap<City, IdDescriptionViewModel>();
 
 
             });

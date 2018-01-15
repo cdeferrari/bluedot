@@ -28,18 +28,8 @@ namespace ApiCore.Services.Implementations.Users
 
         List<FunctionalUnit> IUnitService.GetAll()
         {
-            var units = UnitRepository.GetAll();
-            if (units == null)
-                throw new BadRequestException(ErrorMessages.UnidadNoEncontrada);
-
-            var result = new List<FunctionalUnit>();
-            var enumerator = units.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return UnitRepository.GetAll().ToList();
+            
         }
 
         [Transaction]

@@ -162,7 +162,8 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitId = user.FunctionalUnitId
+                            FunctionalUnitId = user.FunctionalUnitId,
+                            PaymentTypeId = user.PaymentTypeId
                         };
                         this.OwnerService.CreateOwner(owner);
                     }
@@ -217,6 +218,7 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
+                            PaymentTypeId = user.PaymentTypeId,
                             FunctionalUnitId = user.FunctionalUnitId
                         };
 
@@ -375,7 +377,9 @@ namespace Administracion.Controllers
             {
                 var owners = this.OwnerService.GetAll();
                 var owner = owners.Where(x => x.User.Id.Equals(id)).FirstOrDefault();
+                user.PaymentTypeId = owner.PaymentTypeId;
                 user.IsOwner = true;
+
 
                 if (owner.FunctionalUnitId != 0)
                 {
