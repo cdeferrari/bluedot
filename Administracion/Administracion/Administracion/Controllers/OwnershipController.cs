@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Administracion.Controllers
 {
-    [CustomAuthorize(Roles.Root)]
+    [CustomAuthorize(Roles.All)]
     public class OwnershipController : Controller
     {
         public virtual IOwnershipService OwnershipService { get; set; }

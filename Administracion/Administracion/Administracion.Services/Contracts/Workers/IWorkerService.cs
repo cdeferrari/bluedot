@@ -13,7 +13,7 @@ namespace Administracion.Services.Contracts.Workers
         IList<Worker> GetAll();
         Worker GetWorker(int WorkerId);
         bool CreateWorker(WorkerRequest Worker);
-        bool UpdateWorker(Worker Worker);
+        bool UpdateWorker(WorkerRequest Worker);
         bool DeleteWorker(int WorkerId);
     }
 }

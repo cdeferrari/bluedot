@@ -21,18 +21,7 @@ namespace ApiCore.Services.Implementations.BacklogUser
 
         public List<DomainModel.BacklogUser> GetAll()
         {
-            var users = this.BacklogUserRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<DomainModel.BacklogUser>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return this.BacklogUserRepository.GetAll().ToList();            
         }
 
     }

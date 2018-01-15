@@ -8,6 +8,7 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Repository.Contracts;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.Renters;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Renters
 {
@@ -23,10 +24,14 @@ namespace ApiCore.Services.Implementations.Renters
             var entityToInsert = new Renter()
             {
                 User = this.UserRepository.GetById(Renter.UserId),
-            
                 PaymentTypeId =Renter.PaymentTypeId
-                
             };
+
+            if (Renter.FunctionalUnitId != 0)
+            {
+                entityToInsert.FunctionalUnitId = Renter.FunctionalUnitId;
+            }
+            
 
             if (Renter.FunctionalUnitId != 0)
             {
@@ -76,18 +81,8 @@ namespace ApiCore.Services.Implementations.Renters
         [Transaction]
         public List<Renter> GetAll()
         {
-            var users = RenterRepository.GetAll();
-            if (users == null)
-                throw new BadRequestException(ErrorMessages.UserNoEncontrado);
-
-            var result = new List<Renter>();
-            var enumerator = users.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return RenterRepository.GetAll().ToList();
+            
         }
 
         [Transaction]

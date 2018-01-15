@@ -2,17 +2,24 @@
 using Administracion.Integration.Implementations;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.Autentication;
+using Administracion.Services.Contracts.CommonData;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.ConsortiumSecure;
+using Administracion.Services.Contracts.Countries;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.LaboralUnion;
 using Administracion.Services.Contracts.Lists;
 using Administracion.Services.Contracts.Managers;
+using Administracion.Services.Contracts.Messages;
 using Administracion.Services.Contracts.Multimedias;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.PaymentTypesService;
 using Administracion.Services.Contracts.Priorities;
 using Administracion.Services.Contracts.Providers;
+using Administracion.Services.Contracts.Provinces;
 using Administracion.Services.Contracts.Renters;
+using Administracion.Services.Contracts.SecureStatus;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.TaskResult;
 using Administracion.Services.Contracts.Tickets;
@@ -21,15 +28,20 @@ using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Administrations;
 using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Checklists;
+using Administracion.Services.Implementations.CommonData;
 using Administracion.Services.Implementations.Consortiums;
+using Administracion.Services.Implementations.ConsortiumSecure;
+using Administracion.Services.Implementations.Countrys;
 using Administracion.Services.Implementations.FunctionalUnits;
 using Administracion.Services.Implementations.LaboralUnion;
 using Administracion.Services.Implementations.Managers;
+using Administracion.Services.Implementations.Messages;
 using Administracion.Services.Implementations.Multimedias;
 using Administracion.Services.Implementations.Owners;
 using Administracion.Services.Implementations.Ownerships;
 using Administracion.Services.Implementations.Priorities;
 using Administracion.Services.Implementations.Providers;
+using Administracion.Services.Implementations.Province;
 using Administracion.Services.Implementations.Renters;
 using Administracion.Services.Implementations.Status;
 using Administracion.Services.Implementations.TaskResult;
@@ -72,6 +84,7 @@ namespace Administracion.App_Start
             builder.RegisterType<Synchronic>().As<ISync>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<TicketService>().As<ITicketService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ConsortiumService>().As<IConsortiumService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ConsortiumSecureService>().As<IConsortiumSecureService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<AdministrationService>().As<IAdministrationService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<MultimediaService>().As<IMultimediaService>().SingleInstance().PropertiesAutowired();
 
@@ -80,15 +93,22 @@ namespace Administracion.App_Start
             builder.RegisterType<WorkerService>().As<IWorkerService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<RenterService>().As<IRenterService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ProviderService>().As<IProviderService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ProvinceService>().As<IProvinceService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<CityService>().As<ICityService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<OwnerService>().As<IOwnerService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<UserService>().As<IUserService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PriorityService>().As<IPriorityService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<StatusService>().As<IStatusService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<CommonDataService>().As<ICommonDataService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<TaskResultService>().As<ITaskResultService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<LaboralUnionService>().As<ILaboralUnionService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ManagerService>().As<IManagerService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<MessageService>().As<IMessageService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<FunctionalUnitService>().As<IFunctionalUnitService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ChecklistService>().As<IChecklistService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<CountryService>().As<ICountryService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<PaymentTypesService>().As<IPaymentTypesService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().SingleInstance().PropertiesAutowired();
 
 
         }

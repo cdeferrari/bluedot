@@ -7,6 +7,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Multimedias;
 using ApiCore.DomainModel;
+using ApiCore.Dtos.Request;
 
 namespace ApiCore.Controllers
 {
@@ -69,7 +70,7 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(Entidad))]
-        public IHttpActionResult Post(Multimedia Multimedia)
+        public IHttpActionResult Post(MultimediaRequest Multimedia)
         {
             var result = MultimediaService.CreateMultimedia(Multimedia);
 
@@ -83,7 +84,7 @@ namespace ApiCore.Controllers
         /// </summary>
         /// <param name="Multimedia">Consorcio a modificar</param>
         /// <returns></returns>
-        public IHttpActionResult Put(int id, Multimedia Multimedia)
+        public IHttpActionResult Put(int id, MultimediaRequest Multimedia)
         {            
             var originalMultimedia = MultimediaService.GetById(id);
             

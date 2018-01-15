@@ -1,20 +1,20 @@
 ﻿@model Administracion.Models.TicketViewModel
 
         <tr>
-                        
-            <td>@Model.Id</td>                              
-            <td>@switch(Model.Priority.Id)
+            @{var tckid = "#TCK" + Model.Id; }
+            <td>@tckid</td>                              
+            <td>@switch (Model.Priority.Description)
             {
-                case 1:
+                case "baja":
                     <span class="label label-success">@Model.Priority.Description</span>
                     break;
-                case 2:
+                case "media":
                     <span class="label label-success">@Model.Priority.Description</span>
                     break;
-                case 3:
+                case "alta":
                     <span class="label label-danger">@Model.Priority.Description</span>
                     break;
-                case 4:
+                case "bloqueante":
                     <span class="label label-danger">@Model.Priority.Description</span>
                     break;                
             }
@@ -25,7 +25,7 @@
             <td>-</td>          
             <td class="text-center">
                 <div class="btn-group">
-                    <a href="UpdateTicketById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="UpdateTicketById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
                     <a href="DeleteTicket/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                 </div>
             </td>            

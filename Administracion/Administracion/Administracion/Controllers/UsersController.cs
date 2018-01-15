@@ -7,6 +7,8 @@ using Administracion.Models;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
+using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.PaymentTypesService;
 using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Tickets;
@@ -14,6 +16,7 @@ using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,49 +32,48 @@ namespace Administracion.Controllers
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
         public virtual IWorkerService WorkerService { get; set; }
         public virtual IOwnerService OwnerService { get; set; }
+        public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IRenterService RenterService { get; set; }
         public virtual IProviderService ProviderService { get; set; }
+        public virtual IPaymentTypesService PaymentTypeService { get; set; }
         public virtual IAdministrationService AdministrationService { get; set; }
 
         public ActionResult Index()
         {
             try
             {
-                var workers = this.WorkerService.GetAll();
+                //var workers = this.WorkerService.GetAll();
                 var owners = this.OwnerService.GetAll();
-                var renters = this.RenterService.GetAll();
+                //var renters = this.RenterService.GetAll();
 
 
-                var usersIds = workers.Select(x => x.User.Id)
-                    .Union(owners.Select(x => x.User.Id))
-                    .Union(renters.Select(x => x.User.Id))
-                    .ToList();
+                //var usersIds = workers.Select(x => x.User.Id)
+                //    .Union(owners.Select(x => x.User.Id))
+                //    .Union(renters.Select(x => x.User.Id))
+                //    .ToList();
 
-                var users = this.UserService.GetAll().Select(x => !usersIds.Contains(x.Id)).ToList();
-
-
-                var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
+                //var users = this.UserService.GetAll().Select(x => !usersIds.Contains(x.Id)).ToList();
+                
+                var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
                 {
                     Value = x.Id.ToString(),
-                    Text = x.Name
+                    Text = x.Description
                 });
 
-                var paymentTypes = new List<SelectListItem>() { new SelectListItem() { Value = 1.ToString(), Text = "tarjeta de credito" } };
                 var usersViewModel = new List<UserViewModel>();
 
-                workers.ForEach(x => usersViewModel.Add(
-                    new UserViewModel()
-                    {
-                        Id = x.User.Id,
-                        CUIT = x.User.CUIT,
-                        ContactData = Mapper.Map<ContactDataViewModel>(x.User.ContactData),
-                        DNI = x.User.DNI,
-                        Name = x.User.Name,
-                        Surname = x.User.Surname,
-                        IsWorker = true, 
-                        Administrations = administrations,
-                        PaymentTypes = paymentTypes
-                    }));
+                //workers.ForEach(x => usersViewModel.Add(
+                //    new UserViewModel()
+                //    {
+                //        Id = x.User.Id,
+                //        CUIT = x.User.CUIT,
+                //        ContactData = Mapper.Map<ContactDataViewModel>(x.User.ContactData),
+                //        DNI = x.User.DNI,
+                //        Name = x.User.Name,
+                //        Surname = x.User.Surname,
+                //        IsWorker = true, 
+                //        PaymentTypes = paymentTypes
+                //    }));
 
                 owners.ForEach(x => usersViewModel.Add(
                     new UserViewModel()
@@ -83,23 +85,21 @@ namespace Administracion.Controllers
                         Name = x.User.Name,
                         Surname = x.User.Surname,
                         IsOwner = true,
-                        Administrations = administrations,
                         PaymentTypes = paymentTypes
                     }));
 
-                renters.ForEach(x => usersViewModel.Add(
-                    new UserViewModel()
-                    {
-                        Id = x.User.Id,
-                        CUIT = x.User.CUIT,
-                        ContactData = Mapper.Map<ContactDataViewModel>(x.User.ContactData),
-                        DNI = x.User.DNI,
-                        Name = x.User.Name,
-                        Surname = x.User.Surname,
-                        IsRenter = true,
-                        Administrations = administrations,
-                        PaymentTypes = paymentTypes
-                    }));
+                //renters.ForEach(x => usersViewModel.Add(
+                //    new UserViewModel()
+                //    {
+                //        Id = x.User.Id,
+                //        CUIT = x.User.CUIT,
+                //        ContactData = Mapper.Map<ContactDataViewModel>(x.User.ContactData),
+                //        DNI = x.User.DNI,
+                //        Name = x.User.Name,
+                //        Surname = x.User.Surname,
+                //        IsRenter = true,
+                //        PaymentTypes = paymentTypes
+                //    }));
                 
                 
                 return View("List",usersViewModel);
@@ -120,16 +120,26 @@ namespace Administracion.Controllers
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
-            var paymentTypes = new List<SelectListItem>() { new SelectListItem() { Value = 1.ToString(), Text = "tarjeta de credito" } };
 
-            var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
+            var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Ownership.Address.Street+" "+x.Ownership.Address.Number+" - Piso:"+ x.Floor+" Unidad:"+ x.Dto
+                Text = x.Description
             });
 
+            var ownershipList = this.OwnershipService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Address.Street + " " + x.Address.Number 
+            });
 
-            var userViewModel = new UserViewModel() { Administrations = administrations , PaymentTypes = paymentTypes, FunctionalUnitList = functionalUnitList};
+            var functionalUnitList = new List<FunctionalUnit>().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
+            });
+
+            var userViewModel = new UserViewModel() { Administrations = administrations , PaymentTypes = paymentTypes, OwnershipList = ownershipList, FunctionalUnitList = functionalUnitList};
             return View(userViewModel);
         }
 
@@ -138,7 +148,7 @@ namespace Administracion.Controllers
         {
          
             var nuser = new User();
-
+            
             try
             {
                 nuser = Mapper.Map<User>(user);
@@ -152,7 +162,8 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitId = user.FunctionalUnitId
+                            FunctionalUnitId = user.FunctionalUnitId,
+                            PaymentTypeId = user.PaymentTypeId
                         };
                         this.OwnerService.CreateOwner(owner);
                     }
@@ -192,8 +203,120 @@ namespace Administracion.Controllers
                 else
                 {
                     this.UserService.UpdateUser(nuser);
+                    var owners = this.OwnerService.GetAll();
+                    var ownersUsersIds = owners.Select(x => x.User.Id).ToList();
+
+                    var renters = this.RenterService.GetAll();
+                    var rentersUsersIds = renters.Select(x => x.User.Id).ToList();
+
+                    var workers = this.WorkerService.GetAll();
+                    var workersUsersIds = workers.Select(x => x.User.Id).ToList();
+
+                    if (user.IsOwner)
+                    {
+                        
+                        var owner = new OwnerRequest()
+                        {
+                            UserId = nuser.Id,
+                            PaymentTypeId = user.PaymentTypeId,
+                            FunctionalUnitId = user.FunctionalUnitId
+                        };
+
+                        if (ownersUsersIds.Contains(user.Id))
+                        {
+                            var oldOwner = owners.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            owner.Id = oldOwner.Id;
+                            this.OwnerService.UpdateOwner(owner);
+                        }
+                        else
+                        {                         
+                            this.OwnerService.CreateOwner(owner);
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (ownersUsersIds.Contains(user.Id))
+                        {
+                            var owner = owners.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            this.OwnerService.DeleteOwner(owner.Id);
+                        }
+                        
+                    }
+
+                    if (user.IsRenter)
+                    {
+
+                        var renter = new RenterRequest()
+                        {
+                            UserId = nuser.Id,
+                            PaymentTypeId = user.PaymentTypeId,
+                            FunctionalUnitId = user.FunctionalUnitId
+                        };
+
+                        if (rentersUsersIds.Contains(user.Id))
+                        {
+                            var oldRenter = renters.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            renter.Id = oldRenter.Id;
+                            this.RenterService.UpdateRenter(renter);
+                        }
+                        else
+                        {
+                            this.RenterService.CreateRenter(renter);
+                        }
+
+                    }
+                    else
+                    {
+                        if (rentersUsersIds.Contains(user.Id))
+                        {
+                            var renter = renters.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            this.RenterService.DeleteRenter(renter.Id);
+                        }
+                        
+                    }
+
+                    if (user.IsWorker)
+                    {
+
+                        var worker = new WorkerRequest()
+                        {
+                            UserId = nuser.Id
+                        };
+
+                        if (workersUsersIds.Contains(user.Id))
+                        {
+                            var oldWorker = workers.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            worker.Id = oldWorker.Id;
+                            this.WorkerService.UpdateWorker(worker);
+                        }
+                        else
+                        {
+                            this.WorkerService.CreateWorker(worker);
+                        }
+
+                    }
+                    else
+                    {
+                        if (rentersUsersIds.Contains(user.Id))
+                        {
+                            var renter = renters.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
+                            this.RenterService.DeleteRenter(renter.Id);
+                        }
+
+                    }
+
                 }
-                return Redirect("/Users/Index");
+
+                if (!string.IsNullOrEmpty(user.CallbackUrl))
+                {
+                    return Redirect(user.CallbackUrl);
+                }
+                else
+                {
+                    return Redirect("/Users/Index");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -203,25 +326,82 @@ namespace Administracion.Controllers
         }
 
 
-        public ActionResult UpdateUserById(int id)
+        public ActionResult UpdateUserById(int id, string callbackUrl)
         {
             var oUser = this.UserService.GetUser(id);
             var user = Mapper.Map<UserViewModel>(oUser);
+            var renters = this.RenterService.GetAll();
+
+
             var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
 
-            var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
+
+            var ownershipList = this.OwnershipService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number + " - Piso:" + x.Floor + " Unidad:" + x.Dto
+                Text = x.Address.Street + " " + x.Address.Number
             });
 
-            user.FunctionalUnitList = functionalUnitList;
+            user.OwnershipList = ownershipList;
+            user.FunctionalUnitList = new List<FunctionalUnit>().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
+            });
+
             user.Administrations = administrations;
-            user.PaymentTypes = new List<SelectListItem>() { new SelectListItem() { Value = 1.ToString(), Text = "tarjeta de credito" } };
+
+            
+            var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
+
+
+            user.PaymentTypes = paymentTypes;
+
+            var renterUsers = renters.Select(x => x.User.Id).ToList();
+            if (renterUsers.Contains(id))
+            {
+                var renter = renters.Where(x => x.User.Id.Equals(id)).FirstOrDefault();
+                user.PaymentTypeId = renter.PaymentTypeId;
+                user.FunctionalUnitId = renter.FunctionalUnitId;
+                user.IsRenter = true;
+            }
+            else
+            {
+                var owners = this.OwnerService.GetAll();
+                var owner = owners.Where(x => x.User.Id.Equals(id)).FirstOrDefault();
+                user.PaymentTypeId = owner.PaymentTypeId;
+                user.IsOwner = true;
+
+
+                if (owner.FunctionalUnitId != 0)
+                {
+                    var functionalUnits = this.FunctionalUnitService.GetAll();
+
+                    var userUnit = functionalUnits.Where(x => x.Id == owner.FunctionalUnitId).FirstOrDefault();
+
+                    user.OwnershipId = userUnit.Ownership.Id;
+
+                    user.FunctionalUnitList = functionalUnits.Where(x => x.Ownership.Id == userUnit.Ownership.Id).Select(x => new SelectListItem()
+                    {
+                        Value = x.Id.ToString(),
+                        Text = "Piso:" + x.Floor + " Unidad:" + x.Dto
+                    });
+
+                    user.FunctionalUnitId = owner.FunctionalUnitId;
+                }
+                
+            }
+
+            user.CallbackUrl = callbackUrl;
+
             return View("CreateUser",user);
         }
 
@@ -278,6 +458,19 @@ namespace Administracion.Controllers
             {
                 return View("../Shared/Error");
             }
+            
+        }
+
+        public string GetUnitsByOwnership(int id)
+        {
+
+            var functionalUnitList = this.OwnershipService.GetUnits(id).Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = "Piso:" + x.Floor + " Unidad:" + x.Dto
+            });
+
+            return JsonConvert.SerializeObject(functionalUnitList);
             
         }
 

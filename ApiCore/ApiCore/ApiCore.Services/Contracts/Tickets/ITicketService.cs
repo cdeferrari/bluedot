@@ -13,6 +13,7 @@ namespace ApiCore.Services.Contracts.Tickets
         Ticket CreateTicket(TicketRequest ticket);
         Ticket GetById(int ticketId);
         IList<Ticket> GetAll();
+        IList<Ticket> GetByConsortiumId(int consortiumId);
         Ticket UpdateTicket(Ticket originalTicket, TicketRequest ticket);
         void DeleteTicket(int ticketId);
     }

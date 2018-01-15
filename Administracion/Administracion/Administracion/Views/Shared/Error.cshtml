@@ -2,8 +2,33 @@
 
 @{
     ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-building"></i> Consorcio</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>            
+        </ul>
+        <div class="row">
+            <h1 class="text-danger">Error.</h1>
+            <h2 class="text-danger">Hubo un error, por favor intente más tarde.</h2>
 
+        </div>
+    </div>
+
+    
+</div>
+
+    

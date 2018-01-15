@@ -9,6 +9,6 @@ namespace ApiCore.Repository.Contracts
 {
     public interface ITicketRepository : IRepository<Ticket>
     {
-        
+        IList<Ticket> GetByConsortiumId(int consortiumId);
     }
 }

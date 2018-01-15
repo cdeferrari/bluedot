@@ -14,5 +14,6 @@ namespace Administracion.Services.Contracts.Ownerships
         Entidad CreateOwnership(Ownership ownership);
         bool UpdateOwnership(Ownership ownership);
         bool DeleteOwnership(int ownershipId);
+        IList<FunctionalUnit> GetUnits(int OwnershipId);
     }
 }

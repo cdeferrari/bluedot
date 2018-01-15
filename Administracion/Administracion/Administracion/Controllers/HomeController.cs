@@ -10,11 +10,18 @@ namespace Administracion.Controllers
 {
     public class HomeController : Controller
     {
-        [CustomAuthorize(Roles.Root)]
+        [CustomAuthorize(Roles.All)]
         public ActionResult Index()
         {
             return Redirect("DataBase/Index");
         }
+
+        [CustomAuthorize(Roles.Client)]
+        public ActionResult User()
+        {
+            return Redirect("/DataBase/User");
+        }
+
 
         public ActionResult About()
         {

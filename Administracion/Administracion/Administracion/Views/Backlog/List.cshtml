@@ -1,4 +1,5 @@
-﻿@model List<Administracion.Models.TicketViewModel>
+﻿@using Administracion.Security
+@model List<Administracion.Models.TicketViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,18 +12,26 @@
         <div class="content-header">
             <ul class="nav-horizontal text-center">
                 <li>
-                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                    @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)                    
+                    {
+                        <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                    }
+                    else
+                    {
+                        <a href="/DataBase/User"><i class="fa fa-home"></i> Home</a>
+                    }
+
                 </li>
 
                 <li>
-                    <a href="javascript:void(0)"><i class="fa fa-ticket"></i> Tickets</a>
+                    <a href="javascript:void(0)"><i class="fa fa-ticket"></i> Pedidos</a>
                 </li>
 
             </ul>
         </div>
         <ul class="breadcrumb breadcrumb-top">
             <li>Home</li>
-            <li><a href="">Tickets</a></li>
+            <li><a href="">Pedidos</a></li>
         </ul>
         <div class="row">
             <div class="col-sm-4 col-lg-3">
@@ -33,7 +42,7 @@
                         <div class="block-options pull-right">
 
                         </div>
-                        <h2><i class="fa fa-ticket"></i> Administrar <strong>Tickets</strong></h2>
+                        <h2><i class="fa fa-ticket"></i> Administrar <strong>Pedidos</strong></h2>
                     </div>
                     <!-- END Menu Title -->
                     <!-- Menu Content -->
@@ -98,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td class="text-right">
-                                    <strong>Resoolucion Promedio</strong>
+                                    <strong>Resolucion Promedio</strong>
                                 </td>
                                 <td>-</td>
                             </tr>
@@ -115,10 +124,10 @@
                     <!-- Tickets Title -->
                     <div class="block-title">
                         <div class="block-options pull-right">                            
-                            <a href="CreateTicket/" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Ticket"><i class="fa fa-plus"></i></a>
+                            <a href="CreateTicket/" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Crear Pedido"><i class="fa fa-plus"></i></a>
                         </div>
                         <ul class="nav nav-tabs" data-toggle="tabs">
-                            <li class="active"><a href="#tickets-list">Listado de Tickets</a></li>                            
+                            <li class="active"><a href="#tickets-list">Listado de Pedidos</a></li>                            
                         </ul>
                     </div>
                     <!-- END Tickets Title -->

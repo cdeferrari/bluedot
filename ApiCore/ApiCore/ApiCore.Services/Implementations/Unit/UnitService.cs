@@ -28,18 +28,8 @@ namespace ApiCore.Services.Implementations.Users
 
         List<FunctionalUnit> IUnitService.GetAll()
         {
-            var units = UnitRepository.GetAll();
-            if (units == null)
-                throw new BadRequestException(ErrorMessages.UnidadNoEncontrada);
-
-            var result = new List<FunctionalUnit>();
-            var enumerator = units.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return UnitRepository.GetAll().ToList();
+            
         }
 
         [Transaction]
@@ -57,7 +47,8 @@ namespace ApiCore.Services.Implementations.Users
         private FunctionalUnit MergeUnit(FunctionalUnit originalUnit,  FunctionalUnitRequest unit)
         {
             originalUnit.Dto = unit.Dto;
-            originalUnit.Floor = unit.Floor;            
+            originalUnit.Floor = unit.Floor;
+            originalUnit.Number = unit.Number;
             originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);
             
             return originalUnit;

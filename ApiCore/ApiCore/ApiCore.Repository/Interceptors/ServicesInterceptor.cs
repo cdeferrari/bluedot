@@ -38,7 +38,7 @@ namespace ApiCore.Repository.Interceptors
                 }
             }
             catch (Exception ex)
-            {
+            {   
                 if (_transaction != null)
                 {
                     if (_context.Database.CurrentTransaction != null)

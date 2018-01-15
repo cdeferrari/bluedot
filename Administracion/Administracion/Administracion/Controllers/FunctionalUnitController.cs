@@ -112,7 +112,7 @@ namespace Administracion.Controllers
                                 Id = Renter.Id,
                                 FunctionalUnitId = entidad.Id,
                                 UserId = Renter.User.Id,
-                                PaymentTypeId = 1
+                                PaymentTypeId = Renter.PaymentTypeId
                             };
 
                             this.RenterService.UpdateRenter(renterRequest);
@@ -124,7 +124,8 @@ namespace Administracion.Controllers
                             {
                                 Id = Owner.Id,
                                 FunctionalUnitId = entidad.Id,
-                                UserId = Owner.User.Id
+                                UserId = Owner.User.Id,
+                                PaymentTypeId = Owner.PaymentTypeId
                             };
                             this.OwnersService.UpdateOwner(ownerRequest);
                         }
@@ -142,7 +143,7 @@ namespace Administracion.Controllers
                             Id = Renter.Id,
                             FunctionalUnitId = nunit.Id,
                             UserId = Renter.User.Id,
-                            PaymentTypeId = 1
+                            PaymentTypeId = Renter.PaymentTypeId
                         };
 
                         this.RenterService.UpdateRenter(renterRequest);
@@ -190,13 +191,15 @@ namespace Administracion.Controllers
             });
 
 
-            var owners = this.OwnersService.GetAll().Select(x => new SelectListItem()
+            var owners = this.OwnersService.GetAll();
+            var ownersList = owners.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.User.Name+ " " + x.User.Surname
             });
 
-            var renters = this.RenterService.GetAll().Select(x => new SelectListItem()
+            var renters = this.RenterService.GetAll();
+            var rentersList = renters.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.User.Name + " " + x.User.Surname
@@ -204,8 +207,21 @@ namespace Administracion.Controllers
 
             var unit = Mapper.Map<FunctionalUnitViewModel>(oUnit);
             unit.Ownerships = ownerships;
-            unit.Owners = owners;
-            unit.Renters = renters;
+            unit.Owners = ownersList;
+            unit.Renters = rentersList;
+
+            var ownersUnitId = owners.Select(x => x.FunctionalUnitId).ToList();
+            var rentersUnitId = renters.Select(x => x.FunctionalUnitId).ToList();
+
+            if (ownersUnitId.Contains(id))
+            {
+                unit.OwnerId = owners.Where(x => x.FunctionalUnitId.Equals(id)).FirstOrDefault().Id;
+            }
+
+            if (rentersUnitId.Contains(id))
+            {
+                unit.RenterId = renters.Where(x => x.FunctionalUnitId.Equals(id)).FirstOrDefault().Id;
+            }
             unit.ConsortiumId = consortiumId;
             return View("CreateFunctionalUnit",unit);
         }
@@ -239,6 +255,24 @@ namespace Administracion.Controllers
                 return View("../Shared/Error");
             }
             
+        }
+
+        public JsonResult GetFunctionalUnitsByConsortium(int id)
+        {
+            var consortium = this.ConsortiumService.GetConsortium(id);
+
+            var units = this.FunctionalUnitService.GetAll()
+                .Where(x => x.Ownership.Id.Equals(consortium.Ownership.Id))
+                .Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Street + "-"
+                    + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
+                })
+                .ToList();
+
+            return Json(new SelectList(units, "Value", "Text"));
+
         }
 
 

@@ -12,10 +12,13 @@ namespace ApiCore.Dtos.Response
         public virtual string FriendlyName { get; set; }
         public virtual string CUIT { get; set; }
         public virtual string MailingList { get; set; }
+        public virtual string Telephone { get; set; }
         public virtual AdministrationResponse Administration { get; set; }        
         
         public virtual OwnershipResponse Ownership { get; set; }
 
         public virtual IList<ManagerResponse> Managers { get; set; }
+
+        public virtual IList<ConsortiumSecureResponse> ConsortiumSecure { get; set; }
     }
 }

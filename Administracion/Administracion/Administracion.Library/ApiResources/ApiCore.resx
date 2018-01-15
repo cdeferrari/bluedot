@@ -123,14 +123,29 @@
   <data name="CreateChecklist" xml:space="preserve">
     <value>Lista/</value>
   </data>
+  <data name="CreateCity" xml:space="preserve">
+    <value>City/</value>
+  </data>
+  <data name="CreateCommonData" xml:space="preserve">
+    <value>CommonData/</value>
+  </data>
   <data name="CreateConsortium" xml:space="preserve">
     <value>Consorcio/</value>
+  </data>
+  <data name="CreateConsortiumSecure" xml:space="preserve">
+    <value>ConsortiumSecure/</value>
   </data>
   <data name="CreateFunctionalUnit" xml:space="preserve">
     <value>Unidad/</value>
   </data>
+  <data name="CreateLaboralUnion" xml:space="preserve">
+    <value>LaboralUnion/</value>
+  </data>
   <data name="CreateManager" xml:space="preserve">
     <value>Manager/</value>
+  </data>
+  <data name="CreateMessage" xml:space="preserve">
+    <value>Message/</value>
   </data>
   <data name="CreateMultimedia" xml:space="preserve">
     <value>Multimedia/</value>
@@ -141,8 +156,14 @@
   <data name="CreateOwnership" xml:space="preserve">
     <value>Propiedad/</value>
   </data>
+  <data name="CreatePaymentType" xml:space="preserve">
+    <value>PaymentType/</value>
+  </data>
   <data name="CreateProvider" xml:space="preserve">
     <value>Provider/</value>
+  </data>
+  <data name="CreateProvince" xml:space="preserve">
+    <value>Province/</value>
   </data>
   <data name="CreateRenter" xml:space="preserve">
     <value>Renter/</value>
@@ -162,14 +183,29 @@
   <data name="DeleteChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
   </data>
+  <data name="DeleteCity" xml:space="preserve">
+    <value>City/{0}</value>
+  </data>
+  <data name="DeleteCommonData" xml:space="preserve">
+    <value>CommonData/{0}</value>
+  </data>
   <data name="DeleteConsortium" xml:space="preserve">
     <value>Consortium/{0}</value>
+  </data>
+  <data name="DeleteConsortiumSecure" xml:space="preserve">
+    <value>ConsortiumSecure/{0}</value>
   </data>
   <data name="DeleteFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>
   </data>
+  <data name="DeleteLaboralUnion" xml:space="preserve">
+    <value>LaboralUnion/{0}</value>
+  </data>
   <data name="DeleteManager" xml:space="preserve">
     <value>Manager/{0}</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Message/{0}</value>
   </data>
   <data name="DeleteOwner" xml:space="preserve">
     <value>Owner/{0}</value>
@@ -177,8 +213,14 @@
   <data name="DeleteOwnership" xml:space="preserve">
     <value>Propiedad/{0}</value>
   </data>
+  <data name="DeletePaymentType" xml:space="preserve">
+    <value>PaymentType/{0}</value>
+  </data>
   <data name="DeleteProvider" xml:space="preserve">
     <value>Provider/{0}</value>
+  </data>
+  <data name="DeleteProvince" xml:space="preserve">
+    <value>Province/{0}</value>
   </data>
   <data name="DeleteRenter" xml:space="preserve">
     <value>Renter/{0}</value>
@@ -204,8 +246,20 @@
   <data name="GetAllChecklist" xml:space="preserve">
     <value>Lista/</value>
   </data>
+  <data name="GetAllCities" xml:space="preserve">
+    <value>City/</value>
+  </data>
+  <data name="GetAllCommonData" xml:space="preserve">
+    <value>CommonData/</value>
+  </data>
+  <data name="GetAllCommonDataItems" xml:space="preserve">
+    <value>CommonDataItem/</value>
+  </data>
   <data name="GetAllConsortium" xml:space="preserve">
     <value>Consorcio/</value>
+  </data>
+  <data name="GetAllConsortiumSecure" xml:space="preserve">
+    <value>ConsortiumSecure/</value>
   </data>
   <data name="GetAllFunctionalUnits" xml:space="preserve">
     <value>Unidad/</value>
@@ -219,11 +273,17 @@
   <data name="GetAllManagers" xml:space="preserve">
     <value>Manager/</value>
   </data>
+  <data name="GetAllMessages" xml:space="preserve">
+    <value>Message/</value>
+  </data>
   <data name="GetAllOwners" xml:space="preserve">
     <value>Owner/</value>
   </data>
   <data name="GetAllOwnerships" xml:space="preserve">
     <value>Propiedad/All</value>
+  </data>
+  <data name="GetAllPaymentTypes" xml:space="preserve">
+    <value>PaymentType/</value>
   </data>
   <data name="GetAllPriorities" xml:space="preserve">
     <value>Priority/</value>
@@ -231,8 +291,14 @@
   <data name="GetAllProviders" xml:space="preserve">
     <value>Provider/</value>
   </data>
+  <data name="GetAllProvinces" xml:space="preserve">
+    <value>Province/</value>
+  </data>
   <data name="GetAllRenter" xml:space="preserve">
     <value>Renter/</value>
+  </data>
+  <data name="GetAllSecureStatus" xml:space="preserve">
+    <value>SecureStatus/</value>
   </data>
   <data name="GetAllStatus" xml:space="preserve">
     <value>Status/</value>
@@ -250,20 +316,32 @@
   <data name="GetAllWorkers" xml:space="preserve">
     <value>Worker/</value>
   </data>
+  <data name="GetByConsortiumId" xml:space="preserve">
+    <value>Consorcio/{0}/Tickets</value>
+  </data>
   <data name="GetChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
   </data>
   <data name="GetChecklistsByConsortium" xml:space="preserve">
     <value>Consorcio/{0}/Checklists</value>
   </data>
+  <data name="GetCommonData" xml:space="preserve">
+    <value>CommonData/{0}</value>
+  </data>
   <data name="GetConsortium" xml:space="preserve">
     <value>Consorcio/{0}</value>
+  </data>
+  <data name="GetConsortiumSecure" xml:space="preserve">
+    <value>ConsortiumSecure/{0}</value>
   </data>
   <data name="GetFunctionalUnit" xml:space="preserve">
     <value>Unidad/{0}</value>
   </data>
   <data name="GetManager" xml:space="preserve">
     <value>Manager/{0}</value>
+  </data>
+  <data name="GetMessage" xml:space="preserve">
+    <value>Message/{0}</value>
   </data>
   <data name="GetMultimedia" xml:space="preserve">
     <value>Multimedia/{0}</value>
@@ -277,11 +355,17 @@
   <data name="GetProvider" xml:space="preserve">
     <value>Provider/{0}</value>
   </data>
+  <data name="GetProvincesByCountry" xml:space="preserve">
+    <value>Country/{0}/Provinces</value>
+  </data>
   <data name="GetRenter" xml:space="preserve">
     <value>Renter/{0}</value>
   </data>
   <data name="GetTicket" xml:space="preserve">
     <value>Tickets/{0}</value>
+  </data>
+  <data name="GetUnits" xml:space="preserve">
+    <value>Propiedad/{0}/Unidades</value>
   </data>
   <data name="GetUser" xml:space="preserve">
     <value>Users/{0}</value>
@@ -298,8 +382,14 @@
   <data name="UpdateChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
   </data>
+  <data name="UpdateCommonData" xml:space="preserve">
+    <value>CommonData/{0}</value>
+  </data>
   <data name="UpdateConsortium" xml:space="preserve">
     <value>Consortium/{0}</value>
+  </data>
+  <data name="UpdateConsortiumSecure" xml:space="preserve">
+    <value>ConsortiumSecure/{0}</value>
   </data>
   <data name="UpdateFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>

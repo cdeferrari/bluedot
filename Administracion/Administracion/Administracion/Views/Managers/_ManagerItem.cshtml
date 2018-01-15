@@ -1,0 +1,76 @@
+﻿@model Administracion.Models.ManagerViewModel
+
+<tr>    
+    <th class="text-center">@Model.Id</th>
+    <th class="text-center">@Model.User.DNI</th>
+    <th>@Model.User.Surname</th>
+    <th>@Model.User.Name</th>    
+    @if (Model.User.ContactData != null && !string.IsNullOrEmpty(Model.User.ContactData.Telephone))
+    {
+        <th>@Model.User.ContactData.Telephone</th>
+    }
+    else
+    {
+        <th></th>
+    }
+
+            @if (Model.User.ContactData != null && !string.IsNullOrEmpty(Model.User.ContactData.Email))
+            {
+                <th>@Model.User.ContactData.Email</th>
+            }
+            else
+            {
+                <th></th>
+            }
+
+            @if (!Model.IsAlternate)
+            {
+                <td class="text-center">Titular</td>
+            }
+            else
+            {
+                <td class="text-center">Suplente</td>
+            }
+
+        
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateManagerById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    @*<a href="DeleteUser/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>*@
+
+                    <a href="#modal-delete-@Model.Id" data-toggle="modal" title="Borrar Proveedor" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+            
+        </tr>
+
+	<!-- DELETE -->
+<div id="modal-delete-@Model.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> ELIMINAR EMPLEADO </h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Estas seguro que queres Eliminar a @Model.User.Name @Model.User.Surname</legend>
+
+                    </fieldset>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button onclick="location.href='DeleteManager/@Model.Id'"  type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>

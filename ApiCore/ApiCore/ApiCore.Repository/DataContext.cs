@@ -8,6 +8,7 @@ using System.Web.Configuration;
 
 namespace ApiCore.Repository
 {
+    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class DataContext : DbContext, IDbContext
     {
         private int _timeout;

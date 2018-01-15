@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 namespace ApiCore.Services.Contracts.LaboralUnion
 {
     public interface ILaboralUnionService
-    {
-        
+    {        
         IList<DomainModel.LaboralUnion> GetAll();
-        
+        DomainModel.LaboralUnion CreateLaboralUnion(DescriptionRequest LaboralUnion);
+
+        void Delete(int laboralUnionId);
     }
 }

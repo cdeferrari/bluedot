@@ -11,5 +11,6 @@ namespace ApiCore.Dtos.Response
         public virtual int Id { get; set; }
         public virtual UserResponse User { get; set; }        
         public virtual int FunctionalUnitId { get; set; }
+        public virtual int? PaymentTypeId { get; set; }
     }
 }

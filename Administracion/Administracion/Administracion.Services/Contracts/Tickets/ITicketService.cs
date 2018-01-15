@@ -11,6 +11,7 @@ namespace Administracion.Services.Contracts.Tickets
     public interface ITicketService
     {
         IList<Ticket> GetAll();
+        IList<Ticket> GetByConsortiumId(int consortiumId);
         Ticket GetTicket(int ticketId);
         bool CreateTicket(TicketRequest ticket);
         bool UpdateTicket(TicketRequest ticket);

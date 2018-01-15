@@ -43,13 +43,21 @@
     <Compile Include="Account.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Administration.cs" />
+    <Compile Include="CommonData.cs" />
     <Compile Include="Consortium.cs" />
+    <Compile Include="City.cs" />
+    <Compile Include="Province.cs" />
     <Compile Include="DataContact.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Enum\Roles.cs" />
     <Compile Include="Enum\TipoMultimedia.cs" />
+    <Compile Include="CommonDataItem.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="LaboralUnion.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="PaymentType.cs" />
+    <Compile Include="ConsortiumSecure.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="TaskList .cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="List.cs" />
@@ -62,10 +70,12 @@
     <Compile Include="Status.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="TaskResult.cs" />
+    <Compile Include="SecureStatus.cs" />
     <Compile Include="TicketStatus.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Provider.cs" />
     <Compile Include="Manager.cs" />
+    <Compile Include="BacklogUser.cs" />
     <Compile Include="Worker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

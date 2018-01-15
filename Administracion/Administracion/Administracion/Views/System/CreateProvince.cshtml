@@ -1,0 +1,86 @@
+﻿@model Administracion.Models.ProvinceViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-building"></i> Provincia</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Provincia</a></li>
+        </ul>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVA </strong> PROVINCIA</h2>
+                    </div>
+
+                    @using (Html.BeginForm("CreateProvince", "System", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        
+                        @Html.HiddenFor(x => x.Id)
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">PAIS</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.CountryId, Model.CountriesList, "-- ELIJA PAIS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class='col-md-10 '>
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripción" } })
+                                <span class="help-block">Coloque la descripción</span>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                     
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>                                    
+                                </div>
+                            </div>
+
+                    }
+
+                </div>
+
+                </div>
+
+
+            </div>
+        
+    </div>
+    
+</div>
+

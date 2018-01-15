@@ -7,6 +7,7 @@ using ApiCore.Repository.Attributes;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Tickets
 {
@@ -77,18 +78,23 @@ namespace ApiCore.Services.Implementations.Tickets
         private void MergeTicket(Ticket originalTicket, TicketRequest ticket)
         {
             originalTicket.Customer = ticket.Customer;
-            originalTicket.Consortium = this.ConsortiumRepository.GetById(ticket.ConsortiumId);
+            originalTicket.Consortium = ticket.ConsortiumId.HasValue ? this.ConsortiumRepository.GetById(ticket.ConsortiumId.Value) : null;
             originalTicket.Status = this.StatusRepository.GetById(ticket.StatusId);
             originalTicket.OpenDate = ticket.OpenDate;
             originalTicket.CloseDate = ticket.CloseDate;
             originalTicket.LimitDate = ticket.LimitDate;
-            originalTicket.FunctionalUnit = this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId);
+            originalTicket.FunctionalUnit = ticket.FunctionalUnitId.HasValue ? this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId.Value) : null ;
             originalTicket.Priority = this.PriorityRepository.GetById(ticket.PriorityId);
-            originalTicket.Worker = this.WorkerRepository.GetById(ticket.WorkerId);
+            originalTicket.Worker = ticket.WorkerId.HasValue ? this.WorkerRepository.GetById(ticket.WorkerId.Value):null;
             originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
             originalTicket.Title = ticket.Title;
             originalTicket.Description = ticket.Description;
         }
-        
+
+        public IList<Ticket> GetByConsortiumId(int consortiumId)
+        {
+            return TicketRepository.GetByConsortiumId(consortiumId).ToList();
+            
+        }
     }
 }

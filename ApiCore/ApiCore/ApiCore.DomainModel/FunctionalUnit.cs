@@ -11,5 +11,6 @@ namespace ApiCore.DomainModel
         public virtual Ownership Ownership {get; set;}
         public virtual int Floor { get; set; }
         public virtual string Dto { get; set; }
+        public virtual int Number { get; set; }
     }
 }

@@ -45,11 +45,17 @@
     <Compile Include="Account\UserResponse.cs" />
     <Compile Include="Account\WorkerResponse.cs" />
     <Compile Include="Consortium\ConsortiumRequest.cs" />
+    <Compile Include="CommonData\CommonDataRequest.cs" />
+    <Compile Include="DescriptionRequest.cs" />
     <Compile Include="List\TaskListRequest.cs" />
+    <Compile Include="ConsortiumSecure\ConsortiumSecureRequest.cs" />
+    <Compile Include="Message\MessageRequest.cs" />
     <Compile Include="Manager\ManagerRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Owner\OwnerRequest.cs" />
     <Compile Include="List\ListRequest.cs" />
+    <Compile Include="City\CityRequest.cs" />
+    <Compile Include="Province\ProvinceRequest.cs" />
     <Compile Include="Unit\FunctionalUnitRequest.cs" />
     <Compile Include="Worker\WorkerRequest.cs" />
     <Compile Include="Provider\ProviderRequest.cs" />

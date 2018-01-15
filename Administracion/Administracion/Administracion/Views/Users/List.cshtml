@@ -61,9 +61,9 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var consortium in Model)
+                            @foreach (var user in Model)
                             {
-                                @Html.Partial("_UserItem", consortium)
+                                @Html.Partial("_UserItem", user)
                             }
                         </tbody>
                     </table>
@@ -77,3 +77,4 @@
     </div>
 </div>
 
+<!-- END DELETE  -->

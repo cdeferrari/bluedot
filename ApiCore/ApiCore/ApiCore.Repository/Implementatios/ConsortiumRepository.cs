@@ -10,6 +10,14 @@ namespace ApiCore.Repository.Implementatios
 {
     public class ConsortiumRepository : Repository<Consortium>, IConsortiumRepository
     {
-
+        public IQueryable<Consortium> GetAllActives()
+        {
+            return Entities.Where(x=> !x.Inactive).AsQueryable();
+        }
+        public void LogicDelete(Consortium consortium)
+        {
+            consortium.Inactive = true;
+            this.Update(consortium);
+        }
     }
 }

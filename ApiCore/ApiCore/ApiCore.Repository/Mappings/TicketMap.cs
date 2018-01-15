@@ -20,12 +20,12 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Description).IsRequired().HasColumnName("description");
             this.Property(x => x.Title).IsRequired().HasColumnName("title");            
             this.HasRequired(x => x.Priority).WithMany().Map(x => x.MapKey("priority_id"));
-            this.HasRequired(x => x.Consortium).WithMany().Map(x => x.MapKey("consortium_id"));
+            this.HasOptional(x => x.Consortium).WithMany().Map(x => x.MapKey("consortium_id"));
             this.HasRequired(x => x.Status).WithMany().Map(x => x.MapKey("status_id"));
-            this.HasRequired(x => x.FunctionalUnit).WithMany().Map(x => x.MapKey("functional_unit_id"));
+            this.HasOptional(x => x.FunctionalUnit).WithMany().Map(x => x.MapKey("functional_unit_id"));
             this.HasOptional(x => x.Worker).WithMany().Map(x => x.MapKey("worker_id"));
             this.HasRequired(x => x.Creator).WithMany().Map(x => x.MapKey("creator_id"));
-
+            this.HasMany(x => x.Messages).WithRequired(x => x.Ticket).Map(x => x.MapKey("ticket_id"));
         }
 
     }

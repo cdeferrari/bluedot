@@ -10,6 +10,11 @@ namespace ApiCore.Repository.Implementatios
 {
     public class TicketRepository : Repository<Ticket>, ITicketRepository
     {
-
+        public IList<Ticket> GetByConsortiumId(int consortiumId)
+        {
+            var result = this.Context.Set<Ticket>().Where(x => x.Consortium.Id == consortiumId)
+                .ToList();
+            return result;
+        }
     }
 }

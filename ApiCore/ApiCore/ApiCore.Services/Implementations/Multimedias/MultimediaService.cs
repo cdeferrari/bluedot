@@ -9,16 +9,18 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Multimedias;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Multimedias
 {
     public class MultimediaService : IMultimediaService
     {
         
-        public IMultimediaRepository MultimediaRepository { get; set; }                
+        public IMultimediaRepository MultimediaRepository { get; set; }
+        public IOwnershipRepository OwnershipRepository { get; set; }
 
         [Transaction]
-        public Multimedia CreateMultimedia(Multimedia Multimedia)
+        public Multimedia CreateMultimedia(MultimediaRequest Multimedia)
         {
             Multimedia originalMultimedia = new Multimedia();
             var entityToInsert = MergeMultimedia(originalMultimedia, Multimedia);
@@ -38,7 +40,7 @@ namespace ApiCore.Services.Implementations.Multimedias
         
 
         [Transaction]
-        public Multimedia UpdateMultimedia(Multimedia originalMultimedia, Multimedia Multimedia)
+        public Multimedia UpdateMultimedia(Multimedia originalMultimedia, MultimediaRequest Multimedia)
         {            
             originalMultimedia = this.MergeMultimedia(originalMultimedia, Multimedia);
             MultimediaRepository.Update(originalMultimedia);
@@ -55,10 +57,10 @@ namespace ApiCore.Services.Implementations.Multimedias
         }
         
 
-        private Multimedia MergeMultimedia(Multimedia originalMultimedia, Multimedia Multimedia)
+        private Multimedia MergeMultimedia(Multimedia originalMultimedia, MultimediaRequest Multimedia)
         {                       
             originalMultimedia.MultimediaTypeId = Multimedia.MultimediaTypeId;
-            originalMultimedia.OwnershipId = Multimedia.OwnershipId;
+            originalMultimedia.Ownership = this.OwnershipRepository.GetById(Multimedia.OwnershipId);
             originalMultimedia.Url = Multimedia.Url;
            
             return originalMultimedia;
@@ -66,18 +68,8 @@ namespace ApiCore.Services.Implementations.Multimedias
 
         public List<Multimedia> GetAll()
         {
-            var Multimedias = MultimediaRepository.GetAll();
-            if (Multimedias == null)
-                throw new BadRequestException(ErrorMessages.ConsorcioNoEncontrado);
-
-            var result = new List<Multimedia>();
-            var enumerator = Multimedias.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return MultimediaRepository.GetAll().ToList();
+            
         }
     }
 }

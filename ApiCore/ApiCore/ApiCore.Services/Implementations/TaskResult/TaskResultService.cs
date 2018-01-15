@@ -8,6 +8,7 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.TaskResult;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.TaskResult
 {
@@ -19,18 +20,8 @@ namespace ApiCore.Services.Implementations.TaskResult
         [Transaction]
         public IList<DomainModel.TaskResult> GetAll()
         {
-            var status = TaskResultRepository.GetAll();
-            if (status == null)
-                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
-
-            var result = new List<DomainModel.TaskResult>();
-            var enumerator = status.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result ;
+            return TaskResultRepository.GetAll().ToList();
+            
         }
         
 

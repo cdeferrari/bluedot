@@ -47,13 +47,18 @@ namespace ApiCore
 
                 cfg.CreateMap<FunctionalUnitRequest, FunctionalUnit>();
                 cfg.CreateMap<Consortium, ConsortiumResponse>();
+                cfg.CreateMap<ConsortiumSecure, ConsortiumSecureResponse>();
                 cfg.CreateMap<FunctionalUnit, UnitResponse>();
                 cfg.CreateMap<FunctionalUnit, FunctionalUnitResponse>();
+
+                cfg.CreateMap<CommonData, CommonDataResponse>()
+                .ForMember(x => x.OwnershipId, m => m.MapFrom(y => y.Ownership.Id));
 
                 cfg.CreateMap<List, ListResponse>();
                 cfg.CreateMap<Address,AddressResponse>();
                 cfg.CreateMap<TaskList, TaskListResponse>();
                 cfg.CreateMap<Manager, ManagerResponse>();
+                cfg.CreateMap<Message, MessageResponse>();
 
             });
 

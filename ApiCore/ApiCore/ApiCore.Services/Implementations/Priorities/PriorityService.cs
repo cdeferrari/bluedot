@@ -9,6 +9,7 @@ using ApiCore.Library.Mensajes;
 using System.Collections.Generic;
 using ApiCore.Services.Contracts.TicketStatus;
 using ApiCore.Services.Contracts.Priorities;
+using System.Linq;
 
 namespace ApiCore.Services.Implementations.Priorities
 {
@@ -20,18 +21,8 @@ namespace ApiCore.Services.Implementations.Priorities
         [Transaction]
         public IList<Priority> GetAll()
         {
-            var status = PriorityRepository.GetAll();
-            if (status == null)
-                throw new BadRequestException(ErrorMessages.TicketNoEncontrado);
-
-            var result = new List<DomainModel.Priority>();
-            var enumerator = status.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                result.Add(enumerator.Current);
-
-            }
-            return result;
+            return PriorityRepository.GetAll().ToList();
+            
         }
         
         

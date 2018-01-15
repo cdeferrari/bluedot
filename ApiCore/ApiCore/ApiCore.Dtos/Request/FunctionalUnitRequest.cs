@@ -14,5 +14,6 @@ namespace ApiCore.Dtos.Request
         public virtual string Dto { get; set; }
         public virtual int OwnerId { get; set; }
         public virtual int RenterId { get; set; }
+        public virtual int Number { get; set; }
     }
 }

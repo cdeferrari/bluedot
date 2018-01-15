@@ -1,0 +1,142 @@
+﻿@model Administracion.Models.ConsortiumSecureViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-group"></i> Seguros</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Seguros</a></li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVOS </strong> SEGUROS</h2>
+                    </div>
+                    @using (Html.BeginForm("CreateUpdateConsortiumSecure", "ConsortiumSecure", FormMethod.Post , htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                    {
+                        
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.ConsortiumId)
+                        <input type="hidden" name="Id" id="Id" value="@Model.Id"  />
+
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">                            
+                            @Html.LabelFor(model => model.PolizyNumber, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.PolizyNumber, new { htmlAttributes = new { @class = "form-control", @placeholder="Numero de poliza",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese número de poliza')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque el numero de poliza</span>
+                                @Html.ValidationMessageFor(model => model.PolizyNumber, "", new { @class = "text-danger" })                                                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @placeholder = "Marca",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese marca de poliza')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque el apellido completo</span>
+                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class='col-md-9 '>
+
+                            <div class='input-group date'>
+                               @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese fecha de vencimiento')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+
+
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                            <label class="col-md-3 control-label" for="example-select">Estado</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.SecureStatusId,  Model.SecureStatus, "-- ELIJA ESTADO --",new { @class = "form-control",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Elija un estado')",
+                               @oninput = "setCustomValidity('')"
+                           })                                
+                            </div>                                        
+                    </div>
+                    
+                    
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> ALTA</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                            </div>
+                                        </div>
+
+                    }
+
+                    </div>                            
+                </div>            
+            </div>    
+        </div>    
+    </div>
+  <!-- Footer -->
+<footer class="clearfix">
+    <div class="pull-right">
+        Creado por <a href="http://www.bluedot.com.ar" _blank">Bluedot</a>
+    </div>
+    <div class="pull-left">
+        Software Version 1.0
+    </div>
+</footer>
+<!-- END Footer -->
+
+
+
+
+
+
+

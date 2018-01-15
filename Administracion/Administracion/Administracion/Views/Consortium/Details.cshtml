@@ -11,6 +11,11 @@
 
             <div class="content-header">
                 <ul class="nav-horizontal text-center">
+
+                    <li style="float:left;">
+                        <a><img src="@Model.ImageUrl" style="width:75px; height:85px;" /></a>
+                    </li>
+
                     <li>
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
@@ -37,11 +42,42 @@
                         </div>
                         <!-- END Shipping Address Title -->
                         <!-- Shipping Address Content -->
-                        <address>
-                            @Model.Ownership.Address.Street  @Model.Ownership.Address.Number<br>
-                            <i class="fa fa-phone"></i> (54911) 11111111<br>
-                            <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">@Model.MailingList</a>
-                        </address>
+
+                        @using (Html.BeginForm("FastUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                        {
+                            <address>
+                                <input type="hidden" id="id" name="id" value="@Model.Id" />
+                                <div class="address-to-edit">
+                                    @Model.Ownership.Address.Street
+                                    @Model.Ownership.Address.Number
+                                    <a id="edit-address" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                </div>
+                                <i class="fa fa-phone"></i><a class="telephone-to-edit" href="javascript:void(0)">@Model.Telephone</a>
+                                <a id="edit-telephone" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <br>
+                                <i class="fa fa-envelope-o"></i> <a class="list-to-edit" href="javascript:void(0)">@Model.MailingList</a>
+                                <a id="edit-list" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <div class="form-group form-actions fast-save-button" style="margin-top: 4%; display:none">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-sm btn-primary">GUARDAR</button>
+                                    </div>
+                                </div>
+</address>
+                        }
+                        <div class="block-title">
+                            <h1>
+                                <strong>Cuenta con:</strong>
+                                @foreach (var data in Model.Ownership.CommonData)
+                                {
+                                    if (data.Have)
+                                    {
+                                        <h1>@data.Item.Description </h1>
+                                    }
+                                    
+                                }
+
+                            </h1>
+                        </div>
                         <!-- END Shipping Address Content -->
                     </div>
                     <!-- END Shipping Address Block -->
@@ -54,7 +90,7 @@
                         <div class="widget-extra themed-background">
                             <h4 class="widget-content-light"><strong>Tickets</strong> Abiertos</h4>
                         </div>
-                        <div class="widget-extra-full"><span class="h2 animation-expandOpen">-</span></div>
+                        <div class="widget-extra-full"><span class="h2 animation-expandOpen">@Model.TicketQuantity</span></div>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
@@ -99,25 +135,33 @@
                         <table class="table table-borderless table-striped table-vcenter table-bordered">
                             <tbody>
                                 <tr>
+                                    
+                                    <td class="text-center"><strong>NRO</strong></td>
                                     <td class="text-center"><strong>PISO</strong></td>
-                                    <td class="text-center"><strong>UF</strong></td>
-                                    <td class="text-center"><strong>Inquilino</strong></td>
+                                    <td class="text-center"><strong>DTO</strong></td>                                    
+                                    <td class="text-center"><strong>Propietario</strong></td>
                                     <td class="text-center"><strong>%</strong></td>
                                     <td class="text-center">Estado</td>
                                     <td class="text-center">Acciones</td>
                                 </tr>
 
-                                @foreach (var unit in Model.Ownership.FunctionalUnits)
+                                @foreach (var unit in Model.Ownership.FunctionalUnits.OrderBy(x => x.Number))
                                 {
                                     <tr>
+                                        <td class="text-center"><a href="javascript:void(0)">@unit.Number</a></td>
                                         <td class="text-center" style="width: 100px;"><a href="javascript:void(0)"><strong>@unit.Floor</strong></a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@unit.Dto</a></td>
-                                        @if (unit.Renter != null)
+                                        <td class="text-center"><a href="javascript:void(0)">@unit.Dto</a></td>                                        
+                                        
+                                        
+                                        
+                                        @{ var ownerDescription = unit.Owner != null ?
+                                                  unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
+                                                }
+                                        @if (unit.Owner != null)
                                         {
                                             <td class="text-center">
-                                                <a href="javascript:void(0)">
-
-                                                    @unit.Renter.User.Name @unit.Renter.User.Surname
+                                                <a href="/Users/UpdateUserById?id=@unit.Owner.User.Id&callbackUrl=/Consortium/Details/@Model.Id">
+                                                    @ownerDescription
 
                                                 </a>
                                             </td>
@@ -131,12 +175,41 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="/FunctionalUnit/UpdateFunctionalUnitById?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                <a href="/FunctionalUnit/DeleteFunctionalUnit?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <a href="#modal-delete-uf-@unit.Id" data-toggle="modal" title="Borrar unidad" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                             </div>
                                         </td>
                                     </tr>
 
-                                }                               
+                                    <div id="modal-delete-uf-@unit.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header text-center">
+                                                    <h2 class="modal-title"><i class="fa fa-pencil"></i> ELIMINAR UNIDAD</h2>
+                                                </div>
+                                                <!-- END Modal Header -->
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                    <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                                                        <fieldset>
+                                                            <legend>Estas seguro que queres Eliminar la unidad nro @unit.Number </legend>
+
+                                                        </fieldset>
+
+                                                        <div class="form-group form-actions">
+                                                            <div class="col-xs-12 text-right">
+                                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                                                                <button onclick="location.href='/FunctionalUnit/DeleteFunctionalUnit?id=@unit.Id&consortiumId=@Model.Id'" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- END Modal Body -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                            }                               
 
                             </tbody>
                         </table>
@@ -162,7 +235,7 @@
                             {
                                 <tbody>
                                     <tr>
-                                        <td class="text-center" style="width: 100px;"><strong>FECHA</strong></td>
+                                        <td class="text-center" style="width: 100px;"><strong>Fecha</strong></td>
                                         <td>Resultado</td>
                                         <td class="text-center">Encargado</td>
                                         <td class="hidden-xs text-center">
@@ -176,21 +249,29 @@
 
                                             @if (list.Tasks.TrueForAll(x => x.Status.Description.Equals("closed")))
                                             {
-                                                <td><a href="/Consortium/UpdateChecklist/@list.Id">INCOMPLETA</a></td>
+                                                <td><a href="/Consortium/UpdateChecklist/@list.Id">OK</a></td>
                                             }
                                             else
                                             {
-                                                <td><a href="/Consortium/UpdateChecklist/@list.Id">OK</a></td>                                                
+                                                <td>
+
+                                                    <a href="/Consortium/UpdateChecklist/@list.Id" class="btn btn-xs btn-danger">
+                                                        
+                                                            <strong>@list.Coments</strong>
+                                                        
+                                                    <i class="fa fa-exclamation-triangle"></i></a>
+
+                                                </td>
                                             }
 
-                                    <td class="text-center">@list.Customer</td>
-                                    <td class="hidden-xs text-center">
-                                    
-                                        @Html.Partial("_Calification", list.Tasks)
-                                        
+                                            <td class="text-center">@list.Customer</td>
+                                            <td class="hidden-xs text-center">
 
-                                    </td>
-                                </tr>
+                                                @Html.Partial("_Calification", list.Tasks)
+
+
+                                            </td>
+                                        </tr>
                                     }                               
                             </tbody>
                             }
@@ -228,6 +309,7 @@
                                     <td class="text-center"><strong>Obra Social</strong></td>
                                     <td class="text-center"><strong>Talle Ropa</strong></td>
                                     <td class="text-center">CUIT</td>
+                                    <td class="text-center">TIPO</td>
                                     <td class="text-center">Acciones</td>
                                 </tr>
                                 @foreach (var manager in Model.Managers)
@@ -245,15 +327,135 @@
                                         }
                                         
                                         <td class="text-center"><a href="javascript:void(0)"></a>@manager.LaborUnion.Description</td>
-                                        <td class="text-center">-</td>
+                                        <td class="text-center">Calzado: @manager.FootwearWaist - Pantalón: @manager.PantsWaist - Camisa: @manager.ShirtWaist </td>
                                         <td class="text-center">@manager.User.CUIT</td>
+                                        
+                                            @if (!manager.IsAlternate)
+                                            {
+                                            <td class="text-center">Titular</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">Suplente</td>
+                                            }
+
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="/Managers/UpdateManagerById?id=@manager.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                <a href="/Managers/DeleteManager?id=@manager.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <a href="/Managers/UpdateManagerById?id=@manager.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>                                                
+                                                <a href="#modal-delete-manager-@manager.Id" data-toggle="modal" title="Borrar unidad" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                             </div>
                                         </td>
                                     </tr>
+
+                                    <div id="modal-delete-manager-@manager.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header text-center">
+                                                    <h2 class="modal-title"><i class="fa fa-pencil"></i> ELIMINAR ENCARGADO</h2>
+                                                </div>
+                                                <!-- END Modal Header -->
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                    <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                                                        <fieldset>
+                                                            <legend>Estas seguro que queres Eliminar a @manager.User.Name @manager.User.Surname </legend>
+
+                                                        </fieldset>
+
+                                                        <div class="form-group form-actions">
+                                                            <div class="col-xs-12 text-right">
+                                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                                                                <button onclick="location.href='/Managers/DeleteManager?id=@manager.Id&consortiumId=@Model.Id'" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- END Modal Body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <!-- END Latest Orders Content -->
+                    </div>
+                    <!-- END Latest Orders Block -->
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Latest Orders Block -->
+                    <div class="block">
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">
+                            <div class="block-options pull-right">
+                                <a href="/ConsortiumSecure/CreateConsortiumSecure/@Model.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Seguro"><i class="fa fa-plus"></i></a>
+ 
+                            </div>
+                            <h2><strong>Seguros</strong> </h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        <table class="table table-borderless table-striped table-vcenter table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><strong>Id.</strong></td>
+                                    <td class="text-center"><strong>Numero Poliza</strong></td>
+                                    <td class="text-center"><strong>Marca</strong></td>
+                                    <td class="text-center"><strong>Estado</strong></td>
+                                    <td class="text-center"><strong>Vencimiento</strong></td>
+                                    <td class="text-center">Acciones</td>
+                                </tr>
+                                @foreach (var secure in Model.ConsortiumSecure)
+                                {
+                                    <tr>
+                                        <td class="text-center"><a href="javascript:void(0)"><strong>@secure.Id</strong></a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@secure.PolizyNumber</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@secure.Brand</a></td>
+                                        <td class="text-center"><a href="javascript:void(0)">@secure.Status.Description</a></td>
+                                       
+                                        <td class="text-center"><a href="javascript:void(0)"></a>@secure.LimitDate</td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="/ConsortiumSecure/UpdateConsortiumSecureById?id=@secure.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                                <a href="#modal-delete-secure-@secure.Id" data-toggle="modal" title="Borrar unidad" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <div id="modal-delete-secure-@secure.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header text-center">
+                                                    <h2 class="modal-title"><i class="fa fa-pencil"></i> ELIMINAR SEGURO</h2>
+                                                </div>
+                                                <!-- END Modal Header -->
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                    <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                                                        <fieldset>
+                                                            <legend>Estas seguro que queres Eliminar la poliza nro @secure.PolizyNumber </legend>
+
+                                                        </fieldset>
+
+                                                        <div class="form-group form-actions">
+                                                            <div class="col-xs-12 text-right">
+                                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                                                                <button onclick="location.href='/ConsortiumSecure/DeleteConsortiumSecure?id=@secure.Id&consortiumId=@Model.Id'" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- END Modal Body -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
 
 

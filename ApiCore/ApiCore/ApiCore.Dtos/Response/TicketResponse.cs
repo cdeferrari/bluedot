@@ -22,6 +22,6 @@ namespace ApiCore.Dtos.Response
         public virtual BacklogUserResponse Creator { get; set; }
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
-
+        public virtual IList<MessageResponse> Messages { get; set; }
     }
 }

@@ -49,6 +49,21 @@ using ApiCore.Services.Implementations.LaboralUnion;
 using ApiCore.Services.Contracts.LaboralUnion;
 using ApiCore.Services.Implementations.TaskResult;
 using ApiCore.Services.Contracts.TaskResult;
+using ApiCore.Services.Contracts.PaymentTypes;
+using ApiCore.Services.Implementations.SecureStatus;
+using ApiCore.Services.Contracts.SecureStatus;
+using ApiCore.Services.Implementations.ConsortiumSecures;
+using ApiCore.Services.Contracts.ConsortiumSecures;
+using ApiCore.Services.Implementations.CommonDataItems;
+using ApiCore.Services.Contracts.CommonDataItems;
+using ApiCore.Services.Implementations.CommonDatas;
+using ApiCore.Services.Contracts.CommonDatas;
+using ApiCore.Services.Contracts.Messages;
+using ApiCore.Services.Implementations.Messages;
+using ApiCore.Services.Implementations.Provinces;
+using ApiCore.Services.Contracts.Provinces;
+using ApiCore.Services.Contracts.Cities;
+using ApiCore.Services.Implementations.Citys;
 
 namespace ApiCore.App_Start
 {
@@ -107,6 +122,10 @@ namespace ApiCore.App_Start
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<ConsortiumSecureService>().As<IConsortiumSecureService>().PropertiesAutowired().InstancePerRequest()
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<TicketStatusService>().As<ITicketStatusService>().PropertiesAutowired().InstancePerRequest()
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
@@ -136,6 +155,14 @@ namespace ApiCore.App_Start
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<ProvincesService>().As<IProvincesService>().PropertiesAutowired().InstancePerRequest()
+            .EnableInterfaceInterceptors()
+            .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<CitiesService>().As<ICitiesService>().PropertiesAutowired().InstancePerRequest()
+            .EnableInterfaceInterceptors()
+            .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<MultimediaService>().As<IMultimediaService>().PropertiesAutowired().InstancePerRequest()
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ServicesInterceptor));
@@ -153,11 +180,33 @@ namespace ApiCore.App_Start
               .EnableInterfaceInterceptors()
               .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
+
+            builder.RegisterType<PaymentTypeService>().As<IPaymentTypeService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
+
             builder.RegisterType<ItemsService>().As<IItemsService>().PropertiesAutowired().InstancePerRequest()
               .EnableInterfaceInterceptors()
               .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<CommonDataItemsService>().As<ICommonDataItemsService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<CommonDataService>().As<ICommonDataService>().PropertiesAutowired().InstancePerRequest()
+              .EnableInterfaceInterceptors()
+              .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<ManagerService>().As<IManagerService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<MessageService>().As<IMessageService>().PropertiesAutowired().InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
@@ -177,16 +226,24 @@ namespace ApiCore.App_Start
             builder.RegisterType<WorkerRepository>().As<IWorkerRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<RenterRepository>().As<IRenterRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ProviderRepository>().As<IProviderRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<CityRepository>().As<ICityRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<ProvinceRepository>().As<IProvinceRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<CountryRepository>().As<ICountryRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<StatusRepository>().As<IStatusRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<SecureStatusRepository>().As<ISecureStatusRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<ConsortiumSecureRepository>().As<IConsortiumSecureRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ContactDataRepository>().As<IContactDataRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ListRepository>().As<IListRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TaskResultRepository>().As<ITaskResultRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ItemsRepository>().As<IItemsRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<CommonDataItemsRepository>().As<ICommonDataItemsRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<CommonDataRepository>().As<ICommonDataRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<LaboralUnionRepository>().As<ILaboralUnionRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ManagerRepository>().As<IManagerRepository>().PropertiesAutowired().InstancePerRequest();
-
-
+            builder.RegisterType<MessageRepository>().As<IMessageRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<PaymentTypeRepository>().As<IPaymentTypeRepository>().PropertiesAutowired().InstancePerRequest();
+            
         }
 
     }

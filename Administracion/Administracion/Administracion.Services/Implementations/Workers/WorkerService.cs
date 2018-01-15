@@ -24,7 +24,7 @@ namespace Administracion.Services.Implementations.Workers
           return  IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateWorker, RestMethod.Post, null, Worker);                        
         }
 
-        public bool UpdateWorker(Worker Worker)
+        public bool UpdateWorker(WorkerRequest Worker)
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"],string.Format(ApiCore.UpdateWorker, Worker.Id), RestMethod.Put, null, Worker);                        
         }
