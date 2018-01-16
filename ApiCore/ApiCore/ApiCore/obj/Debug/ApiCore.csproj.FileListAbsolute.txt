@@ -447,3 +447,4 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.dll.config
 >>>>>>> origin/master
+D:\Carpetutus\Repositories\GitHub\bluedot\ApiCore\ApiCore\ApiCore\bin\ApiCore.Services.dll.config
