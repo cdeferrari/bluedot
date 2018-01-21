@@ -1348,6 +1348,11 @@ a.widget.widget-hover-effect4:active {
 =================================================================
 */
 
+/* General */
+th {
+    font-weight: normal;
+}
+
 /* Login */
 #login-background {
     width: 100%;
