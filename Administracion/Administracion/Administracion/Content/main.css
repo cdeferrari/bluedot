@@ -1353,6 +1353,10 @@ th {
     font-weight: normal;
 }
 
+.gi.green {
+    color: limegreen;
+}
+
 /* Login */
 #login-background {
     width: 100%;

@@ -149,9 +149,7 @@
                                     <tr>
                                         <td class="text-center">@unit.Number</td>
                                         <td class="text-center" style="width: 100px;"><strong>@unit.Floor</strong></td>
-                                        <td class="text-center">@unit.Dto</td>                                        
-                                        
-                                        
+                                        <td class="text-center">@unit.Dto</td>
                                         
                                         @{ var ownerDescription = unit.Owner != null ?
                                                   unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
@@ -161,7 +159,6 @@
                                             <td class="text-center">
                                                 <a href="/Users/UpdateUserById?id=@unit.Owner.User.Id&callbackUrl=/Consortium/Details/@Model.Id">
                                                     @ownerDescription
-
                                                 </a>
                                             </td>
                                         }
@@ -169,8 +166,14 @@
                                         {
                                             <td></td>
                                         }
+                                        <!--
                                         <td class="text-right"><strong>$65,00</strong></td>
                                         <td class="text-center"><span class="label label-success">Cobrado</span></td>
+                                        -->
+                                        
+                                        <td class="text-right"><strong>&nbsp;</strong></td>
+                                        <td class="text-center"><!--<i class="gi gi-ok green"></i>-->-</td><!-- gi-ok_2 para el tick clasico -->
+                                        
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="/FunctionalUnit/UpdateFunctionalUnitById?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
