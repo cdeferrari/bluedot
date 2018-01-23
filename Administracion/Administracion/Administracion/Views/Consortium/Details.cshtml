@@ -134,8 +134,7 @@
                         <!-- Latest Orders Content -->
                         <table class="table table-borderless table-striped table-vcenter table-bordered">
                             <tbody>
-                                <tr>
-                                    
+                                <tr>                                    
                                     <td class="text-center"><strong>NRO</strong></td>
                                     <td class="text-center"><strong>PISO</strong></td>
                                     <td class="text-center"><strong>DTO</strong></td>                                    
@@ -148,9 +147,9 @@
                                 @foreach (var unit in Model.Ownership.FunctionalUnits.OrderBy(x => x.Number))
                                 {
                                     <tr>
-                                        <td class="text-center"><a href="javascript:void(0)">@unit.Number</a></td>
-                                        <td class="text-center" style="width: 100px;"><a href="javascript:void(0)"><strong>@unit.Floor</strong></a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@unit.Dto</a></td>                                        
+                                        <td class="text-center">@unit.Number</td>
+                                        <td class="text-center" style="width: 100px;"><strong>@unit.Floor</strong></td>
+                                        <td class="text-center">@unit.Dto</td>                                        
                                         
                                         
                                         
