@@ -1415,6 +1415,16 @@ th {
     float: left;
 }
 
+/* Consortium details */
+
+div.consorcio-address-box {
+    height: 115px;
+    margin-bottom: 10px;
+}
+
+div.consorcio-address-form {
+    padding-top: 20px;
+}
 /* Full Background Image */
 img.full-bg {
     min-height: 100%;

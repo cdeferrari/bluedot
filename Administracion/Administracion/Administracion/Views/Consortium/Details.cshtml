@@ -11,11 +11,6 @@
 
             <div class="content-header">
                 <ul class="nav-horizontal text-center">
-
-                    <li style="float:left;">
-                        <a><img src="@Model.ImageUrl" style="width:75px; height:85px;" /></a>
-                    </li>
-
                     <li>
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
@@ -42,28 +37,39 @@
                         </div>
                         <!-- END Shipping Address Title -->
                         <!-- Shipping Address Content -->
+                        
+                        <div class="row consorcio-address-box">
+                            <div class="col-md-3"> <!--style="float:left;"--> 
+                                <a href="@Model.ImageUrl" data-lightbox="consortium-image" data-title="@Model.FriendlyName">
+                                    <img src="@Model.ImageUrl" style="width:75px; height:85px;" />
+                                </a>
+                            </div>
+                            <div class="col-md-9 consorcio-address-form"><!-- Address form -->
+                                @using (Html.BeginForm("FastUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                                {
 
-                        @using (Html.BeginForm("FastUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
-                        {
-                            <address>
-                                <input type="hidden" id="id" name="id" value="@Model.Id" />
-                                <div class="address-to-edit">
-                                    @Model.Ownership.Address.Street
-                                    @Model.Ownership.Address.Number
-                                    <a id="edit-address" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                </div>
-                                <i class="fa fa-phone"></i><a class="telephone-to-edit" href="javascript:void(0)">@Model.Telephone</a>
-                                <a id="edit-telephone" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                <br>
-                                <i class="fa fa-envelope-o"></i> <a class="list-to-edit" href="javascript:void(0)">@Model.MailingList</a>
-                                <a id="edit-list" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                <div class="form-group form-actions fast-save-button" style="margin-top: 4%; display:none">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-sm btn-primary">GUARDAR</button>
-                                    </div>
-                                </div>
-</address>
-                        }
+                                    <address>
+                                        <input type="hidden" id="id" name="id" value="@Model.Id" />
+                                        <div class="address-to-edit">
+                                            @Model.Ownership.Address.Street
+                                            @Model.Ownership.Address.Number
+                                            <a id="edit-address" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                        <i class="fa fa-phone"></i><a class="telephone-to-edit" href="javascript:void(0)">@Model.Telephone</a>
+                                        <a id="edit-telephone" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <br>
+                                        <i class="fa fa-envelope-o"></i> <a class="list-to-edit" href="javascript:void(0)">@Model.MailingList</a>
+                                        <a id="edit-list" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <div class="form-group form-actions fast-save-button" style="margin-top: 4%; display:none">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-sm btn-primary">GUARDAR</button>
+                                            </div>
+                                        </div>
+                                    </address>
+                                }
+                            </div><!-- Address form -->
+                        </div>
+                        
                         <div class="block-title">
                             <h1>
                                 <strong>Cuenta con:</strong>
