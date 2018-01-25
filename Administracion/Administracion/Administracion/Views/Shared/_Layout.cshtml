@@ -180,6 +180,12 @@
     });
     </script>
 
+    <script>/* AJUSTE #SIDEBAR HEIGHT */
+        $(window).on('load', function () {//Hacemos que el sidebar sea tan alto como el body
+            $("#sidebar").css("height", $("body").css("height"));
+        });
+    </script>
+
 
 </body>
 

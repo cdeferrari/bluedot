@@ -2,332 +2,330 @@
 @if (SessionPersister.isAuthenticated)
 {
     <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations" style="overflow: visible;">
-         <div id="sidebar">
-                    <!-- Wrapper for scrolling functionality -->
-                    <div id="sidebar-scroll">
-                        <!-- Sidebar Content -->
-                        <div class="sidebar-content">
-                            <!-- Brand -->
-                            <a href="index.html" class="sidebar-brand">
-                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Adm.</strong>Carman</span>
+         <div id="sidebar"><!-- La altura del sidebar se ve retocada por un script "AJUSTE #SIDEBAR HEIGHT" al pie de _layout -->
+            <!-- Wrapper for scrolling functionality -->
+            <div id="sidebar-scroll">
+                <!-- Sidebar Content -->
+                <div class="sidebar-content">
+                    <!-- Brand -->
+                    <a href="index.html" class="sidebar-brand">
+                        <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Adm.</strong>Carman</span>
+                    </a>
+                    <!-- END Brand -->
+                    <!-- User Info -->
+                    <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                        <div class="sidebar-user-avatar">
+                            <a href="page_ready_user_profile.html">                                        
+                                <img src="~/Content/img/avatar.jpg" />
                             </a>
-                            <!-- END Brand -->
-                            <!-- User Info -->
-                            <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
-                                <div class="sidebar-user-avatar">
-                                    <a href="page_ready_user_profile.html">                                        
-                                        <img src="~/Content/img/avatar.jpg" />
-                                    </a>
-                                </div>
-                                <div class="sidebar-user-name">I.Carman</div>
-                                <div class="sidebar-user-links">
-                                    <!--<a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Perfil"><i class="gi gi-user"></i></a>-->
-                                    <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
-                                    <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                    <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Mis Datos" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
-                                    <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                        </div>
+                        <div class="sidebar-user-name">I.Carman</div>
+                        <div class="sidebar-user-links">
+                            <!--<a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Perfil"><i class="gi gi-user"></i></a>-->
+                            <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
+                            <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
+                            <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Mis Datos" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
+                            <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                        </div>
+                    </div>
+                    <!-- END User Info -->
+                    <!-- Theme Colors -->
+                    <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
+                    <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
+                        <!-- You can also add the default color theme
+                        <li class="active">
+                            <a href="javascript:void(0)" class="themed-background-dark-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default Blue"></a>
+                        </li>
+                        -->
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-modern themed-border-modern" data-theme="css/themes/modern.css" data-toggle="tooltip" title="Modern"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-flatie themed-border-flatie" data-theme="css/themes/flatie.css" data-toggle="tooltip" title="Flatie"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-spring themed-border-spring" data-theme="css/themes/spring.css" data-toggle="tooltip" title="Spring"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-fancy themed-border-fancy" data-theme="css/themes/fancy.css" data-toggle="tooltip" title="Fancy"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-coral themed-border-coral" data-theme="css/themes/coral.css" data-toggle="tooltip" title="Coral"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-lake themed-border-lake" data-theme="css/themes/lake.css" data-toggle="tooltip" title="Lake"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-forest themed-border-forest" data-theme="css/themes/forest.css" data-toggle="tooltip" title="Forest"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-waterlily themed-border-waterlily" data-theme="css/themes/waterlily.css" data-toggle="tooltip" title="Waterlily"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" title="Emerald"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="themed-background-dark-blackberry themed-border-blackberry" data-theme="css/themes/blackberry.css" data-toggle="tooltip" title="Blackberry"></a>
+                        </li>
+                    </ul>
+                    <!-- END Theme Colors -->
+                    <!-- Sidebar Navigation -->
+                    @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)
+                    {
+                        <ul class="sidebar-nav">
+                            <li>
+                                <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
+                            </li>
+                            <li>
+                                <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Consortium/Index">Ver Consorcios</a>
+                                    </li>
+
+
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
+                            </li>
+
+
+
+
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
+                                @*<ul>
+                                        <li>
+                                            <a href="page_forms_general.html">Crear Nuevo Checklist</a>
+                                        </li>
+                                        <li>
+                                            <a href="page_forms_components.html">Ver Checklists</a>
+                                        </li>
+
+                                    </ul>*@
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
+                                @*<ul>
+                                        <li>
+                                            <a href="page_forms_general.html">Nuevo Gasto</a>
+                                        </li>
+                                        <li>
+                                            <a href="page_forms_components.html">Cargar Factura</a>
+                                        </li>
+
+                                    </ul>*@
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Managers/Index">Ver empleados</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Providers/Index">Ver proveedores</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                <span class="sidebar-header-title">Soporte</span>
+                            </li>
+                            <li>
+                                <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Backlog/Index">Ver Tickets</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
+                                <span class="sidebar-header-title">Documentación</span>
+                            </li>
+                            <li>
+                                <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
+                            </li>
+
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="sidebar-nav">
+                            <li>
+                                <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
+                            </li>
+                            <li>
+                                <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Consortium/Index">Ver Consorcios</a>
+                                    </li>
+
+
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Propietarios</span></a>
+                            </li>
+
+
+
+
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
+                                @*<ul>
+                                        <li>
+                                            <a href="page_forms_general.html">Crear Nuevo Checklist</a>
+                                        </li>
+                                        <li>
+                                            <a href="page_forms_components.html">Ver Checklists</a>
+                                        </li>
+
+                                    </ul>*@
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
+                                @*<ul>
+                                        <li>
+                                            <a href="page_forms_general.html">Nuevo Gasto</a>
+                                        </li>
+                                        <li>
+                                            <a href="page_forms_components.html">Cargar Factura</a>
+                                        </li>
+
+                                    </ul>*@
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Managers/Index">Ver empleados</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Providers/Index">Ver proveedores</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                <span class="sidebar-header-title">Soporte</span>
+                            </li>
+                            <li>
+                                <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Backlog/Index">Ver Tickets</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
+                                <span class="sidebar-header-title">Documentación</span>
+                            </li>
+                            <li>
+                                <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
+                            </li>
+
+                        </ul>
+
+                    }
+                        <!-- END Sidebar Navigation -->
+
+                        <!-- Sidebar Notifications -->
+                            <div class="sidebar-header sidebar-nav-mini-hide">
+                                <span class="sidebar-header-options clearfix">
+                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Refresh"><i class="gi gi-refresh"></i></a>
+                                </span>
+                                <span class="sidebar-header-title">Actividad</span>
+                            </div>
+                            <div class="sidebar-section sidebar-nav-mini-hide">
+                                <div class="alert alert-success alert-alt">
+                                    <small>5 min </small><br>
+                                    <i class="fa fa-thumbs-up fa-fw"></i> No hay actividades todavía
                                 </div>
                             </div>
-                            <!-- END User Info -->
-                            <!-- Theme Colors -->
-                            <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
-                            <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
-                                <!-- You can also add the default color theme
-                                <li class="active">
-                                    <a href="javascript:void(0)" class="themed-background-dark-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default Blue"></a>
-                                </li>
-                                -->
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-night themed-border-night" data-theme="css/themes/night.css" data-toggle="tooltip" title="Night"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-modern themed-border-modern" data-theme="css/themes/modern.css" data-toggle="tooltip" title="Modern"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-autumn themed-border-autumn" data-theme="css/themes/autumn.css" data-toggle="tooltip" title="Autumn"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-flatie themed-border-flatie" data-theme="css/themes/flatie.css" data-toggle="tooltip" title="Flatie"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-spring themed-border-spring" data-theme="css/themes/spring.css" data-toggle="tooltip" title="Spring"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-fancy themed-border-fancy" data-theme="css/themes/fancy.css" data-toggle="tooltip" title="Fancy"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-fire themed-border-fire" data-theme="css/themes/fire.css" data-toggle="tooltip" title="Fire"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-coral themed-border-coral" data-theme="css/themes/coral.css" data-toggle="tooltip" title="Coral"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-lake themed-border-lake" data-theme="css/themes/lake.css" data-toggle="tooltip" title="Lake"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-forest themed-border-forest" data-theme="css/themes/forest.css" data-toggle="tooltip" title="Forest"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-waterlily themed-border-waterlily" data-theme="css/themes/waterlily.css" data-toggle="tooltip" title="Waterlily"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" title="Emerald"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="themed-background-dark-blackberry themed-border-blackberry" data-theme="css/themes/blackberry.css" data-toggle="tooltip" title="Blackberry"></a>
-                                </li>
-                            </ul>
-                            <!-- END Theme Colors -->
-                            <!-- Sidebar Navigation -->
-                            @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)
-                            {
-                                <ul class="sidebar-nav">
-                                    <li>
-                                        <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Consortium/Index">Ver Consorcios</a>
-                                            </li>
-
-
-
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
-                                    </li>
-
-
-
-
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
-                                        @*<ul>
-                                                <li>
-                                                    <a href="page_forms_general.html">Crear Nuevo Checklist</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_forms_components.html">Ver Checklists</a>
-                                                </li>
-
-                                            </ul>*@
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
-                                        @*<ul>
-                                                <li>
-                                                    <a href="page_forms_general.html">Nuevo Gasto</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_forms_components.html">Cargar Factura</a>
-                                                </li>
-
-                                            </ul>*@
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Managers/Index">Ver empleados</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Providers/Index">Ver proveedores</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-header">
-                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
-                                        <span class="sidebar-header-title">Soporte</span>
-                                    </li>
-                                    <li>
-                                        <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Backlog/Index">Ver Tickets</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-header">
-                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
-                                        <span class="sidebar-header-title">Documentación</span>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
-                                    </li>
-
-                                </ul>
-                            }
-                            else
-                            {
-                                <ul class="sidebar-nav">
-                                    <li>
-                                        <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Consortium/Index">Ver Consorcios</a>
-                                            </li>
-
-
-
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Propietarios</span></a>
-                                    </li>
-
-
-
-
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Checklist</span></a>
-                                        @*<ul>
-                                                <li>
-                                                    <a href="page_forms_general.html">Crear Nuevo Checklist</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_forms_components.html">Ver Checklists</a>
-                                                </li>
-
-                                            </ul>*@
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-wallet sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Gastos</span></a>
-                                        @*<ul>
-                                                <li>
-                                                    <a href="page_forms_general.html">Nuevo Gasto</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page_forms_components.html">Cargar Factura</a>
-                                                </li>
-
-                                            </ul>*@
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Managers/CreateManager">Cargar Nuevo Empleado</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Managers/Index">Ver empleados</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Providers/Index">Ver proveedores</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-header">
-                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
-                                        <span class="sidebar-header-title">Soporte</span>
-                                    </li>
-                                    <li>
-                                        <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
-                                            </li>
-                                            <li>
-                                                <a href="/Backlog/Index">Ver Tickets</a>
-                                            </li>
-
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-header">
-                                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"></a></span>
-                                        <span class="sidebar-header-title">Documentación</span>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="hi hi-file sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Información Útil</span></a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#"><i class="hi hi-folder-open sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Archivos</span></a>
-                                    </li>
-
-                                </ul>
-
-                            }
-                                            <!-- END Sidebar Navigation -->
-
-                                            <!-- Sidebar Notifications -->
-                                                <div class="sidebar-header sidebar-nav-mini-hide">
-                                                    <span class="sidebar-header-options clearfix">
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" title="Refresh"><i class="gi gi-refresh"></i></a>
-                                                    </span>
-                                                    <span class="sidebar-header-title">Actividad</span>
-                                                </div>
-                                                <div class="sidebar-section sidebar-nav-mini-hide">
-                                                    <div class="alert alert-success alert-alt">
-                                                        <small>5 min </small><br>
-                                                        <i class="fa fa-thumbs-up fa-fw"></i> No hay actividades todavía
-                                                    </div>
-                                                </div>
-                                            <!-- END Sidebar Notifications -->
-                                            </div>
-                                        <!-- END Sidebar Content -->
-                     </div>
-                                    <!-- END Wrapper for scrolling functionality -->
-        </div>
+                        <!-- END Sidebar Notifications -->
+                        </div><!-- END Sidebar Content -->                                
+                </div><!-- END Wrapper for scrolling functionality -->                            
+        </div><!-- END Sidebar -->
             <div id="main-container">
 
             <header class="navbar navbar-default">
