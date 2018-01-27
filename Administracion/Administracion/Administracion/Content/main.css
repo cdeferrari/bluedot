@@ -1348,6 +1348,15 @@ a.widget.widget-hover-effect4:active {
 =================================================================
 */
 
+/* General */
+th {
+    font-weight: normal;
+}
+
+.gi.green {
+    color: limegreen;
+}
+
 /* Login */
 #login-background {
     width: 100%;
@@ -1406,6 +1415,16 @@ a.widget.widget-hover-effect4:active {
     float: left;
 }
 
+/* Consortium details */
+
+div.consorcio-address-box {
+    height: 115px;
+    margin-bottom: 10px;
+}
+
+div.consorcio-address-form {
+    padding-top: 20px;
+}
 /* Full Background Image */
 img.full-bg {
     min-height: 100%;

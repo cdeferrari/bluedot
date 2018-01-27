@@ -11,11 +11,6 @@
 
             <div class="content-header">
                 <ul class="nav-horizontal text-center">
-
-                    <li style="float:left;">
-                        <a><img src="@Model.ImageUrl" style="width:75px; height:85px;" /></a>
-                    </li>
-
                     <li>
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
@@ -42,28 +37,39 @@
                         </div>
                         <!-- END Shipping Address Title -->
                         <!-- Shipping Address Content -->
+                        
+                        <div class="row consorcio-address-box">
+                            <div class="col-md-3"> <!--style="float:left;"--> 
+                                <a href="@Model.ImageUrl" data-lightbox="consortium-image" data-title="@Model.FriendlyName">
+                                    <img src="@Model.ImageUrl" style="width:75px; height:85px;" />
+                                </a>
+                            </div>
+                            <div class="col-md-9 consorcio-address-form"><!-- Address form -->
+                                @using (Html.BeginForm("FastUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
+                                {
 
-                        @using (Html.BeginForm("FastUpdateConsortium", "Consortium", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" }))
-                        {
-                            <address>
-                                <input type="hidden" id="id" name="id" value="@Model.Id" />
-                                <div class="address-to-edit">
-                                    @Model.Ownership.Address.Street
-                                    @Model.Ownership.Address.Number
-                                    <a id="edit-address" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                </div>
-                                <i class="fa fa-phone"></i><a class="telephone-to-edit" href="javascript:void(0)">@Model.Telephone</a>
-                                <a id="edit-telephone" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                <br>
-                                <i class="fa fa-envelope-o"></i> <a class="list-to-edit" href="javascript:void(0)">@Model.MailingList</a>
-                                <a id="edit-list" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                <div class="form-group form-actions fast-save-button" style="margin-top: 4%; display:none">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-sm btn-primary">GUARDAR</button>
-                                    </div>
-                                </div>
-</address>
-                        }
+                                    <address>
+                                        <input type="hidden" id="id" name="id" value="@Model.Id" />
+                                        <div class="address-to-edit">
+                                            @Model.Ownership.Address.Street
+                                            @Model.Ownership.Address.Number
+                                            <a id="edit-address" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                        <i class="fa fa-phone"></i><a class="telephone-to-edit" href="javascript:void(0)">@Model.Telephone</a>
+                                        <a id="edit-telephone" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <br>
+                                        <i class="fa fa-envelope-o"></i> <a class="list-to-edit" href="javascript:void(0)">@Model.MailingList</a>
+                                        <a id="edit-list" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <div class="form-group form-actions fast-save-button" style="margin-top: 4%; display:none">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-sm btn-primary">GUARDAR</button>
+                                            </div>
+                                        </div>
+                                    </address>
+                                }
+                            </div><!-- Address form -->
+                        </div>
+                        
                         <div class="block-title">
                             <h1>
                                 <strong>Cuenta con:</strong>
@@ -88,7 +94,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <a href="javascript:void(0)" class="widget widget-hover-effect2">
                         <div class="widget-extra themed-background">
-                            <h4 class="widget-content-light"><strong>Tickets</strong> Abiertos</h4>
+                            <h4 class="widget-content-light"><strong>Reclamos</strong> Abiertos</h4>
                         </div>
                         <div class="widget-extra-full"><span class="h2 animation-expandOpen">@Model.TicketQuantity</span></div>
                     </a>
@@ -134,8 +140,7 @@
                         <!-- Latest Orders Content -->
                         <table class="table table-borderless table-striped table-vcenter table-bordered">
                             <tbody>
-                                <tr>
-                                    
+                                <tr>                                    
                                     <td class="text-center"><strong>NRO</strong></td>
                                     <td class="text-center"><strong>PISO</strong></td>
                                     <td class="text-center"><strong>DTO</strong></td>                                    
@@ -148,11 +153,9 @@
                                 @foreach (var unit in Model.Ownership.FunctionalUnits.OrderBy(x => x.Number))
                                 {
                                     <tr>
-                                        <td class="text-center"><a href="javascript:void(0)">@unit.Number</a></td>
-                                        <td class="text-center" style="width: 100px;"><a href="javascript:void(0)"><strong>@unit.Floor</strong></a></td>
-                                        <td class="text-center"><a href="javascript:void(0)">@unit.Dto</a></td>                                        
-                                        
-                                        
+                                        <td class="text-center">@unit.Number</td>
+                                        <td class="text-center" style="width: 100px;"><strong>@unit.Floor</strong></td>
+                                        <td class="text-center">@unit.Dto</td>
                                         
                                         @{ var ownerDescription = unit.Owner != null ?
                                                   unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
@@ -162,7 +165,6 @@
                                             <td class="text-center">
                                                 <a href="/Users/UpdateUserById?id=@unit.Owner.User.Id&callbackUrl=/Consortium/Details/@Model.Id">
                                                     @ownerDescription
-
                                                 </a>
                                             </td>
                                         }
@@ -170,8 +172,14 @@
                                         {
                                             <td></td>
                                         }
+                                        <!--
                                         <td class="text-right"><strong>$65,00</strong></td>
                                         <td class="text-center"><span class="label label-success">Cobrado</span></td>
+                                        -->
+                                        
+                                        <td class="text-right"><strong>&nbsp;</strong></td>
+                                        <td class="text-center"><!--<i class="gi gi-ok green"></i>-->-</td><!-- gi-ok_2 para el tick clasico -->
+                                        
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="/FunctionalUnit/UpdateFunctionalUnitById?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>

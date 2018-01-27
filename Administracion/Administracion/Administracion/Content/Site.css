@@ -25,9 +25,32 @@ textarea {
     max-width: 280px;
 }
 
+/*
+ * Index =========================
+ * 01 - Global styles
+ * 02 - Page content
+ * 03 - Main backdrop
+ * 04 - Hidden top and left menu
+ * 05 - Top menu
+ * 06 - Left menu
+ * 07 - Colorful menu
+ * 08 - Panels
+ * 09 - Avatar
+ * 10 - Animate menu button
+ * 11 - Breadcrumb
+ * 12 - Top sub-menu
+ * 13 - Superclean mode
+ * 14 - Fixed menu mode
+ * 15 - Boxed layout
+ * 16 - Iconbar menu
+ * 17 - Single page block
+ * 18 - Examples
+ * 19 - Login
+ * 20 - Widgets
+ */
 
 /*
- * GLOBAL STYLES
+ * 1 - GLOBAL STYLES
  */
 html {
     font-size: 14px;
@@ -101,7 +124,7 @@ a {
 }
 
 /*
- * PAGE CONTENT
+ * 2 - PAGE CONTENT
  */
 .page-content {
     padding: 25px;
@@ -120,7 +143,7 @@ pre {
 }
 
 /*
- * MAIN BACKDROP
+ * 3 - MAIN BACKDROP
  */
 .main-backdrop {
     position: fixed;
@@ -153,7 +176,7 @@ pre {
 }
 
 /*
- * HIDDEN TOP AND LEFT MENU
+ * 4 - HIDDEN TOP AND LEFT MENU
  */
 .hidden-left-menu {
     display: none;
@@ -176,7 +199,7 @@ pre {
     }
 
 /*
- * TOP MENU
+ * 5 - TOP MENU
  */
 nav.top-menu {
     height: 80px;
@@ -294,7 +317,7 @@ nav.top-menu .dropdown-inline-button {
         }
 
 /*
- * LEFT MENU
+ * 6 - LEFT MENU
  */
 nav.left-menu {
     position: fixed;
@@ -686,7 +709,7 @@ nav.left-menu {
 }
 
 /*
- * COLORFUL MENU
+ * 7 - COLORFUL MENU
  */
 nav.left-menu [class^='left-menu-list-color'], nav.left-menu [class*=' left-menu-list-color'] {
     position: relative;
@@ -741,7 +764,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
 }
 
 /*
- * PANELS
+ * 8 - PANELS
  */
 .page-content-inner > .panel:last-child {
     margin-bottom: 0px;
@@ -892,7 +915,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
     }
 
 /*
- * AVATAR
+ * 9 - AVATAR
  */
 .avatar {
     width: 37px;
@@ -912,7 +935,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
     }
 
 /*
- * ANIMATE MENU BUTTON
+ * 10 - ANIMATE MENU BUTTON
  */
 .animate-menu-button {
     display: inline-block;
@@ -1005,7 +1028,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
         }
 
 /*
- * BREADCRUMB
+ * 11 - BREADCRUMB
  */
 .breadcrumb {
     -webkit-border-radius: 0px;
@@ -1029,7 +1052,7 @@ nav.left-menu .left-menu-list-color-yellow:hover:before, nav.left-menu .left-men
     }
 
 /*
- * TOP SUBMENU
+ * 12 -TOP SUBMENU
  */
 nav.top-submenu, .top-submenu {
     margin-bottom: 16px;
@@ -1054,7 +1077,7 @@ nav.top-submenu, .top-submenu {
     }
 
 /*
- * SUPERCLEAN MODE
+ * 13 - SUPERCLEAN MODE
  */
 .mode-superclean {
     background: #ffffff;
@@ -1113,7 +1136,7 @@ nav.top-submenu, .top-submenu {
 }
 
 /*
- * FIXED MENU MODE
+ * 14 - FIXED MENU MODE
  */
 .menu-static .page-content {
     margin-top: 0px !important;
@@ -1129,7 +1152,7 @@ nav.top-submenu, .top-submenu {
 }
 
 /*
- * BOXED LAYOUT
+ * 15 - BOXED LAYOUT
  */
 @media (min-width: 768px) {
     body.layout-boxed {
@@ -1222,7 +1245,7 @@ nav.top-submenu, .top-submenu {
 }
 
 /*
- * ICONBAR MENU
+ * 16 - ICONBAR MENU
  */
 @media (min-width: 768px) {
     body.menu-iconbar:not(.menu-top) nav.left-menu {
@@ -1308,7 +1331,7 @@ nav.top-submenu, .top-submenu {
 }
 
 /*
- * SINGLE PAGE BLOCK
+ * 17 - SINGLE PAGE BLOCK
  */
 body.single-page {
     height: 100%;
@@ -1593,7 +1616,7 @@ body.single-page-inverse .single-page-block-header {
 }
 
 /*
- * EXAMPLES
+ * 18 - EXAMPLES
  */
 .layout-grid-example {
     margin-left: -10px;
@@ -1691,8 +1714,7 @@ body.single-page-inverse .single-page-block-header {
 
 
 /*
-    login
-
+    19 - login
 */
 .page-content-inner.login-content {
     background-image: url(img/login-bkg.jpg);
@@ -1700,7 +1722,9 @@ body.single-page-inverse .single-page-block-header {
 }
 
 
-/*widgets*/
+/*
+    20 - widgets
+*/
 .widget-seven.background-primary, .widget-seven.background-secondary, .widget-seven.background-default, .widget-seven.background-info, .widget-seven.background-danger, .widget-seven.background-warning, .widget-seven.background-info, .widget-seven.background-success {
     color: #ffffff;
 }
