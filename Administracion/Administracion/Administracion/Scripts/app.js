@@ -7,7 +7,6 @@
  *  use them only in specific pages. Also, if you remove a js plugin you won't use, make
  *  sure to remove its initialization from uiInit().
  */
-
 var App = function () {
     /* Helper variables - set in uiInit() */
     var page, pageContent, header, footer, sidebar, sScroll, sidebarAlt, sScrollAlt;
@@ -558,7 +557,6 @@ var App = function () {
          */
         var colorList = $('.sidebar-themes');
         var themeLink = $('#theme-link');
-
         var themeColor = themeLink.length ? themeLink.attr('href') : 'default';
         var cookies = page.hasClass('enable-cookies') ? true : false;
 
@@ -599,7 +597,9 @@ var App = function () {
         $('a', colorList).click(function (e) {
             // Get theme name
             themeColor = $(this).data('theme');
-
+            if (typeof (Storage) !== "undefined") {//Chequeamos que el navegador soporte localStorage
+                localStorage.setItem("themeColor", themeColor);
+            }
             $('li', colorList).removeClass('active');
             $(this).parent('li').addClass('active');
 
@@ -612,7 +612,7 @@ var App = function () {
                 if (themeLink.length) {
                     themeLink.attr('href', themeColor);
                 } else {
-                    $('link[href="css/themes.css"]').before('<link id="theme-link" rel="stylesheet" href="' + themeColor + '">');
+                    $('link[href="/Content/themes.css"]').before('<link id="theme-link" rel="stylesheet" href="' + themeColor + '">');
                     themeLink = $('#theme-link');
                 }
             }
@@ -726,4 +726,6 @@ var App = function () {
 }();
 
 /* Initialize app when page loads */
-$(function () { App.init(); });
+$(function () {
+    App.init();
+});

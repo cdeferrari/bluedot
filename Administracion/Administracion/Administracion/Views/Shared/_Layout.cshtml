@@ -6,6 +6,14 @@
     <title>@ViewBag.Title - Administracion</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script>/* Cargamos el ultimo theme (color) seleccionado */
+        if (typeof (Storage) !== "undefined") {//Chequeamos que el navegador soporte localStorage
+            var themeColor = localStorage.getItem("themeColor");
+            if (themeColor !== null && themeColor !== "default") {
+                document.write('<link id="theme-link" rel="stylesheet" href="' + themeColor + '">');
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -14,7 +22,7 @@
     @Html.Partial("_LoginPartial")
    
       @RenderBody()
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,6 +33,14 @@
     @RenderSection("scripts", required: false)
 
     <script>$(function(){ TablesDatatables.init(); });</script>
+
+    <script>/* Si el navegador no soporta localStorage, quitamos las bolitas para theme color */
+            if (typeof (Storage) === "undefined") {// Sorry! No Web Storage support..
+                $(window).on('load', function () {
+                    $("ul.sidebar-themes").css('display', 'none');//ocultamos las bolitas
+                });
+            }
+    </script>
 
     <script>
  $(function () {
