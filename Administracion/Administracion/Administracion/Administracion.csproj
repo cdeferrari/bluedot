@@ -314,6 +314,8 @@
     <Content Include="Content\plugins.css" />
     <Content Include="Content\themes.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\themes\amethyst.css" />
+    <Content Include="Content\themes\autumn.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -341,6 +343,18 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\blackberry.css" />
+    <Content Include="Content\themes\coral.css" />
+    <Content Include="Content\themes\emerald.css" />
+    <Content Include="Content\themes\fancy.css" />
+    <Content Include="Content\themes\fire.css" />
+    <Content Include="Content\themes\flatie.css" />
+    <Content Include="Content\themes\forest.css" />
+    <Content Include="Content\themes\lake.css" />
+    <Content Include="Content\themes\modern.css" />
+    <Content Include="Content\themes\night.css" />
+    <Content Include="Content\themes\spring.css" />
+    <Content Include="Content\themes\waterlily.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-filetypes-regular.svg" />
