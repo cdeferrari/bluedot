@@ -4,6 +4,7 @@ using Administracion.Dto.Provider;
 using Administracion.Dto.Renter;
 using Administracion.Dto.Worker;
 using Administracion.Models;
+using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
@@ -461,6 +462,18 @@ namespace Administracion.Controllers
             
         }
 
+        public ActionResult Details(/*int id*/)
+        {
+            //int id = 1471;
+            int id = SessionPersister.Account.User.Id;
+            var oUser = this.UserService.GetUser(id);
+            var user = Mapper.Map<UserViewModel>(oUser);
+            var currUser = SessionPersister.Account.User;
+
+            System.Diagnostics.Debug.WriteLine("USER ID: "+ currUser.Id);
+            return View(user);
+        }
+
         public string GetUnitsByOwnership(int id)
         {
 
@@ -473,7 +486,6 @@ namespace Administracion.Controllers
             return JsonConvert.SerializeObject(functionalUnitList);
             
         }
-
 
     }
 }

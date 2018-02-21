@@ -1,0 +1,77 @@
+﻿@model Administracion.Models.UserViewModel
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .user-info-label {
+        font-size: 12px;
+        font-weight: bold;
+        float: left;
+        width: 170px;
+        margin: 0;
+    }
+    .user-info-row {
+        border-bottom: 1px solid #e9ebee;
+        margin-bottom: 20px;
+    }
+    .user-info-row:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .user-info-detail {
+        color: #90949c;
+    }
+</style>
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="block full">
+            <div class="block-title">
+                <h2>Informacion <strong>General</strong></h2>                
+            </div>
+            <div class="user-info-content">
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Nombre</h3>
+                    <span class="user-info-detail bold">@((Model.Name != null) ? Model.Name : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Apellido</h3>
+                    <span class="user-info-detail bold">@((Model.Surname != null) ? Model.Surname : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">DNI</h3>
+                    <span class="user-info-detail bold">@((Model.DNI != null) ? Model.DNI : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">CUIT</h3>
+                    <span class="user-info-detail bold">@((Model.CUIT != null) ? Model.CUIT : "-")</span>
+                </div>
+            </div><!-- .user-info-content -->
+        </div><!-- .block -->
+    @if(Model.ContactData != null) { 
+        <div class="block full">
+            @{ Administracion.Models.ContactDataViewModel infoContacto = Model.ContactData; }
+            <div class="block-title">
+                <h2>Informacion de <strong>Contacto</strong></h2>
+            </div>
+            <div class="user-info-content">
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Email</h3>
+                    <span class="user-info-detail">@((infoContacto.Email != null) ? infoContacto.Email : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Teléfono fijo</h3>
+                    <span class="user-info-detail">@((infoContacto.Telephone != null) ? infoContacto.Telephone : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Teléfono celular</h3>
+                    <span class="user-info-detail">@((infoContacto.Cellphone != null) ? infoContacto.Cellphone : "-")</span>
+                </div>
+            </div><!-- .user-info-content -->
+        </div><!-- .block -->
+      }
+    </div><!-- #main-container -->
+</div><!-- #page-content -->

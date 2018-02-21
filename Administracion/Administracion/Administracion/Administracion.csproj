@@ -513,6 +513,7 @@
     <Content Include="Views\System\CreateLaboralUnion.cshtml" />
     <Content Include="Views\System\CreateProvince.cshtml" />
     <Content Include="Views\System\CreateCity.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
