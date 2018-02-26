@@ -20,6 +20,7 @@ using AutoMapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -333,13 +334,11 @@ namespace Administracion.Controllers
             var user = Mapper.Map<UserViewModel>(oUser);
             var renters = this.RenterService.GetAll();
 
-
             var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
-
 
             var ownershipList = this.OwnershipService.GetAll().Select(x => new SelectListItem()
             {
@@ -355,14 +354,12 @@ namespace Administracion.Controllers
             });
 
             user.Administrations = administrations;
-
             
             var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
             });
-
 
             user.PaymentTypes = paymentTypes;
 
@@ -413,6 +410,41 @@ namespace Administracion.Controllers
             nuser = Mapper.Map<User>(user);            
             this.UserService.UpdateUser(nuser);
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUserInfo(UserViewModel user)
+        {
+            User currUser = this.UserService.GetUser(user.Id);
+            if (!string.IsNullOrEmpty(user.Name)) { currUser.Name = user.Name; }
+            if (!string.IsNullOrEmpty(user.Surname)) { currUser.Surname = user.Surname; }
+            if (!string.IsNullOrEmpty(user.DNI)) { currUser.DNI = user.DNI; }
+            if (!string.IsNullOrEmpty(user.CUIT)) { currUser.CUIT = user.CUIT; }
+            //User Contact
+            if (user.ContactData != null) //Si se cambio algo en la ContactData
+            {//Se puede asumir que currUser tiene ContactData porque sino no aparece el form
+                if (!string.IsNullOrEmpty(user.ContactData.Email)) {
+                    currUser.ContactData.Email = user.ContactData.Email;
+                }
+                if (!string.IsNullOrEmpty(user.ContactData.Telephone))
+                {
+                    currUser.ContactData.Telephone = user.ContactData.Telephone;
+                }
+                if (!string.IsNullOrEmpty(user.ContactData.Cellphone))
+                {
+                    currUser.ContactData.Cellphone = user.ContactData.Cellphone;
+                }
+            }
+
+            bool result = this.UserService.UpdateUser(currUser);
+            if (result)
+            {
+                return Redirect("/Users/Details");
+            }
+            else
+            {
+                return View("../Shared/Error");
+            }
         }
 
         public ActionResult DeleteUser(int id)
@@ -468,9 +500,8 @@ namespace Administracion.Controllers
             int id = SessionPersister.Account.User.Id;
             var oUser = this.UserService.GetUser(id);
             var user = Mapper.Map<UserViewModel>(oUser);
-            var currUser = SessionPersister.Account.User;
-
-            System.Diagnostics.Debug.WriteLine("USER ID: "+ currUser.Id);
+            //var currUser = SessionPersister.Account.User;
+            
             return View(user);
         }
 

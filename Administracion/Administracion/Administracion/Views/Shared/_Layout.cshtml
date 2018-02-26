@@ -81,6 +81,54 @@
             bindDatePicker();
         });</script>
 
+    <script> //Scripts para users/details
+        $(function () {
+            var url = window.location.href.toLowerCase();
+            if (url.includes("users/details")) {
+                console.log("estamos en User/details");
+                var editBtns = $('.user-info-edit');
+                editBtns.each(function () {
+                    $(this).click(function () {
+                        var attr = $(this).data("attribute");
+                        var span = $('span[data-attribute="' + attr + '"]');
+                        var cancelBtn = $('a.user-info-cancel[data-attribute="' + attr + '"]');
+                        var value = $(span).text();
+                        if (value == "-") { value = "" }
+                        var type = $(this).data("type");
+                        var size = $(this).data("size");
+                        if ( size == null) { size = "md" }//md es el default
+                        var input = '<input id="' + attr + '" name="' + attr + '" type="' + type +
+                            '" class="form-control ' + size + '-input user-info-input" value="' +
+                            value + '" required="required"/>';
+
+                        span.after(input);
+                        span.hide();
+                        $(this).hide();
+                        cancelBtn.show();
+                        $(".user-info-guardar").show();
+                    });
+                });
+                var cancelBtns = $('.user-info-cancel');
+                cancelBtns.each(function () {
+                    $(this).click(function () {
+                        var attr = $(this).data("attribute");
+                        var span = $('span[data-attribute="' + attr + '"]');
+                        var editBtn = $('a.user-info-edit[data-attribute="' + attr + '"]');
+                        var input = $("input[id='" + attr + "']");//importante que sea asi en vez de #id, para evitar conflictos con ids que tengan un '.'
+                        var inputs = $('input.user-info-input');                        
+                        //Si es 1, el unico campo que se estaba editando era este, ocultamos el "guardar".
+                        if (inputs.length == 1) {
+                            $(".user-info-guardar").hide();
+                        }
+                        input.remove();
+                        $(this).hide();
+                        span.show();
+                        editBtn.show();
+                    });
+                });
+            }
+        });
+    </script>
 
     <script type="text/javascript">
 
@@ -163,7 +211,6 @@
 
     });
     </script>   
-
 
     <script type="text/javascript">
 
