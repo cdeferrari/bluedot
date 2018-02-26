@@ -25,7 +25,8 @@ namespace ApiCore.Services.Implementations.Users
                 CUIT = user.CUIT,
                 DNI = user.DNI,
                 Name = user.Name,
-                Surname = user.Surname                
+                Surname = user.Surname,
+                ProfilePic = user.ProfilePic
             };
 
             if (user.ContactData != null)
@@ -81,7 +82,8 @@ namespace ApiCore.Services.Implementations.Users
             originalUser.CUIT = User.CUIT;
             originalUser.DNI = User.DNI;
             originalUser.Name = User.Name;
-            originalUser.Surname = User.Surname;            
+            originalUser.Surname = User.Surname;
+            originalUser.ProfilePic = User.ProfilePic;
         }
 
 

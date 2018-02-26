@@ -14,6 +14,7 @@ namespace Administracion.DomainModel
         public virtual string Surname { get; set; }
         public virtual string DNI { get; set; }
         public virtual string CUIT { get; set; }
+        public virtual string ProfilePic { get; set; }
         public virtual ContactData ContactData { get; set; }        
        
     }

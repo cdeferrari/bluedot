@@ -1,4 +1,5 @@
-﻿@model Administracion.Models.UserViewModel
+﻿@using System.Diagnostics
+@model Administracion.Models.UserViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -65,11 +66,67 @@
     .lg-input {
         width: 300px;
     }
+    .profile-pic {
+        border-radius: 50%;
+        margin-right: 15px;
+        margin-top: -8px;
+        margin-bottom: 8px;
+        border: 2px solid lightgrey;
+        float: left;
+    }
+    .image-row {
+        height: auto;        
+    }
+    img.md {
+        height: 68px;
+        width: 68px;
+        object-fit: cover
+    }
+    img.sm {
+        height: 42px;
+        width: 42px;
+        object-fit: cover
+    }
+    .user-info-options {
+        list-style-type: none;
+        float: left;
+    }
+    .user-info-options a {
+        cursor: pointer;
+    }
+    .user-info-options a:hover {
+        color: #17a2c4;
+    }
+    #ProfilePic {
+        border: none;
+        background-color: inherit;
+    }
 </style>
+@{  
+    WebImage photo = null;
+    var newFileName = "";
+    string fotoDefault = "avatar.jpg";
+    string profilePic = (Model.ProfilePic != null) ? Model.ProfilePic : fotoDefault;
+    string imgPath = "Content/img/";
+    string fullImgPath = "";
+    if (IsPost)
+    {
+        photo = WebImage.GetImageFromRequest();
+        Debug.WriteLine("PHOTO: " + photo.FileName);
+        if (photo != null)
+        {
+            newFileName = Path.GetFileName(photo.FileName);
+            fullImgPath = imgPath + newFileName;
+
+            photo.Save(@"~/" + fullImgPath, null, false);
+
+        }
+    }
+}
 <div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
 
     <div id="main-container">
-    @using (Html.BeginForm("UpdateUserInfo", "Users", FormMethod.Post))
+    @using (Html.BeginForm("UpdateUserInfo", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="block full">           
                 @Html.HiddenFor(x => x.Id)
@@ -82,13 +139,22 @@
                     <h3 class="user-info-label">Nombre</h3>
                     <span data-attribute="Name" class="user-info-detail bold">@((Model.Name != null) ? Model.Name : "-")</span>
                     <a data-attribute="Name" class="user-info-cancel" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times-circle"></i></a>
-                    <a data-attribute="Name" class="user-info-edit" data-type="text" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                    <a data-attribute="Name" class="user-info-edit" data-required="true" data-type="text" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                 </div>
                 <div class="user-info-row clearfix">
                     <h3 class="user-info-label">Apellido</h3>
                     <span class="user-info-detail bold" data-attribute="Surname">@((Model.Surname != null) ? Model.Surname : "-")</span>
                     <a data-attribute="Surname" class="user-info-cancel" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times-circle"></i></a>
-                    <a class="user-info-edit" data-attribute="Surname" data-type="text" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                    <a class="user-info-edit" data-required="true" data-attribute="Surname" data-type="text" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                </div>                
+                <div class="user-info-row image-row clearfix">
+                    <h3 class="user-info-label">Foto</h3>
+                    <span data-attribute="ProfilePic">
+                        <img class="profile-pic md" src="/@imgPath@profilePic" alt="Avatar mediano" />
+                        <img class="profile-pic sm" src="/@imgPath@profilePic" alt="Avatar chico" />
+                    </span>                    
+                    <a class="user-info-cancel edit-img" data-actual="/@imgPath@profilePic" data-attribute="ProfilePic" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times-circle"></i></a>
+                    <a class="user-info-edit edit-img" data-attribute="ProfilePic" data-type="file" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                 </div>
                 <div class="user-info-row clearfix">
                     <h3 class="user-info-label">DNI</h3>
@@ -101,7 +167,7 @@
                     <span class="user-info-detail bold" data-attribute="CUIT">@((Model.CUIT != null) ? Model.CUIT : "-")</span>
                     <a data-attribute="CUIT" class="user-info-cancel" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times-circle"></i></a>
                     <a class="user-info-edit" data-attribute="CUIT" data-type="number" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
-                </div>
+                </div>                
              </div><!-- .user-info-content -->            
         </div><!-- .block -->
 
@@ -117,7 +183,7 @@
                         <h3 class="user-info-label">Email</h3>
                         <span class="user-info-detail" data-attribute="ContactData.Email">@((infoContacto.Email != null) ? infoContacto.Email : "-")</span>
                         <a data-attribute="ContactData.Email" class="user-info-cancel" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times-circle"></i></a>
-                        <a class="user-info-edit" data-attribute="ContactData.Email" data-type="email" data-size="lg" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
+                        <a class="user-info-edit" data-required="true" data-attribute="ContactData.Email" data-type="email" data-size="lg" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                     </div>
                     <div class="user-info-row clearfix">
                         <h3 class="user-info-label">Teléfono fijo</h3>
@@ -133,7 +199,7 @@
                     </div>
                 </div><!-- .user-info-content -->
             </div><!-- .block -->
-       }
+       }        
     }
     </div><!-- #main-container -->
 </div><!-- #page-content -->

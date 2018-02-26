@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using WebGrease.Css.Extensions;
 
 namespace Administracion.Controllers
@@ -420,6 +421,16 @@ namespace Administracion.Controllers
             if (!string.IsNullOrEmpty(user.Surname)) { currUser.Surname = user.Surname; }
             if (!string.IsNullOrEmpty(user.DNI)) { currUser.DNI = user.DNI; }
             if (!string.IsNullOrEmpty(user.CUIT)) { currUser.CUIT = user.CUIT; }
+            var photo = WebImage.GetImageFromRequest("ProfilePic");
+            if (photo != null)
+            {
+                //string newFileName = Path.GetFileName(photo.FileName);
+                string newFileName = "user-" + user.Id + ".jpg";
+                string imgPath = "Content/img/" + newFileName;
+                photo.Save(@"~/" + imgPath, null, false);
+                currUser.ProfilePic = newFileName;
+            }
+            //if (!string.IsNullOrEmpty(user.ProfilePic)) { currUser.ProfilePic = user.ProfilePic; }
             //User Contact
             if (user.ContactData != null) //Si se cambio algo en la ContactData
             {//Se puede asumir que currUser tiene ContactData porque sino no aparece el form
@@ -501,7 +512,7 @@ namespace Administracion.Controllers
             var oUser = this.UserService.GetUser(id);
             var user = Mapper.Map<UserViewModel>(oUser);
             //var currUser = SessionPersister.Account.User;
-            
+
             return View(user);
         }
 
