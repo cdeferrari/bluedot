@@ -1,6 +1,10 @@
 ﻿@using Administracion.Security
+
 @if (SessionPersister.isAuthenticated)
 {
+    string profilePic = SessionPersister.Account.User.ProfilePic;
+    if (profilePic == null) { profilePic = "avatar.jpg"; }
+    
     <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations" style="overflow: visible;">
          <div id="sidebar"><!-- La altura del sidebar se ve retocada por un script "AJUSTE #SIDEBAR HEIGHT" al pie de _layout -->
             <!-- Wrapper for scrolling functionality -->
@@ -15,8 +19,8 @@
                     <!-- User Info -->
                     <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                         <div class="sidebar-user-avatar">
-                            <a href="page_ready_user_profile.html">                                        
-                                <img src="~/Content/img/avatar.jpg" />
+                            <a href="/Users/Details">                             
+                                <img src="~/Content/img/@profilePic" />
                             </a>
                         </div>
                         <div class="sidebar-user-name">I.Carman</div>
@@ -24,7 +28,7 @@
                             <!--<a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Perfil"><i class="gi gi-user"></i></a>-->
                             <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
                             <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                            <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Mis Datos" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
+                            <a href="/Users/Details" class="enable-tooltip" data-placement="bottom" title="Mis Datos"><i class="gi gi-cogwheel"></i></a>
                             <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
                         </div>
                     </div>
@@ -349,8 +353,8 @@
                     <!-- END Alternative Sidebar Toggle Button -->
                     <!-- User Dropdown -->
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                            
-                            <img src="~/Content/img/avatar.jpg" /><i class="fa fa-angle-down"></i>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                            
+                            <img src="~/Content/img/@profilePic" /> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li class="dropdown-header text-center">Mis Datos</li>
@@ -376,7 +380,7 @@
                             <li>
 
                                 <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                <a href="#" data-toggle="modal">
+                                <a href="/Users/Details" data-toggle="modal">
                                     <i class="fa fa-cog fa-fw pull-right"></i>
                                     Mis datos
                                 </a>
