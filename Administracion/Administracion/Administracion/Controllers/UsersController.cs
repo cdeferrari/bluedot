@@ -456,7 +456,9 @@ namespace Administracion.Controllers
                 SessionPersister.Account.User.ProfilePic = currUser.ProfilePic;
                 if (currUser.ContactData != null) { SessionPersister.Account.Email = currUser.ContactData.Email; }
 
-                return Redirect("/Users/Details");
+                DateTime dt = DateTime.Now;
+                //La idea de mandar la date.now es que se refresque el cache y se vea si hubo un cambio en las fotos
+                return Redirect("/Users/Details?"+dt);
             }
             else
             {
