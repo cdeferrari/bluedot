@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Helpers;
 using WebGrease.Css.Extensions;
@@ -424,8 +425,8 @@ namespace Administracion.Controllers
             var photo = WebImage.GetImageFromRequest("ProfilePic");
             if (photo != null)
             {
-                //string newFileName = Path.GetFileName(photo.FileName);
-                string newFileName = "user-" + user.Id + ".jpg";
+                string fileExtension = Path.GetExtension(photo.FileName);
+                string newFileName = "user-" + user.Id + fileExtension;
                 string imgPath = "Content/img/" + newFileName;
                 photo.Save(@"~/" + imgPath, null, false);
                 currUser.ProfilePic = newFileName;
@@ -450,6 +451,7 @@ namespace Administracion.Controllers
             bool result = this.UserService.UpdateUser(currUser);
             if (result)
             {
+                //UPDATE ACCOUNT
                 return Redirect("/Users/Details");
             }
             else
@@ -505,13 +507,11 @@ namespace Administracion.Controllers
             
         }
 
-        public ActionResult Details(/*int id*/)
+        public ActionResult Details()
         {
-            //int id = 1471;
             int id = SessionPersister.Account.User.Id;
             var oUser = this.UserService.GetUser(id);
             var user = Mapper.Map<UserViewModel>(oUser);
-            //var currUser = SessionPersister.Account.User;
 
             return View(user);
         }
