@@ -451,7 +451,11 @@ namespace Administracion.Controllers
             bool result = this.UserService.UpdateUser(currUser);
             if (result)
             {
-                //UPDATE ACCOUNT
+                //Updateamos la info en SessionPersister.Account
+                SessionPersister.Account.UserName = currUser.Name + " " + currUser.Surname;
+                SessionPersister.Account.User.ProfilePic = currUser.ProfilePic;
+                if (currUser.ContactData != null) { SessionPersister.Account.Email = currUser.ContactData.Email; }
+
                 return Redirect("/Users/Details");
             }
             else
