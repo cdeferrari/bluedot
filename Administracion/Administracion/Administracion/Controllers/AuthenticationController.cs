@@ -4,6 +4,7 @@ using Administracion.Models;
 using Administracion.Security;
 using System.Security.Cryptography;
 using System.Text;
+using System.Diagnostics;
 using AutoMapper;
 using Administracion.DomainModel.Enum;
 
@@ -40,7 +41,8 @@ namespace Administracion.Controllers
                 if (accountAutenticated != null)
                 {
 
-                    SessionPersister.Account = Mapper.Map<AccountViewModel>(accountAutenticated);
+                    SessionPersister.Account = Mapper.Map<AccountViewModel>(accountAutenticated);                    
+
                     if (SessionPersister.Account.Role == Roles.Root)
                         return RedirectToAction("Index", "Home");
                     if (SessionPersister.Account.Role == Roles.Client)
