@@ -20,6 +20,7 @@ namespace Administracion.Models
         public virtual string Surname { get; set; }
         public virtual string DNI { get; set; }
         public virtual string CUIT { get; set; }
+        public virtual string ProfilePic { get; set; }
         public virtual ContactDataViewModel ContactData { get; set; }
 
         public virtual bool IsWorker { get; set; }

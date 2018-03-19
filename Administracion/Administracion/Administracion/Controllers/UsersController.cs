@@ -4,6 +4,7 @@ using Administracion.Dto.Provider;
 using Administracion.Dto.Renter;
 using Administracion.Dto.Worker;
 using Administracion.Models;
+using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
@@ -19,9 +20,12 @@ using AutoMapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using WebGrease.Css.Extensions;
 
 namespace Administracion.Controllers
@@ -332,13 +336,11 @@ namespace Administracion.Controllers
             var user = Mapper.Map<UserViewModel>(oUser);
             var renters = this.RenterService.GetAll();
 
-
             var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
-
 
             var ownershipList = this.OwnershipService.GetAll().Select(x => new SelectListItem()
             {
@@ -354,14 +356,12 @@ namespace Administracion.Controllers
             });
 
             user.Administrations = administrations;
-
             
             var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
             });
-
 
             user.PaymentTypes = paymentTypes;
 
@@ -414,6 +414,58 @@ namespace Administracion.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult UpdateUserInfo(UserViewModel user)
+        {
+            User currUser = this.UserService.GetUser(user.Id);
+            if (!string.IsNullOrEmpty(user.Name)) { currUser.Name = user.Name; }
+            if (!string.IsNullOrEmpty(user.Surname)) { currUser.Surname = user.Surname; }
+            if (!string.IsNullOrEmpty(user.DNI)) { currUser.DNI = user.DNI; }
+            if (!string.IsNullOrEmpty(user.CUIT)) { currUser.CUIT = user.CUIT; }
+            var photo = WebImage.GetImageFromRequest("ProfilePic");
+            if (photo != null)
+            {
+                string fileExtension = Path.GetExtension(photo.FileName);
+                string newFileName = "user-" + user.Id + fileExtension;
+                string imgPath = "Content/img/" + newFileName;
+                photo.Save(@"~/" + imgPath, null, false);
+                currUser.ProfilePic = newFileName;
+            }
+            //if (!string.IsNullOrEmpty(user.ProfilePic)) { currUser.ProfilePic = user.ProfilePic; }
+            //User Contact
+            if (user.ContactData != null) //Si se cambio algo en la ContactData
+            {//Se puede asumir que currUser tiene ContactData porque sino no aparece el form
+                if (!string.IsNullOrEmpty(user.ContactData.Email)) {
+                    currUser.ContactData.Email = user.ContactData.Email;
+                }
+                if (!string.IsNullOrEmpty(user.ContactData.Telephone))
+                {
+                    currUser.ContactData.Telephone = user.ContactData.Telephone;
+                }
+                if (!string.IsNullOrEmpty(user.ContactData.Cellphone))
+                {
+                    currUser.ContactData.Cellphone = user.ContactData.Cellphone;
+                }
+            }
+
+            bool result = this.UserService.UpdateUser(currUser);
+            if (result)
+            {
+                //Updateamos la info en SessionPersister.Account
+                SessionPersister.Account.UserName = currUser.Name + " " + currUser.Surname;
+                SessionPersister.Account.User.ProfilePic = currUser.ProfilePic;
+                if (currUser.ContactData != null) { SessionPersister.Account.Email = currUser.ContactData.Email; }
+
+                DateTime dt = DateTime.Now;
+                //La idea de mandar la date.now es que se refresque el cache y se vea si hubo un cambio en las fotos
+                return Redirect("/Users/Details?"+dt);
+            }
+            else
+            {
+                return View("../Shared/Error");
+            }
+        }
+
         public ActionResult DeleteUser(int id)
         {
             var workers = this.WorkerService.GetAll();
@@ -461,6 +513,15 @@ namespace Administracion.Controllers
             
         }
 
+        public ActionResult Details()
+        {
+            int id = SessionPersister.Account.User.Id;
+            var oUser = this.UserService.GetUser(id);
+            var user = Mapper.Map<UserViewModel>(oUser);
+
+            return View(user);
+        }
+
         public string GetUnitsByOwnership(int id)
         {
 
@@ -473,7 +534,6 @@ namespace Administracion.Controllers
             return JsonConvert.SerializeObject(functionalUnitList);
             
         }
-
 
     }
 }

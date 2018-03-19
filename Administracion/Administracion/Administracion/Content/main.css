@@ -1951,6 +1951,109 @@ a[data-toggle="lightbox-image"]:hover img {
     text-decoration: line-through;
 }
 
+/* Users Details */
+    .user-info-label {
+        font-size: 12px;
+        font-weight: bold;
+        float: left;
+        width: 170px;
+        margin: 3px 0 0 0;
+    }
+    .user-info-row {
+        border-bottom: 1px solid #e9ebee;
+        height: 50px;
+        padding: 16px 20px 0;
+    }
+    .user-info-row:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+    .user-info-row:hover {
+        background-color: #f9fafc;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .user-info-detail {
+        color: #90949c;
+    }
+    .user-info-edit {
+        color: #a6a6a6;
+        float: right;
+    }
+    .user-info-edit:hover {
+        color: #808080;
+        cursor: pointer;
+    }
+    .user-info-cancel {
+        color: #DC143C;
+        float: right;
+        display: none;
+        font-size: 15px;
+    }
+    .user-info-cancel:hover {
+        color: #bb1133;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .user-info-guardar {
+        float: right;
+        padding: 3px 5px;
+        margin: 7px 10px 0 0!important;
+        display: none;
+    }
+    .user-info-input {
+        position: relative;
+        bottom: 10px;
+        font-weight: normal;
+        float: left;
+    }
+    .md-input {
+        width: 200px;        
+    }
+    .lg-input {
+        width: 300px;
+    }
+    .profile-pic {
+        border-radius: 50%;
+        margin-right: 15px;
+        margin-top: -8px;
+        margin-bottom: 8px;
+        border: 2px solid lightgrey;
+        float: left;
+    }
+    .image-row {
+        height: auto;        
+    }
+    img.md {
+        height: 68px;
+        width: 68px;
+        object-fit: cover
+    }
+    img.sm {
+        height: 42px;
+        width: 42px;
+        object-fit: cover
+    }
+    .user-info-options {
+        list-style-type: none;
+        float: left;
+    }
+    .user-info-options a {
+        cursor: pointer;
+    }
+    .user-info-options a:hover {
+        color: #17a2c4;
+    }
+    #ProfilePic {
+        border: none;
+        background-color: inherit;
+    }
+@media only screen and (max-width: 768px) {
+    .user-info-label {
+        width: 120px;
+    }
+}
 /*
 =================================================================
 (#m06bos) BOOTSTRAP OVERWRITE/EXTEND STYLES

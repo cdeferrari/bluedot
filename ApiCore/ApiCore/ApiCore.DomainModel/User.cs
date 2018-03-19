@@ -12,6 +12,7 @@ namespace ApiCore.DomainModel
          public virtual string CUIT { get; set; }
          public virtual string Name { get; set; }
          public virtual string Surname { get; set; }
+         public virtual string ProfilePic { get; set; }
          public virtual ContactData ContactData {get; set;}
          public virtual List<MultimediaUsuario> Multimedia { get; set; }
 

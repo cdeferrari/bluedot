@@ -81,6 +81,74 @@
             bindDatePicker();
         });</script>
 
+    <script>/* AJUSTE #SIDEBAR HEIGHT */
+        $(window).on('load', function () {//Hacemos que el sidebar sea tan alto como el body
+            $("#sidebar").css("height", $("body").css("height"));
+        });
+    </script>
+
+    <script> //Scripts para users/details
+        $(function () {
+            var url = window.location.href.toLowerCase();
+            if (url.includes("users/details")) {
+                var editBtns = $('.user-info-edit');//Botones de editar
+                editBtns.each(function () {
+                    $(this).click(function () {
+                        var attr = $(this).data("attribute");
+                        var span = $('span[data-attribute="' + attr + '"]');                        
+                        var cancelBtn = $('a.user-info-cancel[data-attribute="' + attr + '"]');
+                        var value = $(span).text();
+                        if (value == "-") { value = "" }
+                        var type = $(this).data("type");
+                        var size = $(this).data("size");
+                        if ( size == null) { size = "md" }//md es el default
+                        var input = '<input id="' + attr + '" name="' + attr + '" type="' + type +
+                            '" class="form-control ' + size + '-input user-info-input"'
+                        if (!$(this).hasClass("edit-img")) { input += ' value= "' + value + '"' }
+                        if ($(this).data("required") != null) { input += ' required="required"'; }
+                        input += '/>';
+
+                        span.after(input);
+                        if (!$(this).hasClass("edit-img")) { span.hide(); }
+                        else {
+                            $("#ProfilePic").change(function () {
+                                if ($(this)[0].files && $(this)[0].files[0]) {
+                                    console.log("entramos al if");
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $('.profile-pic').attr('src', e.target.result);
+                                    }
+                                    reader.readAsDataURL($(this)[0].files[0]);
+                                }
+                            });
+                        }
+                        $(this).hide();
+                        cancelBtn.show();
+                        $(".user-info-guardar").show();
+                    });
+                });
+                var cancelBtns = $('.user-info-cancel');//Botones de cancelar
+                cancelBtns.each(function () {
+                    $(this).click(function () {
+                        var attr = $(this).data("attribute");
+                        var span = $('span[data-attribute="' + attr + '"]');
+                        var editBtn = $('a.user-info-edit[data-attribute="' + attr + '"]');
+                        var input = $("input[id='" + attr + "']");//importante que sea asi en vez de #id, para evitar conflictos con ids que tengan un '.'
+                        var inputs = $('input.user-info-input');                        
+                        //Si es 1, el unico campo que se estaba editando era este, ocultamos el "guardar".
+                        if (inputs.length == 1) {
+                            $(".user-info-guardar").hide();
+                        }
+                        if ($(this).hasClass("edit-img")) { $(".profile-pic").attr("src", $(this).data("actual")); }
+                        input.remove();
+                        $(this).hide();
+                        span.show();
+                        editBtn.show();
+                    });
+                });
+            }
+        });
+    </script>
 
     <script type="text/javascript">
 
@@ -164,7 +232,6 @@
     });
     </script>   
 
-
     <script type="text/javascript">
 
     $(document).ready(function () {
@@ -194,12 +261,6 @@
             return false;
         })
     });
-    </script>
-
-    <script>/* AJUSTE #SIDEBAR HEIGHT */
-        $(window).on('load', function () {//Hacemos que el sidebar sea tan alto como el body
-            $("#sidebar").css("height", $("body").css("height"));
-        });
     </script>
 
 
