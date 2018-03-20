@@ -1,0 +1,53 @@
+﻿@model Administracion.DomainModel.Spend
+
+        <tr>
+            <td></td>
+            <td >@Model.Description</td>
+            <td >@Model.Bill.Amount</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="UpdateSpendById?id=@Model.Id&consortiumId=@Model.Consortium.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                    <a href="#modal-delete-@Model.Id" data-toggle="modal" title="Borrar Gasto" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+        </tr>
+
+	<!-- DELETE -->
+<div id="modal-delete-@Model.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> ELIMINAR GASTO </h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Estas seguro que queres eliminar el gasto @Model.Description</legend>
+
+                    </fieldset>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button onclick="location.href='DeleteSpend?id=@Model.Id&consortiumId=@Model.Consortium.Id'" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+
+
+
+

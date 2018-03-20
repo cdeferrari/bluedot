@@ -43,6 +43,11 @@
     <Compile Include="Entidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\AdministrationBankAccountRequest.cs" />
+    <Compile Include="Request\PatrimonyStatusRequest.cs" />
+    <Compile Include="Request\IncomeTypeRequest.cs" />
+    <Compile Include="Request\IncomeRequest.cs" />
+    <Compile Include="Request\SpendTypeRequest.cs" />
+    <Compile Include="Request\SpendRequest.cs" />
     <Compile Include="Request\ConsortiumSecureRequest.cs" />
     <Compile Include="Request\CommonDataRequest.cs" />
     <Compile Include="Request\DescriptionRequest.cs" />
@@ -58,6 +63,7 @@
     <Compile Include="Request\ProviderRequest.cs" />
     <Compile Include="Request\ListRequest.cs" />
     <Compile Include="Request\TaskListRequest.cs" />
+    <Compile Include="Request\BillRequest.cs" />
     <Compile Include="Request\TicketRequest.cs" />
     <Compile Include="Request\OwnerRequest.cs" />
     <Compile Include="Request\RenterRequest.cs" />

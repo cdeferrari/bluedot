@@ -43,9 +43,15 @@
     <Compile Include="Account.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Administration.cs" />
+    <Compile Include="Income.cs" />
+    <Compile Include="Bill.cs" />
     <Compile Include="CommonData.cs" />
     <Compile Include="Consortium.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="IncomeType.cs" />
+    <Compile Include="PatrimonyStatus.cs" />
+    <Compile Include="Spend.cs" />
+    <Compile Include="SpendItem.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="DataContact.cs" />
     <Compile Include="Entidad.cs" />
@@ -58,6 +64,7 @@
     <Compile Include="PaymentType.cs" />
     <Compile Include="ConsortiumSecure.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="SpendType.cs" />
     <Compile Include="TaskList .cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="List.cs" />

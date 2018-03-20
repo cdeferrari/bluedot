@@ -3,6 +3,7 @@ using Administracion.Dto.Consortium;
 using Administracion.Dto.ConsortiumSecure;
 using Administracion.Dto.Manager;
 using Administracion.Dto.Message;
+using Administracion.Dto.SpendType;
 using Administracion.Dto.Ticket;
 using Administracion.Dto.Unit;
 using Administracion.Dto.Worker;
@@ -89,6 +90,8 @@ namespace Administracion.App_Start
                 cfg.CreateMap<LaboralUnion, IdDescriptionViewModel>();
                 cfg.CreateMap<Province, IdDescriptionViewModel>();
                 cfg.CreateMap<City, IdDescriptionViewModel>();
+
+                cfg.CreateMap<SpendTypeViewModel, SpendTypeRequest>();
 
 
             });

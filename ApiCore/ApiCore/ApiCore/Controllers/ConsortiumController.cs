@@ -14,6 +14,11 @@ using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Consortiums;
 using ApiCore.Services.Contracts.Lists;
 using ApiCore.Services.Contracts.Tickets;
+using ApiCore.DomainModel;
+using ApiCore.Services.Contracts.Incomes;
+using ApiCore.Services.Contracts.PatrimonyStatuss;
+using ApiCore.Services.Contracts.Spends;
+using ApiCore.Services.Contracts.SpendTypes;
 
 namespace ApiCore.Controllers
 {
@@ -27,7 +32,11 @@ namespace ApiCore.Controllers
         public IConsortiumService ConsortiumService { get; set; }
         public IListService ListService { get; set; }
 
-        public ITicketService TicketService { get; set; }
+        public ITicketService TicketService { get; set; }        
+        public IIncomeService IncomeService { get; set; }
+        public IPatrimonyStatusService PatrimonyStatusService { get; set; }
+        public ISpendService SpendService { get; set; }
+        
 
         // GET api/<controller>/5
         /// <summary>
@@ -96,6 +105,22 @@ namespace ApiCore.Controllers
         }
 
 
+        // POST api/<controller>/5
+        /// <summary>
+        /// Cierra el mes
+        /// </summary>
+        /// <param name="consortiumId">Consorcio a cerrar</param>
+        /// <returns></returns>
+        [Route("{id}/CloseMonth")]
+        public IHttpActionResult CloseMonth(int id)
+        {
+            var result = this.PatrimonyStatusService.RegisterMonth(id);
+
+            return Ok();
+
+        }
+
+
 
         // GET api/<controller>/5
         /// <summary>
@@ -117,6 +142,76 @@ namespace ApiCore.Controllers
             var dto = Mapper.Map<List<TicketResponse>>(completeTaskList);
 
             return Ok(dto);
+        }
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve ingresos del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/Incomes")]
+        [ResponseType(typeof(List<Income>))]
+        public IHttpActionResult GetIncomes(int id, string startDate, string endDate)
+        {
+
+            var dstartDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            var dendDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            var completeIncomeList = IncomeService.GetByConsortiumId(id, dstartDate, dendDate);
+
+            if (completeIncomeList == null)
+                throw new NotFoundException(ErrorMessages.IngresoNoEncontrado);
+            
+            return Ok(completeIncomeList);
+        }
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve el estado Patrimonial del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/PatrimonyStatus")]
+        [ResponseType(typeof(List<PatrimonyStatus>))]
+        public IHttpActionResult GetPatrimonyStatus(int id)
+        {
+
+            var completePatrimonyStatusList = PatrimonyStatusService.GetByConsortiumId(id);
+
+            if (completePatrimonyStatusList == null)
+                throw new NotFoundException(ErrorMessages.PatrimonioNoEncontrado);
+
+            return Ok(completePatrimonyStatusList);
+        }
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve los gastos del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/Spend")]
+        [ResponseType(typeof(List<Spend>))]
+        public IHttpActionResult GetSpend(int id, string startDate, string endDate)
+        {
+            
+            var dstartDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            var dendDate = DateTime.ParseExact(endDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            var completeSpendList = SpendService.GetByConsortiumId(id, dstartDate, dendDate);
+
+            if (completeSpendList == null)
+                throw new NotFoundException(ErrorMessages.GastoNoEncontrado);
+
+            return Ok(completeSpendList);
         }
 
 

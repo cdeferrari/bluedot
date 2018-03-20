@@ -491,6 +491,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\PatrimonyStatusController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\SpendController.cs" />
     <Compile Include="Controllers\CommonDataItemController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LaboralUnionController .cs" />
@@ -500,7 +503,10 @@
     <Compile Include="Controllers\PaymentTypeController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\SpendItemController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Controllers\IncomeTypeController.cs" />
     <Compile Include="Controllers\TaskListController.cs" />
     <Compile Include="Controllers\MultimediaController.cs" />
     <Compile Include="Controllers\OwnershipController.cs" />
@@ -510,6 +516,7 @@
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SecureStatusController.cs" />
     <Compile Include="Controllers\TaskResultController.cs" />
+    <Compile Include="Controllers\SpendTypeController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\CommonDataController.cs" />
     <Compile Include="Controllers\UnitController.cs" />

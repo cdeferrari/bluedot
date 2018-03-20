@@ -120,6 +120,9 @@
   <data name="CreateAdministration" xml:space="preserve">
     <value>Administration/</value>
   </data>
+  <data name="CreateBill" xml:space="preserve">
+    <value>Bills/</value>
+  </data>
   <data name="CreateChecklist" xml:space="preserve">
     <value>Lista/</value>
   </data>
@@ -137,6 +140,12 @@
   </data>
   <data name="CreateFunctionalUnit" xml:space="preserve">
     <value>Unidad/</value>
+  </data>
+  <data name="CreateIncome" xml:space="preserve">
+    <value>Income/</value>
+  </data>
+  <data name="CreateIncomeType" xml:space="preserve">
+    <value>IncomeType/</value>
   </data>
   <data name="CreateLaboralUnion" xml:space="preserve">
     <value>LaboralUnion/</value>
@@ -156,6 +165,9 @@
   <data name="CreateOwnership" xml:space="preserve">
     <value>Propiedad/</value>
   </data>
+  <data name="CreatePatrimonyStatus" xml:space="preserve">
+    <value>PatrimonyStatus/</value>
+  </data>
   <data name="CreatePaymentType" xml:space="preserve">
     <value>PaymentType/</value>
   </data>
@@ -168,6 +180,12 @@
   <data name="CreateRenter" xml:space="preserve">
     <value>Renter/</value>
   </data>
+  <data name="CreateSpend" xml:space="preserve">
+    <value>Spends/</value>
+  </data>
+  <data name="CreateSpendType" xml:space="preserve">
+    <value>SpendTypes/</value>
+  </data>
   <data name="CreateTicket" xml:space="preserve">
     <value>Tickets/</value>
   </data>
@@ -179,6 +197,9 @@
   </data>
   <data name="DeleteAdministration" xml:space="preserve">
     <value>Administration/{0}</value>
+  </data>
+  <data name="DeleteBill" xml:space="preserve">
+    <value>Bill/{0}</value>
   </data>
   <data name="DeleteChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
@@ -198,6 +219,12 @@
   <data name="DeleteFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>
   </data>
+  <data name="DeleteIncome" xml:space="preserve">
+    <value>Income/{0}</value>
+  </data>
+  <data name="DeleteIncomeType" xml:space="preserve">
+    <value>IncomeType/{0}</value>
+  </data>
   <data name="DeleteLaboralUnion" xml:space="preserve">
     <value>LaboralUnion/{0}</value>
   </data>
@@ -213,6 +240,9 @@
   <data name="DeleteOwnership" xml:space="preserve">
     <value>Propiedad/{0}</value>
   </data>
+  <data name="DeletePatrimonyStatus" xml:space="preserve">
+    <value>PatrimonyStatus/{0}</value>
+  </data>
   <data name="DeletePaymentType" xml:space="preserve">
     <value>PaymentType/{0}</value>
   </data>
@@ -224,6 +254,12 @@
   </data>
   <data name="DeleteRenter" xml:space="preserve">
     <value>Renter/{0}</value>
+  </data>
+  <data name="DeleteSpend" xml:space="preserve">
+    <value>Spend/{0}</value>
+  </data>
+  <data name="DeleteSpendType" xml:space="preserve">
+    <value>SpendType/{0}</value>
   </data>
   <data name="DeleteTicket" xml:space="preserve">
     <value>Ticket/{0}</value>
@@ -242,6 +278,9 @@
   </data>
   <data name="GetAllAdministrations" xml:space="preserve">
     <value>Administration/</value>
+  </data>
+  <data name="GetAllBills" xml:space="preserve">
+    <value>Bills/</value>
   </data>
   <data name="GetAllChecklist" xml:space="preserve">
     <value>Lista/</value>
@@ -264,6 +303,12 @@
   <data name="GetAllFunctionalUnits" xml:space="preserve">
     <value>Unidad/</value>
   </data>
+  <data name="GetAllIncomes" xml:space="preserve">
+    <value>Income/</value>
+  </data>
+  <data name="GetAllIncomeTypes" xml:space="preserve">
+    <value>IncomeType/</value>
+  </data>
   <data name="GetAllItems" xml:space="preserve">
     <value>Items/</value>
   </data>
@@ -281,6 +326,9 @@
   </data>
   <data name="GetAllOwnerships" xml:space="preserve">
     <value>Propiedad/All</value>
+  </data>
+  <data name="GetAllPatrimonyStatus" xml:space="preserve">
+    <value>PatrimonyStatus/</value>
   </data>
   <data name="GetAllPaymentTypes" xml:space="preserve">
     <value>PaymentType/</value>
@@ -300,6 +348,15 @@
   <data name="GetAllSecureStatus" xml:space="preserve">
     <value>SecureStatus/</value>
   </data>
+  <data name="GetAllSpendItems" xml:space="preserve">
+    <value>SpendItem/</value>
+  </data>
+  <data name="GetAllSpends" xml:space="preserve">
+    <value>Spends/</value>
+  </data>
+  <data name="GetAllSpendType" xml:space="preserve">
+    <value>SpendTypes/</value>
+  </data>
   <data name="GetAllStatus" xml:space="preserve">
     <value>Status/</value>
   </data>
@@ -315,6 +372,9 @@
   </data>
   <data name="GetAllWorkers" xml:space="preserve">
     <value>Worker/</value>
+  </data>
+  <data name="GetBill" xml:space="preserve">
+    <value>Bill/{0}</value>
   </data>
   <data name="GetByConsortiumId" xml:space="preserve">
     <value>Consorcio/{0}/Tickets</value>
@@ -337,6 +397,15 @@
   <data name="GetFunctionalUnit" xml:space="preserve">
     <value>Unidad/{0}</value>
   </data>
+  <data name="GetIncome" xml:space="preserve">
+    <value>Income/{0}</value>
+  </data>
+  <data name="GetIncomeByConsortiumId" xml:space="preserve">
+    <value>Consorcio/{0}/Income?startDate={1}&amp;endDate={2}</value>
+  </data>
+  <data name="GetIncomeType" xml:space="preserve">
+    <value>IncomeType/{0}</value>
+  </data>
   <data name="GetManager" xml:space="preserve">
     <value>Manager/{0}</value>
   </data>
@@ -352,6 +421,12 @@
   <data name="GetOwnership" xml:space="preserve">
     <value>Propiedad/{0}</value>
   </data>
+  <data name="GetPatrimonyStatus" xml:space="preserve">
+    <value>PatrimonyStatus/{0}</value>
+  </data>
+  <data name="GetPatrimonyStatusByConsortium" xml:space="preserve">
+    <value>Consorcio/{0}/PatrimonyStatus</value>
+  </data>
   <data name="GetProvider" xml:space="preserve">
     <value>Provider/{0}</value>
   </data>
@@ -360,6 +435,18 @@
   </data>
   <data name="GetRenter" xml:space="preserve">
     <value>Renter/{0}</value>
+  </data>
+  <data name="GetSpend" xml:space="preserve">
+    <value>Spends/{0}</value>
+  </data>
+  <data name="GetSpendByConsortium" xml:space="preserve">
+    <value>Consorcio/{0}/Spend?startDate={1}&amp;endDate={2}</value>
+  </data>
+  <data name="GetSpendType" xml:space="preserve">
+    <value>SpendTypes/{0}</value>
+  </data>
+  <data name="GetSpendTypeByConsortium" xml:space="preserve">
+    <value>Consorcio/{0}/SpendType</value>
   </data>
   <data name="GetTicket" xml:space="preserve">
     <value>Tickets/{0}</value>
@@ -379,6 +466,9 @@
   <data name="UpdateAdministration" xml:space="preserve">
     <value>Administration/{0}</value>
   </data>
+  <data name="UpdateBill" xml:space="preserve">
+    <value>Bill/{0}</value>
+  </data>
   <data name="UpdateChecklist" xml:space="preserve">
     <value>Lista/{0}</value>
   </data>
@@ -394,6 +484,12 @@
   <data name="UpdateFunctionalUnit" xml:space="preserve">
     <value>Unit/{0}</value>
   </data>
+  <data name="UpdateIncome" xml:space="preserve">
+    <value>Income/{0}</value>
+  </data>
+  <data name="UpdateIncomeType" xml:space="preserve">
+    <value>IncomeType/{0}</value>
+  </data>
   <data name="UpdateManager" xml:space="preserve">
     <value>Manager/{0}</value>
   </data>
@@ -403,11 +499,20 @@
   <data name="UpdateOwnership" xml:space="preserve">
     <value>Propiedad/{0}</value>
   </data>
+  <data name="UpdatePatrimonyStatus" xml:space="preserve">
+    <value>PatrimonyStatus/{0}</value>
+  </data>
   <data name="UpdateProvider" xml:space="preserve">
     <value>Provider/{0}</value>
   </data>
   <data name="UpdateRenter" xml:space="preserve">
     <value>Renter/{0}</value>
+  </data>
+  <data name="UpdateSpend" xml:space="preserve">
+    <value>Spend/{0}</value>
+  </data>
+  <data name="UpdateSpendType" xml:space="preserve">
+    <value>SpendType/{0}</value>
   </data>
   <data name="UpdateTicket" xml:space="preserve">
     <value>Ticket/{0}</value>
@@ -417,5 +522,8 @@
   </data>
   <data name="UpdateWorker" xml:space="preserve">
     <value>Worker/{0}</value>
+  </data>
+  <data name="CloseMonth" xml:space="preserve">
+    <value>Consorcio/{0}/CloseMonth</value>
   </data>
 </root>

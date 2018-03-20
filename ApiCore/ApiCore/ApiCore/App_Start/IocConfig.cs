@@ -64,6 +64,18 @@ using ApiCore.Services.Implementations.Provinces;
 using ApiCore.Services.Contracts.Provinces;
 using ApiCore.Services.Contracts.Cities;
 using ApiCore.Services.Implementations.Citys;
+using ApiCore.Services.Implementations.SpendItems;
+using ApiCore.Services.Contracts.SpendItems;
+using ApiCore.Services.Implementations.SpendTypes;
+using ApiCore.Services.Contracts.SpendTypes;
+using ApiCore.Services.Implementations.Bills;
+using ApiCore.Services.Contracts.Bills;
+using ApiCore.Services.Implementations.Spends;
+using ApiCore.Services.Contracts.Spends;
+using ApiCore.Services.Implementations.PatrimonyStatuss;
+using ApiCore.Services.Contracts.PatrimonyStatuss;
+using ApiCore.Services.Implementations.Incomes;
+using ApiCore.Services.Contracts.Incomes;
 
 namespace ApiCore.App_Start
 {
@@ -214,6 +226,30 @@ namespace ApiCore.App_Start
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<SpendItemService>().As<ISpendItemService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<SpendTypeService>().As<ISpendTypeService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<BillService>().As<IBillService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<SpendService>().As<ISpendService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<IncomeService>().As<IIncomeService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<PatrimonyStatusService>().As<IPatrimonyStatusService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MultimediaRepository>().As<IMultimediaRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
@@ -243,7 +279,13 @@ namespace ApiCore.App_Start
             builder.RegisterType<ManagerRepository>().As<IManagerRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MessageRepository>().As<IMessageRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PaymentTypeRepository>().As<IPaymentTypeRepository>().PropertiesAutowired().InstancePerRequest();
-            
+            builder.RegisterType<SpendTypeRepository>().As<ISpendTypeRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<SpendItemRepository>().As<ISpendItemRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<BillRepository>().As<IBillRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<SpendRepository>().As<ISpendRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<IncomeRepository>().As<IIncomeRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<PatrimonyStatusRepository>().As<IPatrimonyStatusRepository>().PropertiesAutowired().InstancePerRequest();
+
         }
 
     }

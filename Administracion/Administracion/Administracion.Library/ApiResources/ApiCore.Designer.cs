@@ -61,11 +61,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/CloseMonth.
+        /// </summary>
+        public static string CloseMonth {
+            get {
+                return ResourceManager.GetString("CloseMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration/.
         /// </summary>
         public static string CreateAdministration {
             get {
                 return ResourceManager.GetString("CreateAdministration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bills/.
+        /// </summary>
+        public static string CreateBill {
+            get {
+                return ResourceManager.GetString("CreateBill", resourceCulture);
             }
         }
         
@@ -124,6 +142,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Income/.
+        /// </summary>
+        public static string CreateIncome {
+            get {
+                return ResourceManager.GetString("CreateIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IncomeType/.
+        /// </summary>
+        public static string CreateIncomeType {
+            get {
+                return ResourceManager.GetString("CreateIncomeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LaboralUnion/.
         /// </summary>
         public static string CreateLaboralUnion {
@@ -178,6 +214,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PatrimonyStatus/.
+        /// </summary>
+        public static string CreatePatrimonyStatus {
+            get {
+                return ResourceManager.GetString("CreatePatrimonyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PaymentType/.
         /// </summary>
         public static string CreatePaymentType {
@@ -214,6 +259,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spends/.
+        /// </summary>
+        public static string CreateSpend {
+            get {
+                return ResourceManager.GetString("CreateSpend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendTypes/.
+        /// </summary>
+        public static string CreateSpendType {
+            get {
+                return ResourceManager.GetString("CreateSpendType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets/.
         /// </summary>
         public static string CreateTicket {
@@ -246,6 +309,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteAdministration {
             get {
                 return ResourceManager.GetString("DeleteAdministration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bill/{0}.
+        /// </summary>
+        public static string DeleteBill {
+            get {
+                return ResourceManager.GetString("DeleteBill", resourceCulture);
             }
         }
         
@@ -304,6 +376,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Income/{0}.
+        /// </summary>
+        public static string DeleteIncome {
+            get {
+                return ResourceManager.GetString("DeleteIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IncomeType/{0}.
+        /// </summary>
+        public static string DeleteIncomeType {
+            get {
+                return ResourceManager.GetString("DeleteIncomeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LaboralUnion/{0}.
         /// </summary>
         public static string DeleteLaboralUnion {
@@ -349,6 +439,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PatrimonyStatus/{0}.
+        /// </summary>
+        public static string DeletePatrimonyStatus {
+            get {
+                return ResourceManager.GetString("DeletePatrimonyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PaymentType/{0}.
         /// </summary>
         public static string DeletePaymentType {
@@ -381,6 +480,24 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteRenter {
             get {
                 return ResourceManager.GetString("DeleteRenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spend/{0}.
+        /// </summary>
+        public static string DeleteSpend {
+            get {
+                return ResourceManager.GetString("DeleteSpend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendType/{0}.
+        /// </summary>
+        public static string DeleteSpendType {
+            get {
+                return ResourceManager.GetString("DeleteSpendType", resourceCulture);
             }
         }
         
@@ -435,6 +552,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllAdministrations {
             get {
                 return ResourceManager.GetString("GetAllAdministrations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bills/.
+        /// </summary>
+        public static string GetAllBills {
+            get {
+                return ResourceManager.GetString("GetAllBills", resourceCulture);
             }
         }
         
@@ -502,6 +628,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Income/.
+        /// </summary>
+        public static string GetAllIncomes {
+            get {
+                return ResourceManager.GetString("GetAllIncomes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IncomeType/.
+        /// </summary>
+        public static string GetAllIncomeTypes {
+            get {
+                return ResourceManager.GetString("GetAllIncomeTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Items/.
         /// </summary>
         public static string GetAllItems {
@@ -552,6 +696,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllOwnerships {
             get {
                 return ResourceManager.GetString("GetAllOwnerships", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PatrimonyStatus/.
+        /// </summary>
+        public static string GetAllPatrimonyStatus {
+            get {
+                return ResourceManager.GetString("GetAllPatrimonyStatus", resourceCulture);
             }
         }
         
@@ -610,6 +763,33 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SpendItem/.
+        /// </summary>
+        public static string GetAllSpendItems {
+            get {
+                return ResourceManager.GetString("GetAllSpendItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spends/.
+        /// </summary>
+        public static string GetAllSpends {
+            get {
+                return ResourceManager.GetString("GetAllSpends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendTypes/.
+        /// </summary>
+        public static string GetAllSpendType {
+            get {
+                return ResourceManager.GetString("GetAllSpendType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status/.
         /// </summary>
         public static string GetAllStatus {
@@ -651,6 +831,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllWorkers {
             get {
                 return ResourceManager.GetString("GetAllWorkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bill/{0}.
+        /// </summary>
+        public static string GetBill {
+            get {
+                return ResourceManager.GetString("GetBill", resourceCulture);
             }
         }
         
@@ -718,6 +907,33 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Income/{0}.
+        /// </summary>
+        public static string GetIncome {
+            get {
+                return ResourceManager.GetString("GetIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/Income?startDate={1}&amp;endDate={2}.
+        /// </summary>
+        public static string GetIncomeByConsortiumId {
+            get {
+                return ResourceManager.GetString("GetIncomeByConsortiumId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IncomeType/{0}.
+        /// </summary>
+        public static string GetIncomeType {
+            get {
+                return ResourceManager.GetString("GetIncomeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager/{0}.
         /// </summary>
         public static string GetManager {
@@ -763,6 +979,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PatrimonyStatus/{0}.
+        /// </summary>
+        public static string GetPatrimonyStatus {
+            get {
+                return ResourceManager.GetString("GetPatrimonyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/PatrimonyStatus.
+        /// </summary>
+        public static string GetPatrimonyStatusByConsortium {
+            get {
+                return ResourceManager.GetString("GetPatrimonyStatusByConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provider/{0}.
         /// </summary>
         public static string GetProvider {
@@ -786,6 +1020,42 @@ namespace Administracion.Library.ApiResources {
         public static string GetRenter {
             get {
                 return ResourceManager.GetString("GetRenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spends/{0}.
+        /// </summary>
+        public static string GetSpend {
+            get {
+                return ResourceManager.GetString("GetSpend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/Spend?startDate={1}&amp;endDate={2}.
+        /// </summary>
+        public static string GetSpendByConsortium {
+            get {
+                return ResourceManager.GetString("GetSpendByConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendTypes/{0}.
+        /// </summary>
+        public static string GetSpendType {
+            get {
+                return ResourceManager.GetString("GetSpendType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/SpendType.
+        /// </summary>
+        public static string GetSpendTypeByConsortium {
+            get {
+                return ResourceManager.GetString("GetSpendTypeByConsortium", resourceCulture);
             }
         }
         
@@ -844,6 +1114,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bill/{0}.
+        /// </summary>
+        public static string UpdateBill {
+            get {
+                return ResourceManager.GetString("UpdateBill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lista/{0}.
         /// </summary>
         public static string UpdateChecklist {
@@ -889,6 +1168,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Income/{0}.
+        /// </summary>
+        public static string UpdateIncome {
+            get {
+                return ResourceManager.GetString("UpdateIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IncomeType/{0}.
+        /// </summary>
+        public static string UpdateIncomeType {
+            get {
+                return ResourceManager.GetString("UpdateIncomeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager/{0}.
         /// </summary>
         public static string UpdateManager {
@@ -916,6 +1213,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PatrimonyStatus/{0}.
+        /// </summary>
+        public static string UpdatePatrimonyStatus {
+            get {
+                return ResourceManager.GetString("UpdatePatrimonyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provider/{0}.
         /// </summary>
         public static string UpdateProvider {
@@ -930,6 +1236,24 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateRenter {
             get {
                 return ResourceManager.GetString("UpdateRenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spend/{0}.
+        /// </summary>
+        public static string UpdateSpend {
+            get {
+                return ResourceManager.GetString("UpdateSpend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendType/{0}.
+        /// </summary>
+        public static string UpdateSpendType {
+            get {
+                return ResourceManager.GetString("UpdateSpendType", resourceCulture);
             }
         }
         

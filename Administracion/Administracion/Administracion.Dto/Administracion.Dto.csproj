@@ -44,6 +44,10 @@
     <Compile Include="Account\RoleResponse.cs" />
     <Compile Include="Account\UserResponse.cs" />
     <Compile Include="Account\WorkerResponse.cs" />
+    <Compile Include="PatrimonyStatus\PatrimonyStatusRequest.cs" />
+    <Compile Include="IncomeType\IncomeTypeRequest.cs" />
+    <Compile Include="Income\IncomeRequest.cs" />
+    <Compile Include="Bill\BillRequest.cs" />
     <Compile Include="Consortium\ConsortiumRequest.cs" />
     <Compile Include="CommonData\CommonDataRequest.cs" />
     <Compile Include="DescriptionRequest.cs" />
@@ -55,6 +59,8 @@
     <Compile Include="Owner\OwnerRequest.cs" />
     <Compile Include="List\ListRequest.cs" />
     <Compile Include="City\CityRequest.cs" />
+    <Compile Include="SpendType\SpendTypeRequest.cs" />
+    <Compile Include="Spend\SpendRequest.cs" />
     <Compile Include="Province\ProvinceRequest.cs" />
     <Compile Include="Unit\FunctionalUnitRequest.cs" />
     <Compile Include="Worker\WorkerRequest.cs" />

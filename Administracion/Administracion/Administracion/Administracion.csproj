@@ -242,6 +242,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BacklogController.cs" />
+    <Compile Include="Controllers\SpendTypeController.cs" />
+    <Compile Include="Controllers\SpendController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\ConsortiumController.cs" />
     <Compile Include="Controllers\DataBaseController.cs" />
@@ -254,6 +256,7 @@
     <Compile Include="Controllers\MultimediaController.cs" />
     <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
+    <Compile Include="Controllers\PatrimonyController.cs" />
     <Compile Include="Controllers\WorkersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -263,10 +266,12 @@
     <Compile Include="Models\FastUpdateViewModel.cs" />
     <Compile Include="Models\ConsortiumSecureViewModel.cs" />
     <Compile Include="Models\CityViewModel.cs" />
+    <Compile Include="Models\SpendTypeViewModel.cs" />
     <Compile Include="Models\ProvinceViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\ManagerViewModel.cs" />
     <Compile Include="Models\IdDescriptionViewModel.cs" />
+    <Compile Include="Models\CreateSpendViewModel.cs" />
     <Compile Include="Models\SystemModel.cs" />
     <Compile Include="Models\TaskListViewModel.cs" />
     <Compile Include="Models\CheckListViewModel.cs" />
@@ -279,6 +284,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\FunctionalUnitViewModel.cs" />
     <Compile Include="Models\OwnershipViewModel.cs" />
+    <Compile Include="Models\PatrimonyStatusViewModel.cs" />
+    <Compile Include="Models\SpendViewModel.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Models\ProviderViewModel.cs" />
     <Compile Include="Models\WorkerViewModel.cs" />
@@ -514,6 +521,12 @@
     <Content Include="Views\System\CreateProvince.cshtml" />
     <Content Include="Views\System\CreateCity.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Patrimony\List.cshtml" />
+    <Content Include="Views\Patrimony\_PatrimonyItem.cshtml" />
+    <Content Include="Views\Spend\_SueldoItem.cshtml" />
+    <Content Include="Views\Spend\List.cshtml" />
+    <Content Include="Views\Spend\_SpendItem.cshtml" />
+    <Content Include="Views\Spend\CreateSpend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

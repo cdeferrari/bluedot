@@ -1,0 +1,507 @@
+﻿@model Administracion.Models.SpendViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+
+                <li class="active">
+                    <a href="#"><i class="fa fa-dollar"></i> Gastos</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Gastos</a></li>
+        </ul>
+        <div class="block full" id="spend-page">
+            <div class="block-title">
+                <h2><strong>Listado de</strong> Gastos</h2>
+            </div>
+            <p>Acá podrás encontrar toda la información de los gastos del consorcio</p>
+
+
+            <div class="panel-heading">
+                <div class="row">
+                    
+                    <div class="col-md-2">                        
+                    </div>
+                </div>
+            </div>
+
+            @{
+                var spendItemDetYSueldos = Model.SpendItems.Where(x => x.Text.ToLower().Equals("detalle de sueldo y cargas sociales")).FirstOrDefault();
+                var spendItemAportesYContr = Model.SpendItems.Where(x => x.Text.ToLower().Equals("aportes y contribuciones")).FirstOrDefault();
+                var spendItemServPub = Model.SpendItems.Where(x => x.Text.ToLower().Equals("servicios públicos")).FirstOrDefault();
+                var spendItemAbonoServ = Model.SpendItems.Where(x => x.Text.ToLower().Equals("abono de servicios")).FirstOrDefault();
+                var spendItemMantPartesComunes = Model.SpendItems.Where(x => x.Text.ToLower().Equals("mantenimiento de partes comunes")).FirstOrDefault();
+                var spendItemRepUnidades = Model.SpendItems.Where(x => x.Text.ToLower().Equals("trabajo de reparaciones en unidades")).FirstOrDefault();
+                var spendItemGastosBancarios = Model.SpendItems.Where(x => x.Text.ToLower().Equals("gastos bancarios")).FirstOrDefault();
+                var spendItemGastosLimpieza = Model.SpendItems.Where(x => x.Text.ToLower().Equals("gastos de limpieza")).FirstOrDefault();
+                var spendItemGastosAdmin = Model.SpendItems.Where(x => x.Text.ToLower().Equals("gastos de administracion")).FirstOrDefault();
+                var spendItemPagosSeguros = Model.SpendItems.Where(x => x.Text.ToLower().Equals("pagos del período de seguros")).FirstOrDefault();
+                var spendItemOtros = Model.SpendItems.Where(x => x.Text.ToLower().Equals("otros")).FirstOrDefault();
+            }
+
+            <h2 class="h2-title">Remuneraciones al personal y cargas Sociales</h2>
+            <div class="table-responsive">
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemDetYSueldos.Value</th>
+                                <th class="text-center header-item">@spendItemDetYSueldos.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var sueldo in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)))
+                            {
+                                @Html.Partial("_SueldoItem", sueldo)
+                            }
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemAportesYContr.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center header-item">@spendItemAportesYContr.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var aporte in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)))
+                            {
+                                @Html.Partial("_SpendItem", aporte)
+                            }
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+
+            <h2 class="h2-title">Pagos del período por suministros, servicios, abonos y seguros</h2>
+            <div style="font-size:9px">(Conf. Art 10 inc. e y f ley N° 941)</div>
+            <div>RUBROS-CONCEPTO-DETALLE DE PROVEEDORES</div>
+            <div class="table-responsive">
+
+                <div class="block">
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemServPub.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemServPub.Value</th>
+                                <th class="text-center header-item">@spendItemServPub.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var aporte in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)))
+                            {
+                            @Html.Partial("_SpendItem", aporte)
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+            <div class="table-responsive">
+
+                <div class="block">
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemAbonoServ.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemAbonoServ.Value</th>
+                                <th class="text-center header-item">@spendItemAbonoServ.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var abono in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)))
+                            {
+                                @Html.Partial("_SpendItem", abono)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemMantPartesComunes.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemMantPartesComunes.Value</th>
+                                <th class="text-center header-item">@spendItemMantPartesComunes.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var mant in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemMantPartesComunes.Value)))
+                            {
+                                @Html.Partial("_SpendItem", mant)
+                            }
+                        </tbody>
+                    </table>
+
+                    </div>
+
+
+                </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemRepUnidades.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemRepUnidades.Value</th>
+                                <th class="text-center header-item">@spendItemRepUnidades.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var rep in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemRepUnidades.Value)))
+                            {
+                                @Html.Partial("_SpendItem", rep)
+                            }
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+
+               
+            </div>
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemGastosBancarios.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemGastosBancarios.Value</th>
+                                <th class="text-center header-item">@spendItemGastosBancarios.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var gbanc in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)))
+                            {
+                            @Html.Partial("_SpendItem", gbanc)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemGastosLimpieza.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemGastosLimpieza.Value</th>
+                                <th class="text-center header-item">@spendItemGastosLimpieza.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var glimp in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosLimpieza.Value)))
+                            {
+                                @Html.Partial("_SpendItem", glimp)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemGastosAdmin.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemGastosAdmin.Value</th>
+                                <th class="text-center header-item">@spendItemGastosAdmin.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var gadmin in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)))
+                            {
+                            @Html.Partial("_SpendItem", gadmin)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemPagosSeguros.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemPagosSeguros.Value</th>
+                                <th class="text-center header-item">@spendItemPagosSeguros.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var pseg in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)))
+                            {
+                            @Html.Partial("_SpendItem", pseg)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <div class="block">
+
+                    <div class="block-title">
+                        <div class="block-options pull-right">
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemOtros.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center header-item">@spendItemOtros.Value</th>
+                                <th class="text-center header-item">@spendItemOtros.Text</th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center header-item">GASTOS A</th>
+                                <th class="text-center header-item">GASTOS B</th>
+                                <th class="text-center header-item">GASTOS C</th>
+                                <th class="text-center header-item">TOTAL</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var pseg in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)))
+                            {
+                            @Html.Partial("_SpendItem", pseg)
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            
+        </div>
+
+
+    </div>
+</div>
+
+
+
+

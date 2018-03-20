@@ -1,0 +1,242 @@
+﻿@model Administracion.Models.CreateSpendViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-building"></i> Consorcio</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Consorcio</a></li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVOS </strong> GASTOS</h2>
+                    </div>
+                    @using (Html.BeginForm("CreateUpdateSpend", "Spend", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered" , enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Id)
+
+                        if (Model.ConsortiumId > 0)
+                        {
+                            <input type="hidden" id="ConsortiumId" name="ConsortiumId" value="@Model.ConsortiumId">
+                        }
+
+                        if (Model.Bill != null && Model.Bill.Id > 0)
+                        {
+                            <input type="hidden" id="Bill.Id" name="Bill.Id" value="@Model.Bill.Id">
+                        }
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">GENERA AUTOMATICAMENTE</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class='col-md-9 '>
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripción",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese descripción')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque el nombre completo</span>
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Bill.Number, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.Bill.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nro Factura",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese nro factura')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque el nro de factutura</span>
+                                @Html.ValidationMessageFor(model => model.Bill.Number, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Bill.Amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Monto",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Ingrese monto')",
+                               @oninput = "setCustomValidity('')"
+                           } })
+                                <span class="help-block">Coloque el monto.</span>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Rubro gasto">Tipo de gasto</label>
+                            <div class="col-md-6">
+                                       @Html.DropDownListFor(model => model.SpendTypeId, Model.SpendTypes, "-- ELIJA TIPO DE GASTO  --", new { @class = "form-control" })                                                                                                       
+                            </div>
+                            <div class="col-md-3 ">
+                                <a href="#modal-add-spend-type" data-toggle="modal" title="Agregar Tipo de Gasto" value="Agregar Tipo de Gasto" class="btn btn-success">Agregar Tipo de Gasto</a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">                            
+                            <label class="control-label col-md-3" for="ExpirationDate">Fecha de vencimiento</label>
+                            <div class='col-md-3'>
+
+                                <div class='input-group date'>
+                                    @Html.EditorFor(model => model.Bill.ExpirationDate, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control",
+                                           @required = "required",
+                                           @oninvalid = "this.setCustomValidity('Ingrese fecha de expiracion')",
+                                           @oninput = "setCustomValidity('')"
+                                       }
+                                   })
+
+                                    @Html.ValidationMessage("", new { @class = "text-danger" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Bill.ExpirationDate, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <label class="control-label col-md-3" for="NextExpirationDate">Segundo vencimiento</label>
+                            <div class='col-md-3'>
+
+                                <div class='input-group date'>
+                                    @Html.EditorFor(model => model.Bill.NextExpirationDate, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control",
+                                       @required = "required",
+                                       @oninvalid = "this.setCustomValidity('Ingrese segunda fecha de expiracion')",
+                                       @oninput = "setCustomValidity('')"
+                                   }
+                               })
+
+                                    @Html.ValidationMessage("", new { @class = "text-danger" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Bill.NextExpirationDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Rubro gasto">Empleado</label>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.WorkerId, Model.Workers, "-- ELIJA EMPLEADO --", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Rubro gasto">Proveedor</label>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.ProviderId, Model.Providers, "-- ELIJA PROVEEDOR  --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Rubro gasto">Encargado</label>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.ManagerId, Model.Managers, "-- ELIJA ENCARGADO  --", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
+                                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                </div>
+                            </div>
+                    }
+
+                </div>
+            </div>
+        </div>                
+    </div>            
+</div>
+
+
+
+<div id="modal-add-spend-type" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO TIPO DE GASTO</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
+
+                @using (Html.BeginForm("CreateSpendType", "SpendType", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
+
+
+                    <input type="hidden" name="ConsortiumId" id="ConsortiumId" value="@Model.ConsortiumId" />
+                    <input type="hidden" name="SpendItemId" id="SpendItemId" value="@Model.SpendItemId" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Descripción</label>
+                        <div>
+                            <input name="Description" id="Description" type="text" class="col-md-10" />
+                        </div>
+                    </div>
+                    <div class="form-group row">                        
+                        <label class="col-md-3 control-label">Configuración</label>
+                        <div class="col-md-9">
+                            <label class="checkbox-inline" for="example-inline-checkbox2">
+                                @Html.CheckBoxFor(model => model.Required) Requerido
+                            </label>
+
+                            <label class="checkbox-inline" for="example-inline-checkbox2">
+                                @Html.CheckBoxFor(model => model.ForAll) Todos los consorcios
+                            </label>
+
+                        </div>                        
+                    </div>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+
+                            @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                        </div>
+                    </div>
+                }
+                @*</form>*@
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>

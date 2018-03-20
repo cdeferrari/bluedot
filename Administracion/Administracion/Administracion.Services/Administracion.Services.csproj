@@ -46,8 +46,15 @@
   <ItemGroup>
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
+    <Compile Include="Contracts\SpendsType\ISpendTypeService.cs" />
+    <Compile Include="Contracts\Spends\ISpendService.cs" />
+    <Compile Include="Contracts\PatrimonyStatus\IPatrimonyStatusService.cs" />
+    <Compile Include="Contracts\IncomeTypes\IIncomeTypeService.cs" />
+    <Compile Include="Contracts\Incomes\IIncomeService.cs" />
     <Compile Include="Contracts\Checklists\IChecklistService.cs" />
     <Compile Include="Contracts\Cities\ICityService.cs" />
+    <Compile Include="Contracts\Bills\IBillService.cs" />
+    <Compile Include="Contracts\SpendItems\ISpendItemsService.cs" />
     <Compile Include="Contracts\Provinces\IProvinceService.cs" />
     <Compile Include="Contracts\Countries\ICountryService.cs" />
     <Compile Include="Contracts\LaboralUnions\ILaboralUnionService.cs" />
@@ -70,9 +77,16 @@
     <Compile Include="Contracts\Providers\IProviderService.cs" />
     <Compile Include="Contracts\Workers\IWorkerService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Implementations\SpendsType\SpendTypeService.cs" />
+    <Compile Include="Implementations\Spends\SpendService.cs" />
+    <Compile Include="Implementations\SpendItems\SpendItemService.cs" />
+    <Compile Include="Implementations\PatrimoniesStatus\PatrimonyStatusService.cs" />
+    <Compile Include="Implementations\Incomes\IncomeService.cs" />
     <Compile Include="Implementations\CommonData\CommonDataService.cs" />
+    <Compile Include="Implementations\Bills\BillService.cs" />
     <Compile Include="Implementations\Countries\ConsortryService.cs" />
     <Compile Include="Implementations\Cities\CityService.cs" />
+    <Compile Include="Implementations\IncomeTypes\IncomeTypesService.cs" />
     <Compile Include="Implementations\Provinces\ProvinceService.cs" />
     <Compile Include="Implementations\LaboralUnions\LaboralUnionService.cs" />
     <Compile Include="Implementations\ConsortiumSecure\ConsortiumSecureService.cs" />

@@ -106,11 +106,38 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Factura no encontrada.
+        /// </summary>
+        public static string FacturaNoEncontrada {
+            get {
+                return ResourceManager.GetString("FacturaNoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forbidden.
         /// </summary>
         public static string Forbidden {
             get {
                 return ResourceManager.GetString("Forbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gasto no encontrado.
+        /// </summary>
+        public static string GastoNoEncontrado {
+            get {
+                return ResourceManager.GetString("GastoNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingreso no encontrado.
+        /// </summary>
+        public static string IngresoNoEncontrado {
+            get {
+                return ResourceManager.GetString("IngresoNoEncontrado", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace ApiCore.Library.Mensajes {
         public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patrimonio no encontrado.
+        /// </summary>
+        public static string PatrimonioNoEncontrado {
+            get {
+                return ResourceManager.GetString("PatrimonioNoEncontrado", resourceCulture);
             }
         }
         

@@ -46,6 +46,9 @@
     <Compile Include="Contracts\AdministrationBankAccounts\IAdministrationBankAccountService.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationsService.cs" />
     <Compile Include="Contracts\BankAccounts\IBankAccountService.cs" />
+    <Compile Include="Contracts\PatrimonyStatus\IPatrimonyStatusService.cs" />
+    <Compile Include="Contracts\Incomes\IIncomeService.cs" />
+    <Compile Include="Contracts\Spends\ISpendService.cs" />
     <Compile Include="Contracts\CommonDataItems\ICommonDataItemsService.cs" />
     <Compile Include="Contracts\LaboralUnion\ILaboralUnionService.cs" />
     <Compile Include="Contracts\CommonData\ICommonDataService.cs" />
@@ -53,6 +56,9 @@
     <Compile Include="Contracts\Managers\IManagerService.cs" />
     <Compile Include="Contracts\Ownerships\IOwnershipService.cs" />
     <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
+    <Compile Include="Contracts\SpendItems\ISpendItemService.cs" />
+    <Compile Include="Contracts\IncomeTypes\IIncomeTypeService.cs" />
+    <Compile Include="Contracts\SpendTypes\ISpendTypeService.cs" />
     <Compile Include="Contracts\PersonalBankAccounts\IPersonalBankAccountService.cs" />
     <Compile Include="Contracts\Cities\ICitiesService.cs" />
     <Compile Include="Contracts\Provinces\IProvincesService.cs" />
@@ -63,6 +69,7 @@
     <Compile Include="Contracts\PaymentTypes\IPaymentTypeService.cs" />
     <Compile Include="Contracts\SecureStatus\ISecureStatusService.cs" />
     <Compile Include="Contracts\TaskResults\ITaskResultService.cs" />
+    <Compile Include="Contracts\Bills\IBillService.cs" />
     <Compile Include="Contracts\TicketStatus\ITicketStatusService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\ConsortiumSecures\IConsortiumSecureService.cs" />
@@ -76,6 +83,7 @@
     <Compile Include="Implementations\AdministrationBankAccounts\AdministrationBankAccountService.cs" />
     <Compile Include="Implementations\BankAccounts\BankAccountService.cs" />
     <Compile Include="Implementations\CommonDataItems\CommonDataItemsService.cs" />
+    <Compile Include="Implementations\PatrimonyStatus\PatrimonyStatusService.cs" />
     <Compile Include="Implementations\LaboralUnion\LaboralUnionService.cs" />
     <Compile Include="Implementations\CommonData\CommonDataService.cs" />
     <Compile Include="Implementations\Messages\MessagesService.cs" />
@@ -84,6 +92,10 @@
     <Compile Include="Implementations\BacklogUser\BacklogUserService.cs" />
     <Compile Include="Implementations\Administrations\AdministrationService.cs" />
     <Compile Include="Implementations\Consortiums\ConsortiumService.cs" />
+    <Compile Include="Implementations\SpendItems\SpendItemService.cs" />
+    <Compile Include="Implementations\IncomeTypes\IncomeTypeService.cs" />
+    <Compile Include="Implementations\Incomes\IncomeService.cs" />
+    <Compile Include="Implementations\SpendTypes\SpendTypeService.cs" />
     <Compile Include="Implementations\PersonalBankAccounts\PersonalBankAccountService.cs" />
     <Compile Include="Implementations\Cities\CitiesService.cs" />
     <Compile Include="Implementations\Provinces\ProvincesService.cs" />
@@ -94,6 +106,8 @@
     <Compile Include="Implementations\PaymentTypes\PaymentTypeService.cs" />
     <Compile Include="Implementations\SecureStatus\SecureStatusService.cs" />
     <Compile Include="Implementations\TaskResult\TaskResultService.cs" />
+    <Compile Include="Implementations\Bills\BillService.cs" />
+    <Compile Include="Implementations\Spends\SpendService.cs" />
     <Compile Include="Implementations\TicketStatus\TicketStatusService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Implementations\ConsortiumSecures\ConsortiumSecureService.cs" />

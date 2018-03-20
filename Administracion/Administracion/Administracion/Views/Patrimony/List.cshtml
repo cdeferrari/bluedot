@@ -1,0 +1,115 @@
+﻿@model Administracion.Models.PatrimonyStatusViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+
+                <li class="active">
+                    <a href="#"><i class="fa fa-dollar"></i> Estado Patrimonial</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Estado Patrimonial</a></li>
+        </ul>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Listado de</strong> Estado Patrimoniales</h2>
+            </div>
+            <p>Acá podrás encontrar toda la información de los estados de los consorcios</p>
+
+
+            <div class="panel-heading">
+                <div class="row">
+                    
+                    <div class="col-md-2">                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="table-responsive">
+                @if (Model.Status.Count() > 0)
+                {
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">                    
+
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Debe</th>
+                                    <th>Haber</th>
+                                    <th>Activo</th>
+                                    <th>Pasivo</th>
+                                    <th>Consorcio</th>
+                                    @*<th class="text-center">Acciones</th>*@
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var patrimony in Model.Status)
+                                {
+                                    @Html.Partial("_PatrimonyItem", patrimony)
+                                }
+                            </tbody>
+                        </table>
+
+                }
+                
+
+            </div>
+
+            <div class="col-md-3 ">
+                <a href="#modal-close-month" data-toggle="modal" title="Liquidar" value="Liquidar" class="btn btn-success">Liquidar</a>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<!-- DELETE -->
+<div id="modal-close-month" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> LIQUIDAR </h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Estas seguro que queres realizar la liquidación mensual</legend>
+
+                    </fieldset>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button onclick="location.href='CloseMonth?consortiumId=@Model.ConsortiumId'" type="submit" class="btn btn-sm btn-success">Aceptar</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
