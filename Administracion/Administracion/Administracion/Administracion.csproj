@@ -242,6 +242,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BacklogController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\SpendTypeController.cs" />
     <Compile Include="Controllers\SpendController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Models\FastUpdateViewModel.cs" />
     <Compile Include="Models\ConsortiumSecureViewModel.cs" />
     <Compile Include="Models\CityViewModel.cs" />
+    <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Models\SpendTypeViewModel.cs" />
     <Compile Include="Models\ProvinceViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -527,6 +529,8 @@
     <Content Include="Views\Spend\List.cshtml" />
     <Content Include="Views\Spend\_SpendItem.cshtml" />
     <Content Include="Views\Spend\CreateSpend.cshtml" />
+    <Content Include="Views\Backlog\_TaskDetail.cshtml" />
+    <Content Include="Views\Backlog\_CreateTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

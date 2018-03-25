@@ -26,6 +26,7 @@ namespace ApiCore.Repository.Mappings
             this.HasOptional(x => x.Worker).WithMany().Map(x => x.MapKey("worker_id"));
             this.HasRequired(x => x.Creator).WithMany().Map(x => x.MapKey("creator_id"));
             this.HasMany(x => x.Messages).WithRequired(x => x.Ticket).Map(x => x.MapKey("ticket_id"));
+            this.HasMany(x => x.Tasks).WithRequired(x => x.Ticket).Map(x => x.MapKey("ticket_id"));
         }
 
     }

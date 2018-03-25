@@ -23,5 +23,6 @@ namespace ApiCore.Dtos.Response
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         public virtual IList<MessageResponse> Messages { get; set; }
+        public virtual IList<TaskResponse> Tasks { get; set; }
     }
 }

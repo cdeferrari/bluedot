@@ -277,6 +277,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks/.
+        /// </summary>
+        public static string CreateTask {
+            get {
+                return ResourceManager.GetString("CreateTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets/.
         /// </summary>
         public static string CreateTicket {
@@ -498,6 +507,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteSpendType {
             get {
                 return ResourceManager.GetString("DeleteSpendType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task/{0}.
+        /// </summary>
+        public static string DeleteTask {
+            get {
+                return ResourceManager.GetString("DeleteTask", resourceCulture);
             }
         }
         
@@ -799,6 +817,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks/.
+        /// </summary>
+        public static string GetAllTask {
+            get {
+                return ResourceManager.GetString("GetAllTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TaskResult/.
         /// </summary>
         public static string GetAllTaskResult {
@@ -849,6 +876,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetByConsortiumId {
             get {
                 return ResourceManager.GetString("GetByConsortiumId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket/{0}/Tasks.
+        /// </summary>
+        public static string GetByTicketId {
+            get {
+                return ResourceManager.GetString("GetByTicketId", resourceCulture);
             }
         }
         
@@ -1060,6 +1096,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task/{0}.
+        /// </summary>
+        public static string GetTask {
+            get {
+                return ResourceManager.GetString("GetTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets/{0}.
         /// </summary>
         public static string GetTicket {
@@ -1254,6 +1299,15 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateSpendType {
             get {
                 return ResourceManager.GetString("UpdateSpendType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task/{0}.
+        /// </summary>
+        public static string UpdateTask {
+            get {
+                return ResourceManager.GetString("UpdateTask", resourceCulture);
             }
         }
         

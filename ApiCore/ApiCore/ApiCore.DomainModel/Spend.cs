@@ -13,6 +13,6 @@ namespace ApiCore.DomainModel
         public virtual SpendType Type { get; set; }
         public virtual DateTime PaymentDate { get; set; }
         public virtual string Description { get; set; }
-
+        public virtual Task Task { get; set; }
     }
 }

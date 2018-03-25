@@ -25,5 +25,6 @@ namespace Administracion.Models
         public virtual bool Required { get; set; }
         public virtual bool ForAll { get; set; }
 
+        public virtual int? TaskId { get; set; }
     }
 }

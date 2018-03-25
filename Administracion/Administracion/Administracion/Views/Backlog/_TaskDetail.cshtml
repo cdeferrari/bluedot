@@ -1,0 +1,70 @@
+﻿@model Administracion.DomainModel.Task
+
+<div id="modal-task-details-@Model.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+            @{var workerDescription = Model.Worker != null ? Model.Worker.User.Name + " " + Model.Worker.User.Surname : "-";
+                var managerDescription = Model.Manager != null ? Model.Manager.User.Name + " " + Model.Manager.User.Surname : "-";
+                var providerDescription = Model.Provider != null ? Model.Provider.User.Name + " " + Model.Provider.User.Surname : "-";
+                }
+
+                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Creador: @Model.Creator.User.Name @Model.Creator.User.Surname</legend>
+                        <legend>Fecha de Creación: @Model.OpenDate.ToShortDateString()</legend>
+                        <legend>Prioridad: @Model.Priority.Description</legend>
+                        <legend>Estado: @Model.Status.Description</legend>
+                        <legend>Empleado: @workerDescription</legend>                        
+                        <legend>Encargado: @managerDescription</legend>                        
+                        <legend>Proveedor: @providerDescription</legend>                        
+                    </fieldset>
+
+
+
+                    <div class="block">
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">                            
+                            <h2><strong>Gastos</strong> </h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        @if (Model.Spends != null)
+                        {
+    
+                                    foreach (var spend in Model.Spends)
+                                    {
+                                     var provdescription = spend.Bill.Provider != null ?
+                                          spend.Bill.Provider.User.Name+" " +spend.Bill.Provider.User.Surname : "-";
+                                    var workerdescription = spend.Bill.Worker != null ?
+                                        spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
+                                    var managerdescription = spend.Bill.Manager != null ?
+                                        spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
+
+                                
+                                        <h3>@spend.Description</h3>
+                                        <ul>
+                                            <li><strong>Tipo:</strong>@spend.Type.Description</li>
+                                            <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
+                                            <li><strong>Monto:</strong> @spend.Bill.Amount</li>                                            
+                                            <li><strong>Proveedor:</strong> @provdescription</li>                                            
+                                            <li><strong>Encargado:</strong> @managerdescription</li>                                            
+                                            <li><strong>Empleado:</strong> @workerdescription</li>                                            
+                                        </ul>
+                                    }
+
+                        }
+                        <!-- END Latest Orders Content -->
+                    </div>
+
+                </form>
+            </div>                                                
+        </div>
+    </div>
+</div>

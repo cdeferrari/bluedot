@@ -64,6 +64,7 @@
     <Compile Include="Request\ListRequest.cs" />
     <Compile Include="Request\TaskListRequest.cs" />
     <Compile Include="Request\BillRequest.cs" />
+    <Compile Include="Request\TaskRequest.cs" />
     <Compile Include="Request\TicketRequest.cs" />
     <Compile Include="Request\OwnerRequest.cs" />
     <Compile Include="Request\RenterRequest.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Response\FunctionalUnitResponse.cs" />
     <Compile Include="Response\ListResponse.cs" />
     <Compile Include="Response\MessageResponse.cs" />
+    <Compile Include="Response\TaskResponse.cs" />
     <Compile Include="Response\UnitRenterResponse.cs" />
     <Compile Include="Response\UnitOwnerResponse.cs" />
     <Compile Include="Response\OwnershipUnitResponse.cs" />

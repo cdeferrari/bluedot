@@ -526,4 +526,22 @@
   <data name="CloseMonth" xml:space="preserve">
     <value>Consorcio/{0}/CloseMonth</value>
   </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>Tasks/</value>
+  </data>
+  <data name="DeleteTask" xml:space="preserve">
+    <value>Task/{0}</value>
+  </data>
+  <data name="GetAllTask" xml:space="preserve">
+    <value>Tasks/</value>
+  </data>
+  <data name="GetByTicketId" xml:space="preserve">
+    <value>Ticket/{0}/Tasks</value>
+  </data>
+  <data name="GetTask" xml:space="preserve">
+    <value>Task/{0}</value>
+  </data>
+  <data name="UpdateTask" xml:space="preserve">
+    <value>Task/{0}</value>
+  </data>
 </root>

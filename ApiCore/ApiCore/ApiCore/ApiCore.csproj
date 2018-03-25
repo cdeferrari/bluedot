@@ -517,6 +517,7 @@
     <Compile Include="Controllers\SecureStatusController.cs" />
     <Compile Include="Controllers\TaskResultController.cs" />
     <Compile Include="Controllers\SpendTypeController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\CommonDataController.cs" />
     <Compile Include="Controllers\UnitController.cs" />

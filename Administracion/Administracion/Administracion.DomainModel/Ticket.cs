@@ -25,5 +25,6 @@ namespace Administracion.DomainModel
         public virtual int WorkerId { get; set; }
         public virtual int CreatorId { get; set; }
         public virtual IList<Message> Messages { get; set; }
+        public virtual IList<Task> Tasks { get; set; }
     }
 }

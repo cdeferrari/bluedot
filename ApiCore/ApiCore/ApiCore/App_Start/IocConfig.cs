@@ -76,6 +76,8 @@ using ApiCore.Services.Implementations.PatrimonyStatuss;
 using ApiCore.Services.Contracts.PatrimonyStatuss;
 using ApiCore.Services.Implementations.Incomes;
 using ApiCore.Services.Contracts.Incomes;
+using ApiCore.Services.Contracts.Tasks;
+using ApiCore.Services.Implementations.Tasks;
 
 namespace ApiCore.App_Start
 {
@@ -250,6 +252,14 @@ namespace ApiCore.App_Start
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<TicketService>().As<ITicketService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<TaskService>().As<ITaskService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MultimediaRepository>().As<IMultimediaRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
@@ -285,6 +295,7 @@ namespace ApiCore.App_Start
             builder.RegisterType<SpendRepository>().As<ISpendRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<IncomeRepository>().As<IIncomeRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PatrimonyStatusRepository>().As<IPatrimonyStatusRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<TaskRepository>().As<ITaskRepository>().PropertiesAutowired().InstancePerRequest();
 
         }
 

@@ -29,6 +29,7 @@ using Administracion.Services.Contracts.Spends;
 using Administracion.Services.Contracts.SpendTypes;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.TaskResult;
+using Administracion.Services.Contracts.Tasks;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
@@ -59,6 +60,7 @@ using Administracion.Services.Implementations.Spends;
 using Administracion.Services.Implementations.SpendTypes;
 using Administracion.Services.Implementations.Status;
 using Administracion.Services.Implementations.TaskResult;
+using Administracion.Services.Implementations.Tasks;
 using Administracion.Services.Implementations.Tickets;
 using Administracion.Services.Implementations.Users;
 using Administracion.Services.Implementations.Workers;
@@ -130,6 +132,7 @@ namespace Administracion.App_Start
             builder.RegisterType<SpendItemService>().As<ISpendItemsService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SpendService>().As<ISpendService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<IncomeService>().As<IIncomeService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<TaskService>().As<ITaskService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PatrimonyStatusService>().As<IPatrimonyStatusService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<IncomeTypesService>().As<IIncomeTypeService>().SingleInstance().PropertiesAutowired();
 

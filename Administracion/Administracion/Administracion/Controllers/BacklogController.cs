@@ -7,7 +7,10 @@ using Administracion.Security;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
+using Administracion.Services.Contracts.Managers;
 using Administracion.Services.Contracts.Priorities;
+using Administracion.Services.Contracts.Providers;
+using Administracion.Services.Contracts.SpendItemsService;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
@@ -31,9 +34,11 @@ namespace Administracion.Controllers
         public virtual IUserService UserService { get; set; }
         public virtual IAuthentication AuthenticationService { get; set; }
         public virtual IWorkerService WorkerService { get; set; }
+        public virtual IProviderService ProviderService { get; set; }
+        public virtual IManagerService ManagerService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
-
+        public virtual ISpendItemsService SpendItemService { get; set; }
 
 
         public ActionResult Index()
@@ -82,6 +87,18 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
+            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
+
+            var managerList = this.ManagerService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
+
             var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
@@ -99,6 +116,8 @@ namespace Administracion.Controllers
                 PriorityList = priorityList,
                 StatusList = statusSelectList,
                 WorkersList = workersList,
+                ManagerList = managerList,
+                ProviderList = providerList,
                 UsersList = userList,
                 ConsortiumList = consortiumList,
                 FunctionalUnitList = functionalUnitList
@@ -173,6 +192,24 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
+            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
+
+            var managerList = this.ManagerService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
+
+            var spendItemsList = this.SpendItemService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
+
             var allConsortiums = this.ConsortiumService.GetAll();
 
             var consortiumList = allConsortiums.Select(x => new SelectListItem()
@@ -181,25 +218,33 @@ namespace Administracion.Controllers
                 Text = x.FriendlyName
             });
 
-            var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Dto.ToString()
-            });
 
             var oTicket = this.TicketService.GetTicket(id);
             var ticket = Mapper.Map<TicketViewModel>(oTicket);
+
+            var functionalUnitList = oTicket.Consortium.Ownership.FunctionalUnits
+                .Select(x => new SelectListItem()
+            {
+                    Value = x.Id.ToString(),
+                    Text = oTicket.Consortium.Ownership.Address.Street + " " + oTicket.Consortium.Ownership.Address.Street + "-"
+                    + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
+                });
+
+
             ticket.StatusList = statusList;
             ticket.PriorityList = priorityList;
             ticket.WorkersList = workersList;
+            ticket.ManagerList = managerList;
+            ticket.ProviderList = providerList;
             ticket.UsersList = userList;
             ticket.ConsortiumList = consortiumList;
             ticket.FunctionalUnitList = functionalUnitList;
             ticket.Consortium = oTicket.Consortium;
+            ticket.Worker = oTicket.WorkerId > 0 ? this.WorkerService.GetWorker(oTicket.WorkerId) : null;
             ticket.ConsortiumId = oTicket.Consortium != null ? oTicket.Consortium.Id : 0;
             ticket.FunctionalUnit = oTicket.FunctionalUnit;
             ticket.FunctionalUnitId = oTicket.FunctionalUnit != null ? oTicket.FunctionalUnit.Id : 0;
-            
+            ticket.SpendItemList = spendItemsList;            
 
             return View("CreateTicket",ticket);
         }

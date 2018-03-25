@@ -41,6 +41,11 @@
                             <input type="hidden" id="ConsortiumId" name="ConsortiumId" value="@Model.ConsortiumId">
                         }
 
+                        if (Model.TaskId.HasValue)
+                        {
+                            <input type="hidden" id="TaskId" name="TaskId" value="@Model.TaskId.Value">
+                        }
+
                         if (Model.Bill != null && Model.Bill.Id > 0)
                         {
                             <input type="hidden" id="Bill.Id" name="Bill.Id" value="@Model.Bill.Id">

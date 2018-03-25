@@ -61,7 +61,7 @@
                             <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -143,7 +143,7 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -220,7 +220,7 @@
                         </div>
                     </div>
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -260,7 +260,7 @@
                         </div>
                     </div>
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -301,7 +301,7 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -342,7 +342,7 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -383,21 +383,21 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed" name="table">
 
-                        <thead>
+                        
                             <tr>
                                 <th class="text-center header-item">@spendItemGastosAdmin.Value</th>
-                                <th class="text-center header-item">@spendItemGastosAdmin.Text</th>
-                                <th></th>
-                                <th></th>
+                                <th class="text-center border-rigth-none" style="border-right:none">@spendItemGastosAdmin.Text</th>
+                                <th class="border-left-right-none" style="border-right:none; border-left:none"></th>
+                                <th class="border-left-none" style="border-left:none"></th>
                                 <th class="text-center header-item">GASTOS A</th>
                                 <th class="text-center header-item">GASTOS B</th>
                                 <th class="text-center header-item">GASTOS C</th>
                                 <th class="text-center header-item">TOTAL</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
-                        </thead>
+                        
 
                         <tbody>
                             @foreach (var gadmin in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)))
@@ -424,7 +424,7 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -465,7 +465,7 @@
                     </div>
 
 
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
 
                         <thead>
                             <tr>
@@ -505,3 +505,13 @@
 
 
 
+<script>
+    document.onreadystatechange = function () {
+        var tables = document. getElementsByName("table");
+        
+        tables.forEach(function (item, index, arr) {
+            item.setAttribute("class", "table table-vcenter table-condensed dataTable no-footer");
+        });
+    }
+    
+</script>

@@ -16,9 +16,10 @@ namespace ApiCore.Services.Implementations.Spends
     {
         public ISpendRepository SpendRepository { get; set; }
         public ISpendTypeRepository SpendTypeRepository { get; set; }        
-        public IConsortiumService ConsortiumService { get; set; }
+        public IConsortiumRepository ConsortiumRepository { get; set; }
         public IBillRepository BillRepository { get; set; }
-        
+        public ITaskRepository TaskRepository { get; set; }
+
         [Transaction]
         public Spend CreateSpend(SpendRequest Spend)
         {
@@ -76,8 +77,9 @@ namespace ApiCore.Services.Implementations.Spends
         private void MergeSpend(Spend originalSpend, SpendRequest Spend)
         {
             originalSpend.Bill = this.BillRepository.GetById(Spend.BillId);
-            originalSpend.Consortium = this.ConsortiumService.GetById(Spend.ConsortiumId);
+            originalSpend.Consortium = this.ConsortiumRepository.GetById(Spend.ConsortiumId);
             originalSpend.Type = this.SpendTypeRepository.GetById(Spend.SpendTypeId);
+            originalSpend.Task = Spend.TaskId.HasValue ? this.TaskRepository.GetById(Spend.TaskId.Value) : null;
             originalSpend.Description = Spend.Description;
             originalSpend.PaymentDate = Spend.PaymentDate;            
         }

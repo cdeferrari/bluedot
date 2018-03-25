@@ -12,6 +12,8 @@ using ApiCore.Dtos.Response;
 using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.Services.Contracts.Tickets;
+using ApiCore.DomainModel;
+using ApiCore.Services.Contracts.Tasks;
 
 namespace ApiCore.Controllers
 {
@@ -23,6 +25,7 @@ namespace ApiCore.Controllers
     {
 
         public ITicketService TicketService { get; set; }
+        public ITaskService TaskService { get; set; }
 
         // GET api/<controller>/5
         /// <summary>
@@ -121,5 +124,27 @@ namespace ApiCore.Controllers
             }
             
         }
+
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve checklists del consorcio
+        /// </summary>
+        /// <param name="id">id del ticket</param>
+        /// <returns></returns>
+
+        [Route("{id}/Tasks")]
+        [ResponseType(typeof(List<Task>))]
+        public IHttpActionResult GetChecklist(int id)
+        {
+
+            var completeTaskList = this.TaskService.GetByTicketId(id);
+
+            if (completeTaskList == null)
+                throw new NotFoundException(ErrorMessages.TicketNoEncontrado);
+            
+            return Ok(completeTaskList);
+        }
+
     }
 }

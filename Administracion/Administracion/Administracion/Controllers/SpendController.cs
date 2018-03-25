@@ -73,7 +73,7 @@ namespace Administracion.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateSpend(int consortiumId, int spendItemId)
+        public ActionResult CreateSpend(int consortiumId, int spendItemId, int? taskId = null)
         {
             var consortium = this.ConsortiumService.GetConsortium(consortiumId);
 
@@ -110,7 +110,8 @@ namespace Administracion.Controllers
                 Providers = new SelectList(providers, "Value", "Text"),
                 Workers = new SelectList(workers, "Value", "Text"),
                 ConsortiumId = consortiumId,
-                SpendItemId = spendItemId
+                SpendItemId = spendItemId,
+                TaskId = taskId
             };
                         
             return View(viewModel);
@@ -193,6 +194,7 @@ namespace Administracion.Controllers
                 PaymentDate = DateTime.Now,
                 SpendTypeId = spend.SpendTypeId,                
                 ConsortiumId = spend.ConsortiumId,
+                TaskId = spend.TaskId,
                 Id = spend.Id
             };
             
@@ -215,7 +217,7 @@ namespace Administracion.Controllers
                 {
                     if (nspend.Id == 0)
                     {
-                        nspend.BillId = nbill.Id;
+                        nspend.BillId = entity.Id;
                         result = this.SpendService.CreateSpend(nspend);
                     }
                     else

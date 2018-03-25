@@ -60,6 +60,7 @@ namespace ApiCore
                 cfg.CreateMap<Manager, ManagerResponse>();
                 cfg.CreateMap<Message, MessageResponse>();
 
+                cfg.CreateMap<Task, TaskResponse>();
             });
 
         }

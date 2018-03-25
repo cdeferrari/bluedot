@@ -214,6 +214,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tarea no encontrada.
+        /// </summary>
+        public static string TareaNoEncontrada {
+            get {
+                return ResourceManager.GetString("TareaNoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ticket no encontrado.
         /// </summary>
         public static string TicketNoEncontrado {

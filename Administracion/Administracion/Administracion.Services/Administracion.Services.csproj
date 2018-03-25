@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
+    <Compile Include="Contracts\Tasks\ITaskService.cs" />
     <Compile Include="Contracts\SpendsType\ISpendTypeService.cs" />
     <Compile Include="Contracts\Spends\ISpendService.cs" />
     <Compile Include="Contracts\PatrimonyStatus\IPatrimonyStatusService.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Implementations\Checklists\ChecklistService.cs" />
     <Compile Include="Implementations\SecureStatus\SecureStatusService.cs" />
     <Compile Include="Implementations\TaskResults\TaskResultService.cs" />
+    <Compile Include="Implementations\Tasks\TaskService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Implementations\Owners\OwnersService.cs" />
     <Compile Include="Implementations\Providers\ProviderService.cs" />

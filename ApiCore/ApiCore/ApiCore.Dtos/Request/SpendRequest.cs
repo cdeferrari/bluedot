@@ -15,5 +15,6 @@ namespace ApiCore.Dtos.Request
         public virtual string Description { get; set; }
         public virtual DateTime PaymentDate { get; set; }
         
+        public virtual int? TaskId { get; set; }
     }
 }

@@ -117,6 +117,7 @@
     <Compile Include="Contracts\IConsortiumRepository.cs" />
     <Compile Include="Contracts\IListRepository.cs" />
     <Compile Include="Contracts\IProvinceRepository.cs" />
+    <Compile Include="Contracts\ITaskRepository.cs" />
     <Compile Include="Contracts\ITicketRepository.cs" />
     <Compile Include="Contracts\IOwnerRepository.cs" />
     <Compile Include="Contracts\IRenterRepository.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Implementatios\PriorityRepository.cs" />
     <Compile Include="Implementatios\ListRepository.cs" />
     <Compile Include="Implementatios\ProvinceRepository.cs" />
+    <Compile Include="Implementatios\TaskRepository.cs" />
     <Compile Include="Implementatios\TicketRepository.cs" />
     <Compile Include="Implementatios\OwnerRepository.cs" />
     <Compile Include="Implementatios\RenterRepository.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Mappings\LaboralUnionMap.cs" />
     <Compile Include="Mappings\ConsortiumSecureMap.cs" />
     <Compile Include="Mappings\BillMap.cs" />
+    <Compile Include="Mappings\TaskMap.cs" />
     <Compile Include="Mappings\TicketStatusMap.cs" />
     <Compile Include="Mappings\TicketMap.cs" />
     <Compile Include="Mappings\OwnerMap.cs" />

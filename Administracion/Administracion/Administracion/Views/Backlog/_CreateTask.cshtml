@@ -1,0 +1,58 @@
+﻿@model Administracion.Models.TicketViewModel
+
+<div id="modal-add-task" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVA ORDEN</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                @using (Html.BeginForm("CreateTask", "Task", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
+
+                    <input type="hidden" name="Task.TicketId" id="Task.TicketId" value="@Model.Id" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Descripción</label>
+                        <div>
+                            <input name="Task.Description" id="Task.Description" type="text" class="col-md-10" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Prioridad: </label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Task.PriorityId, Model.PriorityList, "-- Elija Prioridad --")
+                        </div>
+                        <label class="control-label col-md-2">Trabajador: </label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Task.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Encargado: </label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Task.Manager.Id, Model.ManagerList, "-- Elija Encargado --")
+                        </div>
+                        <label class="control-label col-md-2">Proveedor: </label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Task.Provider.Id, Model.ProviderList, "-- Elija Proveedor --")
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                        </div>
+                    </div>
+                }
+                @*</form>*@
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>

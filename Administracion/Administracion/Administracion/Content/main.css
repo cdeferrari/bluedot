@@ -2610,6 +2610,18 @@ textarea.form-control {
     background-color: #eaedf1;
 }
 
+.border-left-right-none {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.border-left-none {
+    border-left: none !important;
+}
+
+.border-right-none {
+    border-right: none !important;
+}
 /* List Group */
 .list-group-item {
     border-color: #eaedf1;

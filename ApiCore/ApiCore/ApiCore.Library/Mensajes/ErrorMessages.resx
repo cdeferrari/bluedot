@@ -168,6 +168,9 @@
   <data name="ProvinciaNoEncontrada" xml:space="preserve">
     <value>Provincia no encontrada</value>
   </data>
+  <data name="TareaNoEncontrada" xml:space="preserve">
+    <value>Tarea no encontrada</value>
+  </data>
   <data name="TicketNoEncontrado" xml:space="preserve">
     <value>Ticket no encontrado</value>
   </data>

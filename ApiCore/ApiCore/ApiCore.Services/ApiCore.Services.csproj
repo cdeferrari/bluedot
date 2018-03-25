@@ -70,6 +70,7 @@
     <Compile Include="Contracts\SecureStatus\ISecureStatusService.cs" />
     <Compile Include="Contracts\TaskResults\ITaskResultService.cs" />
     <Compile Include="Contracts\Bills\IBillService.cs" />
+    <Compile Include="Contracts\Tasks\ITaskService.cs" />
     <Compile Include="Contracts\TicketStatus\ITicketStatusService.cs" />
     <Compile Include="Contracts\Tickets\ITicketService.cs" />
     <Compile Include="Contracts\ConsortiumSecures\IConsortiumSecureService.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Implementations\TaskResult\TaskResultService.cs" />
     <Compile Include="Implementations\Bills\BillService.cs" />
     <Compile Include="Implementations\Spends\SpendService.cs" />
+    <Compile Include="Implementations\Tasks\TaskService.cs" />
     <Compile Include="Implementations\TicketStatus\TicketStatusService.cs" />
     <Compile Include="Implementations\Tickets\TicketService.cs" />
     <Compile Include="Implementations\ConsortiumSecures\ConsortiumSecureService.cs" />

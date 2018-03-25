@@ -1,15 +1,15 @@
 ﻿@model Administracion.DomainModel.Spend
 
 <tr>
-    <td></td>
-    <td >@Model.Description</td>
-    <td></td>
-    <td>@Model.PaymentDate.ToString("MMM-yy")</td>
-    <td >@Model.Bill.Amount</td>    
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="text-center">
+    <td style="border: solid 1px; border-color: #eaedf1;"></td>
+    <td style="border-left: solid 1px; border-color: #eaedf1;">@Model.Description</td>
+    <td class="border-left-right-none"></td>
+    <td class="border-left-none" style="border-right: solid 1px; border-color: #eaedf1;">@Model.PaymentDate.ToString("MMM-yy")</td>
+    <td style="border: solid 1px; border-color: #eaedf1;">@Model.Bill.Amount</td>    
+    <td style="border: solid 1px; border-color: #eaedf1;"></td>
+    <td style="border: solid 1px; border-color: #eaedf1;"></td>
+    <td style="border: solid 1px; border-color: #eaedf1;"></td>
+    <td style="border: solid 1px; border-color: #eaedf1;" class="text-center">
         <div class="btn-group">
             <a href="UpdateSpendById?id=@Model.Id&consortiumId=@Model.Consortium.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>            
             <a href="#modal-delete-@Model.Id" data-toggle="modal" title="Borrar Gasto" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
