@@ -1447,7 +1447,12 @@ img.full-bg {
     padding: 5px;
 }
 
-#spend-page .table-responsive .header-item {
+#spend-page .total-table {
+    background-color: #f9fafc;
+}
+
+
+    #spend-page .table-responsive .header-item {
     font-size: 14px;
 }
 
