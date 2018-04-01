@@ -84,6 +84,21 @@
                         </tbody>
 
                     </table>
+                    @{var percentageItemSueldos = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemSueldos = Math.Round(percentageItemSueldos, 2);
+                        }
+
+                    <div class="total-table row">                        
+                        <div class="col-md-4"></div>                            
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>                            
+                            <div class="col-md-2"> 
+                            @percentageItemSueldos %
+                            </div>                            
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount)</div>                            
+                        </div>                        
+                    </div>
+
 
 
                 </div>
@@ -124,7 +139,20 @@
                             }
                         </tbody>
                     </table>
+                    @{var percentageItemAportesYContr = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemAportesYContr = Math.Round(percentageItemAportesYContr, 2);
+                    }
 
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemAportesYContr %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -166,6 +194,20 @@
                             }
                         </tbody>
                     </table>
+                    @{var percentageItemServPub = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemServPub = Math.Round(percentageItemServPub, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemServPub %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -203,6 +245,21 @@
                             }
                         </tbody>
                     </table>
+
+                    @{var percentageItemAbonoServ = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemAbonoServ = Math.Round(percentageItemAbonoServ, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemAbonoServ %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -244,6 +301,21 @@
                         </tbody>
                     </table>
 
+                    @{var percentageItemMantPartesComunes = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemMantPartesComunes.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemMantPartesComunes = Math.Round(percentageItemMantPartesComunes, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemMantPartesComunes %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemMantPartesComunes.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
+
                     </div>
 
 
@@ -283,6 +355,21 @@
                             }
                         </tbody>
                     </table>
+
+                    @{var percentageItemRepUnidades = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemRepUnidades.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemRepUnidades = Math.Round(percentageItemRepUnidades, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemRepUnidades %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemRepUnidades.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
                     
                 </div>
@@ -325,6 +412,21 @@
                         </tbody>
                     </table>
 
+                    @{var percentageItemGastosBancarios = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemGastosBancarios = Math.Round(percentageItemGastosBancarios, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemGastosBancarios %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
+
                 </div>
 
 
@@ -366,6 +468,22 @@
                         </tbody>
                     </table>
 
+                    @{var percentageItemGastosLimpieza = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosLimpieza.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemGastosLimpieza = Math.Round(percentageItemGastosLimpieza, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemGastosLimpieza %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosLimpieza.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
+
+
                 </div>
 
 
@@ -406,6 +524,20 @@
                             }
                         </tbody>
                     </table>
+                    @{var percentageItemGastosAdmin = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemGastosAdmin = Math.Round(percentageItemGastosAdmin, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemGastosAdmin %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -447,6 +579,20 @@
                             }
                         </tbody>
                     </table>
+                    @{var percentageItemPagosSeguros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemPagosSeguros = Math.Round(percentageItemPagosSeguros, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemPagosSeguros %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -489,12 +635,31 @@
                         </tbody>
                     </table>
 
+                    @{var percentageItemOtros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        percentageItemOtros = Math.Round(percentageItemOtros, 2);
+                    }
+
+                    <div class="total-table row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">Total</div>
+                            <div class="col-md-2">
+                                @percentageItemOtros %
+                            </div>
+                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)).Sum(x => x.Bill.Amount)</div>
+                        </div>
+                    </div>
+
                 </div>
 
 
             </div>
 
 
+
+            <div class="col-md-3 ">
+                <a href="#modal-close-month" data-toggle="modal" title="Liquidar" value="Liquidar" class="btn btn-success">Liquidar</a>
+            </div>
             
         </div>
 
@@ -502,6 +667,35 @@
     </div>
 </div>
 
+<div id="modal-close-month" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> LIQUIDAR </h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Estas seguro que queres realizar la liquidación mensual</legend>
+
+                    </fieldset>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button onclick="location.href='/Patrimony/CloseMonth?consortiumId=@Model.ConsortiumId'" type="submit" class="btn btn-sm btn-success">Aceptar</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
 
 
 
