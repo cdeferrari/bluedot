@@ -21,7 +21,9 @@
         </div>
         <ul class="breadcrumb breadcrumb-top">
             <li><a href="/home">Home</a></li>
-            <li><a href="">Consorcio</a></li>
+            <li><a href="/Consortium/Index">Consorcios</a></li>            
+            <li><a href="/Consortium/Details/@Model.ConsortiumId">Consorcio</a></li>            
+            <li><a href="/Spend/Index?Id=@Model.ConsortiumId">Gastos</a></li>            
         </ul>
         <div class="row">
 
@@ -203,7 +205,7 @@
             <div class="modal-body">
                 @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
 
-                @using (Html.BeginForm("CreateSpendType", "SpendType", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                @using (Html.BeginForm("CreateSpendType", "SpendType", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered", @id="createSpendForm" }))
                 {
 
 
@@ -213,7 +215,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2">Descripción</label>
                         <div>
-                            <input name="Description" id="Description" type="text" class="col-md-10" />
+                            <input name="Description" id="SpendTypeDescription" type="text" class="col-md-10" />
                         </div>
                     </div>
                     <div class="form-group row">                        
@@ -232,10 +234,10 @@
 
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-sm btn-default" id="cancelCreateSpendItemButton" data-dismiss="modal">Cancelar</button>
 
                             @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
-                            <input type="submit" class="btn btn-success" value="Guardar" />
+                            <input type="submit" class="btn btn-success" value="Guardar" id="createSpendButton"  />
                         </div>
                     </div>
                 }

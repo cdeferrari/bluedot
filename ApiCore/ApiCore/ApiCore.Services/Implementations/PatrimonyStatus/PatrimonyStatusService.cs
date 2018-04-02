@@ -92,22 +92,28 @@ namespace ApiCore.Services.Implementations.PatrimonyStatuss
             this.ValidateSpendsWithTypes(spends, spendTypes);
             
             var lastStatus = this.PatrimonyStatusRepository
-                .GetByConsortiumId(spends.FirstOrDefault().Consortium.Id)
+                .GetByConsortiumId(consortiumId)
                 .OrderByDescending(x => x.StatusDate)
                 .FirstOrDefault();
 
-            this.ValidateUnique(lastStatus, startDate, endDate);
+            var oldStatus = this.PatrimonyStatusRepository
+                .GetByConsortiumId(consortiumId)
+                .OrderByDescending(x => x.StatusDate)
+                .Take(2)
+                .LastOrDefault();
+
+            var lastValidStatus = this.ValidateUnique(lastStatus,oldStatus, startDate, endDate);
 
             var debt = spends.Sum(x => x.Bill.Amount);
             var totalIncome = incomes.Sum(x => x.Amount);
 
             var patrimonyStatus = new PatrimonyStatus()
             {
-                Activo = lastStatus != null ? lastStatus.Activo - debt + totalIncome : 0 - debt + totalIncome,
-                Pasivo = lastStatus != null ? lastStatus.Pasivo + debt - totalIncome : 0 + debt - totalIncome,
+                Activo = lastValidStatus != null ? lastValidStatus.Activo - debt + totalIncome : 0 - debt + totalIncome,
+                Pasivo = lastValidStatus != null ? lastValidStatus.Pasivo + debt - totalIncome : 0 + debt - totalIncome,
                 Haber = totalIncome,
                 Debe = debt,
-                Consortium = lastStatus != null ? lastStatus.Consortium : this.ConsortiumRepository.GetById(consortiumId),
+                Consortium = this.ConsortiumRepository.GetById(consortiumId),
                 StatusDate = now           
             };
 
@@ -117,11 +123,17 @@ namespace ApiCore.Services.Implementations.PatrimonyStatuss
         }
 
 
-        public void ValidateUnique(PatrimonyStatus patrimony, DateTime startDate, DateTime endDate)
+        public PatrimonyStatus ValidateUnique(PatrimonyStatus patrimony, PatrimonyStatus oldPatrimonyStatus, DateTime startDate, DateTime endDate)
         {
-            if(patrimony != null && (patrimony.StatusDate > startDate && patrimony.StatusDate < endDate))
-                throw new Exception("El mes ya se encuentra cerrado");
-
+            if (patrimony != null && (patrimony.StatusDate >= startDate && patrimony.StatusDate <= endDate))
+            {
+                this.PatrimonyStatusRepository.Delete(patrimony);
+                if (patrimony != oldPatrimonyStatus)
+                    return oldPatrimonyStatus;
+                else
+                    return null;
+            }
+            return patrimony;
         }
 
         public void ValidateSpendsWithTypes(IList<Spend> spends, List<SpendType> spendTypes)

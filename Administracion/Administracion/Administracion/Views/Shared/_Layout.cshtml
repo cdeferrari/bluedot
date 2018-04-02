@@ -262,7 +262,55 @@
         })
     });
     </script>
+    <script>
+            var form = $("#createSpendForm");
+            form.submit(function (event) {
+                event.preventDefault();                
+                debugger
+                var consortiumId = $("#ConsortiumId").val();
+                var spendItemId = $("#SpendItemId").val();
+                var description = $("#SpendTypeDescription").val();
+                var requiredVal = $("#Required:checked").val();
+                var forAllVal = $("#ForAll:checked").val();
 
+                var required = requiredVal != undefined;
+                var forAll = forAllVal != undefined;
+
+                $.ajax({
+                    type: "GET",
+                    url: "/SpendType/CreateSpendType?consortiumId=" + consortiumId + "&spendItemId=" + spendItemId + "&description=" + description + "&required=" + required + "&forAll=" + forAll,
+                    //data: { "consortiumId": consortiumId, "spendItemId": spendItemId, "description": description, "required": required, "forAll": forAll },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {
+                        $("#SpendTypeId").empty();                
+                        var cid = $("#ConsortiumId").val();
+                        $.ajax({
+                            type: 'GET',
+                            url: '/SpendType/GetByConsortium?id=' + cid + "&itemId=" + spendItemId,
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+
+                            success: function (spdTypes) {
+                
+                                $.each(spdTypes, function (i, unidad) {
+                                    $("#SpendTypeId").append('<option value="' + unidad.Value + '">' +
+                                        unidad.Text + '</option>');
+                                });
+                                $("#cancelCreateSpendItemButton").click();
+                            },
+                            error: function (ex) {
+                                alert('El recibo de tipos falló.' + ex);
+                            }
+                        });
+
+                    }
+                });
+                
+            });
+        
+
+    </script>
 
 </body>
 

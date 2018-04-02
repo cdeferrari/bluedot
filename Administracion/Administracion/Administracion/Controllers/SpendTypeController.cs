@@ -15,6 +15,8 @@ using Administracion.Services.Contracts.LaboralUnion;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Dto.SpendType;
+using Newtonsoft.Json;
+using System.Web.Services;
 
 namespace Administracion.Controllers
 {
@@ -24,11 +26,19 @@ namespace Administracion.Controllers
         public virtual ISpendTypeService SpendTypeservice { get; set; }
         public virtual IUserService UserService { get; set; }
         
-        [HttpPost]
-        public ActionResult CreateSpendType(SpendTypeViewModel SpendType)
+        public string CreateSpendType(int consortiumId, int spendItemId, string description, bool required, bool forAll)
         {
-         
-            var nSpendTypes = Mapper.Map<SpendTypeRequest>(SpendType);                        
+
+            var spendType = new SpendTypeViewModel()
+            {
+                ConsortiumId = consortiumId,
+                Description = description,
+                ForAll = forAll,
+                Required = required,
+                SpendItemId = spendItemId
+            };
+
+            var nSpendTypes = Mapper.Map<SpendTypeRequest>(spendType);                        
 
             try
             {
@@ -37,16 +47,17 @@ namespace Administracion.Controllers
                 var result = entity.Id != 0;                
                 if (result)
                 {
-                    return Redirect(string.Format("/Spend/CreateSpend?consortiumId={0}&spendItemId={1}", SpendType.ConsortiumId, SpendType.SpendItemId));
+                    return JsonConvert.SerializeObject(result);
+                    //return Redirect(string.Format("/Spend/CreateSpend?consortiumId={0}&spendItemId={1}", SpendType.ConsortiumId, SpendType.SpendItemId));
                 }
                 else
                 {
-                    return View("../Shared/Error");
+                    return JsonConvert.SerializeObject(result);
                 }
             }
             catch (Exception ex)
             {
-                return View("../Shared/Error");
+                return JsonConvert.SerializeObject(ex);
             }
         }
 
@@ -58,7 +69,22 @@ namespace Administracion.Controllers
 
             return Redirect(string.Format("/Spend/Index?consortiumId={0}", consortiumId));
         }
-        
-        
+
+
+
+        public string GetByConsortium(int id, int itemId)
+        {
+            var spendlist = this.SpendTypeservice.GetAll();
+
+            var spendTypesList = spendlist.Where(x=> x.Consortium.Id == id && x.Item.Id == itemId).Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
+
+            return JsonConvert.SerializeObject(spendTypesList);
+
+        }
+
     }
 }

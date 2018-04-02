@@ -19,9 +19,11 @@
                 </li>
             </ul>
         </div>
-        <ul class="breadcrumb breadcrumb-top">
-            <li><a href="/home">Home</a></li>
-            <li><a href="">Gastos</a></li>
+        <ul class="breadcrumb breadcrumb-top">            
+                <li><a href="/home">Home</a></li>
+                <li><a href="/Consortium/Index">Consorcios</a></li>
+                <li><a href="/Consortium/Details/@Model.ConsortiumId">Consorcio</a></li>            
+                <li><a href="">Gastos</a></li>            
         </ul>
         <div class="block full" id="spend-page">
             <div class="block-title">
@@ -84,7 +86,14 @@
                         </tbody>
 
                     </table>
-                    @{var percentageItemSueldos = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+
+                    @{
+                        decimal percentageItemSueldos = 0;
+                        if(Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemSueldos = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount); 
+                        }
+
                         percentageItemSueldos = Math.Round(percentageItemSueldos, 2);
                         }
 
@@ -139,7 +148,12 @@
                             }
                         </tbody>
                     </table>
-                    @{var percentageItemAportesYContr = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemAportesYContr = 0;
+                        if(Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemAportesYContr  = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemAportesYContr = Math.Round(percentageItemAportesYContr, 2);
                     }
 
@@ -194,7 +208,13 @@
                             }
                         </tbody>
                     </table>
-                    @{var percentageItemServPub = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{
+                        decimal percentageItemServPub = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemServPub = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemServPub = Math.Round(percentageItemServPub, 2);
                     }
 
@@ -246,7 +266,13 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemAbonoServ = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{
+                        decimal percentageItemAbonoServ = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemAbonoServ = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+                        
                         percentageItemAbonoServ = Math.Round(percentageItemAbonoServ, 2);
                     }
 
@@ -301,7 +327,13 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemMantPartesComunes = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemMantPartesComunes.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{
+                        decimal percentageItemMantPartesComunes = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemMantPartesComunes = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemMantPartesComunes.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemMantPartesComunes = Math.Round(percentageItemMantPartesComunes, 2);
                     }
 
@@ -356,7 +388,13 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemRepUnidades = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemRepUnidades.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{
+                        decimal percentageItemRepUnidades = 0;
+
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemRepUnidades = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemRepUnidades.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
                         percentageItemRepUnidades = Math.Round(percentageItemRepUnidades, 2);
                     }
 
@@ -412,7 +450,12 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemGastosBancarios = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemGastosBancarios = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemGastosBancarios = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemGastosBancarios = Math.Round(percentageItemGastosBancarios, 2);
                     }
 
@@ -468,7 +511,12 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemGastosLimpieza = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosLimpieza.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemGastosLimpieza = 0;
+
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemGastosLimpieza = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosLimpieza.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
                         percentageItemGastosLimpieza = Math.Round(percentageItemGastosLimpieza, 2);
                     }
 
@@ -524,7 +572,13 @@
                             }
                         </tbody>
                     </table>
-                    @{var percentageItemGastosAdmin = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemGastosAdmin = 0;
+
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemGastosAdmin = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemGastosAdmin = Math.Round(percentageItemGastosAdmin, 2);
                     }
 
@@ -579,7 +633,12 @@
                             }
                         </tbody>
                     </table>
-                    @{var percentageItemPagosSeguros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemPagosSeguros = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemPagosSeguros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemPagosSeguros = Math.Round(percentageItemPagosSeguros, 2);
                     }
 
@@ -635,7 +694,12 @@
                         </tbody>
                     </table>
 
-                    @{var percentageItemOtros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                    @{decimal percentageItemOtros = 0;
+                        if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                        {
+                            percentageItemOtros = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                        }
+
                         percentageItemOtros = Math.Round(percentageItemOtros, 2);
                     }
 
