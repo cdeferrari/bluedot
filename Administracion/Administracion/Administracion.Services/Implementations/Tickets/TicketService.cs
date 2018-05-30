@@ -45,5 +45,10 @@ namespace Administracion.Services.Implementations.Tickets
         {
             return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetByConsortiumId, consortiumId), RestMethod.Get, null, null);
         }
+
+        public bool CreateTicketHistory(TicketHistoryRequest Ticket)
+        {
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTicketHistory, RestMethod.Post, null, Ticket);
+        }
     }
 }

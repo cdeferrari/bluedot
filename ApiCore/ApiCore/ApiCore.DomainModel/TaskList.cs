@@ -12,7 +12,7 @@ namespace ApiCore.DomainModel
         public virtual TicketStatus Status { get; set; }
         public virtual TaskResult Result { get; set; }
         public virtual string Description { get; set; }
-        public virtual string Coments { get; set; }
-
+        public virtual string Coments { get; set; }        
+       
     }
 }

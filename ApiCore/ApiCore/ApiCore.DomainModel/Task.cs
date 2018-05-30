@@ -19,6 +19,7 @@ namespace ApiCore.DomainModel
         public virtual Manager Manager { get; set; }
         public virtual BacklogUser Creator { get; set; }        
         public virtual IList<Spend> Spends { get; set; }
+        public virtual IList<TaskHistory> TaskHistory { get; set; }
 
     }
 }

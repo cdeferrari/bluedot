@@ -76,9 +76,28 @@
                                     </address>
                                 }
                             </div><!-- Address form -->
+                           
                         </div>
-                        
-                        <div class="block-title">
+                        <div class="row ">
+                            <label class="col-md-6 control-label">Control Matafuegos: </label>
+                            <div class="col-md-3">
+                                <a href="#modal-fire-control-list" data-toggle="modal"><i class="fa fa-eye"></i></a>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="#modal-create-fire-control" data-toggle="modal"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <label class="col-md-6 control-label">Control Ascensores: </label>
+                            <div class="col-md-3">
+                                <a href="#modal-elevator-control-list" data-toggle="modal"><i class="fa fa-eye"></i></a>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="#modal-create-elevator-control" data-toggle="modal"><i class="fa fa-sort"></i></a>
+                                
+                            </div>
+                        </div>
+                        <div class="block-title" style="margin-top:10px;">
                             <h1>
                                 <strong>Cuenta con:</strong>
                                 @foreach (var data in Model.Ownership.CommonData)
@@ -87,7 +106,7 @@
                                     {
                                         <h1>@data.Item.Description </h1>
                                     }
-                                    
+
                                 }
 
                             </h1>
@@ -102,7 +121,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <a href="javascript:void(0)" class="widget widget-hover-effect2">
                         <div class="widget-extra themed-background">
-                            <h4 class="widget-content-light"><strong>Reclamos</strong> Abiertos</h4>
+                            <h4 class   ="widget-content-light"><strong>Reclamos</strong> Abiertos</h4>
                         </div>
                         <div class="widget-extra-full"><span class="h2 animation-expandOpen">@Model.TicketQuantity</span></div>
                     </a>
@@ -166,7 +185,7 @@
                                         <td class="text-center">@unit.Dto</td>
                                         
                                         @{ var ownerDescription = unit.Owner != null ?
-                                                  unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
+            unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
                                                 }
                                         @if (unit.Owner != null)
                                         {
@@ -498,4 +517,186 @@
         </div>
     </div>
     
+</div>
+
+
+
+<div id="modal-create-fire-control" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-fire"></i> NUEVO CONTROL</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
+
+                @using (Html.BeginForm("CreateFireExtinguisherControl", "Consortium", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
+
+                    <input type="hidden" name="ConsortiumId" id="ConsortiumId" value="@Model.Id" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Proveedor</label>
+      
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.ProviderId, Model.Providers, "-- Elija Proveedor --")
+                        </div>                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Fecha de vencimiento</label>
+                        <div class="col-md-6">
+                            <div class='input-group date'>
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field ExpirationDate must be a date." data-val-required="The ExpirationDate field is required." id="ExpirationDate" name="ExpirationDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de vencimiento')" required="required" type="datetime" value="">
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                        <div class="form-group form-actions">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+
+                                @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
+                                <input type="submit" class="btn btn-success" value="Guardar" />
+                            </div>
+                        </div>
+                        }
+                        @*</form>*@
+                    </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-create-elevator-control" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-sort"></i> NUEVO CONTROL</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
+
+                @using (Html.BeginForm("CreateElevatorControl", "Consortium", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
+
+                    <input type="hidden" name="ConsortiumId" id="ConsortiumId" value="@Model.Id" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Proveedor</label>
+
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.ProviderId, Model.Providers, "-- Elija Proveedor --")
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        
+                        <label class="control-label col-md-4">Fecha de vencimiento</label>
+                        <div class="col-md-6">
+                            <div class='input-group date'>
+                                
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field ExpirationDate must be a date." data-val-required="The ExpirationDate field is required." id="ExpirationDate" name="ExpirationDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de vencimiento')" required="required" type="datetime" value="">
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+
+                            @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                        </div>
+                    </div>
+                }
+                @*</form>*@
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+
+</div>
+
+
+
+<div id="modal-elevator-control-list" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-sort"></i> Control Ascensores</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="block-title">
+                    <h2><strong>Último control</strong> </h2>
+                </div>
+                <div class="block">
+                    <ul>
+                        @{
+                            var lastElevatorCheck = Model.ElevatorControls.OrderByDescending(x => x.ControlDate).FirstOrDefault();}
+                        
+                        @if (lastElevatorCheck != null)
+                        {
+                            <li><strong>Proveedor:</strong>@lastElevatorCheck.Provider.User.Name </li>
+                            <li><strong>Fecha:</strong> @lastElevatorCheck.ControlDate.ToShortDateString() -<strong>Vencimiento:</strong>@lastElevatorCheck.ExpirationDate.ToShortDateString()</li>
+                        }
+                        
+                    </ul>
+                </div>
+
+                @*</form>*@
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-fire-control-list" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-fire"></i> Control Matafuegos</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="block-title">
+                    <h2><strong>Último control</strong> </h2>
+                </div>
+                <div class="block">
+                    <ul>
+                        @{var lastFireCheck = Model.FireExtinguisherControls.OrderByDescending(x => x.ControlDate).FirstOrDefault();}
+
+                        @if (lastFireCheck != null)
+                        {
+                            <li><strong>Proveedor:</strong>@lastFireCheck.Provider.User.Name </li>
+                            <li><strong>Fecha:</strong> @lastFireCheck.ControlDate.ToShortDateString() -<strong>Vencimiento:</strong>@lastFireCheck.ExpirationDate.ToShortDateString()</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
 </div>

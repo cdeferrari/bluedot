@@ -539,9 +539,51 @@
     <value>Ticket/{0}/Tasks</value>
   </data>
   <data name="GetTask" xml:space="preserve">
-    <value>Task/{0}</value>
+    <value>Tasks/{0}</value>
   </data>
   <data name="UpdateTask" xml:space="preserve">
     <value>Task/{0}</value>
+  </data>
+  <data name="GetAllSpendClass" xml:space="preserve">
+    <value>SpendClass/</value>
+  </data>
+  <data name="GetAllAreas" xml:space="preserve">
+    <value>Area/</value>
+  </data>
+  <data name="CreateTaskHistory" xml:space="preserve">
+    <value>TaskHistory/</value>
+  </data>
+  <data name="CreateTicketHistory" xml:space="preserve">
+    <value>TicketHistory/</value>
+  </data>
+  <data name="CreateElevatorControl" xml:space="preserve">
+    <value>ElevatorControl/</value>
+  </data>
+  <data name="CreateFireExtinguisherControl" xml:space="preserve">
+    <value>FireExtinguisherControl/</value>
+  </data>
+  <data name="DeleteElevatorControl" xml:space="preserve">
+    <value>ElevatorControl/{0}</value>
+  </data>
+  <data name="DeleteFireExtinguisherControl" xml:space="preserve">
+    <value>FireExtinguisherControl/{0}</value>
+  </data>
+  <data name="GetAllElevatorControls" xml:space="preserve">
+    <value>ElevatorControl/</value>
+  </data>
+  <data name="GetAllFireExtinguisherControls" xml:space="preserve">
+    <value>FireExtinguisherControl/</value>
+  </data>
+  <data name="GetElevatorControl" xml:space="preserve">
+    <value>ElevatorControl/{0}</value>
+  </data>
+  <data name="GetFireExtinguisherControl" xml:space="preserve">
+    <value>FireExtinguisherControl/{0}</value>
+  </data>
+  <data name="UpdateElevatorControl" xml:space="preserve">
+    <value>ElevatorControl/{0}</value>
+  </data>
+  <data name="UpdateFireExtinguisherControl" xml:space="preserve">
+    <value>FireExtinguisherControl/{0}</value>
   </data>
 </root>

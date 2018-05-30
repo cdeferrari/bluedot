@@ -15,7 +15,6 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Coments).IsOptional().HasColumnName("coments");
             this.HasRequired(x => x.Status).WithMany().Map(x => x.MapKey("status_id"));
             this.HasRequired(x => x.Result).WithMany().Map(x => x.MapKey("result_id"));            
-
         }
 
     }

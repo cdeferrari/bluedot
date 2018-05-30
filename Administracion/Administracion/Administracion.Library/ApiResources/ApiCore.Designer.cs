@@ -133,6 +133,24 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ElevatorControl/.
+        /// </summary>
+        public static string CreateElevatorControl {
+            get {
+                return ResourceManager.GetString("CreateElevatorControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FireExtinguisherControl/.
+        /// </summary>
+        public static string CreateFireExtinguisherControl {
+            get {
+                return ResourceManager.GetString("CreateFireExtinguisherControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unidad/.
         /// </summary>
         public static string CreateFunctionalUnit {
@@ -286,11 +304,29 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TaskHistory/.
+        /// </summary>
+        public static string CreateTaskHistory {
+            get {
+                return ResourceManager.GetString("CreateTaskHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets/.
         /// </summary>
         public static string CreateTicket {
             get {
                 return ResourceManager.GetString("CreateTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TicketHistory/.
+        /// </summary>
+        public static string CreateTicketHistory {
+            get {
+                return ResourceManager.GetString("CreateTicketHistory", resourceCulture);
             }
         }
         
@@ -372,6 +408,24 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteConsortiumSecure {
             get {
                 return ResourceManager.GetString("DeleteConsortiumSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ElevatorControl/{0}.
+        /// </summary>
+        public static string DeleteElevatorControl {
+            get {
+                return ResourceManager.GetString("DeleteElevatorControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FireExtinguisherControl/{0}.
+        /// </summary>
+        public static string DeleteFireExtinguisherControl {
+            get {
+                return ResourceManager.GetString("DeleteFireExtinguisherControl", resourceCulture);
             }
         }
         
@@ -574,6 +628,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area/.
+        /// </summary>
+        public static string GetAllAreas {
+            get {
+                return ResourceManager.GetString("GetAllAreas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bills/.
         /// </summary>
         public static string GetAllBills {
@@ -633,6 +696,24 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllConsortiumSecure {
             get {
                 return ResourceManager.GetString("GetAllConsortiumSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ElevatorControl/.
+        /// </summary>
+        public static string GetAllElevatorControls {
+            get {
+                return ResourceManager.GetString("GetAllElevatorControls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FireExtinguisherControl/.
+        /// </summary>
+        public static string GetAllFireExtinguisherControls {
+            get {
+                return ResourceManager.GetString("GetAllFireExtinguisherControls", resourceCulture);
             }
         }
         
@@ -777,6 +858,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllSecureStatus {
             get {
                 return ResourceManager.GetString("GetAllSecureStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpendClass/.
+        /// </summary>
+        public static string GetAllSpendClass {
+            get {
+                return ResourceManager.GetString("GetAllSpendClass", resourceCulture);
             }
         }
         
@@ -930,6 +1020,24 @@ namespace Administracion.Library.ApiResources {
         public static string GetConsortiumSecure {
             get {
                 return ResourceManager.GetString("GetConsortiumSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ElevatorControl/{0}.
+        /// </summary>
+        public static string GetElevatorControl {
+            get {
+                return ResourceManager.GetString("GetElevatorControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FireExtinguisherControl/{0}.
+        /// </summary>
+        public static string GetFireExtinguisherControl {
+            get {
+                return ResourceManager.GetString("GetFireExtinguisherControl", resourceCulture);
             }
         }
         
@@ -1096,7 +1204,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task/{0}.
+        ///   Looks up a localized string similar to Tasks/{0}.
         /// </summary>
         public static string GetTask {
             get {
@@ -1200,6 +1308,24 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateConsortiumSecure {
             get {
                 return ResourceManager.GetString("UpdateConsortiumSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ElevatorControl/{0}.
+        /// </summary>
+        public static string UpdateElevatorControl {
+            get {
+                return ResourceManager.GetString("UpdateElevatorControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FireExtinguisherControl/{0}.
+        /// </summary>
+        public static string UpdateFireExtinguisherControl {
+            get {
+                return ResourceManager.GetString("UpdateFireExtinguisherControl", resourceCulture);
             }
         }
         

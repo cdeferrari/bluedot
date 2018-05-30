@@ -89,7 +89,7 @@ namespace ApiCore.Services.Implementations.PatrimonyStatuss
 
             var spendTypes = this.SpendTypeRepository.GetByConsortiumId(consortiumId).Where(x => x.Required).ToList();
 
-            this.ValidateSpendsWithTypes(spends, spendTypes);
+            //this.ValidateSpendsWithTypes(spends, spendTypes);
             
             var lastStatus = this.PatrimonyStatusRepository
                 .GetByConsortiumId(consortiumId)

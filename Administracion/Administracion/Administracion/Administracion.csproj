@@ -264,9 +264,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FireExtinguisherControlViewModel.cs" />
     <Compile Include="Models\FastUpdateViewModel.cs" />
     <Compile Include="Models\ConsortiumSecureViewModel.cs" />
     <Compile Include="Models\CityViewModel.cs" />
+    <Compile Include="Models\ChoseConsortiumViewModel.cs" />
+    <Compile Include="Models\ElevatorControlViewModel.cs" />
+    <Compile Include="Models\TicketHistoryViewModel.cs" />
+    <Compile Include="Models\TaskHistoryViewModel.cs" />
     <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Models\SpendTypeViewModel.cs" />
     <Compile Include="Models\ProvinceViewModel.cs" />
@@ -531,6 +536,13 @@
     <Content Include="Views\Spend\CreateSpend.cshtml" />
     <Content Include="Views\Backlog\_TaskDetail.cshtml" />
     <Content Include="Views\Backlog\_CreateTask.cshtml" />
+    <Content Include="Views\Spend\PastListMenu.cshtml" />
+    <Content Include="Views\Spend\ChoseConsortium.cshtml" />
+    <Content Include="Views\Backlog\_CreateTaskFollow.cshtml" />
+    <Content Include="Views\Backlog\_CreateTicketFollow.cshtml" />
+    <Content Include="Views\Backlog\_TicketFollowDetails.cshtml" />
+    <Content Include="Views\Backlog\_TaskFollowDetails.cshtml" />
+    <Content Include="Views\Spend\_SueldoList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

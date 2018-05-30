@@ -4,12 +4,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center">
-                <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
+            <div class="modal-header text-center row">
+                <div class="col-md-6">
+                    <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
+                        </div>
+                    <div class="col-md-12" style="margin-top: 10px;">
+                        <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
+                    </div>                    
+                </div>
+                
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body row">
             @{var workerDescription = Model.Worker != null ? Model.Worker.User.Name + " " + Model.Worker.User.Surname : "-";
                 var managerDescription = Model.Manager != null ? Model.Manager.User.Name + " " + Model.Manager.User.Surname : "-";
                 var providerDescription = Model.Provider != null ? Model.Provider.User.Name + " " + Model.Provider.User.Surname : "-";
@@ -68,3 +79,7 @@
         </div>
     </div>
 </div>
+
+
+@Html.Partial("_CreateTaskFollow", Model)
+@Html.Partial("_TaskFollowDetails", Model)

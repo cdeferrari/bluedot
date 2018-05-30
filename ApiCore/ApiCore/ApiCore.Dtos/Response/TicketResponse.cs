@@ -19,10 +19,14 @@ namespace ApiCore.Dtos.Response
         public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual PriorityResponse Priority { get; set; }
         public virtual WorkerResponse Worker { get; set; }
+        public virtual ManagerResponse Manager { get; set; }
+        public virtual BacklogUserResponse BacklogUser { get; set; }
         public virtual BacklogUserResponse Creator { get; set; }
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         public virtual IList<MessageResponse> Messages { get; set; }
         public virtual IList<TaskResponse> Tasks { get; set; }
+        public virtual Area Area { get; set; }
+        public virtual IList<TicketHistoryResponse> TicketHistory { get; set; }
     }
 }

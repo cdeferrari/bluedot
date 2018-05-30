@@ -120,6 +120,9 @@
   <data name="AdministracionNoEncontrado" xml:space="preserve">
     <value>Administracion no encontrada</value>
   </data>
+  <data name="AreaNoEncontrada" xml:space="preserve">
+    <value>Area no encontrada</value>
+  </data>
   <data name="BadRequest" xml:space="preserve">
     <value>BadRequest</value>
   </data>
@@ -170,6 +173,12 @@
   </data>
   <data name="TareaNoEncontrada" xml:space="preserve">
     <value>Tarea no encontrada</value>
+  </data>
+  <data name="TaskHistoryNoEncontrado" xml:space="preserve">
+    <value>Seguimiento no encontrado</value>
+  </data>
+  <data name="TicketHistoryNoEncontrado" xml:space="preserve">
+    <value>Seguimiento no encontrado</value>
   </data>
   <data name="TicketNoEncontrado" xml:space="preserve">
     <value>Ticket no encontrado</value>

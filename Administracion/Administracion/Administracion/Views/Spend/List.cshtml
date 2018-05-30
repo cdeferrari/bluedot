@@ -55,12 +55,29 @@
             }
 
             <h2 class="h2-title">Remuneraciones al personal y cargas Sociales</h2>
+            @using (Html.BeginForm("ProcessManagerCsv", "Spend", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Elija el archivo a procesar</label>
+                    <div class='col-md-8'>
+                        <input type="hidden" name="consortiumId" id="consortiumId" value="@Model.ConsortiumId" />
+                        <input type="file" id="managercsv" name="managercsv" />
+                    </div>
+                </div>                
+                <button type="submit" class="btn btn-default">Procesar</button>
+            }
+
+            
             <div class="table-responsive">
                 <div class="block">
-
+                    <div class="row" style="background-color: red;color: white;">
+                        Los siguientes items no estan asociados a ningún encargado
+                    </div>
                     <div class="block-title">
                         <div class="block-options pull-right">
                             <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                            <a href="/Spend/DeleteList?consortiumId=@Model.ConsortiumId&managerId=0" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Eliminar Gastos"><i class="fa fa-minus-circle"></i></a>
                         </div>
                     </div>
                     <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
@@ -79,44 +96,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var sueldo in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)))
+                            @foreach (var sueldo in Model.SalarySpendWithoutManager)
                             {
                                 @Html.Partial("_SueldoItem", sueldo)
                             }
                         </tbody>
 
                     </table>
-
-                    @{
-                        decimal percentageItemSueldos = 0;
-                        if(Model.Spends.Sum(x => x.Bill.Amount) > 0)
-                        {
-                            percentageItemSueldos = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount); 
-                        }
-
-                        percentageItemSueldos = Math.Round(percentageItemSueldos, 2);
-                        }
-
-                    <div class="total-table row">                        
-                        <div class="col-md-4"></div>                            
-                        <div class="col-md-8">
-                            <div class="col-md-6">Total</div>                            
-                            <div class="col-md-2"> 
-                            @percentageItemSueldos %
-                            </div>                            
-                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).Sum(x => x.Bill.Amount)</div>                            
-                        </div>                        
-                    </div>
-
-
-
                 </div>
-
             </div>
+
+            @foreach (var key in Model.SalarySpends.Keys)
+            {
+                @Html.Partial("_SueldoList", Model.SalarySpends[key]);
+            }
 
 
             <div class="table-responsive">
-
                 <div class="block">
 
                     <div class="block-title">
@@ -723,6 +719,7 @@
 
             <div class="col-md-3 ">
                 <a href="#modal-close-month" data-toggle="modal" title="Liquidar" value="Liquidar" class="btn btn-success">Liquidar</a>
+                <a href="/Spend/PastListMenu?id=@Model.ConsortiumId" title="Ver anteriores" value="Ver anteriores" class="btn btn-info">Ver anteriores</a>
             </div>
             
         </div>

@@ -23,8 +23,12 @@ namespace Administracion.DomainModel
         public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual Priority Priority { get; set; }
         public virtual int WorkerId { get; set; }
+        public virtual Manager Manager { get; set; }
+        public virtual BacklogUser BacklogUser { get; set; }
+        public virtual Area Area { get; set; }
         public virtual int CreatorId { get; set; }
         public virtual IList<Message> Messages { get; set; }
         public virtual IList<Task> Tasks { get; set; }
+        public virtual IList<TicketHistory> TicketHistory { get; set; }
     }
 }

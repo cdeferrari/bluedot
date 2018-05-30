@@ -1,0 +1,85 @@
+﻿@model IList<Administracion.DomainModel.Spend>
+
+@{
+    var manager = Model.FirstOrDefault().Bill.Manager;
+ }
+
+ <div class="table-responsive">
+    <div class="block" style="background-color:#f9fafc">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6">Nombre y apellido:</label>
+                @manager.User.Name @manager.User.Surname                
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-6">CUIL:</label>
+                @manager.User.CUIT                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6">Cargo:</label>
+                Encargado
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-6">Categoría del edificio:</label>
+                @Model.FirstOrDefault().Consortium.Ownership.Category
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 34px;">
+            <div class="col-md-6">
+                <label class="col-md-6">Período:</label>
+                @DateTime.Now.ToString("yyyy/MM")
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-6">Categoría del encargado:</label>
+                @Model.FirstOrDefault().Consortium.Ownership.Category
+            </div>
+        </div>
+        <div class="block-title">
+            <div class="block-options pull-right">
+                <a href="/Spend/DeleteList?consortiumId=@Model.FirstOrDefault().Consortium.Id&managerId=@Model.FirstOrDefault().Bill.Manager.Id" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Eliminar Gastos"><i class="fa fa-minus-circle"></i></a>
+            </div>
+        </div>
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" name="table">
+
+            <thead>
+                <tr>
+                    <th class="text-center header-item">1</th>
+                    <th class="text-center header-item">Detalle de sueldos</th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-center header-item">GASTOS A</th>
+                    <th class="text-center header-item">GASTOS B</th>
+                    <th class="text-center header-item">GASTOS C</th>
+                    <th class="text-center header-item">TOTAL</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sueldo in Model)
+                {
+                    @Html.Partial("_SueldoItem", sueldo)
+                }
+            </tbody>
+
+        </table>
+
+        @{            
+            var total = Model.Sum(x => x.SpendClass.Id == 5 ? -x.Bill.Amount : x.Bill.Amount);            
+        }
+
+        <div class="total-table row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <div class="col-md-6">Total</div>
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-2">$@total</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

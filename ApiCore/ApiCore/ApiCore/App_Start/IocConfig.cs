@@ -78,6 +78,18 @@ using ApiCore.Services.Implementations.Incomes;
 using ApiCore.Services.Contracts.Incomes;
 using ApiCore.Services.Contracts.Tasks;
 using ApiCore.Services.Implementations.Tasks;
+using ApiCore.Services.Contracts.SpendClasss;
+using ApiCore.Services.Implementations.SpendClass;
+using ApiCore.Services.Contracts.Area;
+using ApiCore.Services.Implementations.Area;
+using ApiCore.Services.Implementations.TaskHistory;
+using ApiCore.Services.Contracts.TaskHistory;
+using ApiCore.Services.Implementations.TicketHistory;
+using ApiCore.Services.Contracts.TicketHistory;
+using ApiCore.Services.Implementations.ElevatorControls;
+using ApiCore.Services.Contracts.ElevatorControls;
+using ApiCore.Services.Implementations.FireExtinguisherControls;
+using ApiCore.Services.Contracts.FireExtinguisherControls;
 
 namespace ApiCore.App_Start
 {
@@ -244,6 +256,10 @@ namespace ApiCore.App_Start
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<SpendClassService>().As<ISpendClassService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<IncomeService>().As<IIncomeService>().PropertiesAutowired().InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
@@ -260,6 +276,28 @@ namespace ApiCore.App_Start
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<TaskHistoryService>().As<ITaskHistoryService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<TicketHistoryService>().As<ITicketHistoryService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<AreaService>().As<IAreaService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+
+            builder.RegisterType<ElevatorControlService>().As<IElevatorControlService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<FireExtinguisherControlService>().As<IFireExtinguisherControlService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+            builder.RegisterType<AreaRepository>().As<IAreaRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TicketRepository>().As<ITicketRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MultimediaRepository>().As<IMultimediaRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ConsortiumRepository>().As<IConsortiumRepository>().PropertiesAutowired().InstancePerRequest();
@@ -282,6 +320,8 @@ namespace ApiCore.App_Start
             builder.RegisterType<ContactDataRepository>().As<IContactDataRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ListRepository>().As<IListRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TaskResultRepository>().As<ITaskResultRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<TaskHistoryRepository>().As<ITaskHistoryRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<TicketHistoryRepository>().As<ITicketHistoryRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ItemsRepository>().As<IItemsRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<CommonDataItemsRepository>().As<ICommonDataItemsRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<CommonDataRepository>().As<ICommonDataRepository>().PropertiesAutowired().InstancePerRequest();
@@ -293,9 +333,12 @@ namespace ApiCore.App_Start
             builder.RegisterType<SpendItemRepository>().As<ISpendItemRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<BillRepository>().As<IBillRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendRepository>().As<ISpendRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<SpendClassRepository>().As<ISpendClassRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<IncomeRepository>().As<IIncomeRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PatrimonyStatusRepository>().As<IPatrimonyStatusRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<ElevatorControlRepository>().As<IElevatorControlRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<FireExtinguisherControlRepository>().As<IFireExtinguisherControlRepository>().PropertiesAutowired().InstancePerRequest();
 
         }
 

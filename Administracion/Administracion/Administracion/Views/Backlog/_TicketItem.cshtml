@@ -22,6 +22,14 @@
             </td>
             <td>@Model.Title</td>
             <td>@Model.Customer</td>          
+            @if (Model.Consortium != null)
+            {
+                <td>@Model.Consortium.Ownership.Address.Street @Model.Consortium.Ownership.Address.Number</td>
+            }
+            else
+            {
+                <td>-</td>
+            }            
             <td>-</td>          
             <td class="text-center">
                 <div class="btn-group">

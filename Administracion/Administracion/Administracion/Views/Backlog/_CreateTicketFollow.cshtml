@@ -1,0 +1,56 @@
+﻿@model Administracion.Models.TicketViewModel
+
+<div id="modal-add-follow" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO SEGUIMIENTO</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                @using (Html.BeginForm("CreateTicketFollow", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
+
+                    <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Comentario</label>
+                        <div>
+                            <input name="Coment" id="Coment" type="text" class="col-md-10" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        
+                        <label class="control-label col-md-3">Próxima fecha de seguimiento</label>
+                        <div class='col-md-4 '>
+
+                            <div class='input-group date'>
+                        
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required." id="TicketFollow_FollowDate" name="FollowDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de proximo seguimiento')" required="required" type="datetime" value="">
+
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TicketFollow.FollowDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                        </div>
+                    </div>
+                }
+                
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>

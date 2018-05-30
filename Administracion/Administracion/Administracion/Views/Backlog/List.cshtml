@@ -48,7 +48,7 @@
                     <!-- Menu Content -->
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active">
-                            <a href="javascript:void(0)">
+                            <a href="/Backlog/Index">
                                 <span class="badge pull-right">@Model.Count</span>
                                 <i class="fa fa-ticket fa-fw"></i> <strong>Todos</strong>
                             </a>
@@ -60,13 +60,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)">
+                            <a href="/Backlog/GetByStatus?statusDescription=open">
                                 <span class="badge pull-right">@Model.Where(x => x.Status.Id == 1).Count()</span>
                                 <i class="fa fa-folder-open-o fa-fw"></i> <strong>Abiertos</strong>
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)">
+                            <a href="/Backlog/GetByStatus?statusDescription=closed">
                                 <span class="badge pull-right">@Model.Where(x => x.Status.Id == 2).Count()</span>
                                 <i class="fa fa-folder-o fa-fw"></i> <strong>Cerrados</strong>
                             </a>
@@ -149,6 +149,7 @@
                                                     @*<th>Origen</th>*@
                                                     <th>Titulo</th>
                                                     <th class="text-center">Solicitante</th>
+                                                    <th class="text-center">Consorcio</th>
                                                     <th class="text-center"><i class="fa fa-comments"></i></th>
                                                     <th>Acciones</th>
                                                 </tr>

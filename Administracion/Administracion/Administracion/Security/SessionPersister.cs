@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Administracion.Models;
+using System.Configuration;
 
 namespace Administracion.Security
 {
@@ -15,6 +16,7 @@ namespace Administracion.Security
         {
             get 
             {
+                HttpContext.Current.Session.Timeout = !string.IsNullOrEmpty(ConfigurationManager.AppSettings["sessionTimeOut"]) ? int.Parse(ConfigurationManager.AppSettings["sessionTimeOut"]) : 60;
                 if (HttpContext.Current == null)
                     return null;
 

@@ -20,6 +20,8 @@ namespace ApiCore.Services.Implementations.Tickets
         public IPriorityRepository PriorityRepository { get; set; }        
         public IBacklogUserRepository BacklogUserRepository { get; set; }
         public IWorkerRepository WorkerRepository { get; set; }
+        public IManagerRepository ManagerRepository { get; set; }
+        public IAreaRepository AreaRepository { get; set; }
 
         [Transaction]
         public Ticket CreateTicket(TicketRequest ticket)
@@ -86,6 +88,9 @@ namespace ApiCore.Services.Implementations.Tickets
             originalTicket.FunctionalUnit = ticket.FunctionalUnitId.HasValue ? this.FunctionalUnitRepository.GetById(ticket.FunctionalUnitId.Value) : null ;
             originalTicket.Priority = this.PriorityRepository.GetById(ticket.PriorityId);
             originalTicket.Worker = ticket.WorkerId.HasValue ? this.WorkerRepository.GetById(ticket.WorkerId.Value):null;
+            originalTicket.Manager = ticket.ManagerId.HasValue ? this.ManagerRepository.GetById(ticket.ManagerId.Value) : null;
+            originalTicket.BacklogUser = ticket.BacklogUserId.HasValue ? this.BacklogUserRepository.GetById(ticket.BacklogUserId.Value) : null;
+            originalTicket.Area = ticket.AreaId.HasValue ? this.AreaRepository.GetById(ticket.AreaId.Value) : null;
             originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
             originalTicket.Title = ticket.Title;
             originalTicket.Description = ticket.Description;

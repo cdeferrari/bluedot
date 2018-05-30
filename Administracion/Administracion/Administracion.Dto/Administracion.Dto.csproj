@@ -44,6 +44,7 @@
     <Compile Include="Account\RoleResponse.cs" />
     <Compile Include="Account\UserResponse.cs" />
     <Compile Include="Account\WorkerResponse.cs" />
+    <Compile Include="Control\ControlRequest.cs" />
     <Compile Include="Task\TaskRequest.cs" />
     <Compile Include="PatrimonyStatus\PatrimonyStatusRequest.cs" />
     <Compile Include="IncomeType\IncomeTypeRequest.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="SpendType\SpendTypeRequest.cs" />
     <Compile Include="Spend\SpendRequest.cs" />
     <Compile Include="Province\ProvinceRequest.cs" />
+    <Compile Include="Task\TaskHistoryRequest.cs" />
+    <Compile Include="Ticket\TicketHistoryRequest.cs" />
     <Compile Include="Unit\FunctionalUnitRequest.cs" />
     <Compile Include="Worker\WorkerRequest.cs" />
     <Compile Include="Provider\ProviderRequest.cs" />

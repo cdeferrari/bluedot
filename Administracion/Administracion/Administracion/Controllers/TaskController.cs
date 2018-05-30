@@ -17,6 +17,7 @@ using Administracion.Services.Contracts.Consortiums;
 using Administracion.Dto.Message;
 using Administracion.Services.Contracts.Tasks;
 using Administracion.Services.Contracts.Status;
+using Administracion.Dto.Task;
 
 namespace Administracion.Controllers
 {
@@ -65,8 +66,24 @@ namespace Administracion.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult CreateTaskFollow(TaskHistoryViewModel task)
+        {
+            try
+            {
+                var taskHistoryRequest = Mapper.Map<TaskHistoryRequest>(task);
+                this.TasksService.CreateTaskHistory(taskHistoryRequest);
+                var otask = this.TasksService.GetTask(task.TaskId);
+                return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", otask.Ticket.Id));
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
 
-        
+        }
+
+
         public ActionResult DeleteTask(int id, int ticketId)
         {                    
             this.TasksService.DeleteTask(id);

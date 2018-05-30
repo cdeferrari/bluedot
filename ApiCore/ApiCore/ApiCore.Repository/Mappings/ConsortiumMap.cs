@@ -18,6 +18,8 @@ namespace ApiCore.Repository.Mappings
             this.HasRequired(x => x.Administration).WithMany().Map(x => x.MapKey("administration_id"));
             this.HasMany(x => x.Managers).WithOptional(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
             this.HasMany(x => x.ConsortiumSecure).WithRequired(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
+            this.HasMany(x => x.ElevatorControls).WithRequired(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
+            this.HasMany(x => x.FireExtinguisherControls).WithRequired(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
             this.Property(x => x.Inactive).IsRequired().HasColumnName("inactive");
             this.Property(x => x.Telephone).IsOptional().HasColumnName("telephone");
         }

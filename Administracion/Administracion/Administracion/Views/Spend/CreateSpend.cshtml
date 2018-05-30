@@ -75,16 +75,31 @@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Bill.Number, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 @Html.EditorFor(model => model.Bill.Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nro Factura",
                                @required = "required",
                                @oninvalid = "this.setCustomValidity('Ingrese nro factura')",
                                @oninput = "setCustomValidity('')"
                            } })
-                                <span class="help-block">Coloque el nro de factutura</span>
+                                <span class="help-block">Coloque el nro de factura</span>
                                 @Html.ValidationMessageFor(model => model.Bill.Number, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Bill.ClientNumber, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control",
+                                   @placeholder = "Nro Cliente",
+                                   @required = "required",
+                                   @oninvalid = "this.setCustomValidity('Ingrese nro de cliente')",
+                                   @oninput = "setCustomValidity('')"
+                               }
+                           })
+                                <span class="help-block">Coloque el nro de cliente</span>
+                                @Html.ValidationMessageFor(model => model.Bill.ClientNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3">
                                 @Html.EditorFor(model => model.Bill.Amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Monto",
                                @required = "required",
                                @oninvalid = "this.setCustomValidity('Ingrese monto')",
@@ -96,8 +111,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="Rubro gasto">Tipo de gasto</label>
-                            <div class="col-md-6">
+                            <label class="control-label col-md-3" for="Rubro gasto">Clase y Tipo de gasto</label>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(model => model.SpendClassId, Model.SpendClass, "-- ELIJA CLASE DE GASTO  --", new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
                                        @Html.DropDownListFor(model => model.SpendTypeId, Model.SpendTypes, "-- ELIJA TIPO DE GASTO  --", new { @class = "form-control" })                                                                                                       
                             </div>
                             <div class="col-md-3 ">
@@ -132,7 +150,7 @@
 
                             </div>
 
-                            <label class="control-label col-md-3" for="NextExpirationDate">Segundo vencimiento</label>
+                            <label class="control-label col-md-3" for="NextExpirationDate">Pr&oacute;ximo vencimiento</label>
                             <div class='col-md-3'>
 
                                 <div class='input-group date'>
@@ -142,7 +160,7 @@
                                    {
                                        @class = "form-control",
                                        @required = "required",
-                                       @oninvalid = "this.setCustomValidity('Ingrese segunda fecha de expiracion')",
+                                       @oninvalid = "this.setCustomValidity('Ingrese próxima fecha de vencimiento')",
                                        @oninput = "setCustomValidity('')"
                                    }
                                })
@@ -157,12 +175,12 @@
                         </div>
                         
 
-                        <div class="form-group">
+                        @*<div class="form-group">
                             <label class="control-label col-md-3" for="Rubro gasto">Empleado</label>
                             <div class="col-md-6">
                                 @Html.DropDownListFor(model => model.WorkerId, Model.Workers, "-- ELIJA EMPLEADO --", new { @class = "form-control" })
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="form-group">
                             <label class="control-label col-md-3" for="Rubro gasto">Proveedor</label>

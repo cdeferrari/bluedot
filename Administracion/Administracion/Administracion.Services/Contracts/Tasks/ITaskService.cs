@@ -1,5 +1,6 @@
 ﻿using Administracion.DomainModel;
 using Administracion.Dto.Message;
+using Administracion.Dto.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace Administracion.Services.Contracts.Tasks
     {
         IList<Task> GetAll();
         Task GetTask(int TaskId);
-        Entidad CreateTask(TaskRequest Task);        
+        Entidad CreateTask(TaskRequest Task);
+        bool CreateTaskHistory(TaskHistoryRequest Task);
         bool DeleteTask(int TaskId);
         IList<Task> GetByTicketId(int ticketId);
     }

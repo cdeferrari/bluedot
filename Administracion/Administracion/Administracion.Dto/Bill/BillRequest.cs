@@ -14,6 +14,7 @@ namespace Administracion.Dto.Bill
         public virtual int? WorkerId { get; set; }
         public virtual int? ManagerId { get; set; }
         public virtual string Number { get; set; }
+        public virtual string ClientNumber { get; set; }
         public virtual decimal Amount { get; set; }
         public virtual DateTime CreationDate { get; set; }
         public virtual DateTime ExpirationDate { get; set; }

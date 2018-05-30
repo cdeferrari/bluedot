@@ -21,5 +21,6 @@ namespace ApiCore.Dtos.Response
         public virtual string Description { get; set; }
         
         public virtual IList<Spend> Spends { get;set; }
+        public virtual IList<TaskHistoryResponse> TaskHistory { get; set; }
     }
 }

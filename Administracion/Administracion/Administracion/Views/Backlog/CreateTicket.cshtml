@@ -12,7 +12,7 @@
 
         <div class="block full">
              @if (Model.Id > 0)
-            {
+             {
                 <h2>@Model.Title</h2>
              }
              else
@@ -20,33 +20,37 @@
                 <h2>Pedido</h2>
              }
 
-
-
-
             @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
+                if (Model.Id > 0)
+                {
+                    @Html.HiddenFor(x => x.Title)
+                }
+
                 <div class="form-horizontal">
-                    @*<h4>Ingrese los siguientes datos</h4>*@
                     <hr />
 
                     @if (Model.Id > 0)
                     {
                         <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@Model.Status.Description</strong></div>
+                        <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Creado por : @Model.Creator.Name @Model.Creator.Surname el día @Model.OpenDate.ToShortDateString()</a>
                         <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Asignar este ticket</a>
                         <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a> <a href="javascript:void(0)" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Resolver Ticket</a>
                         <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Marcar como urgente</a>
+                        
                         <hr>
                     }
+
                     
 
 
                     @Html.HiddenFor(model => model.Id)
                     @if (Model.Id == 0)
                     {
-                    <div class="form-group row">
-                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="form-group row">                        
+                        <label class="control-label col-md-2" for="Titulo">Titulo</label>
                         <div class='col-md-8'>
                      
                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
@@ -80,7 +84,7 @@
 
                             @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
                         </div>
-                        <label class="control-label col-md-2">Consumidor</label>
+                        <label class="control-label col-md-2">Reclamado por:</label>
                         <div class="col-md-2">
                             @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
@@ -104,21 +108,50 @@
                         <div class="col-md-4">
                             @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --")
                         </div>
-                        <label class="control-label col-md-2">Trabajador</label>
+                        <label class="control-label col-md-2">Asignado a</label>
                         <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.Worker.Id, Model.WorkersList, "-- Elija Trabajador --")
+                            @Html.DropDownListFor(model => model.Manager.Id, Model.ManagerList, "-- Elija encargado--")
+                        </div>
+                    </div> 
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Area</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Area.Id, Model.AreaList, "-- Elija Area --")
+                        </div>                        
+                        <label class="col-md-3 control-label" for="example-email-input">Autoasignar</label>                        
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <label id="autoasign-label" class="switch switch-primary" for='@Model.Autoasign'>
+                                    <input id="Autoasign" name="Autoasign" type="checkbox" value="true" @(Model.Autoasign ? "checked=\"checked\"" : "") />
+                                    <span data-toggle="tooltip" title="OK"></span>
+                                </label>
+                            </div>                            
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <div class="col-md-offset-2 col-md-4">
+                        <div class="col-md-3">
                             <input type="submit" value="Guardar" class="btn btn-success" />
                         </div>
-                        <div class="col-md-offset-2 col-md-4">
-                            <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar órden de trabajo</a>
-                        </div>
+                        @if (Model.Id > 0)
+                        {
+                            <div class="col-md-3">
+                                <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar órden de trabajo</a>
+                            </div>
+
+                            <div class="col-md-3">
+                                <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
+                            </div>
+
+                            <div class="col-md-3">
+                                <a href="#modal-follow-list" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
+                            </div>
+
+                        }
                         
+                       
                     </div>
 
 
@@ -256,7 +289,7 @@
                 <div class="block">
                     <!-- Top Products Title -->
                     <div class="block-title">
-                        <h2><strong>MENSAJES</strong></h2>
+                        <h2><strong>COMENTARIOS</strong></h2>
                     </div>
 
                         <ul class="media-list media-feed push">
@@ -275,6 +308,10 @@
                                                 <small> @Math.Round(restTime.TotalDays) dias</small>
                                                 <small>@Math.Round(restTime.TotalHours) horas</small>
                                             </span>
+                                            @*<div>
+                                                <span class="text-muted pull-right">@message.Sender.Name @message.Sender.Surname</span>
+                                            </div>*@
+                                            
                                             @*<small><a href="page_ready_user_profile.html">Inquilino1</a> a través de <a href="javascript:void(0)">llamado</a></small>*@
                                         </p>
                                         
@@ -288,7 +325,9 @@
                                             Unidad Funcional: @uf<BR>
                                             @message.Content
                                         </p>
-
+                                        <p>
+                                            <span class="text-muted pull-left">@message.Sender.Name @message.Sender.Surname</span>
+                                        </p>
                                     </div>
 
                                 </li>
@@ -298,7 +337,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-offset-2 col-md-4">
-                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Mensaje" value="Agregar Mensaje" class="btn btn-success">Agregar Mensaje</a>
+                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Comentario" value="Agregar Comentario" class="btn btn-success">Agregar Comentario</a>
                             </div>
                         </div>
 
@@ -359,6 +398,8 @@
 
 
 @Html.Partial("_CreateTask", Model)
+@Html.Partial("_CreateTicketFollow", Model)
+@Html.Partial("_TicketFollowDetails", Model)
 
 <script>
 
@@ -385,9 +426,24 @@
             );
 
         });
-
+        
     };
 
+    var asignlabel = document.getElementById("autoasign-label");
+    asignlabel.addEventListener(
+        'click',
+        function () {
+            debugger
+            var asigninput = document.getElementById("Autoasign");
+            if (asigninput.getAttribute("checked") != null && asigninput.getAttribute("checked") != undefined) {
+                asigninput.removeAttribute("checked");
+            }
+            else {
+                asigninput.setAttribute("checked", "checked");
+            }
+        },
+        false
+    );
 
 
 </script>

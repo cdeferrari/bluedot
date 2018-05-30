@@ -14,6 +14,7 @@ namespace Administracion.Services.Contracts.Tickets
         IList<Ticket> GetByConsortiumId(int consortiumId);
         Ticket GetTicket(int ticketId);
         bool CreateTicket(TicketRequest ticket);
+        bool CreateTicketHistory(TicketHistoryRequest ticket);
         bool UpdateTicket(TicketRequest ticket);
         bool DeleteTicket(int ticketId);
     }

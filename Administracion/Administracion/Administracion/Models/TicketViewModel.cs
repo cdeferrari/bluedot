@@ -25,7 +25,8 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> StatusList { get; set; }
         public virtual IEnumerable<SelectListItem> PriorityList { get; set; }
         public virtual IEnumerable<SelectListItem> WorkersList { get; set; }
-        public virtual IEnumerable<SelectListItem> ManagerList { get; set; }
+        public virtual IEnumerable<SelectListItem> ManagerList { get; set; }        
+        public virtual IEnumerable<SelectListItem> AreaList { get; set; }
         public virtual IEnumerable<SelectListItem> ProviderList { get; set; }
         public virtual IEnumerable<SelectListItem> UsersList { get; set; }
         public virtual IEnumerable<SelectListItem> ConsortiumList { get; set; }
@@ -34,11 +35,15 @@ namespace Administracion.Models
         public virtual Worker Worker { get; set; }
         public virtual Provider Provider { get; set; }
         public virtual Manager Manager { get; set; }
+        public virtual BacklogUser BacklogUser { get; set; }
+        public virtual Area Area { get; set; }
         public virtual User Creator { get; set; }
         public virtual Consortium Consortium { get; set; }
         public virtual IList<MessageViewModel> Messages { get; set; }
         public virtual IList<Task> Tasks { get; set; }
-
         public virtual TaskViewModel Task { get; set; }
+        public virtual IList<TicketHistoryViewModel> TicketHistory { get; set; }
+        public virtual TicketHistoryViewModel TicketFollow { get; set; }
+        public virtual bool Autoasign { get; set; }
     }
 }

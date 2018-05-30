@@ -7,6 +7,7 @@ using Administracion.Integration.Model;
 using System.Configuration;
 using Administracion.Library.ApiResources;
 using Administracion.Dto.Message;
+using Administracion.Dto.Task;
 
 namespace Administracion.Services.Implementations.Tasks
 {
@@ -43,6 +44,11 @@ namespace Administracion.Services.Implementations.Tasks
         public IList<Task> GetByTicketId(int ticketId)
         {
             return IntegrationService.RestCall<List<Task>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetByTicketId, ticketId), RestMethod.Get, null, null);
+        }
+
+        public bool CreateTaskHistory(TaskHistoryRequest Task)
+        {
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTaskHistory, RestMethod.Post, null, Task);            
         }
     }
 }

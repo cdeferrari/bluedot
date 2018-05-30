@@ -11,6 +11,7 @@ namespace ApiCore.Dtos.Request
     {
         public virtual int BillId { get; set; }
         public virtual int SpendTypeId { get; set; }
+        public virtual int SpendClassId { get; set; }
         public virtual int ConsortiumId { get; set; }
         public virtual string Description { get; set; }
         public virtual DateTime PaymentDate { get; set; }

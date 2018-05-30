@@ -20,6 +20,9 @@ namespace Administracion.Dto.Ticket
         public virtual int? FunctionalUnitId { get; set; }
         public virtual int PriorityId { get; set; }        
         public virtual int? WorkerId { get; set; }
+        public virtual int? ManagerId { get; set; }
+        public virtual int? BacklogUserId { get; set; }
+        public virtual int? AreaId { get; set; }
         public virtual int CreatorId { get; set; }
 
     }

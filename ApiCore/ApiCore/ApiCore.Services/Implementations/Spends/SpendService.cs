@@ -15,7 +15,8 @@ namespace ApiCore.Services.Implementations.Spends
     public class SpendService : ISpendService
     {
         public ISpendRepository SpendRepository { get; set; }
-        public ISpendTypeRepository SpendTypeRepository { get; set; }        
+        public ISpendTypeRepository SpendTypeRepository { get; set; }
+        public ISpendClassRepository SpendClassRepository { get; set; }
         public IConsortiumRepository ConsortiumRepository { get; set; }
         public IBillRepository BillRepository { get; set; }
         public ITaskRepository TaskRepository { get; set; }
@@ -79,6 +80,7 @@ namespace ApiCore.Services.Implementations.Spends
             originalSpend.Bill = this.BillRepository.GetById(Spend.BillId);
             originalSpend.Consortium = this.ConsortiumRepository.GetById(Spend.ConsortiumId);
             originalSpend.Type = this.SpendTypeRepository.GetById(Spend.SpendTypeId);
+            originalSpend.SpendClass = this.SpendClassRepository.GetById(Spend.SpendClassId);
             originalSpend.Task = Spend.TaskId.HasValue ? this.TaskRepository.GetById(Spend.TaskId.Value) : null;
             originalSpend.Description = Spend.Description;
             originalSpend.PaymentDate = Spend.PaymentDate;            

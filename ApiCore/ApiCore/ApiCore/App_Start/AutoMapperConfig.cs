@@ -57,9 +57,13 @@ namespace ApiCore
                 cfg.CreateMap<List, ListResponse>();
                 cfg.CreateMap<Address,AddressResponse>();
                 cfg.CreateMap<TaskList, TaskListResponse>();
+                cfg.CreateMap<TaskHistory, TaskHistoryResponse>();
+                cfg.CreateMap<TicketHistory, TicketHistoryResponse>();
                 cfg.CreateMap<Manager, ManagerResponse>();
                 cfg.CreateMap<Message, MessageResponse>();
 
+                cfg.CreateMap<ElevatorControl, ControlResponse>();
+                cfg.CreateMap<FireExtinguisherControl, ControlResponse>();
                 cfg.CreateMap<Task, TaskResponse>();
             });
 

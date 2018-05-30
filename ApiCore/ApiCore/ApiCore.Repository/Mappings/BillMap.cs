@@ -17,6 +17,7 @@ namespace ApiCore.Repository.Mappings
 
 
             this.Property(x => x.Number).IsRequired().HasColumnName("bill_number");
+            this.Property(x => x.ClientNumber).IsOptional().HasColumnName("client_number");
             this.Property(x => x.Amount).IsRequired().HasColumnName("amount");
 
             this.Property(x => x.CreationDate).IsRequired().HasColumnName("creation_date");

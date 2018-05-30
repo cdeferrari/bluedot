@@ -2,6 +2,7 @@
 using Administracion.DomainModel.Enum;
 using Administracion.Dto.CommonData;
 using Administracion.Dto.Consortium;
+using Administracion.Dto.Control;
 using Administracion.Dto.List;
 using Administracion.Models;
 using Administracion.Security;
@@ -9,10 +10,13 @@ using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.CommonData;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.Countries;
+using Administracion.Services.Contracts.ElevatorControlService;
+using Administracion.Services.Contracts.FireExtinguisherControlService;
 using Administracion.Services.Contracts.Lists;
 using Administracion.Services.Contracts.Multimedias;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.TaskResult;
@@ -44,7 +48,10 @@ namespace Administracion.Controllers
         public virtual IChecklistService ChecklistService { get; set; }
         public virtual IOwnerService OwnersService { get; set; }
         public virtual IRenterService RenterService { get; set; }
+        public virtual IProviderService ProviderService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
+        public virtual IElevatorControlService ElevatorControlService { get; set; }
+        public virtual IFireExtinguisherControlService FireExtinguisherControlService { get; set; }
         // GET: Backlog
         public ActionResult Index()
         {
@@ -241,6 +248,69 @@ namespace Administracion.Controllers
 
 
         [HttpPost]
+        public ActionResult CreateElevatorControl(ElevatorControlViewModel control)
+        {
+            var ncontrol = new ControlRequest()
+            {
+                ConsortiumId = control.ConsortiumId,
+                ControlDate = DateTime.Now,
+                ExpirationDate = control.ExpirationDate,
+                ProviderId = control.ProviderId
+            };
+
+            try
+            {
+                var result = this.ElevatorControlService
+                    .CreateElevatorControl(ncontrol);
+
+                if (result)
+                {
+                    return Redirect(string.Format("/Consortium/Details/{0}", control.ConsortiumId));
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateFireExtinguisherControl(FireExtinguisherControlViewModel control)
+        {
+            var ncontrol = new ControlRequest()
+            {
+                ConsortiumId= control.ConsortiumId,
+                ControlDate = DateTime.Now,
+                ExpirationDate = control.ExpirationDate,
+                ProviderId = control.ProviderId
+            };
+            
+            try
+            {
+                var result = this.FireExtinguisherControlService
+                    .CreateFireExtinguisherControl(ncontrol);
+                
+                if (result)
+                {
+                    return Redirect(string.Format("/Consortium/Details/{0}", control.ConsortiumId));
+                }
+                else
+                {
+                    return View("../Shared/Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+        }
+
+
+        [HttpPost]
         public ActionResult CreateUpdateChecklist(CheckListViewModel checklist)
         {
             
@@ -418,6 +488,14 @@ namespace Administracion.Controllers
             var renters = this.RenterService.GetAll();
 
             var tickets = this.TicketService.GetByConsortiumId(id);
+
+            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
+
+            consortium.Providers = providerList;
 
             consortium.TicketQuantity = tickets.Where(x => x.Status.Description.ToLower().Equals("open")).Count();
 

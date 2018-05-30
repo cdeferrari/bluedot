@@ -12,6 +12,7 @@ namespace Administracion.DomainModel
         public virtual Bill Bill { get; set; }
         public virtual Consortium Consortium { get; set; }
         public virtual SpendType Type { get; set; }
+        public virtual SpendClass SpendClass { get; set; }
         public virtual DateTime PaymentDate { get; set; }
         public virtual string Description { get; set; }
     }

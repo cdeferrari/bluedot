@@ -70,6 +70,15 @@ namespace ApiCore.Library.Mensajes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area no encontrada.
+        /// </summary>
+        public static string AreaNoEncontrada {
+            get {
+                return ResourceManager.GetString("AreaNoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BadRequest.
         /// </summary>
         public static string BadRequest {
@@ -219,6 +228,24 @@ namespace ApiCore.Library.Mensajes {
         public static string TareaNoEncontrada {
             get {
                 return ResourceManager.GetString("TareaNoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seguimiento no encontrado.
+        /// </summary>
+        public static string TaskHistoryNoEncontrado {
+            get {
+                return ResourceManager.GetString("TaskHistoryNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seguimiento no encontrado.
+        /// </summary>
+        public static string TicketHistoryNoEncontrado {
+            get {
+                return ResourceManager.GetString("TicketHistoryNoEncontrado", resourceCulture);
             }
         }
         

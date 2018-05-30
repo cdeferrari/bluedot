@@ -2,13 +2,54 @@
 
         <tr>
             <td style="border: solid 1px; border-color: #eaedf1;"></td>
-            <td class="border-right-none " style="border-left: solid 1px; border-color: #eaedf1;">@Model.Type.Description</td>
-            <td class="border-left-right-none">$@Model.Bill.Amount</td>
-            <td class="border-left-none" style="border-right: solid 1px; border-color: #eaedf1;"></td>
-            <td  style="border: solid 1px; border-color: #eaedf1;" ></td>
-            <td  style="border: solid 1px; border-color: #eaedf1;"> </td>
-            <td  style="border: solid 1px; border-color: #eaedf1;"></td>
-            <td  style="border: solid 1px; border-color: #eaedf1;">$@Model.Bill.Amount</td>                        
+            <td class="border-right-none " style="border-left: solid 1px; border-color: #eaedf1;">@Model.Description</td>
+            @if (Model.SpendClass != null && Model.SpendClass.Id == 4)
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;">$@Model.Bill.Amount</td>
+            }
+            else
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;"></td>
+            }
+
+            @if (Model.SpendClass != null && Model.SpendClass.Id == 5)
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;">($@Model.Bill.Amount)</td>
+            }
+            else
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;"></td>
+            }
+
+            
+            @if (Model.SpendClass != null && Model.SpendClass.Id == 1)
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;">$@Model.Bill.Amount</td>
+            }
+            else
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;"></td>
+            }
+
+            @if (Model.SpendClass != null && Model.SpendClass.Id == 2)
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;">$@Model.Bill.Amount</td>
+            }
+            else
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;"></td>
+            }
+
+            @if (Model.SpendClass != null && Model.SpendClass.Id == 3)
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;">$@Model.Bill.Amount</td>
+            }
+            else
+            {
+                <td style="border: solid 1px; border-color: #eaedf1;"></td>
+            }
+            @{ var total = Model.SpendClass.Id == 5 ? -Model.Bill.Amount : Model.Bill.Amount;}
+            <td  style="border: solid 1px; border-color: #eaedf1;"> @total</td>                        
             <td style="border: solid 1px; border-color: #eaedf1;" class="text-center">
                 <div class="btn-group">
                     <a href="UpdateSpendById?id=@Model.Id&consortiumId=@Model.Consortium.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>

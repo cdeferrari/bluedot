@@ -20,5 +20,6 @@ namespace Administracion.DomainModel
         public virtual DateTime OpenDate { get; set; }
         public virtual DateTime? CloseDate { get; set; }        
         public IList<Spend> Spends { get; set; }
+        public virtual IList<TaskHistory> TaskHistory { get; set; }
     }
 }

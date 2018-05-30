@@ -1,0 +1,32 @@
+﻿@model Administracion.Models.TicketViewModel
+
+@if (Model != null && Model.TicketHistory != null)
+{
+    <div id="modal-follow-list" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header text-center">
+                    <h2 class="modal-title"><i class="fa fa-pencil"></i> SEGUIMIENTO</h2>
+                </div>
+                <!-- END Modal Header -->
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div class="block-title">
+                        <h2><strong>Lista</strong> </h2>
+                    </div>
+                    <div class="block">
+                        <ul>
+                            @foreach (var follow in Model.TicketHistory)
+                            {
+                                <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- END Modal Body -->
+            </div>
+        </div>
+    </div>
+}

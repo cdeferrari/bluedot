@@ -79,6 +79,7 @@ namespace ApiCore.Services.Implementations.Bills
             originalBill.ExpirationDate = Bill.ExpirationDate;
             originalBill.NextExpirationDate = Bill.NextExpirationDate;
             originalBill.Number = Bill.Number;
+            originalBill.ClientNumber = Bill.ClientNumber;
             originalBill.Worker = Bill.WorkerId.HasValue ? this.WorkerRepository.GetById(Bill.WorkerId.Value) : null;
             originalBill.Provider = Bill.ProviderId.HasValue ? this.ProviderRepository.GetById(Bill.ProviderId.Value) : null;
             originalBill.Manager = Bill.ManagerId.HasValue ? this.ManagerRepository.GetById(Bill.ManagerId.Value) : null;

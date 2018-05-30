@@ -17,6 +17,9 @@ namespace Administracion.DomainModel
         public virtual Ownership Ownership {get; set;}        
         public virtual IList<Manager> Managers { get; set; }
         public virtual IList<ConsortiumSecure> ConsortiumSecure { get; set; }
+        public virtual IList<FireExtinguisherControl> FireExtinguisherControls { get; set; }
+        public virtual IList<ElevatorControl> ElevatorControls { get; set; }
+
 
     }
 }

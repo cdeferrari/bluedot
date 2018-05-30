@@ -17,5 +17,8 @@ namespace ApiCore.DomainModel
          public virtual IList<Manager> Managers { get; set; }
         public virtual IList<ConsortiumSecure> ConsortiumSecure { get; set; }
         public virtual bool Inactive { get; set; }
+        public virtual IList<FireExtinguisherControl> FireExtinguisherControls { get; set; }
+        public virtual IList<ElevatorControl> ElevatorControls { get; set; }
+
     }
 }

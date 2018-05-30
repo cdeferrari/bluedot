@@ -4,6 +4,7 @@ using Administracion.Dto.ConsortiumSecure;
 using Administracion.Dto.Manager;
 using Administracion.Dto.Message;
 using Administracion.Dto.SpendType;
+using Administracion.Dto.Task;
 using Administracion.Dto.Ticket;
 using Administracion.Dto.Unit;
 using Administracion.Dto.Worker;
@@ -23,6 +24,8 @@ namespace Administracion.App_Start
 
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Ticket, TicketViewModel>();
+                cfg.CreateMap<TicketHistory, TicketHistoryViewModel>();
+                cfg.CreateMap<TaskHistory, TaskHistoryViewModel>();
                 cfg.CreateMap<Ticket, TicketRequest>()
                 .ForMember(x => x.PriorityId, o => o.MapFrom(y => y.Priority.Id))
                 .ForMember(x => x.ConsortiumId, o => o.MapFrom(y => y.Consortium.Id))
@@ -92,6 +95,8 @@ namespace Administracion.App_Start
                 cfg.CreateMap<City, IdDescriptionViewModel>();
 
                 cfg.CreateMap<SpendTypeViewModel, SpendTypeRequest>();
+                cfg.CreateMap<TicketHistoryViewModel, TicketHistoryRequest>();
+                cfg.CreateMap<TaskHistoryViewModel, TaskHistoryRequest>();
 
 
             });

@@ -1,12 +1,15 @@
 ﻿using Administracion.Integration.Contracts;
 using Administracion.Integration.Implementations;
 using Administracion.Services.Contracts.Administrations;
+using Administracion.Services.Contracts.AreaService;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Bills;
 using Administracion.Services.Contracts.CommonData;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.ConsortiumSecure;
 using Administracion.Services.Contracts.Countries;
+using Administracion.Services.Contracts.ElevatorControlService;
+using Administracion.Services.Contracts.FireExtinguisherControlService;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Incomes;
 using Administracion.Services.Contracts.IncomeTypes;
@@ -24,6 +27,7 @@ using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.Provinces;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.SecureStatus;
+using Administracion.Services.Contracts.SpendClass;
 using Administracion.Services.Contracts.SpendItemsService;
 using Administracion.Services.Contracts.Spends;
 using Administracion.Services.Contracts.SpendTypes;
@@ -34,6 +38,7 @@ using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Administrations;
+using Administracion.Services.Implementations.AreaService;
 using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Bills;
 using Administracion.Services.Implementations.Checklists;
@@ -41,6 +46,8 @@ using Administracion.Services.Implementations.CommonData;
 using Administracion.Services.Implementations.Consortiums;
 using Administracion.Services.Implementations.ConsortiumSecure;
 using Administracion.Services.Implementations.Countrys;
+using Administracion.Services.Implementations.ElevatorControls;
+using Administracion.Services.Implementations.FireExtinguisherControls;
 using Administracion.Services.Implementations.FunctionalUnits;
 using Administracion.Services.Implementations.Incomes;
 using Administracion.Services.Implementations.IncomeTypes;
@@ -55,6 +62,7 @@ using Administracion.Services.Implementations.Priorities;
 using Administracion.Services.Implementations.Providers;
 using Administracion.Services.Implementations.Province;
 using Administracion.Services.Implementations.Renters;
+using Administracion.Services.Implementations.SpendClass;
 using Administracion.Services.Implementations.SpendItems;
 using Administracion.Services.Implementations.Spends;
 using Administracion.Services.Implementations.SpendTypes;
@@ -126,15 +134,18 @@ namespace Administracion.App_Start
             builder.RegisterType<PaymentTypesService>().As<IPaymentTypesService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().SingleInstance().PropertiesAutowired();
 
-
+            builder.RegisterType<AreaService>().As<IAreaService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<BillService>().As<IBillService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SpendTypeService>().As<ISpendTypeService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SpendItemService>().As<ISpendItemsService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SpendService>().As<ISpendService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<SpendClassService>().As<ISpendClassService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<IncomeService>().As<IIncomeService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<TaskService>().As<ITaskService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PatrimonyStatusService>().As<IPatrimonyStatusService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<IncomeTypesService>().As<IIncomeTypeService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ElevatorControlService>().As<IElevatorControlService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<FireExtinguisherControlService>().As<IFireExtinguisherControlService>().SingleInstance().PropertiesAutowired();
 
 
         }

@@ -19,9 +19,12 @@ namespace ApiCore.DomainModel
         public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual Priority Priority { get; set; }
         public virtual Worker Worker { get; set; }
+        public virtual Manager Manager { get; set; }
         public virtual BacklogUser Creator { get; set; }
+        public virtual BacklogUser BacklogUser { get; set; }
         public virtual IList<Message> Messages { get; set; }
         public virtual IList<Task> Tasks { get; set; }
-
+        public virtual IList<TicketHistory> TicketHistory { get; set; }
+        public virtual Area Area { get; set; }
     }
 }

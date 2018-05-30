@@ -22,5 +22,9 @@ namespace Administracion.Models
         public virtual IList<ConsortiumSecure> ConsortiumSecure { get; set; }
         public virtual int TicketQuantity { get; set; }
         public virtual string ImageUrl { get; set; }
+        public virtual IList<FireExtinguisherControl> FireExtinguisherControls { get; set; }
+        public virtual IList<ElevatorControl> ElevatorControls { get; set; }
+        public virtual IEnumerable<SelectListItem> Providers { get; set; }
+        public virtual int ProviderId { get; set; }
     }
 }
