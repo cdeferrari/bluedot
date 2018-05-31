@@ -94,6 +94,11 @@ namespace ApiCore.Services.Implementations.Tickets
             originalTicket.Creator = this.BacklogUserRepository.GetById(ticket.CreatorId);
             originalTicket.Title = ticket.Title;
             originalTicket.Description = ticket.Description;
+
+            if (ticket.Resolved.HasValue)
+            {
+                originalTicket.Resolved = ticket.Resolved;
+            }
         }
 
         public IList<Ticket> GetByConsortiumId(int consortiumId)

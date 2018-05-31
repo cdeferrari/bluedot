@@ -26,5 +26,6 @@ namespace ApiCore.DomainModel
         public virtual IList<Task> Tasks { get; set; }
         public virtual IList<TicketHistory> TicketHistory { get; set; }
         public virtual Area Area { get; set; }
+        public virtual bool? Resolved { get; set; }
     }
 }

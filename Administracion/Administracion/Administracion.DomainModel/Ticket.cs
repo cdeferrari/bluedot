@@ -30,5 +30,6 @@ namespace Administracion.DomainModel
         public virtual IList<Message> Messages { get; set; }
         public virtual IList<Task> Tasks { get; set; }
         public virtual IList<TicketHistory> TicketHistory { get; set; }
+        public virtual bool? Resolved { get; set; }
     }
 }

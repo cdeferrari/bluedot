@@ -28,5 +28,6 @@ namespace ApiCore.Dtos.Response
         public virtual IList<TaskResponse> Tasks { get; set; }
         public virtual Area Area { get; set; }
         public virtual IList<TicketHistoryResponse> TicketHistory { get; set; }
+        public virtual bool? Resolved { get; set; }
     }
 }

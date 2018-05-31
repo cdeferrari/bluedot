@@ -71,7 +71,7 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
-            var priorityList = this.PriorityService.GetAll().Select(x => new SelectListItem()
+            var priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
@@ -276,7 +276,7 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
-            var priorityList = this.PriorityService.GetAll().Select(x => new SelectListItem()
+            var priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Description
@@ -433,6 +433,28 @@ namespace Administracion.Controllers
             });
             
             return Redirect("/Backlog/UpdateTicketById/"+id);
+        }
+
+        public ActionResult ResolveTicket(int id)
+        {
+            var ticket = this.TicketService.GetTicket(id);
+            var statusList = this.StatusService.GetAll();
+            ticket.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
+            ticket.Resolved = true;
+            ticket.CloseDate = DateTime.Now;
+            
+            var nticket = Mapper.Map<TicketRequest>(ticket);
+            this.TicketService.UpdateTicket(nticket);
+
+            this.MessageService.CreateMessage(new Dto.Message.MessageRequest()
+            {
+                Content = "Resolvi el ticket",
+                Date = DateTime.Now,
+                SenderId = SessionPersister.Account.User.Id,
+                TicketId = id
+            });
+
+            return Redirect("/Backlog/UpdateTicketById/" + id);
         }
 
         public ActionResult SetTicketBlocker(int id)

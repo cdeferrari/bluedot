@@ -45,5 +45,6 @@ namespace Administracion.Models
         public virtual IList<TicketHistoryViewModel> TicketHistory { get; set; }
         public virtual TicketHistoryViewModel TicketFollow { get; set; }
         public virtual bool Autoasign { get; set; }
+        public virtual bool? Resolved { get; set; }
     }
 }

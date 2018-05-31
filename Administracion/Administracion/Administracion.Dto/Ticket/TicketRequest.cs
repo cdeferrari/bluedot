@@ -24,6 +24,6 @@ namespace Administracion.Dto.Ticket
         public virtual int? BacklogUserId { get; set; }
         public virtual int? AreaId { get; set; }
         public virtual int CreatorId { get; set; }
-
+        public virtual bool? Resolved { get; set; }
     }
 }
