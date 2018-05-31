@@ -54,20 +54,20 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)">
-                                <span class="badge pull-right">@Model.Where(x=> x.Priority.Description == "bloqueante" && x.Status.Id == 1).Count()</span>
+                            <a href="/Backlog/GetByPriority?priorityDescription=alta">
+                                <span class="badge pull-right">@Model.Where(x => x.Priority.Description == "alta").Count()</span>
                                 <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Urgentes</strong>
                             </a>
                         </li>
                         <li>
                             <a href="/Backlog/GetByStatus?statusDescription=open">
-                                <span class="badge pull-right">@Model.Where(x => x.Status.Id == 1).Count()</span>
+                                <span class="badge pull-right">@Model.Where(x => x.Status.Description == "open").Count()</span>
                                 <i class="fa fa-folder-open-o fa-fw"></i> <strong>Abiertos</strong>
                             </a>
                         </li>
                         <li>
                             <a href="/Backlog/GetByStatus?statusDescription=closed">
-                                <span class="badge pull-right">@Model.Where(x => x.Status.Id == 2).Count()</span>
+                                <span class="badge pull-right">@Model.Where(x => x.Status.Description == "closed").Count()</span>
                                 <i class="fa fa-folder-o fa-fw"></i> <strong>Cerrados</strong>
                             </a>
                         </li>

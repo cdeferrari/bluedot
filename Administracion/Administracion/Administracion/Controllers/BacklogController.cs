@@ -494,5 +494,23 @@ namespace Administracion.Controllers
             }
         }
 
+        public ActionResult GetByPriority(string priorityDescription)
+        {
+            try
+            {
+                var tickets = this.TicketService.GetAll()
+                    .Where(x => x.Priority.Description == priorityDescription)
+                    .ToList();
+
+                var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
+
+                return View("List", ticketsViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+        }
+
     }
 }
