@@ -26,5 +26,6 @@ namespace Administracion.Models
         public virtual IList<ElevatorControl> ElevatorControls { get; set; }
         public virtual IEnumerable<SelectListItem> Providers { get; set; }
         public virtual int ProviderId { get; set; }
+        public virtual string ClaveSuterh { get; set; }
     }
 }

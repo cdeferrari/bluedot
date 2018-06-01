@@ -22,5 +22,6 @@ namespace ApiCore.Dtos.Response
         public virtual IList<ConsortiumSecureResponse> ConsortiumSecure { get; set; }
         public virtual IList<ControlResponse> FireExtinguisherControls { get; set; }
         public virtual IList<ControlResponse> ElevatorControls { get; set; }
+        public virtual string ClaveSuterh { get; set; }
     }
 }

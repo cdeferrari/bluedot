@@ -71,6 +71,7 @@ namespace ApiCore.Services.Implementations.Consortiums
             originalConsortium.Telephone = consortium.Telephone;
             originalConsortium.Administration = this.AdministrationRepository.GetById(consortium.AdministrationId);
             originalConsortium.Ownership = this.OwnershipRepository.GetById(consortium.OwnershipId);
+            originalConsortium.ClaveSuterh = consortium.ClaveSuterh;
             return originalConsortium;
         }
 

@@ -22,6 +22,7 @@ namespace ApiCore.Repository.Mappings
             this.HasMany(x => x.FireExtinguisherControls).WithRequired(x => x.Consortium).Map(x => x.MapKey("consortium_id"));
             this.Property(x => x.Inactive).IsRequired().HasColumnName("inactive");
             this.Property(x => x.Telephone).IsOptional().HasColumnName("telephone");
+            this.Property(x => x.ClaveSuterh).IsOptional().HasColumnName("clave_suterh");
         }
 
     }

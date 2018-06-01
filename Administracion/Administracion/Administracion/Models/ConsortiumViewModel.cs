@@ -27,6 +27,6 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> Cities { get; set; }
         public virtual OwnershipViewModel Ownership { get; set; }
         public virtual HttpPostedFileBase Image { get; set; }
-
+        public virtual string ClaveSuterh { get; set; }
     }
 }
