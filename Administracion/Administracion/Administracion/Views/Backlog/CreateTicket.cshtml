@@ -34,7 +34,7 @@
 
                     @if (Model.Id > 0)
                     {
-                        <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@Model.Status.Description</strong></div>
+                        <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</strong></div>
                         <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Creado por : @Model.Creator.Name @Model.Creator.Surname el día @Model.OpenDate.ToShortDateString()</a>
                         <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Asignar este ticket</a>
                         <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a> 
