@@ -405,13 +405,53 @@ namespace Administracion.Controllers
                     Text = x.Description
                 });
 
+                var spendsWithoutManager = new List<Spend>();
+                var salaryDictionary = new Dictionary<int, IList<Spend>>();
+                var managers = new List<Manager>();
+                var spendItemDetYSueldos = spendItemsList.Where(x => x.Text.ToLower().Equals("detalle de sueldo y cargas sociales")).FirstOrDefault();
+
+                var salarySpends = spendsList.Where(x => x.Type.Item.Id == int.Parse(spendItemDetYSueldos.Value)).ToList();
+
+                salarySpends.ForEach(x =>
+                {
+                    if (x.Bill.Manager != null)
+                    {
+                        if (!salaryDictionary.Keys.Contains(x.Bill.Manager.Id))
+                        {
+                            var list = new List<Spend>() { x };
+                            salaryDictionary.Add(x.Bill.Manager.Id, list);
+                            managers.Add(x.Bill.Manager);
+
+                        }
+                        else
+                        {
+                            var list = salaryDictionary[x.Bill.Manager.Id];
+                            list.Add(x);
+                            salaryDictionary[x.Bill.Manager.Id] = list;
+                        }
+                    }
+                    else
+                    {
+                        spendsWithoutManager.Add(x);
+                    }
+                });
+
+                var salaryDictionaryManager = new Dictionary<Manager, IList<Spend>>();
+
+                foreach (var key in salaryDictionary.Keys)
+                {
+                    salaryDictionaryManager.Add(managers.Where(x => x.Id == key).FirstOrDefault(), salaryDictionary[key]);
+                }
+                
 
                 var spendsViewModel = new SpendViewModel()
                 {
                     Spends = spendsList,
                     SpendItems = spendItemsList,
                     SpendTypes = spendTypesList,
-                    ConsortiumId = id
+                    ConsortiumId = id,
+                    SalarySpends = salaryDictionaryManager,
+                    SalarySpendWithoutManager = spendsWithoutManager
                 };
 
                 return View("List", spendsViewModel);

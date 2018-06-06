@@ -35,12 +35,15 @@
                     @if (Model.Id > 0)
                     {
                         <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</strong></div>
-                        <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Creado por : @Model.Creator.Name @Model.Creator.Surname el día @Model.OpenDate.ToShortDateString()</a>
-                        <a href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-user"></i> Asignar este ticket</a>
-                        <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a> 
-                         
-                                            if (Model.Resolved.HasValue && Model.Resolved.Value)
-                                            {
+                        <p> Creado por : @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</p>                        
+                        if (Model.Status.Description != "closed")
+                        {
+                            <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a>
+                        }
+
+
+                        if (Model.Resolved.HasValue && Model.Resolved.Value)
+                        {
                                                 <a style="background-color:green; color:white" href="javascript:void(0)" class="btn btn-xs btn-default pull-right">
                                                      RESUELTO</a>
                                                     }
@@ -51,7 +54,7 @@
                                                     </a>
                                                     }
 
-                                                    <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Marcar como urgente</a>
+                                                    <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Dar Prioridad Alta</a>
 
                                                     <hr>
                                                     }
@@ -156,7 +159,7 @@
                             @if (Model.Id > 0)
                             {
                                 <div class="col-md-3">
-                                    <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar órden de trabajo</a>
+                                    <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar &oacute;rden de trabajo</a>
                                 </div>
 
                                                             <div class="col-md-3">
@@ -194,14 +197,14 @@
                 <div class="block">
                     <!-- Latest Orders Title -->
                     <div class="block-title">                        
-                        <h2><strong>Órdenes</strong></h2>
+                        <h2><strong>&Oacute;rdenes</strong></h2>
                     </div>
                     <!-- END Latest Orders Title -->
                     <!-- Latest Orders Content -->
                     <table class="table table-borderless table-striped table-vcenter table-bordered">
                         <tbody>
                             <tr>                                
-                                <td class="text-center"><strong>Descripción</strong></td>
+                                <td class="text-center"><strong>Descripci&oacute;n </strong></td>
                                 <td class="text-center"><strong>Estado Actual</strong></td>                                                                
                                 <td class="text-center">Creacion</td>                                
                                 <td class="text-center">Acciones</td>

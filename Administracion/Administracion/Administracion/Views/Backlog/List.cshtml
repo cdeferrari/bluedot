@@ -12,7 +12,7 @@
         <div class="content-header">
             <ul class="nav-horizontal text-center">
                 <li>
-                    @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)                    
+                    @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)
                     {
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
                     }
@@ -34,7 +34,7 @@
             <li><a href="">Pedidos</a></li>
         </ul>
         <div class="row">
-            <div class="col-sm-4 col-lg-3">
+            <div class="col-sm-3 col-lg-2">
                 <!-- Menu Block -->
                 <div class="block full">
                     <!-- Menu Title -->
@@ -47,26 +47,30 @@
                     <!-- END Menu Title -->
                     <!-- Menu Content -->
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <a href="/Backlog/Index">
+                        @{ var clase = Model.SelectedIndex == 1 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/Index" style="padding-left:0">
                                 <span class="badge pull-right">@Model.All</span>
                                 <i class="fa fa-ticket fa-fw"></i> <strong>Todos</strong>
                             </a>
                         </li>
-                        <li>
-                            <a href="/Backlog/GetByPriority?priorityDescription=alta">
+                        @{ clase = Model.SelectedIndex == 2 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/GetByPriority?priorityDescription=alta" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Blockers</span>
                                 <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Urgentes</strong>
                             </a>
                         </li>
-                        <li>
-                            <a href="/Backlog/GetByStatus?statusDescription=open">
+                        @{ clase = Model.SelectedIndex == 3 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/GetByStatus?statusDescription=open" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Open</span>
                                 <i class="fa fa-folder-open-o fa-fw"></i> <strong>Abiertos</strong>
                             </a>
                         </li>
-                        <li>
-                            <a href="/Backlog/GetByStatus?statusDescription=closed">
+                        @{ clase = Model.SelectedIndex == 4 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/GetByStatus?statusDescription=closed" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Closed</span>
                                 <i class="fa fa-folder-o fa-fw"></i> <strong>Cerrados</strong>
                             </a>
@@ -77,7 +81,7 @@
                 </div>
                 <!-- END Menu Block -->
                 <!-- Quick Month Stats Block -->
-                <div class="block">
+                @*<div class="block">
                     <!-- Quick Month Stats Title -->
                     <div class="block-title">
                         <h2><i class="gi gi-charts"></i>  <strong>Estadisticas</strong></h2>
@@ -114,11 +118,11 @@
                         </tbody>
                     </table>
                     <!-- END Quick Month Stats Content -->
-                </div>
+                </div>*@
                 <!-- END Quick Month Stats Block -->
             </div>
 
-            <div class="col-sm-8 col-lg-9">
+            <div class="col-sm-9 col-lg-10">
                 <!-- Tickets Block -->
                 <div class="block">
                     <!-- Tickets Title -->
@@ -145,13 +149,15 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">ID</th>
-                                                    <th>Estado</th>
+                                                    <th class="text-center">Fecha</th>
+                                                    <th class="text-center">Prioridad</th>
                                                     @*<th>Origen</th>*@
                                                     <th>Titulo</th>
+                                                    <th>Resp.</th>
                                                     <th class="text-center">Solicitante</th>
                                                     <th class="text-center">Consorcio</th>
-                                                    <th class="text-center"><i class="fa fa-comments"></i></th>
-                                                    <th>Acciones</th>
+                                                    <th class="text-center">Estado</th>
+                                                    <th class="text-center">Resuelto</th>                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>

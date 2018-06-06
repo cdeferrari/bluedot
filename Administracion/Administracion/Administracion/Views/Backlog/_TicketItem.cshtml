@@ -1,41 +1,53 @@
 ﻿@model Administracion.Models.TicketViewModel
 
-        <tr>
-            @{var tckid = "#TCK" + Model.Id; }
-            <td>@tckid</td>                              
-            <td>@switch (Model.Priority.Description)
+        <tr>            
+            <td><a href="UpdateTicketById/@Model.Id">@Model.Id</a> </td>                              
+            <td>@Model.OpenDate.ToShortDateString()</td>                              
+            <td class="text-center">@switch (Model.Priority.Description)
             {
                 case "baja":
                     <span class="label label-success">@Model.Priority.Description</span>
                     break;
                 case "media":
-                    <span class="label label-success">@Model.Priority.Description</span>
+                    <span class="label label-warning">@Model.Priority.Description</span>
                     break;
                 case "alta":
                     <span class="label label-danger">@Model.Priority.Description</span>
                     break;
-                case "bloqueante":
-                    <span class="label label-danger">@Model.Priority.Description</span>
-                    break;                
             }
             
             </td>
-            <td>@Model.Title</td>
-            <td>@Model.Customer</td>          
-            @if (Model.Consortium != null)
+            <td class="text-center"><a href="UpdateTicketById/@Model.Id">@Model.Title</a> </td>
+            @if (Model.BacklogUser != null)
             {
-                <td>@Model.Consortium.Ownership.Address.Street @Model.Consortium.Ownership.Address.Number</td>
+                <td class="text-center">@Model.BacklogUser.User.Name @Model.BacklogUser.User.Surname</td>
             }
             else
             {
-                <td>-</td>
+                <td class="text-center">-</td>
+            }
+            
+            <td class="text-center">@Model.Customer</td>          
+            @if (Model.Consortium != null)
+            {
+                <td class="text-center">@Model.Consortium.Ownership.Address.Street @Model.Consortium.Ownership.Address.Number</td>
+            }
+            else
+            {
+                <td class="text-center">-</td>
             }            
-            <td>-</td>          
-            <td class="text-center">
-                <div class="btn-group">
-                    <a href="UpdateTicketById/@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
-                    <a href="DeleteTicket/@Model.Id" data-toggle="tooltip" title="Borrar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                </div>
-            </td>            
+            @{ var statusDescription = Model.Status.Description == "open" ? "abierto" : "cerrado";  }
+
+            <td class="text-center">@statusDescription</td>
+            
+            @if (Model.Resolved.HasValue && Model.Resolved.Value)
+            {
+                <td class="text-center"><i class="fa fa-check" aria-hidden="true"></i></td>
+            }
+            else
+            {
+                <td class="text-center"><i class="fa fa-times" aria-hidden="true"></i></td>
+            }
+            
             
         </tr>

@@ -57,7 +57,8 @@ namespace Administracion.Controllers
                     All = ticketsViewModel.Count,
                     Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
-                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count()
+                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),
+                    SelectedIndex = 1
                 };
                 return View("List", ticketListViewModel);
             }
@@ -309,14 +310,9 @@ namespace Administracion.Controllers
             var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.User.Name + " " + x.User.Surname
+                Text = x.User.Name 
             });
-
-            var managerList = this.ManagerService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name + " " + x.User.Surname
-            });
+            
 
             var spendItemsList = this.SpendItemService.GetAll().Select(x => new SelectListItem()
             {
@@ -346,6 +342,13 @@ namespace Administracion.Controllers
 
             var back_user = this.AuthenticationService.GetAll().Where(x => x.Id == ticket.Creator.Id).FirstOrDefault();
             var user = this.UserService.GetUser(back_user.User.Id);
+
+            var managerList = oTicket.Consortium.Managers
+                .Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.User.Name + " " + x.User.Surname
+                });
 
             ticket.StatusList = statusList;
             ticket.PriorityList = priorityList;
@@ -456,10 +459,7 @@ namespace Administracion.Controllers
         public ActionResult ResolveTicket(int id)
         {
             var ticket = this.TicketService.GetTicket(id);
-            var statusList = this.StatusService.GetAll();
-            ticket.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
             ticket.Resolved = true;
-            ticket.CloseDate = DateTime.Now;
             
             var nticket = Mapper.Map<TicketRequest>(ticket);
             this.TicketService.UpdateTicket(nticket);
@@ -479,13 +479,13 @@ namespace Administracion.Controllers
         {
             var ticket = this.TicketService.GetTicket(id);
             var statusList = this.PriorityService.GetAll();
-            ticket.Priority.Id = statusList.Where(x => x.Description.Equals("bloqueante")).FirstOrDefault().Id;
+            ticket.Priority.Id = statusList.Where(x => x.Description.Equals("alta")).FirstOrDefault().Id;
             var nticket = Mapper.Map<TicketRequest>(ticket);
             this.TicketService.UpdateTicket(nticket);
 
             this.MessageService.CreateMessage(new Dto.Message.MessageRequest()
             {
-                Content = "Marqué el ticket como bloqueante",
+                Content = "Marqué el ticket con prioridad alta",
                 Date = DateTime.Now,
                 SenderId = SessionPersister.Account.User.Id,
                 TicketId = id
@@ -510,7 +510,8 @@ namespace Administracion.Controllers
                     All = allTickets.Count,
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
-                    Open = allTickets.Where(x => x.Status.Description == "open").Count()
+                    Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    SelectedIndex = statusDescription == "open" ? 3 : 4                    
                 };
                 return View("List", ticketListViewModel);
             }
@@ -536,7 +537,8 @@ namespace Administracion.Controllers
                     All = allTickets.Count,
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
-                    Open = allTickets.Where(x => x.Status.Description == "open").Count()
+                    Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    SelectedIndex = 2
                 };
                 return View("List", ticketListViewModel);
             }

@@ -156,6 +156,9 @@
         //Dropdownlist Selectedchange event
         $("#ConsortiumId").change(function () {
             $("#FunctionalUnitId").empty();
+            var id = $("#ConsortiumId").val();
+            debugger;
+            if (id != null && id != undefined && id != "") {
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("GetFunctionalUnitsByConsortium", "FunctionalUnit")', // we are calling json method
@@ -178,11 +181,14 @@
                     alert('Failed to retrieve units.' + ex);
                 }
             });
+
+            }
+
             return false;
         });
 
         $('#edit-list').click(function () {
-            
+
             var text = $('.list-to-edit').text();
             var input = "<input id='MailingList' style='width:44%; margin-left:1%; display: inline-block;' name='MailingList' type='text' class='form-control' value='" + text + "'  />";
             $('.list-to-edit').text('').append(input);
@@ -202,7 +208,7 @@
         });
 
         $('#edit-address').click(function () {
-            
+
             var text = $.trim($('.address-to-edit').text()).split(" ");
             var number = text[text.length - 1];
             var street = "";
@@ -216,9 +222,9 @@
                     if (text[i] != " ") {
                         street += text[i];
                     }
-                    
+
                 }
-                
+
             }
             var inputstreet = "<input id='Addess.Street' style='width:30%; margin-left:20%; float: left;' name='Address.Street' type='text' class='form-control' value='" + street + "'  />";
             var inputnumber = "<input id='Addess.Number' style='width:30%; margin-right:20%; float: left;' name='Address.Number' type='text' class='form-control' value='" + number + "'  />";

@@ -106,12 +106,14 @@
                 </div>
             </div>
 
-            @foreach (var key in Model.SalarySpends.Keys)
+            @if (Model.SalarySpends.Keys != null)
             {
-                @Html.Partial("_SueldoList", Model.SalarySpends[key]);
+                foreach (var key in Model.SalarySpends.Keys)
+                {
+                    @Html.Partial("_SueldoList", Model.SalarySpends[key]);
+                }
             }
-
-
+            
             <div class="table-responsive">
                 <div class="block">
 
