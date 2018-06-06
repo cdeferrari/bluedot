@@ -49,6 +49,7 @@
     <Compile Include="Contracts\Area\IAreaService.cs" />
     <Compile Include="Contracts\FireExtinguisherControl\IFireExtinguisherControlService.cs" />
     <Compile Include="Contracts\ElevatorControl\IElevatorControlService.cs" />
+    <Compile Include="Contracts\Account\IAccountService.cs" />
     <Compile Include="Contracts\SpendsClass\ISpendClassService.cs" />
     <Compile Include="Contracts\Tasks\ITaskService.cs" />
     <Compile Include="Contracts\SpendsType\ISpendTypeService.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Implementations\Area\AreaService.cs" />
     <Compile Include="Implementations\FireExtinguisherControls\FireExtinguisherControlService.cs" />
     <Compile Include="Implementations\ElevatorControls\ElevatorControlService.cs" />
+    <Compile Include="Implementations\Account\AccountService.cs" />
     <Compile Include="Implementations\SpendClass\SpendClassService.cs" />
     <Compile Include="Implementations\SpendsType\SpendTypeService.cs" />
     <Compile Include="Implementations\Spends\SpendService.cs" />

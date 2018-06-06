@@ -123,15 +123,20 @@
                                                         </div>
                                                         <label class="control-label col-md-2">Asignado a</label>
                                                         <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.Manager.Id, Model.ManagerList, "-- Elija encargado--")
+                                                            @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--")
                                                         </div>
                                                     </div>
 
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Area</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Area.Id, Model.AreaList, "-- Elija Area --")
+                        </div>
+                    </div>
+
+
                                                     <div class="form-group row">
-                                                        <label class="control-label col-md-2">Area</label>
-                                                        <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.Area.Id, Model.AreaList, "-- Elija Area --")
-                                                        </div>
+                                                        
                                                         <label class="col-md-3 control-label" for="example-email-input">Autoasignar</label>
                                                         <div class="form-group">
                                                             <div class="col-md-1">
@@ -144,15 +149,16 @@
                                                     </div>
 
 
-                                                    <div class="form-group row">
-                                                        <div class="col-md-3">
-                                                            <input type="submit" value="Guardar" class="btn btn-success" />
-                                                        </div>
-                                                        @if (Model.Id > 0)
-                        {
-                                                            <div class="col-md-3">
-                                                                <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar órden de trabajo</a>
-                                                            </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <input type="submit" value="Guardar" class="btn btn-success" />
+                            </div>
+                            @if (Model.Id > 0)
+                            {
+                                <div class="col-md-3">
+                                    <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar órden de trabajo</a>
+                                </div>
 
                                                             <div class="col-md-3">
                                                                 <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
@@ -162,14 +168,16 @@
                                                                 <a href="#modal-follow-list" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
                                                             </div>
 
-                                                        }
+                            }
 
 
-                                                    </div>
+                        </div>
 
 
 
-</div>
+                    </div>
+
+
 
             }
             </div>

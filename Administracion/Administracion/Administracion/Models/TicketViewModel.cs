@@ -32,6 +32,7 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> ConsortiumList { get; set; }
         public virtual IEnumerable<SelectListItem> FunctionalUnitList { get; set; }
         public virtual IEnumerable<SelectListItem> SpendItemList { get; set; }
+        public virtual IEnumerable<SelectListItem> BacklogUserList { get; set; }
         public virtual Worker Worker { get; set; }
         public virtual Provider Provider { get; set; }
         public virtual Manager Manager { get; set; }

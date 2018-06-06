@@ -134,6 +134,7 @@ namespace Administracion.App_Start
             builder.RegisterType<PaymentTypesService>().As<IPaymentTypesService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().SingleInstance().PropertiesAutowired();
 
+            builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<AreaService>().As<IAreaService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<BillService>().As<IBillService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SpendTypeService>().As<ISpendTypeService>().SingleInstance().PropertiesAutowired();

@@ -637,6 +637,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account/.
+        /// </summary>
+        public static string GetAllBacklogUsers {
+            get {
+                return ResourceManager.GetString("GetAllBacklogUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bills/.
         /// </summary>
         public static string GetAllBills {

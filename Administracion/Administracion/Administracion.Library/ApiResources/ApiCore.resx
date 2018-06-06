@@ -586,4 +586,7 @@
   <data name="UpdateFireExtinguisherControl" xml:space="preserve">
     <value>FireExtinguisherControl/{0}</value>
   </data>
+  <data name="GetAllBacklogUsers" xml:space="preserve">
+    <value>Account/</value>
+  </data>
 </root>

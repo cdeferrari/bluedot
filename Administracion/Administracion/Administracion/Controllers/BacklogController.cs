@@ -43,7 +43,7 @@ namespace Administracion.Controllers
         public virtual ISpendItemsService SpendItemService { get; set; }
         public virtual IAreaService AreaService { get; set; }
         public virtual IMessageService MessageService { get; set; }
-
+        public virtual IAccountService AccountService { get; set; }
 
         public ActionResult Index()
         {
@@ -51,7 +51,15 @@ namespace Administracion.Controllers
             {
                 var tickets = this.TicketService.GetAll();
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
-                return View("List",ticketsViewModel);
+                var ticketListViewModel = new TicketListViewModel()
+                {
+                    Tickets = ticketsViewModel,
+                    All = ticketsViewModel.Count,
+                    Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
+                    Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
+                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count()
+                };
+                return View("List", ticketListViewModel);
             }
             catch (Exception ex)
             {
@@ -108,7 +116,7 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
-            var backloguserList = this.  ManagerService.GetAll().Select(x => new SelectListItem()
+            var backloguserList = this.AccountService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.User.Name + " " + x.User.Surname
@@ -136,6 +144,7 @@ namespace Administracion.Controllers
                 UsersList = userList,
                 ConsortiumList = consortiumList,
                 AreaList = areaList,
+                BacklogUserList = backloguserList,
                 FunctionalUnitList = functionalUnitList
 
             };
@@ -162,10 +171,7 @@ namespace Administracion.Controllers
                 if (nticket.Id > 0)
                 {
                     var oticket = this.TicketService.GetTicket(nticket.Id);
-                    if(oticket.BacklogUser!= null && oticket.BacklogUser.Id == SessionPersister.Account.Id)
-                    {
-                        nticket.BacklogUserId = null;
-                    }
+                   
                 }
 
             }
@@ -281,7 +287,12 @@ namespace Administracion.Controllers
                 Value = x.Id.ToString(),
                 Text = x.Description
             });
-            
+
+            var backloguserList = this.AccountService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.User.Name + " " + x.User.Surname
+            });
 
             var userList = this.AuthenticationService.GetAll().Select(x => new SelectListItem()
             {
@@ -342,6 +353,7 @@ namespace Administracion.Controllers
             ticket.ManagerList = managerList;
             ticket.ProviderList = providerList;
             ticket.UsersList = userList;
+            ticket.BacklogUserList = backloguserList;
             ticket.ConsortiumList = consortiumList;
             ticket.FunctionalUnitList = functionalUnitList;
             ticket.Consortium = oTicket.Consortium;
@@ -356,6 +368,7 @@ namespace Administracion.Controllers
             ticket.Area = oTicket.Area;
             ticket.Autoasign = oTicket.BacklogUser != null && oTicket.BacklogUser.Id == SessionPersister.Account.Id;
             ticket.BacklogUser = oTicket.BacklogUser;
+            ticket.Status = oTicket.Status;            
 
             return View("CreateTicket",ticket);
         }
@@ -418,20 +431,25 @@ namespace Administracion.Controllers
         public ActionResult CloseTicket(int id)
         {
             var ticket = this.TicketService.GetTicket(id);
-            var statusList = this.StatusService.GetAll();
-            ticket.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
-            ticket.CloseDate = DateTime.Now;
-            var nticket = Mapper.Map<TicketRequest>(ticket);
-            this.TicketService.UpdateTicket(nticket);
 
-            this.MessageService.CreateMessage(new Dto.Message.MessageRequest()
+            if (ticket.Status.Description != "closed")
             {
-                Content = "Cerré el ticket",
-                Date = DateTime.Now,
-                SenderId = SessionPersister.Account.User.Id,
-                TicketId = id
-            });
-            
+                var statusList = this.StatusService.GetAll();
+                ticket.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
+                ticket.CloseDate = DateTime.Now;
+                var nticket = Mapper.Map<TicketRequest>(ticket);
+                this.TicketService.UpdateTicket(nticket);
+
+                this.MessageService.CreateMessage(new Dto.Message.MessageRequest()
+                {
+                    Content = "Cerré el ticket",
+                    Date = DateTime.Now,
+                    SenderId = SessionPersister.Account.User.Id,
+                    TicketId = id
+                });
+
+            }
+
             return Redirect("/Backlog/UpdateTicketById/"+id);
         }
 
@@ -480,13 +498,21 @@ namespace Administracion.Controllers
         {
             try
             {
-                var tickets = this.TicketService.GetAll()
+                var allTickets = this.TicketService.GetAll();
+                var tickets = allTickets
                     .Where(x => x.Status.Description == statusDescription)
                     .ToList();
 
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
-
-                return View("List", ticketsViewModel);
+                var ticketListViewModel = new TicketListViewModel()
+                {
+                    Tickets = ticketsViewModel,
+                    All = allTickets.Count,
+                    Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
+                    Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
+                    Open = allTickets.Where(x => x.Status.Description == "open").Count()
+                };
+                return View("List", ticketListViewModel);
             }
             catch (Exception ex)
             {
@@ -498,13 +524,21 @@ namespace Administracion.Controllers
         {
             try
             {
-                var tickets = this.TicketService.GetAll()
+                var allTickets = this.TicketService.GetAll();
+                var tickets = allTickets
                     .Where(x => x.Priority.Description == priorityDescription)
                     .ToList();
 
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
-
-                return View("List", ticketsViewModel);
+                var ticketListViewModel = new TicketListViewModel()
+                {
+                    Tickets = ticketsViewModel,
+                    All = allTickets.Count,
+                    Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
+                    Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
+                    Open = allTickets.Where(x => x.Status.Description == "open").Count()
+                };
+                return View("List", ticketListViewModel);
             }
             catch (Exception ex)
             {

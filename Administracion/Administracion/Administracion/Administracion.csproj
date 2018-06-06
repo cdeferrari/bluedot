@@ -293,6 +293,7 @@
     <Compile Include="Models\OwnershipViewModel.cs" />
     <Compile Include="Models\PatrimonyStatusViewModel.cs" />
     <Compile Include="Models\SpendViewModel.cs" />
+    <Compile Include="Models\TicketListViewModel.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Models\ProviderViewModel.cs" />
     <Compile Include="Models\WorkerViewModel.cs" />
