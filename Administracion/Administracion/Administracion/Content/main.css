@@ -2074,6 +2074,13 @@ a[data-toggle="lightbox-image"]:hover img {
         width: 120px;
     }
 }
+/* Tickets */
+#tickets-list span.label {
+    padding: 6px 9px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+}
 /*
 =================================================================
 (#m06bos) BOOTSTRAP OVERWRITE/EXTEND STYLES
