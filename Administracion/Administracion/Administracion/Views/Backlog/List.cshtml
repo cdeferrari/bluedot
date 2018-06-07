@@ -75,6 +75,13 @@
                                 <i class="fa fa-folder-o fa-fw"></i> <strong>Cerrados</strong>
                             </a>
                         </li>
+                        @{ clase = Model.SelectedIndex == 5 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/Index?filter=self" style="padding-left:0">
+                                <span class="badge pull-right">@Model.Self</span>
+                                <i class="fa fa-user fa-fw"></i> <strong>Asignados a mí</strong>
+                            </a>
+                        </li>
 
                     </ul>
                     <!-- END Menu Content -->

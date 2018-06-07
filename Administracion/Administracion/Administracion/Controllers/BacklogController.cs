@@ -45,10 +45,11 @@ namespace Administracion.Controllers
         public virtual IMessageService MessageService { get; set; }
         public virtual IAccountService AccountService { get; set; }
 
-        public ActionResult Index()
+        public ActionResult Index(string filter = "")
         {
             try
             {
+                int currUserId = SessionPersister.Account.User.Id;
                 var tickets = this.TicketService.GetAll();
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
                 var ticketListViewModel = new TicketListViewModel()
@@ -57,16 +58,42 @@ namespace Administracion.Controllers
                     All = ticketsViewModel.Count,
                     Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
-                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),
+                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),                    
                     SelectedIndex = 1
                 };
+                List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
+                ticketListViewModel.Self = selfTickets.Count();
+
+                if(filter.ToLower() == "self")
+                {
+                    ticketListViewModel.Tickets = selfTickets;
+                    ticketListViewModel.SelectedIndex = 5;
+                }
+
                 return View("List", ticketListViewModel);
             }
             catch (Exception ex)
             {
+                //throw ex;
                 return View("../Shared/Error");
             }
             
+        }
+
+        private List<TicketViewModel> GetSelfTickets(int selfId, List<TicketViewModel> tickets)
+        {
+            List<TicketViewModel> selfTickets = new List<TicketViewModel>();
+            foreach(TicketViewModel ticket in tickets)
+            {
+                if ((ticket.BacklogUser != null && ticket.BacklogUser.User != null  //Existe el backloguser
+                    && ticket.BacklogUser.User.Id == selfId) ||                     //Y el Id coincide
+                    (ticket.Manager != null && ticket.Manager.User != null  //Existe el manager
+                    && ticket.Manager.User.Id == selfId))                   //Y el Id coincide
+                {
+                    selfTickets.Add(ticket);
+                }
+            }
+            return selfTickets;
         }
 
         // GET: Backlog
@@ -511,6 +538,7 @@ namespace Administracion.Controllers
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
                     Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
                     SelectedIndex = statusDescription == "open" ? 3 : 4                    
                 };
                 return View("List", ticketListViewModel);
@@ -538,6 +566,7 @@ namespace Administracion.Controllers
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
                     Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
                     SelectedIndex = 2
                 };
                 return View("List", ticketListViewModel);
