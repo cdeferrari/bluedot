@@ -18,6 +18,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Surname).IsOptional().HasColumnName("surname");                                
             this.HasOptional(x => x.ContactData).WithMany().Map(x => x.MapKey("data_contact_id"));
             this.Property(x => x.ProfilePic).IsOptional().HasColumnName("profile_pic");
+            this.Property(x => x.Comments).IsOptional().HasColumnName("comments");
 
         }
 
