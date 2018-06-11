@@ -45,7 +45,7 @@ namespace Administracion.Controllers
         public virtual IMessageService MessageService { get; set; }
         public virtual IAccountService AccountService { get; set; }
 
-        public ActionResult Index(int? consortium, string filter = "", string status = "")
+        public ActionResult Index(int? consortium, int? selectedindex, string filter = "", string status = "")
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Administracion.Controllers
                     Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
                     Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),                    
-                    SelectedIndex = 1
+                    SelectedIndex = selectedindex ?? 1
                 };
                 List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
                 ticketListViewModel.Self = selfTickets.Count();
@@ -68,11 +68,9 @@ namespace Administracion.Controllers
                 //asi que lo uploadeo.
                 if(status == "open" || status == "closed") {
                     ticketListViewModel.Tickets = FilterByStatus(ticketListViewModel.Tickets, status);
-                    ticketListViewModel.SelectedIndex = 0;
                 }
                 if (consortium != null) {
                     ticketListViewModel.Tickets = FilterByConsortium(ticketListViewModel.Tickets, consortium.Value);
-                    ticketListViewModel.SelectedIndex = 0;
                 }
 
                 if (filter.ToLower() == "self")
@@ -559,7 +557,7 @@ namespace Administracion.Controllers
 
             return Redirect("/Backlog/Index");
         }
-
+        /*
         public ActionResult GetByStatus(string statusDescription)
         {
             try
@@ -586,7 +584,7 @@ namespace Administracion.Controllers
             {
                 return View("../Shared/Error");
             }
-        }
+        }*/
 
         public ActionResult GetByPriority(string priorityDescription)
         {
