@@ -45,7 +45,7 @@ namespace Administracion.Controllers
         public virtual IMessageService MessageService { get; set; }
         public virtual IAccountService AccountService { get; set; }
 
-        public ActionResult Index(string filter = "")
+        public ActionResult Index(int? consortium, string filter = "", string status = "")
         {
             try
             {
@@ -64,7 +64,18 @@ namespace Administracion.Controllers
                 List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
                 ticketListViewModel.Self = selfTickets.Count();
 
-                if(filter.ToLower() == "self")
+                //Tengo planeado mejorar esto un poco, pero de momento esta andando como deberia 
+                //asi que lo uploadeo.
+                if(status == "open" || status == "closed") {
+                    ticketListViewModel.Tickets = FilterByStatus(ticketListViewModel.Tickets, status);
+                    ticketListViewModel.SelectedIndex = 0;
+                }
+                if (consortium != null) {
+                    ticketListViewModel.Tickets = FilterByConsortium(ticketListViewModel.Tickets, consortium.Value);
+                    ticketListViewModel.SelectedIndex = 0;
+                }
+
+                if (filter.ToLower() == "self")
                 {
                     ticketListViewModel.Tickets = selfTickets;
                     ticketListViewModel.SelectedIndex = 5;
@@ -94,6 +105,34 @@ namespace Administracion.Controllers
                 }
             }
             return selfTickets;
+        }
+
+        //Quita todos los elementos de la lista que tengan un status distinto al pasado por parametro
+        private List<TicketViewModel> FilterByStatus(List<TicketViewModel> tickets, string status)
+        {
+            List<TicketViewModel> filtered = new List<TicketViewModel>();
+            foreach (TicketViewModel ticket in tickets)
+            {
+                if(ticket.Status.Description != status)
+                {
+                    filtered.Add(ticket);
+                }
+            }
+            return filtered;
+        }
+
+        //Quita todos los elementos de la lista que tengan un consortium ID distinto al pasado por parametro
+        private List<TicketViewModel> FilterByConsortium(List<TicketViewModel> tickets, int consortiumId)
+        {
+            List<TicketViewModel> filtered = new List<TicketViewModel>();
+            foreach (TicketViewModel ticket in tickets)
+            {
+                if (ticket.ConsortiumId != consortiumId)
+                {
+                    filtered.Add(ticket);
+                }
+            }
+            return filtered;
         }
 
         // GET: Backlog
