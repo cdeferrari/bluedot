@@ -37,5 +37,7 @@ namespace Administracion.Models
         public virtual string FootwearWaist { get; set; }
         [DisplayName("Horario")]
         public virtual string Schedule { get; set; }
+
+        public IEnumerable<SelectListItem> Provinces { get; set; }
     }
 }

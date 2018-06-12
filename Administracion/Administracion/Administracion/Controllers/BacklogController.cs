@@ -45,10 +45,11 @@ namespace Administracion.Controllers
         public virtual IMessageService MessageService { get; set; }
         public virtual IAccountService AccountService { get; set; }
 
-        public ActionResult Index()
+        public ActionResult Index(int? consortium, int? selectedindex, string filter = "", string status = "")
         {
             try
             {
+                int currUserId = SessionPersister.Account.User.Id;
                 var tickets = this.TicketService.GetAll();
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
                 var ticketListViewModel = new TicketListViewModel()
@@ -57,16 +58,79 @@ namespace Administracion.Controllers
                     All = ticketsViewModel.Count,
                     Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
-                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),
-                    SelectedIndex = 1
+                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),                    
+                    SelectedIndex = selectedindex ?? 1
                 };
+                List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
+                ticketListViewModel.Self = selfTickets.Count();
+
+                //Tengo planeado mejorar esto un poco, pero de momento esta andando como deberia 
+                //asi que lo uploadeo.
+                if(status == "open" || status == "closed") {
+                    ticketListViewModel.Tickets = FilterByStatus(ticketListViewModel.Tickets, status);
+                }
+                if (consortium != null) {
+                    ticketListViewModel.Tickets = FilterByConsortium(ticketListViewModel.Tickets, consortium.Value);
+                }
+
+                if (filter.ToLower() == "self")
+                {
+                    ticketListViewModel.Tickets = selfTickets;
+                    ticketListViewModel.SelectedIndex = 5;
+                }
+
                 return View("List", ticketListViewModel);
             }
             catch (Exception ex)
             {
+                //throw ex;
                 return View("../Shared/Error");
             }
             
+        }
+
+        private List<TicketViewModel> GetSelfTickets(int selfId, List<TicketViewModel> tickets)
+        {
+            List<TicketViewModel> selfTickets = new List<TicketViewModel>();
+            foreach(TicketViewModel ticket in tickets)
+            {
+                if ((ticket.BacklogUser != null && ticket.BacklogUser.User != null  //Existe el backloguser
+                    && ticket.BacklogUser.User.Id == selfId) ||                     //Y el Id coincide
+                    (ticket.Manager != null && ticket.Manager.User != null  //Existe el manager
+                    && ticket.Manager.User.Id == selfId))                   //Y el Id coincide
+                {
+                    selfTickets.Add(ticket);
+                }
+            }
+            return selfTickets;
+        }
+
+        //Quita todos los elementos de la lista que tengan un status distinto al pasado por parametro
+        private List<TicketViewModel> FilterByStatus(List<TicketViewModel> tickets, string status)
+        {
+            List<TicketViewModel> filtered = new List<TicketViewModel>();
+            foreach (TicketViewModel ticket in tickets)
+            {
+                if(ticket.Status.Description != status)
+                {
+                    filtered.Add(ticket);
+                }
+            }
+            return filtered;
+        }
+
+        //Quita todos los elementos de la lista que tengan un consortium ID distinto al pasado por parametro
+        private List<TicketViewModel> FilterByConsortium(List<TicketViewModel> tickets, int consortiumId)
+        {
+            List<TicketViewModel> filtered = new List<TicketViewModel>();
+            foreach (TicketViewModel ticket in tickets)
+            {
+                if (ticket.ConsortiumId != consortiumId)
+                {
+                    filtered.Add(ticket);
+                }
+            }
+            return filtered;
         }
 
         // GET: Backlog
@@ -509,7 +573,7 @@ namespace Administracion.Controllers
 
             return Redirect("/Backlog/Index");
         }
-
+        /*
         public ActionResult GetByStatus(string statusDescription)
         {
             try
@@ -527,6 +591,7 @@ namespace Administracion.Controllers
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
                     Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
                     SelectedIndex = statusDescription == "open" ? 3 : 4                    
                 };
                 return View("List", ticketListViewModel);
@@ -535,7 +600,7 @@ namespace Administracion.Controllers
             {
                 return View("../Shared/Error");
             }
-        }
+        }*/
 
         public ActionResult GetByPriority(string priorityDescription)
         {
@@ -554,6 +619,7 @@ namespace Administracion.Controllers
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
                     Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
                     SelectedIndex = 2
                 };
                 return View("List", ticketListViewModel);

@@ -42,7 +42,7 @@
                         <div class="block-options pull-right">
 
                         </div>
-                        <h2><i class="fa fa-ticket"></i> Administrar <strong>Pedidos</strong></h2>
+                        <h2><i class="fa fa-ticket"></i> Pedidos</h2>
                     </div>
                     <!-- END Menu Title -->
                     <!-- Menu Content -->
@@ -63,16 +63,25 @@
                         </li>
                         @{ clase = Model.SelectedIndex == 3 ? "active" : string.Empty;}
                         <li class="@clase">
-                            <a href="/Backlog/GetByStatus?statusDescription=open" style="padding-left:0">
+                            <!--<a href="/Backlog/GetByStatus?statusDescription=open" style="padding-left:0">-->
+                            <a href="/Backlog/Index?status=open&selectedindex=3" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Open</span>
                                 <i class="fa fa-folder-open-o fa-fw"></i> <strong>Abiertos</strong>
                             </a>
                         </li>
                         @{ clase = Model.SelectedIndex == 4 ? "active" : string.Empty;}
                         <li class="@clase">
-                            <a href="/Backlog/GetByStatus?statusDescription=closed" style="padding-left:0">
+                            <!--<a href="/Backlog/GetByStatus?statusDescription=closed" style="padding-left:0">-->
+                            <a href="/Backlog/Index?status=closed&selectedindex=4" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Closed</span>
                                 <i class="fa fa-folder-o fa-fw"></i> <strong>Cerrados</strong>
+                            </a>
+                        </li>
+                        @{ clase = Model.SelectedIndex == 5 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/Index?filter=self" style="padding-left:0">
+                                <span class="badge pull-right">@Model.Self</span>
+                                <i class="fa fa-user fa-fw"></i> <strong>Mis Tickets</strong>
                             </a>
                         </li>
 

@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using Administracion.Services.Contracts.LaboralUnion;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.Provinces;
 using Administracion.Dto.Manager;
 
 namespace Administracion.Controllers
@@ -26,8 +27,7 @@ namespace Administracion.Controllers
         public virtual IConsortiumService ConsortiumService { get; set; }
         public virtual ILaboralUnionService LaboralUnionService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
-
-        
+        public virtual IProvinceService ProvinceService { get; set; }        
 
         public ActionResult Index()
         {
@@ -64,11 +64,18 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
+            var provinces = this.ProvinceService.GetAllProvinces().Select(x => new SelectListItem()
+            {
+                Value = x.Description,
+                Text = x.Description
+            });
+
             var viewModel = new ManagerViewModel()
             {
                 ConsortiumId = consortium != null ? consortium.Id : 0,
                 LaboralUnionList = laboralUnions,
-                ConsortiumList = consortiumList
+                ConsortiumList = consortiumList,
+                Provinces = provinces
             };
 
             viewModel.Male = true;
