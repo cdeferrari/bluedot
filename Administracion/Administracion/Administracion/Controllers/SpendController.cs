@@ -38,6 +38,10 @@ namespace Administracion.Controllers
         public virtual IWorkerService WorkerService { get; set; }
         public virtual IManagerService ManagerService { get; set; }
 
+        private decimal suterhPercentage = decimal.Parse(ConfigurationManager.AppSettings["suterhPercentage"]);
+        private decimal fateryhPercentage = decimal.Parse(ConfigurationManager.AppSettings["fateryhPercentage"]);
+        private decimal seracarhPercentage = decimal.Parse(ConfigurationManager.AppSettings["seracarhPercentage"]);
+
         // GET: Backlog
         [HttpGet]
         public ActionResult ChoseConsortium()
@@ -478,8 +482,7 @@ namespace Administracion.Controllers
                     var spendTypes = this.SpendTypeService.GetAll();
                     var spendClasses = this.SpendClassService.GetAll();
                     var managers = this.ManagerService.GetAll();
-                    //var keys = Congi
-
+             
                     while (!csvreader.EndOfStream)
                     {
 
@@ -488,158 +491,9 @@ namespace Administracion.Controllers
 
                         this.ParseSpend(values, spendDictionary, managers, spendTypes, spendClasses, consortiumId);
 
-                        //var sueldoBasicoIndex = values.IndexOf("Sueldo Basico");
-                        //if (sueldoBasicoIndex != -1 && !spendDictionary.Keys.Contains("Sueldo Basico"))
-                        //{
-
-                        //    var sueldoBasicoValue = values[sueldoBasicoIndex + 2];
-                        //    spendDictionary.Add("Sueldo Basico", new List<Spend>() { this.CreateSpend("Sueldo Basico", sueldoBasicoValue, consortiumId, spendTypes) });
-                        //}
-
-                        //var retiroResiduosIndex = values.IndexOf("Retiro Residuos");
-                        //if (retiroResiduosIndex != -1 && !spendDictionary.Keys.Contains("Retiro Residuos"))
-                        //{
-                        //    var retiroResiduosValue1 = values[retiroResiduosIndex + 1];
-                        //    var retiroResiduosValue2 = values[retiroResiduosIndex + 2];
-                        //    spendDictionary.Add("Retiro Residuos", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Retiro Residuos", retiroResiduosValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Retiro Residuos", retiroResiduosValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var plusMovimientoCochesIndex = values.IndexOf("Plus Movimiento Coches");
-                        //if (plusMovimientoCochesIndex != -1 && !spendDictionary.Keys.Contains("Plus Movimiento Coches"))
-                        //{
-                        //    var plusMovimientoCochesValue = values[plusMovimientoCochesIndex + 2];
-                        //    spendDictionary.Add("Plus Movimiento Coches", new List<Spend>() { this.CreateSpend("Plus Movimiento Coches", plusMovimientoCochesValue, consortiumId, spendTypes) });
-                        //}
-
-
-                        //var vacacionesIndex = values.IndexOf("Vacaciones");
-                        //if (vacacionesIndex != -1 && !spendDictionary.Keys.Contains("Vacaciones"))
-                        //{
-                        //    var VacacionesValue1 = values[vacacionesIndex + 1];
-                        //    var VacacionesValue2 = values[vacacionesIndex + 2];
-                        //    spendDictionary.Add("Vacaciones", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Vacaciones", VacacionesValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Vacaciones", VacacionesValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var dtovacacionesIndex = values.IndexOf("Dcto Dias Vacaciones");
-                        //if (dtovacacionesIndex != -1 && !spendDictionary.Keys.Contains("Dcto Dias Vacaciones"))
-                        //{
-                        //    var DtoVacacionesValue1 = values[dtovacacionesIndex + 1];
-                        //    var DtoVacacionesValue2 = values[dtovacacionesIndex + 2];
-                        //    spendDictionary.Add("Dcto Dias Vacaciones", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Dcto Dias Vacaciones", DtoVacacionesValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Dcto Dias Vacaciones", DtoVacacionesValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-
-                        //var hsExtraIndex = values.IndexOf("Horas Extras 100%");
-                        //if (hsExtraIndex != -1 && !spendDictionary.Keys.Contains("Horas Extras 100%"))
-                        //{
-                        //    var hsExtraValue1 = values[hsExtraIndex + 1];
-                        //    var hsExtraValue2 = values[hsExtraIndex + 2];
-                        //    spendDictionary.Add("Horas Extras 100%", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Horas Extras 100%", hsExtraValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Horas Extras 100%", hsExtraValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var hsFeriadoIndex = values.IndexOf("Horas Feriados");
-                        //if (hsFeriadoIndex != -1 && !spendDictionary.Keys.Contains("Horas Feriados"))
-                        //{
-                        //    var hsFeriadoValue1 = values[hsFeriadoIndex + 1];
-                        //    var hsFeriadoValue2 = values[hsFeriadoIndex + 2];
-                        //    spendDictionary.Add("Horas Feriados", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Horas Feriados", hsFeriadoValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Horas Feriados", hsFeriadoValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-
-                        //var jubilacionIndex = values.IndexOf("Jubilación");
-                        //if (jubilacionIndex != -1 && !spendDictionary.Keys.Contains("Jubilación"))
-                        //{
-                        //    var jubilacionValue1 = values[jubilacionIndex + 1];
-                        //    var jubilacionValue2 = values[jubilacionIndex + 3];
-                        //    spendDictionary.Add("Jubilación", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Jubilación", jubilacionValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Jubilación", jubilacionValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var leyIndex = values.IndexOf("Ley 19032");
-                        //if (leyIndex != -1 && !spendDictionary.Keys.Contains("Ley 19032"))
-                        //{
-                        //    var leyValue1 = values[leyIndex + 1];
-                        //    var leyValue2 = values[leyIndex + 3];
-                        //    spendDictionary.Add("Ley 19032", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Ley 19032", leyValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Ley 19032", leyValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var ObraSocialIndex = values.IndexOf("Obra Social OSPERYHRA");
-                        //if (ObraSocialIndex != -1 && !spendDictionary.Keys.Contains("Obra Social OSPERYHRA"))
-                        //{
-                        //    var ObraSocialValue1 = values[ObraSocialIndex + 1];
-                        //    var ObraSocialValue2 = values[ObraSocialIndex + 3];
-                        //    spendDictionary.Add("Obra Social OSPERYHRA", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Obra Social OSPERYHRA", ObraSocialValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Obra Social OSPERYHRA", ObraSocialValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var CuotaSindicalIndex = values.IndexOf("Cuota Sindical SUTERH");
-                        //if (CuotaSindicalIndex != -1 && !spendDictionary.Keys.Contains("Cuota Sindical SUTERH"))
-                        //{
-                        //    var CuotaSindicalValue1 = values[CuotaSindicalIndex + 1];
-                        //    var CuotaSindicalValue2 = values[CuotaSindicalIndex + 3];
-                        //    spendDictionary.Add("Cuota Sindical SUTERH", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Cuota Sindical SUTERH", CuotaSindicalValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Cuota Sindical SUTERH", CuotaSindicalValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-                        //var CajaIndex = values.IndexOf("Caja Protecc. Fam. SUTERH");
-                        //if (CajaIndex != -1 && !spendDictionary.Keys.Contains("Caja Protecc. Fam. SUTERH"))
-                        //{
-                        //    var CajalValue1 = values[CajaIndex + 1];
-                        //    var CajalValue2 = values[CajaIndex + 3];
-                        //    spendDictionary.Add("Caja Protecc. Fam. SUTERH", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("Caja Protecc. Fam. SUTERH", CajalValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("Caja Protecc. Fam. SUTERH", CajalValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
-
-                        //var FATERYHIndex = values.IndexOf("F.M.V.D.D. - FATERYH");
-                        //if (FATERYHIndex != -1 && !spendDictionary.Keys.Contains("F.M.V.D.D. - FATERYH"))
-                        //{
-                        //    var FATERYHIValue1 = values[FATERYHIndex + 1];
-                        //    var FATERYHIValue2 = values[FATERYHIndex + 3];
-                        //    spendDictionary.Add("F.M.V.D.D. - FATERYH", new List<Spend>()
-                        //    {
-                        //        this.CreateSpend("F.M.V.D.D. - FATERYH", FATERYHIValue1, consortiumId, spendTypes),
-                        //        this.CreateSpend("F.M.V.D.D. - FATERYH", FATERYHIValue2, consortiumId, spendTypes)
-                        //    });
-                        //}
-
                     }
+
+                    CreateLaboralUnionSpends(spendDictionary, managers, consortiumId,spendTypes,spendClasses);
 
                     spendDictionary.Keys.ToList().ForEach(x => this.PostSpend(spendDictionary[x], consortiumId));
                 }
@@ -648,6 +502,112 @@ namespace Administracion.Controllers
             return Redirect(string.Format("/Spend/Index?Id={0}", consortiumId));
         }
 
+        private void CreateLaboralUnionSpends(IDictionary<string,IList<Spend>> spendsDictionary, IList<Manager> managers, int consortiumId, IList<SpendType> spendTypes, IList<SpendClass> spendClasses)
+        {
+            var spendsByCUIT = this.ParseSpendsDictionary(spendsDictionary);
+            
+            foreach (var key in spendsByCUIT.Keys)
+            {
+                var manager = managers.Where(x => x.User.CUIT == key).FirstOrDefault();
+                if (manager != null)
+                {
+                    var spends = spendsByCUIT[key];
+                    var spendsSum = spends.Sum(x =>
+                    {
+                        if (x.SpendClass.Id == 4)
+                        {
+                            return x.Bill.Amount;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    });
+
+                    spendsSum = decimal.Round(spendsSum, 0);
+
+                    var suterhSpend = this.CreateSuterhSpend(spendsSum, manager, consortiumId, spendTypes, spendClasses);
+                    var fateryhSpend = this.CreateFateryhSpend(spendsSum, manager, consortiumId, spendTypes, spendClasses);
+                    var seracarhSpend = this.CreateSeracarhSpend(spendsSum, manager, consortiumId, spendTypes, spendClasses);
+
+                    spendsDictionary.Add(suterhSpend.FirstOrDefault().Description + "_" + manager.User.CUIT + "_" + suterhSpend.FirstOrDefault().PaymentDate.ToString(), suterhSpend);
+                    spendsDictionary.Add(fateryhSpend.FirstOrDefault().Description + "_" + manager.User.CUIT + "_" + fateryhSpend.FirstOrDefault().PaymentDate.ToString(), fateryhSpend);
+                    spendsDictionary.Add(seracarhSpend.FirstOrDefault().Description + "_" + manager.User.CUIT + "_" + seracarhSpend.FirstOrDefault().PaymentDate.ToString(), seracarhSpend);
+                }                
+            }
+        }
+
+        private IList<Spend> CreateSuterhSpend(decimal spendsSum,Manager manager, int consortiumId, IList<SpendType> spendTypes, IList<SpendClass> spendClasses)
+        {
+            var spendDescription = ConfigurationManager.AppSettings["SuterhSpend"];
+            var amount = spendsSum * suterhPercentage / 100;
+            var result = new List<Spend>()
+            {
+                CreateSpend(spendDescription, null, amount.ToString(), consortiumId, DateTime.Now, spendTypes, spendClasses.Where(x => x.Description == "D").FirstOrDefault(), manager)
+                    
+            };
+            
+            return result;
+        }
+
+        private IList<Spend> CreateFateryhSpend(decimal spendsSum, Manager manager, int consortiumId, IList<SpendType> spendTypes, IList<SpendClass> spendClasses)
+        {
+            var spendDescription = ConfigurationManager.AppSettings["FateryhSpend"];
+            var amount = spendsSum * fateryhPercentage / 100;
+
+            //cambiar la condicion, debe ser por medio tiempo o tiempo completo
+            if (manager.IsAlternate)
+            {
+                amount += 75;
+            }
+            else
+            {
+                amount += 150;
+            }
+
+            var result = new List<Spend>()
+            {
+                CreateSpend(spendDescription, null, amount.ToString(), consortiumId, DateTime.Now, spendTypes, spendClasses.Where(x => x.Description == "D").FirstOrDefault(), manager)
+
+            };
+
+            return result;
+        }
+
+        private IList<Spend> CreateSeracarhSpend(decimal spendsSum, Manager manager, int consortiumId, IList<SpendType> spendTypes, IList<SpendClass> spendClasses)
+        {
+            var spendDescription = ConfigurationManager.AppSettings["SeracarhSpend"];
+            var amount = spendsSum * seracarhPercentage / 100;
+            var result = new List<Spend>()
+            {
+                CreateSpend(spendDescription, null, amount.ToString(), consortiumId, DateTime.Now, spendTypes, spendClasses.Where(x => x.Description == "D").FirstOrDefault(), manager)
+
+            };
+            return result;
+        }
+
+        private IDictionary<string,IList<Spend>> ParseSpendsDictionary(IDictionary<string, IList<Spend>> spendsDictionary)
+        {
+            var result = new Dictionary<string, IList<Spend>>();
+
+            foreach (var key in spendsDictionary.Keys)
+            {
+                var spends = spendsDictionary[key];                
+                var cuit = key.Split('_')[1];
+                var resultSpends = result.Keys.Contains(cuit) ? result[cuit] : new List<Spend>();
+
+                if(resultSpends.Count()>0)
+                {
+                    resultSpends = resultSpends.Concat(spends).ToList();
+                }
+                else
+                {
+                    resultSpends = spends;
+                }
+                result[cuit] = resultSpends;
+            }            
+            return result;
+        }
 
         private void ParseSpend(IList<string> values, Dictionary<string, IList<Spend>> dictionary, IList<Manager> managers, IList<SpendType> spendTypes,IList<SpendClass> spendClasses, int consortiumId)
         {
@@ -678,7 +638,7 @@ namespace Administracion.Controllers
                         spendsToAdd.Add(this.CreateSpend(spendDescription, spendData, spendClassE, consortiumId, spendDate, spendTypes, spendClasses.Where(x => x.Description == "E").FirstOrDefault(), manager));
                     }
 
-                    dictionary.Add(spendDescription + "-" + managerCuit + "-" + spendDate, spendsToAdd);
+                    dictionary.Add(spendDescription + "_" + managerCuit + "_" + spendDate, spendsToAdd);
                 }
                                 
             }

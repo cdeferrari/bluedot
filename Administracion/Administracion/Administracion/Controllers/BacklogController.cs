@@ -278,9 +278,25 @@ namespace Administracion.Controllers
                     if((oTicket.BacklogUser != null && nticket.BacklogUserId != oTicket.BacklogUser.Id))
                     {
                         var content = "Reasigne el ticket a:";
-                        if (nticket.BacklogUserId.HasValue && nticket.BacklogUserId.Value > 0)
+                        if (nticket.BacklogUserId.HasValue)
                         {
-                            content += "mi";
+                            if (nticket.BacklogUserId.Value > 0 && nticket.BacklogUserId.Value == SessionPersister.Account.Id)
+                            {
+                                content += "mi";
+                            }
+                            else
+                            {
+                                var buser = this.AccountService.GetAll().Where(x => x.Id == nticket.BacklogUserId.Value).FirstOrDefault();
+                                if (buser != null)
+                                {
+                                    content += buser.User.Name + " " + buser.User.Surname;
+                                }
+                                else
+                                {
+                                    content = "Reasigné el ticket";
+                                }
+                                
+                            }
                         }
                         else
                         {
