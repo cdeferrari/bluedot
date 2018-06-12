@@ -100,7 +100,7 @@
 
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-text-input">DOMICILIO</label>
+                            <label class="col-md-3 control-label" for="example-text-input">Domicilio Particular</label>
                             @Html.LabelFor(model => model.Home.Street, htmlAttributes: new { @class = "col-md-1 control-label" })
                             <div class="col-md-3">
                                 @Html.EditorFor(model => model.Home.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion",
@@ -127,8 +127,8 @@
                                 @Html.EditorFor(model => model.Home.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "CP" } })
                                 <span class="help-block">Coloque el codigo postal</span>
                             </div> <div class="col-md-3">                                      
-                                @Html.EditorFor(model => model.Home.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ciudad" } })                                
-                                <span class="help-block">Coloque la ciudad</span>
+                                @Html.DropDownListFor(model => model.Home.City, Model.Provinces,"-- Elija ciudad --", new { @class = "form-control" })
+                            <span class="help-block">Coloque la ciudad</span>
                             </div>
                         </div>
                   

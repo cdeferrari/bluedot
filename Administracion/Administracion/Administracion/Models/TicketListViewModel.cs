@@ -14,6 +14,7 @@ namespace Administracion.Models
         public virtual int Open { get; set; }
         public virtual int All { get; set; }
         public virtual int Blockers { get; set; }
+        public virtual int Self { get; set; }
         public virtual int SelectedIndex { get; set; }
         
     }

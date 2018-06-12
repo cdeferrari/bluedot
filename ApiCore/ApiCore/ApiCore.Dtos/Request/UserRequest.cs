@@ -14,6 +14,7 @@ namespace ApiCore.Dtos.Request
         public virtual string Name { get; set; }
         public virtual string Surname { get; set; }
         public virtual string ProfilePic { get; set; }
+        public virtual string Comments { get; set; }
         public virtual ContactData ContactData { get; set; }
         
     }
