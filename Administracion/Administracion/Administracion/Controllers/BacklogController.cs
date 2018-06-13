@@ -111,7 +111,7 @@ namespace Administracion.Controllers
             List<TicketViewModel> filtered = new List<TicketViewModel>();
             foreach (TicketViewModel ticket in tickets)
             {
-                if(ticket.Status.Description != status)
+                if(ticket.Status.Description == status)
                 {
                     filtered.Add(ticket);
                 }
@@ -125,7 +125,7 @@ namespace Administracion.Controllers
             List<TicketViewModel> filtered = new List<TicketViewModel>();
             foreach (TicketViewModel ticket in tickets)
             {
-                if (ticket.ConsortiumId != consortiumId)
+                if (ticket.ConsortiumId == consortiumId)
                 {
                     filtered.Add(ticket);
                 }
