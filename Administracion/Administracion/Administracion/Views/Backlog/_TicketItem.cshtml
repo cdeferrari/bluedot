@@ -36,6 +36,14 @@
             {
                 <td class="text-center">-</td>
             }            
+            @if (Model.FunctionalUnit != null)
+            {
+                <td class="text-center">@Model.FunctionalUnit.Floor</td>
+            }
+            else
+            {
+                <td class="text-center">-</td>
+            }            
             @{ var statusDescription = Model.Status.Description == "open" ? "abierto" : "cerrado";  }
 
             <td class="text-center">@statusDescription</td>
