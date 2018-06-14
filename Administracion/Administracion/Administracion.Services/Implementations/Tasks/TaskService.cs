@@ -50,5 +50,7 @@ namespace Administracion.Services.Implementations.Tasks
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateTaskHistory, RestMethod.Post, null, Task);            
         }
+
+        
     }
 }

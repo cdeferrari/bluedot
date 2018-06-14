@@ -15,6 +15,7 @@ namespace Administracion.Services.Contracts.Tasks
         Entidad CreateTask(TaskRequest Task);
         bool CreateTaskHistory(TaskHistoryRequest Task);
         bool DeleteTask(int TaskId);
+        bool UpdateTask(TaskRequest task);
         IList<Task> GetByTicketId(int ticketId);
     }
 }

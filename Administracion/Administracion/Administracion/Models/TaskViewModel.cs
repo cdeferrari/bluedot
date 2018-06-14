@@ -20,5 +20,7 @@ namespace Administracion.Models
         public virtual Manager Manager { get; set; }
         public virtual IList<TaskHistoryViewModel> TaskHistory { get; set; }
         public virtual TaskHistoryViewModel TaskFollow { get; set; }
+
+        public virtual DateTime FollowDate { get; set; }
     }
 }

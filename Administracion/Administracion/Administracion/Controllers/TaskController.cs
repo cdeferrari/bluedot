@@ -53,6 +53,16 @@ namespace Administracion.Controllers
                 var result = entity.Id != 0;                
                 if (result)
                 {
+                    var taskHistory = new TaskHistoryRequest()
+                    {
+                        Coment = "Seguimiento inicial",
+                        FollowDate = task.FollowDate,                        
+                        TaskId = entity.Id
+                    };
+
+                    
+                    this.TasksService.CreateTaskHistory(taskHistory);
+                    
                     return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", task.TicketId));
                 }
                 else
@@ -91,6 +101,37 @@ namespace Administracion.Controllers
             return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", ticketId));
         }
 
+
+        public ActionResult CloseTask(int id)
+        {   
+            var task = this.TasksService.GetTask(id);
+
+            if (task.Status.Description != "closed")
+            {
+                var statusList = this.StatusService.GetAll();
+                task.Status.Id = statusList.Where(x => x.Description.Equals("closed")).FirstOrDefault().Id;
+                task.CloseDate = DateTime.Now;
+                
+                var ntask = new TaskRequest()
+                {
+                    Id = task.Id,
+                    OpenDate = task.OpenDate,
+                    CreatorId = task.Creator.Id,
+                    Description = task.Description,
+                    StatusId = task.Status.Id,
+                    PriorityId = task.Priority.Id,
+                    WorkerId = task.Worker != null ? task.Worker.Id : 0,
+                    ProviderId = task.Provider != null ? task.Provider.Id : 0,
+                    ManagerId = task.Manager != null ? task.Manager.Id : 0,
+                    TicketId = task.Ticket.Id
+                };
+
+                this.TasksService.UpdateTask(ntask);
+                
+            }
+
+            return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", task.Ticket.Id));
+        }
 
         //public ActionResult CreateSpend(int id, int ticketId)
         //{
