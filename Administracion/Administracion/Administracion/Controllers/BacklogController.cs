@@ -15,6 +15,7 @@ using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.SpendItemsService;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.Tasks;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
 using Administracion.Services.Implementations.Tickets;
@@ -31,6 +32,7 @@ namespace Administracion.Controllers
     public class BacklogController : Controller
     {
         public virtual ITicketService TicketService { get; set; }
+        public virtual ITaskService TaskService { get; set; }
         public virtual IStatusService StatusService { get; set; }
         public virtual IPriorityService PriorityService { get; set; }
         public virtual IUserService UserService { get; set; }
@@ -63,9 +65,16 @@ namespace Administracion.Controllers
                 };
                 List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
                 ticketListViewModel.Self = selfTickets.Count();
+                IList<Ticket> ticketsWithTask = GetTicketsWithTask();
+                ticketListViewModel.WithTask = ticketsWithTask.Count();
 
-                //Tengo planeado mejorar esto un poco, pero de momento esta andando como deberia 
-                //asi que lo uploadeo.
+                if (filter.ToLower() == "self")
+                {
+                    ticketListViewModel.Tickets = selfTickets;
+                } else if (filter.ToLower() == "withtask") {
+                    ticketListViewModel.Tickets = Mapper.Map<List<TicketViewModel>>(ticketsWithTask);
+                }
+
                 if(status == "open" || status == "closed") {
                     ticketListViewModel.Tickets = FilterByStatus(ticketListViewModel.Tickets, status);
                 }
@@ -73,11 +82,6 @@ namespace Administracion.Controllers
                     ticketListViewModel.Tickets = FilterByConsortium(ticketListViewModel.Tickets, consortium.Value);
                 }
 
-                if (filter.ToLower() == "self")
-                {
-                    ticketListViewModel.Tickets = selfTickets;
-                    ticketListViewModel.SelectedIndex = 5;
-                }
 
                 return View("List", ticketListViewModel);
             }
@@ -105,7 +109,21 @@ namespace Administracion.Controllers
             return selfTickets;
         }
 
-        //Quita todos los elementos de la lista que tengan un status distinto al pasado por parametro
+        private IList<Ticket> GetTicketsWithTask()
+        {
+            IList<Ticket> tickets = new List<Ticket>();
+            var tasks = this.TaskService.GetAll();
+            foreach(Task task in tasks)
+            {
+                if(task.Ticket != null)
+                {
+                    tickets.Add(task.Ticket);
+                }
+            }
+            return tickets;
+        }
+
+        //Devuelve una lista con los elementos que tengan un status igual al pasado por parametro
         private List<TicketViewModel> FilterByStatus(List<TicketViewModel> tickets, string status)
         {
             List<TicketViewModel> filtered = new List<TicketViewModel>();
@@ -119,7 +137,7 @@ namespace Administracion.Controllers
             return filtered;
         }
 
-        //Quita todos los elementos de la lista que tengan un consortium ID distinto al pasado por parametro
+        //Devuelve una lista con los elementos que tengan un consortium ID igual al pasado por parametro
         private List<TicketViewModel> FilterByConsortium(List<TicketViewModel> tickets, int consortiumId)
         {
             List<TicketViewModel> filtered = new List<TicketViewModel>();
@@ -620,6 +638,7 @@ namespace Administracion.Controllers
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
                     Open = allTickets.Where(x => x.Status.Description == "open").Count(),
                     Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
+                    WithTask = GetTicketsWithTask().Count(),
                     SelectedIndex = 2
                 };
                 return View("List", ticketListViewModel);

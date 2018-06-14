@@ -79,9 +79,16 @@
                         </li>
                         @{ clase = Model.SelectedIndex == 5 ? "active" : string.Empty;}
                         <li class="@clase">
-                            <a href="/Backlog/Index?filter=self" style="padding-left:0">
+                            <a href="/Backlog/Index?filter=self&selectedindex=5" style="padding-left:0">
                                 <span class="badge pull-right">@Model.Self</span>
                                 <i class="fa fa-user fa-fw"></i> <strong>Mis Tickets</strong>
+                            </a>
+                        </li>
+                        @{ clase = Model.SelectedIndex == 6 ? "active" : string.Empty;}
+                        <li class="@clase">
+                            <a href="/Backlog/Index?filter=withTask&selectedindex=6" style="padding-left:0">
+                                <span class="badge pull-right">@Model.WithTask</span>
+                                &nbsp;<i class="fa fa-thumb-tack"></i> &nbsp;<strong>Con Tarea</strong>
                             </a>
                         </li>
 
