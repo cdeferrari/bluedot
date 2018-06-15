@@ -454,6 +454,8 @@ namespace Administracion.Controllers
                 //Updateamos la info en SessionPersister.Account
                 SessionPersister.Account.UserName = currUser.Name + " " + currUser.Surname;
                 SessionPersister.Account.User.ProfilePic = currUser.ProfilePic;
+                SessionPersister.Account.User.Name = currUser.Name ?? "";
+                SessionPersister.Account.User.Surname = currUser.Surname ?? "";
                 if (currUser.ContactData != null) { SessionPersister.Account.Email = currUser.ContactData.Email; }
 
                 DateTime dt = DateTime.Now;
