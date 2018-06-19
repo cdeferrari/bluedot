@@ -28,6 +28,14 @@ namespace Administracion.Controllers
         public virtual IUserService UserService { get; set; }
         public virtual IStatusService StatusService { get; set; }
 
+        public ActionResult List()
+        {
+            List<Task> tasks = this.TasksService.GetAll().ToList();
+            //List<TaskViewModel> tasksViewModel = Mapper.Map<List<TaskViewModel>>(tasks);
+            TasksViewModel model = new TasksViewModel() { Tasks = tasks };
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult CreateTask(TaskViewModel task)
         {
