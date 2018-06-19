@@ -427,7 +427,7 @@ namespace Administracion.Controllers
             {
                 string fileExtension = Path.GetExtension(photo.FileName);
                 string newFileName = "user-" + user.Id + fileExtension;
-                string imgPath = "Content/img/" + newFileName;
+                string imgPath = "Images/" + newFileName;
                 photo.Save(@"~/" + imgPath, null, false);
                 currUser.ProfilePic = newFileName;
             }

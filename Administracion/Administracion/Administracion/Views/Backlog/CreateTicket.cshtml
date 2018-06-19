@@ -213,10 +213,13 @@
                             @foreach (var task in Model.Tasks)
                             {
                                 <tr>
-                                    
+                                    @{
+                                        var estado = task.Status.Description == "open" ? "abierto" : "cerrado";
+                                    }
+
                                     <td class="text-center">@task.Description</td>
                                     <td class="text-center">
-                                        <strong>@task.Status.Description</strong>
+                                        <strong>@estado</strong>
                                     </td>                                    
                                     @{ var workerDescription = task.Worker != null ?
                                         task.Worker.User.Name + " " + task.Worker.User.Surname : string.Empty;

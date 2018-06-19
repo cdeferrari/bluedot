@@ -19,7 +19,8 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2">Descripci&oacute;n</label>
                         <div class="col-md-10">
-                            <textarea name="Task.Description" id="Task.Description" class="form-control text-box multi-line"></textarea>
+                            @{var initialDescription = !string.IsNullOrEmpty(Model.Description) ? Model.Description : string.Empty;}
+                            <textarea name="Task.Description" id="Task.Description" class="form-control text-box multi-line">@initialDescription</textarea>
                         </div>
                     </div>
 
@@ -38,6 +39,16 @@
                         <div class="col-md-4">
                             @Html.DropDownListFor(model => model.Task.Manager.Id, Model.ManagerList, "-- Elija Encargado --", new { @class = "form-control" })
                         </div>                        
+                        <label class="control-label col-md-2">Seguimiento inicial:</label>
+                        <div class='col-md-4 '>
+                            <div class='input-group date'>
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required." id="TaskFollow_FollowDate" name="FollowDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de proximo seguimiento')" required="required" type="datetime" value="">
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
