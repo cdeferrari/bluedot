@@ -1,0 +1,98 @@
+﻿@using Administracion.Security
+@using Administracion.DomainModel
+@model Administracion.Models.TasksViewModel
+@{
+    ViewBag.Title = "List";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    @if (SessionPersister.Account.Role == Administracion.DomainModel.Enum.Roles.Root)
+                    {
+                        <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                    }
+                    else
+                    {
+                        <a href="/DataBase/User"><i class="fa fa-home"></i> Home</a>
+                    }
+
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)"><i class="fa fa-thumb-tack"></i> Órdenes de Trabajo </a>
+                </li>
+
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li>Home</li>
+            <li><a href="">Órdenes de Trabajo</a></li>
+        </ul>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tickets Block -->
+                <div class="block">
+                    <!-- Tickets Title -->
+                    <div class="block-title">
+                        <!--<div class="block-options pull-right">
+                            <a href="#" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Crear Pedido"><i class="fa fa-plus"></i></a>
+                        </div>-->
+                        <h4>Listado de Órdenes de Trabajo</h4>
+                    </div>
+                    <!-- END Tickets Title -->
+                    <!-- Tabs Content -->
+                    <div class="tab-content">
+                        <!-- Tickets List -->
+                        <div class="tab-pane active" id="tasks-list">
+                            <div class="block-content-full">
+                                <div class="table-responsive remove-margin-bottom">
+
+                                    @if (Model.Tasks.Count > 0)
+                                    {
+
+                                        <table id="example-datatable" class="table table-striped table-vcenter remove-margin-bottom">
+                                            <thead>
+                                                <tr>
+                                                    <!--<th class="text-center">ID</th>-->
+                                                    <th class="text-center">Creación</th>
+                                                    <th class="text-center">Creador</th>
+                                                    <th class="text-center">Ticket</th>
+                                                    <th class="text-center">Prioridad</th>
+                                                    <th class="text-center">Estado</th>
+                                                    <th class="text-center">Empleado</th>
+                                                    <th class="text-center">Encargado</th>
+                                                    <th class="text-center">Proveedor</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (Task task in Model.Tasks)
+                                                {
+                                                    @Html.Partial("_TaskItem", task)
+                                                }
+
+
+                                            </tbody>
+                                        </table>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- END Tareas List -->
+
+                    </div>
+                    <!-- END Tabs Content -->
+                </div>
+                <!-- END Tareas Block -->
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model Administracion.DomainModel.Task
+
+<tr>
+    @*<td>@Model.Id</td>*@
+    <td class="text-center">@Model.OpenDate.ToShortDateString()</td>
+    @if (Model.Creator != null)
+    {
+    <td class="text-center">@Model.Creator.User.Name</td>
+    }
+    else { <td>-</td> }
+    <td class="text-center">@Model.Ticket.Title</td>
+    <td class="text-center">@switch (Model.Priority.Description)
+    {
+        case "baja":
+            <span class="label label-success">@Model.Priority.Description</span>
+            break;
+        case "media":
+            <span class="label label-warning">@Model.Priority.Description</span>
+            break;
+        case "alta":
+            <span class="label label-danger">@Model.Priority.Description</span>
+            break;
+    }</td>
+    <td class="text-center">@Model.Status.Description</td>
+    @if (Model.Worker != null) {
+        <td>@Model.Worker.User.Name</td>
+    }
+    else { <td class="text-center">-</td> }
+    @if (Model.Manager != null)
+    {
+        <td>@Model.Manager.User.Name</td>
+    }
+    else { <td class="text-center">-</td> }
+    @if (Model.Provider != null) {
+        <td class="text-center">@Model.Provider.User.Name</td>
+    }
+    else { <td class="text-center">-</td> }
+    <td class="text-center"><i class="fa fa-pencil" aria-hidden="true"></i></td>
+</tr>

@@ -16,7 +16,7 @@ namespace Administracion.Models
         public virtual string Description { get; set; }
         public virtual string Coments { get; set; }
         public IEnumerable<SelectListItem> Results { get; set; }
-        public IEnumerable<SelectListItem> StatusList { get; set; }
+        public IEnumerable<SelectListItem> StatusList { get; set; }        
     }
 
 }
