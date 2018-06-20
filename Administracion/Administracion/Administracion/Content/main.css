@@ -2074,7 +2074,8 @@ a[data-toggle="lightbox-image"]:hover img {
         width: 120px;
     }
 }
-/* Tickets */
+/* Tickets & Tasks*/
+#tasks-list span.label ,
 #tickets-list span.label {
     padding: 6px 9px;
     border-radius: 16px;
