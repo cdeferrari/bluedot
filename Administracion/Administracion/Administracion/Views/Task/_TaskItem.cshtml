@@ -21,7 +21,10 @@
             <span class="label label-danger">@Model.Priority.Description</span>
             break;
     }</td>
-    <td class="text-center">@Model.Status.Description</td>
+    @{
+        var estado = Model.Status.Description == "open" ? "abierto" : "cerrado";
+    }
+    <td class="text-center">@estado</td>
     @if (Model.Worker != null) {
         <td>@Model.Worker.User.Name</td>
     }
@@ -35,5 +38,13 @@
         <td class="text-center">@Model.Provider.User.Name</td>
     }
     else { <td class="text-center">-</td> }
-    <td class="text-center"><i class="fa fa-pencil" aria-hidden="true"></i></td>
+    <td class="text-center">
+        <a href="@Url.Action("Details", "Task", new { id = Model.Id })"title="ver detalles">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </a>
+            <!--<i class="fa fa-pencil" aria-hidden="true"></i>
+            <a href="#modal-delete-task-@Model.Id" data-toggle="modal" title="Borrar tarea" class="btn-xs"><i class="fa fa-times danger"></i></a>
+            <a href="#modal-spend-@Model.Id" data-toggle="modal" title="Asociar Gasto" class="btn-xs"><i class="fa fa-dollar success"></i></a>
+            -->
+</td>
 </tr>

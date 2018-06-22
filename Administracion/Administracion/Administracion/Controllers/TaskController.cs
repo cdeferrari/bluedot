@@ -141,6 +141,17 @@ namespace Administracion.Controllers
             return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", task.Ticket.Id));
         }
 
+        public ActionResult Details(int id)
+        {
+            Task task = TasksService.GetTask(id);
+            if (task == null)
+            {
+                return View("../Shared/Error");
+            }
+            TaskDetailsViewModel model = new TaskDetailsViewModel() { Task = task };
+            return View(model);
+        }
+
         //public ActionResult CreateSpend(int id, int ticketId)
         //{
         //    this.Messageservice.DeleteMessage(id);
