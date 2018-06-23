@@ -1,0 +1,95 @@
+﻿@model Administracion.Models.TaskDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+    <div id="main-container">
+        <div class="block full">
+            <div class="block-title clearfix">
+                <h2>Detalles <strong>Órden de Trabajo</strong></h2>
+            </div>
+            <div class="task-details-container clearfix">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Descripción</label>
+                        <p>
+                            @Model.Task.Description
+                        </p>
+                    </div>
+                    <div class="col-md-4 clearfix task-actions">
+                        <i class="fa fa-trash pull-right text-danger" title="Eliminar" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"></i>
+                        <i class="fa fa-dollar pull-right text-success" title="Agregar gasto" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Fecha de creación</label>
+                        <p>@Model.Task.OpenDate.ToString("dddd, dd MMMM yyyy")</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Creador</label>
+                        <p>@Model.Task.Creator.User.Name</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Ticket</label>
+                        <p>@Model.Task.Ticket.Title</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Estado</label>
+                        @{ var estado = Model.Task.Status.Description == "open" ? "abierto" : "cerrado"; }
+                        <p>@estado</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Prioridad</label>
+                        <p>@Model.Task.Priority.Description</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Consorcio</label>
+                        <p>@Model.Task.Ticket.Consortium.FriendlyName</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Empleado</label>
+                        @if(Model.Task.Worker != null) { 
+                            <p>@Model.Task.Worker.User.Name</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        <label>Encargado</label>
+                        @if (Model.Task.Manager != null)
+                        {
+                            <p>@Model.Task.Manager.User.Name</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        <label>Proveedor</label>
+                        @if (Model.Task.Provider != null)
+                        {
+                            <p>@Model.Task.Provider.User.Name</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Task/_DeleteTask.cshtml", Model.Task)

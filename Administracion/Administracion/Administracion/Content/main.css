@@ -2082,6 +2082,18 @@ a[data-toggle="lightbox-image"]:hover img {
     display: inline-flex;
     align-items: center;
 }
+
+.task-details-container {
+    padding: 10px 30px;
+}
+
+.task-details-container div p {
+    color: darkgrey;
+}
+
+.task-actions i.fa {
+    font-size: 2em;
+}
 /*
 =================================================================
 (#m06bos) BOOTSTRAP OVERWRITE/EXTEND STYLES
