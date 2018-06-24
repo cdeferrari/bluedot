@@ -1,6 +1,4 @@
-﻿@using Administracion.Models
-
-@model Administracion.Models.TaskDetailsViewModel
+﻿@model Administracion.Models.TaskDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -23,7 +21,7 @@
                         <button class="btn btn-danger pull-right" title="Eliminar"  data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
                         <button class="btn btn-success pull-right" title="Agregar gasto" data-toggle="modal" data-target="#modal-spend-@Model.Task.Id"><i class="fa fa-dollar" aria-hidden="true"></i> Gasto</button>
                         <button class="btn btn-success pull-right" title="Agregar seguimiento" data-target="#modal-add-follow" data-toggle="modal"><i class="fa fa-plus"></i> Seguimiento</button>
-                        <button class="btn btn-info pull-right" title="Ver seguimiento"><i class="fa fa-eye"></i> Seguimiento</button>
+                        <button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>
                     </div>
                 </div>
                 <div class="row">
@@ -99,12 +97,4 @@
 @Html.Partial("~/Views/Task/_DeleteTask.cshtml", Model.Task)
 @Html.Partial("~/Views/Task/_AsociarGasto.cshtml", Model)
 @Html.Partial("~/Views/Task/_AgregarSeguimiento.cshtml", Model.Task)
-<!--
-<div class="col-md-3">
-    <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
-</div>
-
-<div class="col-md-3">
-    <a href="#modal-follow-list" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
-</div>
-    -->
+@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)
