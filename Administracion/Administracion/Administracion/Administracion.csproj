@@ -550,6 +550,8 @@
     <Content Include="Views\Task\_TaskItem.cshtml" />
     <Content Include="Views\Task\_DeleteTask.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Task\_AsociarGasto.cshtml" />
+    <Content Include="Views\Task\_AgregarSeguimiento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
