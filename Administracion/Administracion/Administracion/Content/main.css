@@ -2083,6 +2083,10 @@ a[data-toggle="lightbox-image"]:hover img {
     align-items: center;
 }
 
+#tasks-list i.fa {
+    font-size: 1.4em
+}
+
 .task-details-container {
     padding: 10px 30px;
 }
