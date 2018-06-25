@@ -543,7 +543,6 @@
     <Content Include="Views\Spend\ChoseConsortium.cshtml" />
     <Content Include="Views\Backlog\_CreateTicketFollow.cshtml" />
     <Content Include="Views\Backlog\_TicketFollowDetails.cshtml" />
-    <Content Include="Views\Backlog\_TaskFollowDetails.cshtml" />
     <Content Include="Views\Spend\_SueldoList.cshtml" />
     <Content Include="Views\Task\List.cshtml" />
     <Content Include="Views\Task\_TaskItem.cshtml" />
@@ -552,6 +551,7 @@
     <Content Include="Views\Task\_AsociarGasto.cshtml" />
     <Content Include="Views\Task\_AgregarSeguimiento.cshtml" />
     <Content Include="Views\Task\_VerSeguimiento.cshtml" />
+    <Content Include="Views\Task\_CloseTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

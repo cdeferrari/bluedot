@@ -1,26 +1,26 @@
 ﻿@model Administracion.DomainModel.Task
 
-<div id="modal-delete-task-@Model.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modal-close-task-@Model.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h2 class="modal-title"><i class="fa fa-trash-o"></i> Eliminar órden de trabajo</h2>
+                <h2 class="modal-title"><i class="fa fa-lock"></i> Cerrar órden de trabajo</h2>
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
-            <div class="modal-body">                
+            <div class="modal-body">
                 <div>
-                    <p>Está seguro de querer eliminar la órden de trabajo "<strong>@Model.Description</strong>" ?</p>
+                    <p>Está seguro de querer cerrar la órden de trabajo "<strong>@Model.Description</strong>" ?</p>
 
                 </div>
 
                 <div class="form-group form-actions">
                     <div class="col-xs-12 text-right">
                         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                        <a href="@Url.Action("DeleteTask", "Task", new { id = Model.Id, ticketId = Model.Ticket.Id } )'" class="btn btn-sm btn-danger">Eliminar</a>
+                        <a href="@Url.Action("CloseTask", "Task", new { id = Model.Id } )" class="btn btn-sm btn-danger">Cerrar</a>
                     </div>
-                </div>                
+                </div>
             </div>
             <!-- END Modal Body -->
         </div>
