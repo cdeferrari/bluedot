@@ -4,8 +4,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center">
-                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO SEGUIMIENTO</h2>
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-plus"></i> Nuevo seguimiento</h2>
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
@@ -13,13 +13,13 @@
 
                 @using (Html.BeginForm("CreateTaskFollow", "Task", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
                 {
-                 
+
                     <input type="hidden" name="TaskId" id="TaskId" value="@Model.Id" />
 
                     <div class="form-group row">
-                        <label class="control-label col-md-2">Comentario</label>
-                        <div>
-                            <input name="Coment" id="Coment" type="text" class="col-md-10" />
+                        <label class="control-label col-md-2">Comentarios</label>
+                        <div class="col-md-10">
+                            <input name="Coment" id="Coment" type="text" class="form-control" />
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 

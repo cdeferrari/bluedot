@@ -11,15 +11,21 @@
             </div>
             <div class="task-details-container clearfix">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label>Descripción</label>
                         <p>
                             @Model.Task.Description
                         </p>
                     </div>
-                    <div class="col-md-4 clearfix task-actions">
-                        <i class="fa fa-trash pull-right text-danger" title="Eliminar" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"></i>
-                        <i class="fa fa-dollar pull-right text-success" title="Agregar gasto" aria-hidden="true"></i>
+                    <div class="col-md-6 clearfix task-actions">
+                        <button class="btn btn-danger pull-right" title="Eliminar"  data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
+                        <button class="btn btn-success pull-right" title="Agregar gasto" data-toggle="modal" data-target="#modal-spend-@Model.Task.Id"><i class="fa fa-dollar" aria-hidden="true"></i> Gasto</button>
+                        <button class="btn btn-success pull-right" title="Agregar seguimiento" data-target="#modal-add-task-history-@Model.Task.Id" data-toggle="modal"><i class="fa fa-plus"></i> Seguimiento</button>
+                        <button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>
+                        @if (Model.Task.Status.Description != "closed")
+                        {
+                            <button class="btn btn-default pull-right" title="Cerrar" data-target="#modal-close-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-lock"></i> Cerrar</button>
+                        }
                     </div>
                 </div>
                 <div class="row">
@@ -85,11 +91,52 @@
                         }
                     </div>
                 </div>
-                <div class="row">
-                </div>
+                @if (Model.Task.Spends != null && Model.Task.Spends.Count() > 0)
+                {
+                    <br />
+                    <div class="block">
+                            <!-- Latest Orders Title -->
+                            <div class="block-title">
+                                <h2><strong>Gastos</strong> </h2>
+                            </div>
+                            <!-- END Latest Orders Title -->
+                            <!-- Latest Orders Content -->
+                        
+
+                                @foreach (var spend in Model.Task.Spends)
+                                {
+                                    var provdescription = spend.Bill.Provider != null ?
+                                         spend.Bill.Provider.User.Name + " " + spend.Bill.Provider.User.Surname : "-";
+                                    var workerdescription = spend.Bill.Worker != null ?
+                                        spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
+                                    var managerdescription = spend.Bill.Manager != null ?
+                                        spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
+
+
+                                    <h3>@spend.Description</h3>
+                                            <ul>
+                                                <li><strong>Tipo:</strong>@spend.Type.Description</li>
+                                                <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
+                                                <li><strong>Monto:</strong> @spend.Bill.Amount</li>
+                                                <li><strong>Proveedor:</strong> @provdescription</li>
+                                                <li><strong>Encargado:</strong> @managerdescription</li>
+                                                <li><strong>Empleado:</strong> @workerdescription</li>
+                                            </ul>
+                                }
+
+                            <!-- END Latest Orders Content -->
+                    </div>
+
+
+
+                }
             </div>
         </div>
     </div>
 </div>
 
 @Html.Partial("~/Views/Task/_DeleteTask.cshtml", Model.Task)
+@Html.Partial("~/Views/Task/_CloseTask.cshtml", Model.Task)
+@Html.Partial("~/Views/Task/_AsociarGasto.cshtml", Model)
+@Html.Partial("~/Views/Task/_AgregarSeguimiento.cshtml", Model.Task)
+@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)
