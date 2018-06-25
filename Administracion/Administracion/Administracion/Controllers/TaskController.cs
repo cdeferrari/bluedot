@@ -17,6 +17,7 @@ using Administracion.Services.Contracts.Consortiums;
 using Administracion.Dto.Message;
 using Administracion.Services.Contracts.Tasks;
 using Administracion.Services.Contracts.Status;
+using Administracion.Services.Contracts.SpendItemsService;
 using Administracion.Dto.Task;
 
 namespace Administracion.Controllers
@@ -27,6 +28,7 @@ namespace Administracion.Controllers
         public virtual ITaskService TasksService { get; set; }
         public virtual IUserService UserService { get; set; }
         public virtual IStatusService StatusService { get; set; }
+        public virtual ISpendItemsService SpendItemsService { get; set; }
 
         public ActionResult List()
         {
@@ -148,7 +150,8 @@ namespace Administracion.Controllers
             {
                 return View("../Shared/Error");
             }
-            TaskDetailsViewModel model = new TaskDetailsViewModel() { Task = task };
+            List<SpendItem> spendItemsList = this.SpendItemsService.GetAll().ToList();            
+            TaskDetailsViewModel model = new TaskDetailsViewModel() { Task = task, SpendItemList = spendItemsList };
             return View(model);
         }
 

@@ -1,0 +1,34 @@
+﻿@model Administracion.Models.TaskDetailsViewModel
+
+<div id="modal-spend-@Model.Task.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-dollar"></i> Asociar gasto</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                @using(Html.BeginForm("CreateSpend", "Spend", null, FormMethod.Get, null)) {
+                <fieldset>
+                    <p>
+                        El gasto que genere quedará asociado a la orden "@Model.Task.Description" y al consorcio @Model.Task.Ticket.Consortium.FriendlyName
+                    </p>
+                    <label class="control-label col-md-3">Rubro gasto</label>
+                    @Html.DropDownListFor(model => model.SpendItemId, new SelectList(Model.SpendItemList, "Id", "Description", Model.SpendItemList[0]))
+                    @Html.Hidden("consortiumId", Model.Task.Ticket.Consortium.Id)
+                    @Html.Hidden("taskId", Model.Task.Id)
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-sm btn-info">Continuar</button>
+                        </div>
+                    </div>
+                </fieldset>
+                }
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>

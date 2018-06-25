@@ -2091,8 +2091,10 @@ a[data-toggle="lightbox-image"]:hover img {
     color: darkgrey;
 }
 
-.task-actions i.fa {
-    font-size: 2em;
+.task-actions button {
+    margin-left: 5px;
+    font-size: 1em;
+    padding: 5px 7px;
 }
 /*
 =================================================================
