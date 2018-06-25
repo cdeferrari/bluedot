@@ -26,12 +26,12 @@
     }
     <td class="text-center">@estado</td>
     @if (Model.Worker != null) {
-        <td>@Model.Worker.User.Name</td>
+        <td class="text-center">@Model.Worker.User.Name</td>
     }
     else { <td class="text-center">-</td> }
     @if (Model.Manager != null)
     {
-        <td>@Model.Manager.User.Name</td>
+        <td class="text-center">@Model.Manager.User.Name</td>
     }
     else { <td class="text-center">-</td> }
     @if (Model.Provider != null) {
