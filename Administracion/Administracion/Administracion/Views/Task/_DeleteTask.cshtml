@@ -18,7 +18,7 @@
                 <div class="form-group form-actions">
                     <div class="col-xs-12 text-right">
                         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                        <a href="@Url.Action("DeleteTask", "Task", new { id = Model.Id, ticketId = Model.Ticket.Id } )'" class="btn btn-sm btn-danger">Eliminar</a>
+                        <a href="/Task/DeleteTask/@Model.Id?ticketId=@Model.Ticket.Id" class="btn btn-sm btn-danger">Eliminar</a>
                     </div>
                 </div>                
             </div>

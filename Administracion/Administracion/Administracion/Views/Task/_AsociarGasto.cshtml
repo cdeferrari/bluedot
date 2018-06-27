@@ -15,8 +15,13 @@
                     <p>
                         El gasto que genere quedará asociado a la orden "@Model.Task.Description" y al consorcio @Model.Task.Ticket.Consortium.FriendlyName
                     </p>
-                    <label class="control-label col-md-3">Rubro gasto</label>
-                    @Html.DropDownListFor(model => model.SpendItemId, new SelectList(Model.SpendItemList, "Id", "Description", Model.SpendItemList[0]))
+                    <div class="row">
+                        <label class="control-label col-md-3 text-center">Rubro gasto</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.SpendItemId, new SelectList(Model.SpendItemList, "Id", "Description", Model.SpendItemList[0]), null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
                     @Html.Hidden("consortiumId", Model.Task.Ticket.Consortium.Id)
                     @Html.Hidden("taskId", Model.Task.Id)
                     <div class="form-group form-actions">
