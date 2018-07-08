@@ -119,7 +119,7 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitId = user.FunctionalUnitId
+                            FunctionalUnitIds = user.Units
                         };
                         this.OwnerService.CreateOwner(owner);
                     }

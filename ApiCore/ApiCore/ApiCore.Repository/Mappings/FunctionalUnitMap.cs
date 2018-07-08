@@ -13,7 +13,7 @@ namespace ApiCore.Repository.Mappings
         {
             this.Property(x => x.Number).IsRequired().HasColumnName("number");
             this.Property(x => x.Floor).IsRequired().HasColumnName("piso");
-            this.Property(x => x.Dto).IsOptional().HasColumnName("dto");            
+            this.Property(x => x.Dto).IsOptional().HasColumnName("dto");                       
             
         }
 

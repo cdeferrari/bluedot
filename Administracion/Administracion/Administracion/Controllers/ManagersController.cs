@@ -152,6 +152,13 @@ namespace Administracion.Controllers
         {
             var consortium = consortiumId.HasValue ? this.ConsortiumService.GetConsortium(consortiumId.Value) : null;
 
+            var provinces = this.ProvinceService.GetAllProvinces().Select(x => new SelectListItem()
+            {
+                Value = x.Description,
+                Text = x.Description
+            });
+
+
             var omanager = this.ManagerService.GetManager(id);
             var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
             {
@@ -170,6 +177,7 @@ namespace Administracion.Controllers
             manager.ConsortiumId =  consortiumId.HasValue ? consortiumId.Value : 0;
             manager.ConsortiumList = consortiumList;
             manager.LaboralUnionList = laboralUnions;
+            manager.Provinces = provinces;
             return View("CreateManager",manager);
         }
 

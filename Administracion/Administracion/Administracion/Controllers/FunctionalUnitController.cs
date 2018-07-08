@@ -120,10 +120,15 @@ namespace Administracion.Controllers
 
                         if (Owner != null)
                         {
+                            if (!Owner.FunctionalUnitId.Contains(entidad.Id))
+                            {
+                                Owner.FunctionalUnitId.Add(entidad.Id);
+                            }
+                           
                             var ownerRequest = new OwnerRequest()
                             {
                                 Id = Owner.Id,
-                                FunctionalUnitId = entidad.Id,
+                                FunctionalUnitIds = Owner.FunctionalUnitId,
                                 UserId = Owner.User.Id,
                                 PaymentTypeId = Owner.PaymentTypeId
                             };
@@ -151,10 +156,15 @@ namespace Administracion.Controllers
 
                     if (Owner != null)
                     {
+                        if (!Owner.FunctionalUnitId.Contains(nunit.Id))
+                        {
+                            Owner.FunctionalUnitId.Add(nunit.Id);
+                        }
+
                         var ownerRequest = new OwnerRequest()
                         {
                             Id = Owner.Id,
-                            FunctionalUnitId = nunit.Id,
+                            FunctionalUnitIds = Owner.FunctionalUnitId,
                             UserId = Owner.User.Id
                         };
                         this.OwnersService.UpdateOwner(ownerRequest);
@@ -210,12 +220,14 @@ namespace Administracion.Controllers
             unit.Owners = ownersList;
             unit.Renters = rentersList;
 
-            var ownersUnitId = owners.Select(x => x.FunctionalUnitId).ToList();
+            var ownersUnitId = new List<int>();
+                
+                owners.Select(x => x.FunctionalUnitId).ToList();
             var rentersUnitId = renters.Select(x => x.FunctionalUnitId).ToList();
 
-            if (ownersUnitId.Contains(id))
+            if (owners.Any(x => x.FunctionalUnitId.Contains(id)))
             {
-                unit.OwnerId = owners.Where(x => x.FunctionalUnitId.Equals(id)).FirstOrDefault().Id;
+                unit.OwnerId = owners.Where(x => x.FunctionalUnitId.Contains(id)).FirstOrDefault().Id;
             }
 
             if (rentersUnitId.Contains(id))

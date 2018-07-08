@@ -5,6 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .unidadItemContainer {
+        border: 1px solid grey;
+        border-radius: 5px;       
+        margin-bottom:5px;
+    }
+    .deleteUnit a {
+        float: right;
+        font-size: 15px;
+        border: 1px solid;
+        padding: 0 5px;
+        margin-top: 6px;
+    }
+
+    #unidadItemContainer p {
+        margin-bottom: 0px;
+    }
+
+
+</style>
+
 <div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
 
     <div id="main-container">
@@ -102,64 +123,92 @@
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ContactData.Email, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.ContactData.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
-                                <span class="help-block">Coloque el email</span>
-                                @Html.ValidationMessageFor(model => model.ContactData.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escriba aquí sus comentarios..." } })
-                            </div>
-                        </div>                                        
-
-                        <div class="form-group " id="pagosSelection">
-                            <label class="control-label col-md-3">Medio de pago</label>
-                            <div class="col-md-9">
-                                @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentTypes, "-- Por favor elja --", new { @class = "form-control", @size="1", 
-                                @required = "required",
-                                @oninvalid = "this.setCustomValidity('Elija medio de pago')",
-                                @oninput = "setCustomValidity('')"
-                            })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Tipo</label>
-                            <div class="col-md-9">
-                                <!--
-                                <label class="checkbox-inline" for="example-inline-checkbox1">
-                                    Html.CheckBoxFor(model => model.IsRenter) Inquilino
-                                </label> -->
-                                <label class="checkbox-inline" for="example-inline-checkbox2">
-                                    @Html.CheckBoxFor(model => model.IsOwner) Propietario
-                                </label>
-                                <label class="checkbox-inline" for="example-inline-checkbox3">
-                                    @Html.CheckBoxFor(model => model.IsWorker) Otro                                                    
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="example-file-input">Foto</label>
-                            <div class="col-md-9">
-                                <input disabled type="file" id="example-file-input" name="example-file-input">
-                            </div>
-                        </div>
-
-                        <div class="form-group form-actions">
                             <div class="col-md-9 col-md-offset-3">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
-                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                <a class="btn btn-sm btn-primary" onclick="AddFunctionalUnit()"><i class="fa fa-angle-right"></i> Agregar Unidad</a>                                
                             </div>
                         </div>
+                        <div class="form-group" id="UnidadesFuncionalesCargadas">
+                            @if (Model.Id > 0)
+                            {
 
-                    }
-                </div>                
+                            for (int i = 0; i < Model.FunctionalUnitUserList.Count; i++)
+                            {
+                                <div class="col-md-9 col-md-offset-3 unidadItemContainer">
+                                    <span class="deleteUnit">
+                                        <a href="javascript: delUnitPreview('unit_id_@i');">X</a>
+                                    </span>
+                                    <input id="units[@i]" name="units[@i]" style="display:none" class="unit_id_@i" value="@Model.FunctionalUnitUserList[i].Id" />
+                                    <p>Consorcio: @Model.FunctionalUnitUserList[i].OwnershipAddress</p>
+                                    <p>Piso: @Model.FunctionalUnitUserList[i].Floor Unidad: @Model.FunctionalUnitUserList[i].Dto</p>
+                                </div>
+                            }
+                            }
+                        </div>
+
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ContactData.Email, htmlAttributes: new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ContactData.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                        <span class="help-block">Coloque el email</span>
+                                        @Html.ValidationMessageFor(model => model.ContactData.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escriba aquí sus comentarios..." } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group " id="pagosSelection">
+                                    <label class="control-label col-md-3">Medio de pago</label>
+                                    <div class="col-md-9">
+                                        @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentTypes, "-- Por favor elja --", new
+                           {
+                               @class = "form-control",
+                               @size = "1",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Elija medio de pago')",
+                               @oninput = "setCustomValidity('')"
+                           })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Tipo</label>
+                                    <div class="col-md-9">
+                                        <!--
+                                        <label class="checkbox-inline" for="example-inline-checkbox1">
+                                            Html.CheckBoxFor(model => model.IsRenter) Inquilino
+                                        </label> -->
+                                        <label class="checkbox-inline" for="example-inline-checkbox2">
+                                            @Html.CheckBoxFor(model => model.IsOwner) Propietario
+                                        </label>
+                                        <label class="checkbox-inline" for="example-inline-checkbox3">
+                                            @Html.CheckBoxFor(model => model.IsWorker) Otro
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="example-file-input">Foto</label>
+                                    <div class="col-md-9">
+                                        <input disabled type="file" id="example-file-input" name="example-file-input">
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-actions">
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
+                                        <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>
+                                    </div>
+                                </div>
+
+                                }
+                            </div>
             </div>
 
             
@@ -180,3 +229,4 @@
     </div>
 </footer>
 <!-- END Footer -->
+

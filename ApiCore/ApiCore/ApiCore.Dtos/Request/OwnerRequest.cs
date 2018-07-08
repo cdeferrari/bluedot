@@ -8,7 +8,7 @@ namespace ApiCore.Dtos.Request
 {
     public class OwnerRequest
     {
-        public virtual int FunctionalUnitId { get; set; }
+        public virtual List<int> FunctionalUnitIds { get; set; }
         public virtual int UserId { get; set; }
         public virtual int Id { get; set; }
         public virtual int PaymentTypeId { get; set; }

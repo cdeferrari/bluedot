@@ -23,13 +23,16 @@ namespace ApiCore.Services.Implementations.Owners
             var entityToInsert = new Owner()
             {
                 User = this.UserRepository.GetById(Owner.UserId),
-                PaymentTypeId = Owner.PaymentTypeId
-                
+                PaymentTypeId = Owner.PaymentTypeId,
+                FunctionalUnits = new List<FunctionalUnit>()                
             };
 
-            if (Owner.FunctionalUnitId != 0)
+            if (Owner.FunctionalUnitIds.Count > 0)
             {
-                entityToInsert.FunctionalUnitId = Owner.FunctionalUnitId;
+                foreach (var uid in Owner.FunctionalUnitIds)
+                {
+                    entityToInsert.FunctionalUnits.Add(this.FunctionalUnitRepository.GetById(uid));
+                }                
             }
 
             OwnerRepository.Insert(entityToInsert);
@@ -77,15 +80,38 @@ namespace ApiCore.Services.Implementations.Owners
         private void MergeOwner(Owner originalOwner, OwnerRequest Owner)
         {
             originalOwner.User = this.UserRepository.GetById(Owner.UserId);
-            originalOwner.FunctionalUnitId = Owner.FunctionalUnitId;// this.FunctionalUnitRepository.GetById(Owner.FunctionalUnitId);
+
+            if (Owner.FunctionalUnitIds.Count > 0 )
+            {
+                foreach(var uid in Owner.FunctionalUnitIds)
+                {
+                    if(!originalOwner.FunctionalUnits.Select(x => x.Id).ToList().Contains(uid))
+                    {
+                        var fu = this.FunctionalUnitRepository.GetById(uid);
+                        originalOwner.FunctionalUnits.Add(fu);
+                    }
+                }                
+            }
+
+            var oldUnitsIds = originalOwner.FunctionalUnits
+                .Where(x => !Owner.FunctionalUnitIds.Contains(x.Id))
+                .Select(y => y.Id).ToList();
+
+            foreach (var unidadId in oldUnitsIds)
+            {
+                var fu = this.FunctionalUnitRepository.GetById(unidadId);
+                fu.Owner = null;
+                originalOwner.FunctionalUnits.Remove(fu);                
+            }
+
+
             originalOwner.PaymentTypeId = Owner.PaymentTypeId;
         }
 
         [Transaction]
         public List<Owner> GetAll()
         {
-            return OwnerRepository.GetAll().ToList();            
-            
+            return OwnerRepository.GetAll().ToList();                        
         }
 
     }

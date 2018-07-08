@@ -318,6 +318,110 @@
 
     </script>
 
+    <script> //multiples unidades en create user
+            function delUnitPreview(elemid) {
+                debugger
+                var container = $("." + elemid).parent();
+                $(container).remove();
+                recalculateUnitIndexes();
+            };
+
+
+            function AddFunctionalUnit() {
+                debugger
+                var unitId = $("#FunctionalUnitId").val();                
+                
+                var consortiumDescription = $("#OwnershipId").find(":selected").text();
+                var unitDescription = $("#FunctionalUnitId").find(":selected").text();
+
+                $("#FunctionalUnitId").val('');
+                var $thumbContainer = $("#UnidadesFuncionalesCargadas");
+
+                var unitItemContainer = document.createElement("div");
+                $(unitItemContainer).addClass('unidadItemContainer');
+                $(unitItemContainer).addClass('col-md-9');
+                $(unitItemContainer).addClass('col-md-offset-3');
+
+                var spanElement = document.createElement("span");
+
+                var nextUnitid = getNextUnitId();
+
+                var aelement = document.createElement("a");
+                $(aelement).attr("href", "javascript: delUnitPreview('unit_id_" + nextUnitid + "');");
+                $(aelement).html("X");
+                $(spanElement).append(aelement);
+                $(spanElement).addClass('deleteUnit');
+
+                var inputelement = document.createElement("input");
+                
+                $(inputelement).addClass('unit_id_' + nextUnitid);
+                $(inputelement).hide();
+
+
+                var pelement1 = document.createElement("p");
+                $(pelement1).html("Consorcio: " + consortiumDescription);
+
+                var pelement2 = document.createElement("p");
+                $(pelement2).html(unitDescription);
+
+                $(inputelement).attr("value", unitId);
+                    
+                $(inputelement).attr("id", "units[" + nextUnitid + "]");
+                $(inputelement).attr("name", "units[" + nextUnitid + "]");
+                
+                $(unitItemContainer).append(inputelement);
+                    
+                $(unitItemContainer).append(spanElement);
+                $(unitItemContainer).append(pelement1);
+                $(unitItemContainer).append(pelement2);
+                $thumbContainer.append(unitItemContainer);                
+            };
+
+            function recalculateUnitIndexes() {
+                debugger
+                var intid = 0;
+                units = $(".unidadItemContainer");
+
+                if (units.length === 0) {
+                    return 0;
+                }
+
+                for (var i = 0; i < units.length; i++){
+                    asignUnitContainerIndex(units[i], i);
+                }
+                
+            }
+
+            function asignUnitContainerIndex(elem, index) {
+                debugger
+                var input = $(elem).find("input");
+                $(input).attr("id", "units[" + index + "]");
+                $(input).attr("name", "units[" + index + "]");
+                $(input).attr("class", "unit_id_"+index);
+
+                var a = $(elem).find("a");
+                $(a).attr("href", "javascript: delUnitPreview('unit_id_" + index + "');");
+
+
+            }
+
+            var getNextUnitId = function () {
+
+                var intid = 0;
+                lastunit = $(".unidadItemContainer").last();
+                if (lastunit.length === 0) {
+                    return 0;
+                }
+
+                var id = lastunit.find("input").attr("class");
+                intid = parseInt(id.replace("unit_id_", ""));
+
+                return intid + 1;
+            }
+
+
+    </script>
+
 </body>
 
 </html>

@@ -37,11 +37,12 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> PaymentTypes { get; set; }
         public virtual IEnumerable<SelectListItem> OwnershipList { get; set; }
         public virtual IEnumerable<SelectListItem> FunctionalUnitList { get; set; }
+        public virtual List<FunctionalUnitViewModel> FunctionalUnitUserList { get; set; }
         public virtual int AdministrationId { get; set; }
         public virtual int PaymentTypeId { get; set; }
         public virtual int FunctionalUnitId { get; set; }
         public virtual int OwnershipId { get; set; }
-
+        public virtual List<int> Units { get; set; }
 
     }
 }
