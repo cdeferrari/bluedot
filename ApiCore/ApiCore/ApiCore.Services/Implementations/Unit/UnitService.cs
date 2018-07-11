@@ -50,7 +50,7 @@ namespace ApiCore.Services.Implementations.Users
             originalUnit.Floor = unit.Floor;
             originalUnit.Number = unit.Number;
             originalUnit.Ownership = this.OwnershipRepository.GetById(unit.OwnershipId);
-            
+            originalUnit.Owner = unit.OwnerId != 0 ? this.OwnerRepository.GetById(unit.OwnerId) : null;
             return originalUnit;
         }
 
@@ -78,15 +78,7 @@ namespace ApiCore.Services.Implementations.Users
                 renter.FunctionalUnitId = null;
                 RenterRepository.Update(renter);
             }
-
-
-            var owners = OwnerRepository.GetAll().Where(x => x.FunctionalUnitId.HasValue && x.FunctionalUnitId.Value == unitId).ToList();
-            foreach (var owner in owners)
-            {
-                owner.FunctionalUnitId = null;
-                OwnerRepository.Update(owner);
-            }
-
+            
             var unit = UnitRepository.GetById(unitId);
             UnitRepository.Delete(unit);
         }

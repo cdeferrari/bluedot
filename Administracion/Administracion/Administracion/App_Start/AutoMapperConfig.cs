@@ -53,7 +53,9 @@ namespace Administracion.App_Start
                 cfg.CreateMap<OwnershipViewModel, Ownership>();
                 cfg.CreateMap<Ownership, OwnershipViewModel>();
 
-                cfg.CreateMap<FunctionalUnit, FunctionalUnitViewModel>();
+                cfg.CreateMap<FunctionalUnit, FunctionalUnitViewModel>()
+                .ForMember(x => x.OwnershipAddress, o => o.MapFrom(y => y.Ownership.Address.Street+" "+ y.Ownership.Address.Number));
+
                 cfg.CreateMap<FunctionalUnit, FunctionalUnitRequest>()
                 .ForMember(x => x.OwnershipId, o=> o.MapFrom(y => y.Ownership.Id));
 

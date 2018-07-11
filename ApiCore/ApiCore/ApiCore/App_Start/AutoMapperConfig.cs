@@ -33,7 +33,9 @@ namespace ApiCore
                 cfg.CreateMap<Role, RoleResponse>();
                 cfg.CreateMap<Ownership, OwnershipResponse>();
                 cfg.CreateMap<Ownership, OwnershipUnitResponse>();
-                cfg.CreateMap<Owner, OwnerResponse>();
+                cfg.CreateMap<Owner, OwnerResponse>()
+                .ForMember(x => x.FunctionalUnitId , opt => opt.MapFrom(y => y.FunctionalUnits.Select(x => x.Id).ToList()));
+
                 cfg.CreateMap<Owner, UnitOwnerResponse>();
 
                 cfg.CreateMap<Administration, AdministrationResponse>();

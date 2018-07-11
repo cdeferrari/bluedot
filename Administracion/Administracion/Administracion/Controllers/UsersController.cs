@@ -143,7 +143,7 @@ namespace Administracion.Controllers
                 Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
             });
 
-            var userViewModel = new UserViewModel() { Administrations = administrations , PaymentTypes = paymentTypes, OwnershipList = ownershipList, FunctionalUnitList = functionalUnitList};
+            var userViewModel = new UserViewModel() { Administrations = administrations , PaymentTypes = paymentTypes, OwnershipList = ownershipList, FunctionalUnitList = functionalUnitList, IsOwner = true};
             return View(userViewModel);
         }
 
@@ -166,7 +166,7 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitId = user.FunctionalUnitId,
+                            FunctionalUnitIds = user.Units,
                             PaymentTypeId = user.PaymentTypeId
                         };
                         this.OwnerService.CreateOwner(owner);
@@ -223,7 +223,7 @@ namespace Administracion.Controllers
                         {
                             UserId = nuser.Id,
                             PaymentTypeId = user.PaymentTypeId,
-                            FunctionalUnitId = user.FunctionalUnitId
+                            FunctionalUnitIds = user.Units
                         };
 
                         if (ownersUsersIds.Contains(user.Id))
@@ -381,11 +381,11 @@ namespace Administracion.Controllers
                 user.IsOwner = true;
 
 
-                if (owner.FunctionalUnitId != 0)
+                if (owner.FunctionalUnitId.Count > 0)
                 {
                     var functionalUnits = this.FunctionalUnitService.GetAll();
 
-                    var userUnit = functionalUnits.Where(x => x.Id == owner.FunctionalUnitId).FirstOrDefault();
+                    var userUnit = functionalUnits.Where(x => owner.FunctionalUnitId.Contains(x.Id)).FirstOrDefault();
 
                     user.OwnershipId = userUnit.Ownership.Id;
 
@@ -395,7 +395,9 @@ namespace Administracion.Controllers
                         Text = "Piso:" + x.Floor + " Unidad:" + x.Dto
                     });
 
-                    user.FunctionalUnitId = owner.FunctionalUnitId;
+                    user.FunctionalUnitUserList = Mapper.Map<List<FunctionalUnitViewModel>>(functionalUnits.Where(x => owner.FunctionalUnitId.Contains(x.Id)).ToList());
+
+                    user.FunctionalUnitId = userUnit.Id;
                 }
                 
             }

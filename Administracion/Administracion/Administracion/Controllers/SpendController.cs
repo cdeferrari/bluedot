@@ -508,7 +508,9 @@ namespace Administracion.Controllers
             
             foreach (var key in spendsByCUIT.Keys)
             {
-                var manager = managers.Where(x => x.User.CUIT == key).FirstOrDefault();
+
+                var keyWithoutSimbols = key.Trim().Replace("-", "");
+                var manager = managers.Where(x => x.User!= null && !string.IsNullOrEmpty(x.User.CUIT) &&  x.User.CUIT.Trim().Replace("-", "") == keyWithoutSimbols).FirstOrDefault();
                 if (manager != null)
                 {
                     var spends = spendsByCUIT[key];

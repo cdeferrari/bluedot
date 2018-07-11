@@ -11,6 +11,6 @@ namespace Administracion.Dto.Owner
         public virtual int UserId { get; set; }
         public virtual int Id { get; set; }
         public virtual int PaymentTypeId { get; set; }
-        public virtual int FunctionalUnitId { get; set; }
+        public virtual List<int> FunctionalUnitIds { get; set; }
     }
 }

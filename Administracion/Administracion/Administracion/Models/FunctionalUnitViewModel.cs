@@ -12,6 +12,7 @@ namespace Administracion.Models
     {
         public virtual int Id { get; set; }
         public virtual int ConsortiumId { get; set; }
+        public virtual string OwnershipAddress { get; set; }
         [DisplayName("Piso")]
         public virtual int Floor { get; set; }
         [DisplayName("Departamento")]
