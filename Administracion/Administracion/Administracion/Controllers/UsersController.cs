@@ -526,6 +526,91 @@ namespace Administracion.Controllers
             return View(user);
         }
 
+        [HttpGet]
+        public ActionResult BaseUserEdit(int? id)
+        {
+            BaseUserEditViewModel model = new BaseUserEditViewModel();
+            if(id.HasValue)
+            {
+                User user = this.UserService.GetUser(id.Value);
+                model.SetUser(user);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult BaseUserEdit(BaseUserEditViewModel model)
+        {
+            try
+            {
+                if(!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                User user = new DomainModel.User();
+                ContactData contactData = new ContactData();
+                if (model.Id != 0)
+                {
+                    user = this.UserService.GetUser(model.Id);
+                }
+                model.GetUser(ref user);
+                model.GetContactData(ref contactData);
+                user.ContactData = contactData;
+                if (model.ProfilePic != null)
+                {
+                    user.ProfilePic = GetUserImageName(model.ProfilePic, user.Id);
+                    SaveUserImage(model.ProfilePic, user.ProfilePic);
+                }
+                if (user.Id != 0)
+                {
+                    UserService.UpdateUser(user);
+                }
+                else
+                {
+                    UserService.CreateUser(user);
+                }
+                if(SessionPersister.Account.User.Id == user.Id) {
+                    UpdateLoggedUser(user);
+                }
+                return View("/Users/BaseUserDetails/"+user.Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
+        }
+
+        public ActionResult BaseUserList()
+        {
+            try
+            {
+                List<User> users = this.UserService.GetAll().ToList();
+                return View(users);
+            }
+            catch (Exception ex) 
+            {
+                return View("../Shared/Error");
+            }
+        }
+
+        public ActionResult BaseUserDetails(int id)
+        {
+            try
+            {
+                User user = this.UserService.GetUser(id);
+                if(user == null)
+                {
+                    return View("../Shared/Error");
+                }
+                UserViewModel model = Mapper.Map<UserViewModel>(user);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+        }
+
         public string GetUnitsByOwnership(int id)
         {
 
@@ -537,6 +622,28 @@ namespace Administracion.Controllers
 
             return JsonConvert.SerializeObject(functionalUnitList);
             
+        }
+
+        private string GetUserImageName(HttpPostedFileBase image, int userId)
+        {
+            string fileExtension = Path.GetExtension(image.FileName);
+            string newFileName = "user-" + userId + fileExtension;            
+            return newFileName;
+        }
+
+        private void SaveUserImage(HttpPostedFileBase image, string name)
+        {
+            string imgPath = Path.Combine(Server.MapPath("~/Images"), name);
+            image.SaveAs(imgPath);
+        }
+
+        private void UpdateLoggedUser(User user)
+        {
+            SessionPersister.Account.UserName = user.Name + " " + user.Surname;
+            SessionPersister.Account.User.ProfilePic = user.ProfilePic;
+            SessionPersister.Account.User.Name = user.Name ?? "";
+            SessionPersister.Account.User.Surname = user.Surname ?? "";
+            if (user.ContactData != null) { SessionPersister.Account.Email = user.ContactData.Email; }
         }
 
     }

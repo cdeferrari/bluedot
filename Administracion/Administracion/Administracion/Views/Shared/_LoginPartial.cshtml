@@ -1,5 +1,9 @@
 ﻿@using Administracion.Security
 
+@{ 
+    var url = Request.Url.ToString().ToLower();
+}
+
 @if (SessionPersister.isAuthenticated)
 {
     string profilePic = SessionPersister.Account.User.ProfilePic;
@@ -100,7 +104,7 @@
                     {
                         <ul class="sidebar-nav">
                             <li>
-                                <a href="/DataBase/Index" class="active"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
+                                <a href="/DataBase/Index" class="@(url.Contains("/database") ? "active" : "")"><i class="hi hi-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Home</span></a>
                             </li>
                             <li>
                                 <a href="#"><i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Mis Tareas</span></a>
@@ -109,7 +113,7 @@
                                 <a href="#"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Estadisticas</span></a>
                             </li>
                             <li>
-                                <a href="/Consortium/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
+                                <a href="/Consortium/Index" class="sidebar-nav-menu @(url.Contains("/consortium") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-building sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Consorcios</span></a>
                                 <ul>
                                     <li>
                                         <a href="/Consortium/CreateConsortium">Nuevo Consorcio</a>
@@ -122,10 +126,20 @@
 
                                 </ul>
                             </li>
-
                             <li>
-                                <a href="/Users/Index"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
+                                <a href="@Url.Action("BaseUserList", "Users")" class="sidebar-nav-menu @(url.Contains("/users") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Usuarios</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("BaseUserList", "Users")">Usuarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Users")">Propietarios</a>
+                                    </li>
+                                </ul>
                             </li>
+                            @*<li>
+                                <a href="/Users/Index" class="@(url.Contains("/users") ? "active" : "")"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
+                            </li>*@
 
 
 
@@ -143,14 +157,14 @@
                                     </ul>*@
                             </li>
                             <li>
-                                <a href="/Task/List"><i class="fa fa-thumb-tack sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Órdenes de Trabajo</span></a>
+                                <a href="/Task/List" class="@(url.Contains("/task") ? "active" : "")"><i class="fa fa-thumb-tack sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Órdenes de Trabajo</span></a>
                             </li>
                             <li>
-                                <a href="/Spend/ChoseConsortium" ><i class="fa fa-usd sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Gastos</span></a>
+                                <a href="/Spend/ChoseConsortium" class="@(url.Contains("/spend") ? "active" : "")"><i class="fa fa-usd sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Gastos</span></a>
                             </li>
 
                             <li>
-                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Encargados</span></a>
+                                <a href="#" class="sidebar-nav-menu @(url.Contains("/managers") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Encargados</span></a>
                                 <ul>
                                     <li>
                                         <a href="/Managers/CreateManager">Cargar Nuevo Encargado</a>
@@ -162,7 +176,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="/Providers/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
+                                <a href="/Providers/Index" class="sidebar-nav-menu @(url.Contains("/providers") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Proveedores</span></a>
                                 <ul>
                                     <li>
                                         <a href="/Providers/CreateProvider">Cargar Nuevo Proveedor</a>
@@ -178,7 +192,7 @@
                                 <span class="sidebar-header-title">Soporte</span>
                             </li>
                             <li>
-                                <a href="/Backlog/Index" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
+                                <a href="/Backlog/Index" class="sidebar-nav-menu @(url.Contains("/backlog") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
                                 <ul>
                                     <li>
                                         <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
