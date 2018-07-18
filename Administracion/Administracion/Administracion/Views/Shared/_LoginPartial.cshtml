@@ -126,10 +126,20 @@
 
                                 </ul>
                             </li>
-
                             <li>
-                                <a href="/Users/Index" class="@(url.Contains("/users") ? "active" : "")"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
+                                <a href="@Url.Action("BaseUserList", "Users")" class="sidebar-nav-menu @(url.Contains("/users") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Usuarios</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("BaseUserList", "Users")">Usuarios</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Users")">Propietarios</a>
+                                    </li>
+                                </ul>
                             </li>
+                            @*<li>
+                                <a href="/Users/Index" class="@(url.Contains("/users") ? "active" : "")"><i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"> Propietarios</span></a>
+                            </li>*@
 
 
 

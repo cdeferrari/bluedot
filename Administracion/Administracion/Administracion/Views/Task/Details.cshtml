@@ -21,7 +21,7 @@
                         <button class="btn btn-danger pull-right" title="Eliminar"  data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
                         <button class="btn btn-success pull-right" title="Agregar gasto" data-toggle="modal" data-target="#modal-spend-@Model.Task.Id"><i class="fa fa-dollar" aria-hidden="true"></i> Gasto</button>
                         <button class="btn btn-success pull-right" title="Agregar seguimiento" data-target="#modal-add-task-history-@Model.Task.Id" data-toggle="modal"><i class="fa fa-plus"></i> Seguimiento</button>
-                        <button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>
+                        @*<button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>*@
                         @if (Model.Task.Status.Description != "closed")
                         {
                             <button class="btn btn-default pull-right" title="Cerrar" data-target="#modal-close-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-lock"></i> Cerrar</button>
@@ -126,9 +126,23 @@
 
                             <!-- END Latest Orders Content -->
                     </div>
-
-
-
+                }
+                @if (Model.Task.TaskHistory.Any())
+                {
+                    <br />
+                    <div class="col-md-6">
+                        <div class="task-seguimiento-title">
+                            <h4><strong>Gastos</strong> </h4>
+                        </div>
+                        <div class="task-seguimiento-list">
+                            <ul>
+                                @foreach (var follow in Model.Task.TaskHistory)
+                                {
+                                    <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 }
             </div>
         </div>
@@ -139,4 +153,4 @@
 @Html.Partial("~/Views/Task/_CloseTask.cshtml", Model.Task)
 @Html.Partial("~/Views/Task/_AsociarGasto.cshtml", Model)
 @Html.Partial("~/Views/Task/_AgregarSeguimiento.cshtml", Model.Task)
-@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)
+@*@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)*@

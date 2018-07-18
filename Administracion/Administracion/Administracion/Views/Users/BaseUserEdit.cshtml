@@ -1,0 +1,178 @@
+﻿@model Administracion.Models.BaseUserEditViewModel
+
+@{
+    ViewBag.Title = Model.Id != 0 ? "Edicion" : "Nuevo";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="gi gi-group"></i> Usuarios</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Usuarios</a></li>
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVOS </strong>USUARIOS</h2>
+                    </div>
+                    @using (Html.BeginForm("BaseUserEdit", "Users", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Id)
+
+                        <div class="form-group">
+                            <!-- Nombre -->
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Name, new {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        @placeholder = "Nombre"
+                                    }
+                                })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- Apellido -->
+                            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "col-md-1 control-label" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Surname, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control",
+                                       @placeholder = "Apellido"
+                                   }
+                               })
+                                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                            </div>                            
+                        </div>
+                        <div class="form-group"><!-- Email -->
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Password -->
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Password, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control",
+                                   @placeholder = "Password",
+                                   @type = "password"
+                               }
+                           })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- Password Confirm -->
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "col-md-1 control-label" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.ConfirmPassword, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control",
+                                   @placeholder = "Password",
+                                   @type = "password"
+                               }
+                           })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- Telefono y Celular -->
+                            <label class="col-md-3 control-label" for="example-text-input">Telefono / Celular</label>
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono", @type = "number" } })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Cellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular", @type = "number" } })
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- DNI y CUIT -->
+                            <label class="col-md-3 control-label" for="example-text-input">Documentación</label>
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", @placeholder = "DNI", @type = "number" } })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "form-control", @placeholder = "CUIT", @type = "number" } })
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- Comments -->
+                            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "col-md-3 control-label" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escriba aquí sus comentarios..." } })
+                            </div>
+                        </div>                        
+                        <div class="form-group"><!-- Foto de perfil -->
+                            <label class="col-md-3 control-label" for="example-file-input">Foto</label>
+                            <div class="col-md-9">
+                                <img class="profile-pic md" src="/Images/@Model.ProfilePicFileName" alt="Avatar mediano">
+                                <img class="profile-pic sm" src="/Images/@Model.ProfilePicFileName" alt="Avatar chico">
+                                
+                                @Html.TextBoxFor(model => model.ProfilePic, new { type = "file", @class = "form-control", @style = "width: 210px;" } )
+                            </div>
+                        </div>
+
+                        <div class="form-group form-actions"><!-- Botones -->
+                            <div class="col-md-9 col-md-offset-3">
+                                <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                                <a href="@(Model.Id != 0 ? Url.Action("BaseUserDetails", "Users", new { id = Model.Id }) : Url.Action("BaseUserList", "Users"))" class="btn btn-sm btn-default">Cancelar</a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="clearfix">
+    <div class="pull-right">
+        Creado por <a href="http://www.bluedot.com.ar" _blank">Bluedot</a>
+    </div>
+    <div class="pull-left">
+        Software Version 1.0
+    </div>
+</footer>
+<!-- END Footer -->
+
+@section scripts {
+    <script>
+        $("#ProfilePic").change(function () {
+            if ($(this)[0].files && $(this)[0].files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                            $('.profile-pic').attr('src', e.target.result);
+                        }
+                    reader.readAsDataURL($(this)[0].files[0]);
+            }
+        });
+    </script>
+}

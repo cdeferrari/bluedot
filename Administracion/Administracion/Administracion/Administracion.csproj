@@ -264,6 +264,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaseUserEditViewModel.cs" />
     <Compile Include="Models\FireExtinguisherControlViewModel.cs" />
     <Compile Include="Models\FastUpdateViewModel.cs" />
     <Compile Include="Models\ConsortiumSecureViewModel.cs" />
@@ -552,6 +553,10 @@
     <Content Include="Views\Task\_AgregarSeguimiento.cshtml" />
     <Content Include="Views\Task\_VerSeguimiento.cshtml" />
     <Content Include="Views\Task\_CloseTask.cshtml" />
+    <Content Include="Views\Users\BaseUserEdit.cshtml" />
+    <Content Include="Views\Users\BaseUserList.cshtml" />
+    <Content Include="Views\Users\_BaseUserTableRow.cshtml" />
+    <Content Include="Views\Users\BaseUserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

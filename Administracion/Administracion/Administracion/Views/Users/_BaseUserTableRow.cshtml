@@ -1,0 +1,32 @@
+﻿@model Administracion.DomainModel.User
+
+<tr>
+    <th class="text-center">@Model.Id</th>
+    <th class="text-center">@Model.DNI</th>
+    <th class="text-center">@Model.Surname</th>
+    <th class="text-center">@Model.Name</th>
+    @if (Model.ContactData != null && !string.IsNullOrEmpty(Model.ContactData.Telephone))
+    {
+        <th class="text-center">@Model.ContactData.Telephone</th>
+    }
+    else
+    {
+        <th class="text-center"> - </th>
+    }
+
+    @if (Model.ContactData != null && !string.IsNullOrEmpty(Model.ContactData.Email))
+            {
+        <th class="text-center">@Model.ContactData.Email</th>
+    }
+    else
+    {
+        <th class="text-center"> - </th>
+    }
+    <td class="text-center">
+        <div class="btn-group">
+            <a href="@Url.Action("BaseUserEdit", "Users")?id=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+            <a href="@Url.Action("BaseUserDetails", "Users")?id=@Model.Id" data-toggle="tooltip" title="Detalles" class="btn btn-xs btn-info"><i class="fa fa-info"></i></a>
+            @*<a href="#modal-delete-@Model.Id" data-toggle="modal" title="Borrar Proveedor" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>*@
+        </div>
+    </td>
+</tr>
