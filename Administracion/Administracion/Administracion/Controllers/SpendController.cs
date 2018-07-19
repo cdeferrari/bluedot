@@ -170,11 +170,8 @@ namespace Administracion.Controllers
                     Text = x.Description
                 });
 
-            var providers = this.ProviderService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name
-            });
+            List<Provider> providerList = this.ProviderService.GetAll().ToList();
+            providerList.Sort((x, y) => string.Compare(x.User.Name, y.User.Name));
 
             var workers = this.WorkerService.GetAll().Select(x => new SelectListItem()
             {
@@ -194,7 +191,7 @@ namespace Administracion.Controllers
                 SpendTypes = new SelectList(spendTypes, "Value", "Text"),
                 SpendClass = new SelectList(spendClasses, "Value", "Text"),
                 Managers = new SelectList(managers, "Value", "Text"),
-                Providers = new SelectList(providers, "Value", "Text"),
+                Providers = new SelectList(providerList, "Id", "User.Name"),
                 Workers = new SelectList(workers, "Value", "Text"),
                 ConsortiumId = consortiumId,
                 SpendItemId = spendItemId,
@@ -245,11 +242,8 @@ namespace Administracion.Controllers
                     Text = x.Description
                 });
 
-            var providers = this.ProviderService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name
-            });
+            List<Provider> providerList = this.ProviderService.GetAll().ToList();
+            providerList.Sort((x, y) => string.Compare(x.User.Name, y.User.Name));
 
             var workers = this.WorkerService.GetAll().Select(x => new SelectListItem()
             {
@@ -277,7 +271,7 @@ namespace Administracion.Controllers
                 SpendTypes = new SelectList(spendTypes, "Value", "Text"),
                 SpendClass = new SelectList(spendClasses, "Value", "Text"),
                 Managers = new SelectList(managers, "Value", "Text"),
-                Providers = new SelectList(providers, "Value", "Text"),
+                Providers = new SelectList(providerList, "Id", "User.Name"),
                 Workers = new SelectList(workers, "Value", "Text"),
                 ConsortiumId = spend.Consortium.Id,
                 SpendItemId = spend.Type.Item.Id

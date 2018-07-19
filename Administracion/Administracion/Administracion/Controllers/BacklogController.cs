@@ -187,11 +187,8 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
-            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name + " " + x.User.Surname
-            });
+            List<Provider> providerList = this.ProviderService.GetAll().ToList();
+            providerList.Sort((x, y) => string.Compare(x.User.Name, y.User.Name));
 
             var managerList = this.ManagerService.GetAll().Select(x => new SelectListItem()
             {
@@ -223,7 +220,7 @@ namespace Administracion.Controllers
                 StatusList = statusSelectList,
                 WorkersList = workersList,
                 ManagerList = managerList,
-                ProviderList = providerList,
+                ProviderList = new SelectList(providerList, "Id", "User.Name"),
                 UsersList = userList,
                 ConsortiumList = consortiumList,
                 AreaList = areaList,
@@ -405,12 +402,9 @@ namespace Administracion.Controllers
                 Text = x.User.Name + " " + x.User.Surname
             });
 
-            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name 
-            });
-            
+            List<Provider> providerList = this.ProviderService.GetAll().ToList();
+            providerList.Sort((x, y) => string.Compare(x.User.Name, y.User.Name));
+
 
             var spendItemsList = this.SpendItemService.GetAll().Select(x => new SelectListItem()
             {
@@ -452,7 +446,7 @@ namespace Administracion.Controllers
             ticket.PriorityList = priorityList;
             ticket.WorkersList = workersList;
             ticket.ManagerList = managerList;
-            ticket.ProviderList = providerList;
+            ticket.ProviderList = new SelectList(providerList, "Id", "User.Name");
             ticket.UsersList = userList;
             ticket.BacklogUserList = backloguserList;
             ticket.ConsortiumList = consortiumList;

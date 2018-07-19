@@ -489,13 +489,10 @@ namespace Administracion.Controllers
 
             var tickets = this.TicketService.GetByConsortiumId(id);
 
-            var providerList = this.ProviderService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.User.Name + " " + x.User.Surname
-            });
+            List<Provider> providerList = this.ProviderService.GetAll().ToList();
+            providerList.Sort((x, y) => string.Compare(x.User.Name, y.User.Name));
 
-            consortium.Providers = providerList;
+            consortium.Providers = new SelectList(providerList, "Id", "User.Name");
 
             consortium.TicketQuantity = tickets.Where(x => x.Status.Description.ToLower().Equals("open")).Count();
 
