@@ -115,7 +115,7 @@ namespace Administracion.Controllers
             var tasks = this.TaskService.GetAll();
             foreach(Task task in tasks)
             {
-                if(task.Ticket != null)
+                if(task.Ticket != null && !tickets.Any(x => x.Id == task.Ticket.Id))
                 {
                     tickets.Add(task.Ticket);
                 }
