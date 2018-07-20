@@ -21,7 +21,7 @@
                         <button class="btn btn-danger pull-right" title="Eliminar"  data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
                         <button class="btn btn-success pull-right" title="Agregar gasto" data-toggle="modal" data-target="#modal-spend-@Model.Task.Id"><i class="fa fa-dollar" aria-hidden="true"></i> Gasto</button>
                         <button class="btn btn-success pull-right" title="Agregar seguimiento" data-target="#modal-add-task-history-@Model.Task.Id" data-toggle="modal"><i class="fa fa-plus"></i> Seguimiento</button>
-                        <button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>
+                        @*<button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>*@
                         @if (Model.Task.Status.Description != "closed")
                         {
                             <button class="btn btn-default pull-right" title="Cerrar" data-target="#modal-close-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-lock"></i> Cerrar</button>
@@ -94,15 +94,13 @@
                 @if (Model.Task.Spends != null && Model.Task.Spends.Count() > 0)
                 {
                     <br />
-                    <div class="block">
+                    <div class="block col-md-7">
                             <!-- Latest Orders Title -->
                             <div class="block-title">
                                 <h2><strong>Gastos</strong> </h2>
                             </div>
                             <!-- END Latest Orders Title -->
                             <!-- Latest Orders Content -->
-                        
-
                                 @foreach (var spend in Model.Task.Spends)
                                 {
                                     var provdescription = spend.Bill.Provider != null ?
@@ -111,7 +109,6 @@
                                         spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
                                     var managerdescription = spend.Bill.Manager != null ?
                                         spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
-
 
                                     <h3>@spend.Description</h3>
                                             <ul>
@@ -126,9 +123,23 @@
 
                             <!-- END Latest Orders Content -->
                     </div>
-
-
-
+                }
+                @if (Model.Task.TaskHistory.Any())
+                {
+                    <br />
+                    <div class="block col-md-7">
+                        <div class="block-title">
+                            <h4><strong>Seguimientos</strong></h4>
+                        </div>
+                        <div class="task-seguimiento-list">
+                            <ul>
+                                @foreach (var follow in Model.Task.TaskHistory)
+                                {
+                                    <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 }
             </div>
         </div>
@@ -139,4 +150,4 @@
 @Html.Partial("~/Views/Task/_CloseTask.cshtml", Model.Task)
 @Html.Partial("~/Views/Task/_AsociarGasto.cshtml", Model)
 @Html.Partial("~/Views/Task/_AgregarSeguimiento.cshtml", Model.Task)
-@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)
+@*@Html.Partial("~/Views/Task/_VerSeguimiento.cshtml", Model.Task)*@

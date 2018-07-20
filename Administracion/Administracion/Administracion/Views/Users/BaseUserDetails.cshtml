@@ -1,0 +1,114 @@
+﻿@model Administracion.Models.UserViewModel
+@{
+    ViewBag.Title = "Detalles";
+
+    var newFileName = "";
+    string fotoDefault = "avatar.jpg";
+    string profilePic = (Model.ProfilePic != null) ? Model.ProfilePic : fotoDefault;
+    string imgPath = "Images/";
+}
+<style>
+    .text-default {
+        color: #808080;
+    }
+    .action-icons {
+        font-size: 2em;
+        margin-right: 35px;
+    }
+    .action-icons a {
+        margin: 0 2px;
+    }
+</style>
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="block full">
+            @Html.HiddenFor(x => x.Id)
+            <div class="block-title clearfix">
+                <h2>Informacion <strong>General</strong></h2>
+                <div class="action-icons pull-right">
+                    <a href="@Url.Action("BaseUserList", "Users")" data-toggle="tooltip" title="Lista"><i class="fa fa-list-ul text-default"></i></a>
+                    <a href="@Url.Action("BaseUserEdit", "Users")?id=@Model.Id" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil text-default""></i></a>
+                    <a href="" data-toggle="modal" data-target="#modal-delete-baseuser"><i class="fa fa-trash text-danger" data-toggle="tooltip" title="Eliminar"></i></a>
+                </div>
+            </div>
+            <div class="user-info-content">
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Nombre</h3>
+                    <span data-attribute="Name" class="user-info-detail bold">@((Model.Name != null) ? Model.Name : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">Apellido</h3>
+                    <span class="user-info-detail bold" data-attribute="Surname">@((Model.Surname != null) ? Model.Surname : "-")</span>
+                </div>
+                <div class="user-info-row image-row clearfix">
+                    <h3 class="user-info-label">Foto</h3>
+                    <span data-attribute="ProfilePic">
+                        <img class="profile-pic md" src="/@imgPath@profilePic" alt="Avatar mediano" />
+                        <img class="profile-pic sm" src="/@imgPath@profilePic" alt="Avatar chico" />
+                    </span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">DNI</h3>
+                    <span class="user-info-detail bold" data-attribute="DNI">@((Model.DNI != null) ? Model.DNI : "-")</span>
+                </div>
+                <div class="user-info-row clearfix">
+                    <h3 class="user-info-label">CUIT</h3>
+                    <span class="user-info-detail bold" data-attribute="CUIT">@((Model.CUIT != null) ? Model.CUIT : "-")</span>
+                </div>
+            </div><!-- .user-info-content -->
+        </div><!-- .block -->
+
+        @if (Model.ContactData != null)
+        {
+            <div class="block full">
+                @{ Administracion.Models.ContactDataViewModel infoContacto = Model.ContactData; }
+                <div class="block-title clearfix">
+                    <h2>Informacion de <strong>Contacto</strong></h2>
+                    <button type="submit" class="btn btn-sm btn-primary user-info-guardar"><i class="fa fa-angle-right"></i> Guardar</button>
+                </div>
+                <div class="user-info-content">
+                    <div class="user-info-row clearfix">
+                        <h3 class="user-info-label">Email</h3>
+                        <span class="user-info-detail" data-attribute="ContactData.Email">@((infoContacto.Email != null) ? infoContacto.Email : "-")</span>
+                    </div>
+                    <div class="user-info-row clearfix">
+                        <h3 class="user-info-label">Teléfono fijo</h3>
+                        <span class="user-info-detail" data-attribute="ContactData.Telephone">@((infoContacto.Telephone != null) ? infoContacto.Telephone : "-")</span>
+                    </div>
+                    <div class="user-info-row clearfix">
+                        <h3 class="user-info-label">Teléfono celular</h3>
+                        <span class="user-info-detail" data-attribute="ContactData.Cellphone">@((infoContacto.Cellphone != null) ? infoContacto.Cellphone : "-")</span>
+                    </div>
+                </div><!-- .user-info-content -->
+            </div><!-- .block -->
+            }
+                        
+    </div><!-- #main-container -->
+</div><!-- #page-content -->
+
+<div id="modal-delete-baseuser" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fa fa-trash-o"></i> Eliminar usuario</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div>
+                    <p>Está seguro de querer eliminar al usuario <strong>@Model.Name  @Model.Surname</strong> ?</p>
+                </div>
+                <div class="form-group form-actions">
+                    <div class="col-xs-12 text-right">
+                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                        <a href="@Url.Action("DeleteUser", "Users")?id=@Model.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
