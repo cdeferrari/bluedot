@@ -503,7 +503,7 @@ namespace Administracion.Controllers
             //    .GetAllChecklists(id).OrderByDescending(x => x.OpenDate).Take(10).ToList();
             
             consortium.Ownership.FunctionalUnits.ForEach(x =>
-            x.Owner = owners.Where(y => y.FunctionalUnitId.Equals(x.Id)).FirstOrDefault()
+            x.Owner = owners.Where(y => y.FunctionalUnitId.Contains(x.Id)).FirstOrDefault()
             );
 
             consortium.Ownership.FunctionalUnits.ForEach(x =>

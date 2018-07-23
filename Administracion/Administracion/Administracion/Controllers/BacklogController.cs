@@ -59,14 +59,24 @@ namespace Administracion.Controllers
                     Tickets = ticketsViewModel,
                     All = ticketsViewModel.Count,
                     Blockers = ticketsViewModel.Where(x => x.Priority.Description == "alta").Count(),
-                    Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),
-                    Open = ticketsViewModel.Where(x => x.Status.Description == "open").Count(),                    
+                    Closed = ticketsViewModel.Where(x => x.Status.Description == "closed").Count(),                    
                     SelectedIndex = selectedindex ?? 1
                 };
-                List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel);
+                List<TicketViewModel> selfTickets = GetSelfTickets(currUserId, ticketsViewModel)
+                    .Where(x => x.Status.Description == "open").ToList();
+
                 ticketListViewModel.Self = selfTickets.Count();
-                IList<Ticket> ticketsWithTask = GetTicketsWithTask();
+                IList<Ticket> ticketsWithTask = GetTicketsWithTask().Where(x => x.Status.Description == "open").ToList();
+                var ticketsWithTaskIds = ticketsWithTask.Select(x => x.Id).ToList();
                 ticketListViewModel.WithTask = ticketsWithTask.Count();
+
+                ticketListViewModel.Open = ticketsViewModel
+                            .Where(x => x.Status.Description == "open" && !ticketsWithTaskIds.Contains(x.Id))
+                            .ToList().Count();
+
+                ticketListViewModel.Blockers = ticketsViewModel
+                            .Where(x => x.Priority.Description == "alta" && x.Status.Description == "open")
+                            .ToList().Count();
 
                 if (filter.ToLower() == "self")
                 {
@@ -77,11 +87,15 @@ namespace Administracion.Controllers
 
                 if(status == "open" || status == "closed") {
                     ticketListViewModel.Tickets = FilterByStatus(ticketListViewModel.Tickets, status);
+                    if (status == "open")
+                    {
+                        ticketListViewModel.Tickets = ticketListViewModel.Tickets.Where(x => !ticketsWithTaskIds.Contains(x.Id)).ToList();
+                    }
                 }
                 if (consortium != null) {
                     ticketListViewModel.Tickets = FilterByConsortium(ticketListViewModel.Tickets, consortium.Value);
                 }
-
+                
 
                 return View("List", ticketListViewModel);
             }
@@ -620,21 +634,46 @@ namespace Administracion.Controllers
             {
                 var allTickets = this.TicketService.GetAll();
                 var tickets = allTickets
-                    .Where(x => x.Priority.Description == priorityDescription)
+                    .Where(x => x.Priority.Description == priorityDescription && x.Status.Description == "open")
                     .ToList();
 
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
+                //var ticketListViewModel = new TicketListViewModel()
+                //{
+                //    Tickets = ticketsViewModel,
+                //    All = allTickets.Count,
+                //    Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
+                //    Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
+                //    Open = allTickets.Where(x => x.Status.Description == "open").Count(),
+                //    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
+                //    WithTask = GetTicketsWithTask().Count(),
+                //    SelectedIndex = 2
+                //};
+
                 var ticketListViewModel = new TicketListViewModel()
                 {
                     Tickets = ticketsViewModel,
                     All = allTickets.Count,
                     Blockers = allTickets.Where(x => x.Priority.Description == "alta").Count(),
                     Closed = allTickets.Where(x => x.Status.Description == "closed").Count(),
-                    Open = allTickets.Where(x => x.Status.Description == "open").Count(),
-                    Self = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets)).Count(),
-                    WithTask = GetTicketsWithTask().Count(),
                     SelectedIndex = 2
                 };
+
+                List<TicketViewModel> selfTickets = GetSelfTickets(SessionPersister.Account.User.Id, Mapper.Map<List<TicketViewModel>>(allTickets))
+                    .Where(x => x.Status.Description == "open").ToList();
+
+                ticketListViewModel.Self = selfTickets.Count();
+                IList<Ticket> ticketsWithTask = GetTicketsWithTask().Where(x => x.Status.Description == "open").ToList();
+                var ticketsWithTaskIds = ticketsWithTask.Select(x => x.Id).ToList();
+                ticketListViewModel.WithTask = ticketsWithTask.Count();
+
+                ticketListViewModel.Open = allTickets
+                            .Where(x => x.Status.Description == "open" && !ticketsWithTaskIds.Contains(x.Id))
+                            .ToList().Count();
+
+                ticketListViewModel.Blockers = allTickets
+                            .Where(x => x.Priority.Description == "alta" && x.Status.Description == "open")
+                            .ToList().Count();
                 return View("List", ticketListViewModel);
             }
             catch (Exception ex)
