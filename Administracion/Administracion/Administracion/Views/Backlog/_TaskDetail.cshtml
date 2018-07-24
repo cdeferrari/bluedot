@@ -4,8 +4,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center row">
-                <div class="col-md-6">
+            <div class="modal-header text-center clearfix">
+                <div class="col-md-5">
                     <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
                     @if (Model.Status.Description != "closed")
                     {
@@ -13,15 +13,10 @@
                     }
 
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-12">
-                        <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
-                        </div>
-                    <div class="col-md-12" style="margin-top: 10px;">
-                        <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
-                    </div>                    
-                </div>
-                
+                <div class="col-md-7">
+                    <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-info">Agregar Seguimiento</a>
+                    <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
+                </div>                
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->

@@ -260,7 +260,7 @@
                                                                 <div class="form-group form-actions">
                                                                     <div class="col-xs-12 text-right">
                                                                         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                                                                        <button onclick="location.href='/Task/DeleteTask?id=@task.Id&ticketId=@Model.Id'" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                                        <a  href="@Url.Action("DeleteTask", "Task", new { id = task.Id, ticketId = Model.Id })" type="submit" class="btn btn-sm btn-danger">Eliminar</a>
                                                                     </div>
                                                                 </div>
                                                             </form>
