@@ -32,7 +32,7 @@ namespace Administracion.Controllers
 
         public ActionResult List()
         {
-            List<Task> tasks = this.TasksService.GetAll().ToList();
+            List<Task> tasks = this.TasksService.GetAll().Where(x => x.Status.Description == "open").ToList();
             //List<TaskViewModel> tasksViewModel = Mapper.Map<List<TaskViewModel>>(tasks);
             TasksViewModel model = new TasksViewModel() { Tasks = tasks };
             return View(model);

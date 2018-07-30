@@ -242,6 +242,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BacklogController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\SpendTypeController.cs" />
     <Compile Include="Controllers\SpendController.cs" />
@@ -265,6 +266,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseUserEditViewModel.cs" />
+    <Compile Include="Models\Calendar\Calendar.cs" />
+    <Compile Include="Models\Calendar\Color.cs" />
     <Compile Include="Models\FireExtinguisherControlViewModel.cs" />
     <Compile Include="Models\FastUpdateViewModel.cs" />
     <Compile Include="Models\ConsortiumSecureViewModel.cs" />
@@ -419,6 +422,8 @@
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Calendar\compCalendar.js" />
+    <Content Include="Scripts\Calendar\fullcalendar-es.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -558,6 +563,7 @@
     <Content Include="Views\Users\BaseUserList.cshtml" />
     <Content Include="Views\Users\_BaseUserTableRow.cshtml" />
     <Content Include="Views\Users\BaseUserDetails.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

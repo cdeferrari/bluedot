@@ -19,11 +19,13 @@
                         <ul>
                             @foreach (var follow in Model.TaskHistory)
                             {
-                                <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                                <li>
+                                    <strong>Fecha: </strong> @follow.FollowDate.ToShortDateString()
+                                    <p>@follow.Coment</p>
+                                </li>
                             }
                         </ul>
                     </div>
-
                 </div>
                 <!-- END Modal Body -->
             </div>

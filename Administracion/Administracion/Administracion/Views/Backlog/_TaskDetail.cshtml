@@ -4,8 +4,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center row">
-                <div class="col-md-6">
+            <div class="modal-header text-center clearfix">
+                <div class="col-md-5">
                     <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
                     @if (Model.Status.Description != "closed")
                     {
@@ -13,39 +13,55 @@
                     }
 
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-12">
-                        <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
-                        </div>
-                    <div class="col-md-12" style="margin-top: 10px;">
-                        <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
-                    </div>                    
-                </div>
-                
+                <div class="col-md-7">
+                    <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-info">Agregar Seguimiento</a>
+                    <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
+                </div>                
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
             <div class="modal-body row">
             @{var workerDescription = Model.Worker != null ? Model.Worker.User.Name + " " + Model.Worker.User.Surname : "-";
                 var managerDescription = Model.Manager != null ? Model.Manager.User.Name + " " + Model.Manager.User.Surname : "-";
-                var providerDescription = Model.Provider != null ? Model.Provider.User.Name + " " + Model.Provider.User.Surname : "-";
+                var providerDescription = Model.Provider != null ? Model.Provider.User.Name : "-";
                 }
                 @{
                     var estado = Model.Status.Description == "open" ? "abierto" : "cerrado";
 
                 }
 
-                <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                    <fieldset>
-                        <legend>Creador: @Model.Creator.User.Name @Model.Creator.User.Surname</legend>
-                        <legend>Fecha de Creación: @Model.OpenDate.ToShortDateString()</legend>
-                        <legend>Prioridad: @Model.Priority.Description</legend>
-                        <legend>Estado: @estado</legend>
-                        <legend>Empleado: @workerDescription</legend>                        
-                        <legend>Encargado: @managerDescription</legend>                        
-                        <legend>Proveedor: @providerDescription</legend>                        
-                    </fieldset>
-
+                @*<form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+    <fieldset>
+        <legend>Creador: @Model.Creator.User.Name @Model.Creator.User.Surname</legend>
+        <legend>Fecha de Creación: @Model.OpenDate.ToShortDateString()</legend>
+        <legend>Prioridad: @Model.Priority.Description</legend>
+        <legend>Estado: @estado</legend>
+        <legend>Proveedor: @providerDescription</legend>
+    </fieldset>*@
+                <div class="form-group clearfix">
+                    <div class="col-md-4">
+                        <label>Creador</label>
+                        <p>@Model.Creator.User.Name @Model.Creator.User.Surname</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Fecha de creación</label>
+                        <p>@Model.OpenDate.ToShortDateString()</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Prioridad</label>
+                        <p>@Model.Priority.Description</p>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="col-md-4">
+                        <label>Estado</label>
+                        <p>@estado</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Proveedor</label>
+                        <p>@providerDescription</p>
+                    </div>
+                </div>
 
 
                     <div class="block">
@@ -83,7 +99,7 @@
                         <!-- END Latest Orders Content -->
                     </div>
 
-                </form>
+                @*</form>*@
             </div>                                                
         </div>
     </div>

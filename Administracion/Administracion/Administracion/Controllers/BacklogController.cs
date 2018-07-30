@@ -107,7 +107,7 @@ namespace Administracion.Controllers
             
         }
 
-        private List<TicketViewModel> GetSelfTickets(int selfId, List<TicketViewModel> tickets)
+        public static List<TicketViewModel> GetSelfTickets(int selfId, List<TicketViewModel> tickets)
         {
             List<TicketViewModel> selfTickets = new List<TicketViewModel>();
             foreach(TicketViewModel ticket in tickets)
