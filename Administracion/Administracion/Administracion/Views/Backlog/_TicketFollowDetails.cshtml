@@ -6,8 +6,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header text-center">
-                    <h2 class="modal-title"><i class="fa fa-pencil"></i> SEGUIMIENTO</h2>
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="fa fa-list"></i> Seguimiento</h2>
                 </div>
                 <!-- END Modal Header -->
                 <!-- Modal Body -->
@@ -19,13 +19,14 @@
                         <ul>
                             @foreach (var follow in Model.TicketHistory)
                             {
-                                <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                                <li>
+                                    <strong>Fecha: </strong> @follow.FollowDate.ToShortDateString()
+                                    <p>@follow.Coment</p>
+                                </li>
                             }
                         </ul>
                     </div>
-
-                </div>
-                <!-- END Modal Body -->
+                </div><!-- END Modal Body -->
             </div>
         </div>
     </div>

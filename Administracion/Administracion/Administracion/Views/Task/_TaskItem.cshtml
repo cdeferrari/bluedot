@@ -25,11 +25,6 @@
         var estado = Model.Status.Description == "open" ? "abierto" : "cerrado";
     }
     <td class="text-center">@estado</td>
-    @if (Model.Manager != null)
-    {
-        <td class="text-center">@Model.Manager.User.Name</td>
-    }
-    else { <td class="text-center">-</td> }
     @if (Model.Provider != null) {
         <td class="text-center">@Model.Provider.User.Name</td>
     }
@@ -42,5 +37,5 @@
             <a href="#modal-delete-task-@Model.Id" data-toggle="modal" title="Borrar tarea" class="btn-xs"><i class="fa fa-times danger"></i></a>
             <a href="#modal-spend-@Model.Id" data-toggle="modal" title="Asociar Gasto" class="btn-xs"><i class="fa fa-dollar success"></i></a>
             -->
-</td>
+    </td>
 </tr>
