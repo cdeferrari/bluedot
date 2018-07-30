@@ -47,12 +47,16 @@
     <Compile Include="BacklogUser.cs" />
     <Compile Include="Administration.cs" />
     <Compile Include="BankAccount.cs" />
+    <Compile Include="UnitConfiguration.cs" />
+    <Compile Include="ConsortiumConfiguration.cs" />
+    <Compile Include="UnitConfigurationType.cs" />
     <Compile Include="ElevatorControl.cs" />
     <Compile Include="FireExtinguisherControl.cs" />
     <Compile Include="ItemControl.cs" />
     <Compile Include="PatrimonyStatus.cs" />
     <Compile Include="Income.cs" />
     <Compile Include="Area.cs" />
+    <Compile Include="ConsortiumConfigurationType.cs" />
     <Compile Include="SpendClass.cs" />
     <Compile Include="Spend.cs" />
     <Compile Include="CommonDataItem.cs" />

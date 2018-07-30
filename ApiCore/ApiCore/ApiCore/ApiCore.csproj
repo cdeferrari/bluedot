@@ -490,7 +490,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\UnitConfigurationController.cs" />
+    <Compile Include="Controllers\ConsortiumConfigurationController.cs" />
+    <Compile Include="Controllers\UnitConfigurationTypeController.cs" />
     <Compile Include="Controllers\FireExtinguisherControlController.cs" />
+    <Compile Include="Controllers\ConsortiumConfigurationTypeController.cs" />
     <Compile Include="Controllers\PatrimonyStatusController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\AreaController.cs" />

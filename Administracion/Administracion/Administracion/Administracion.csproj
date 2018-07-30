@@ -271,6 +271,7 @@
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\ChoseConsortiumViewModel.cs" />
     <Compile Include="Models\ElevatorControlViewModel.cs" />
+    <Compile Include="Models\ConsortiumConfigurationViewModel.cs" />
     <Compile Include="Models\TasksViewModel.cs" />
     <Compile Include="Models\TaskDetailsViewModel.cs" />
     <Compile Include="Models\TicketHistoryViewModel.cs" />

@@ -43,6 +43,9 @@
     <Compile Include="Account.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Administration.cs" />
+    <Compile Include="UnitConfiguration.cs" />
+    <Compile Include="ConsortiumConfiguration.cs" />
+    <Compile Include="UnitConfigurationType.cs" />
     <Compile Include="ElevatorControl.cs" />
     <Compile Include="FireExtinguisherControl.cs" />
     <Compile Include="Income.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="CommonData.cs" />
     <Compile Include="Consortium.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="ConsortiumConfigurationType.cs" />
     <Compile Include="IncomeType.cs" />
     <Compile Include="ItemControl.cs" />
     <Compile Include="PatrimonyStatus.cs" />

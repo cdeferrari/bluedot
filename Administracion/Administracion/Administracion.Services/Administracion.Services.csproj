@@ -47,9 +47,13 @@
     <Compile Include="Contracts\Autentication\IAuthentication.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
     <Compile Include="Contracts\Area\IAreaService.cs" />
+    <Compile Include="Contracts\UnitConfiguration\IUnitConfigurationService.cs" />
+    <Compile Include="Contracts\ConsortiumConfiguration\IConsortiumConfigurationService.cs" />
+    <Compile Include="Contracts\UnitConfigurationTypes\IUnitConfigurationTypeService.cs" />
     <Compile Include="Contracts\FireExtinguisherControl\IFireExtinguisherControlService.cs" />
     <Compile Include="Contracts\ElevatorControl\IElevatorControlService.cs" />
     <Compile Include="Contracts\Account\IAccountService.cs" />
+    <Compile Include="Contracts\ConsortiumConfigurationTypes\IConsortiumConfigurationTypeService.cs" />
     <Compile Include="Contracts\SpendsClass\ISpendClassService.cs" />
     <Compile Include="Contracts\Tasks\ITaskService.cs" />
     <Compile Include="Contracts\SpendsType\ISpendTypeService.cs" />
@@ -84,9 +88,13 @@
     <Compile Include="Contracts\Workers\IWorkerService.cs" />
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Area\AreaService.cs" />
+    <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
+    <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
+    <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />
     <Compile Include="Implementations\FireExtinguisherControls\FireExtinguisherControlService.cs" />
     <Compile Include="Implementations\ElevatorControls\ElevatorControlService.cs" />
     <Compile Include="Implementations\Account\AccountService.cs" />
+    <Compile Include="Implementations\ConsortiumConfigurationTypes\ConsortiumConfigurationTypesService.cs" />
     <Compile Include="Implementations\SpendClass\SpendClassService.cs" />
     <Compile Include="Implementations\SpendsType\SpendTypeService.cs" />
     <Compile Include="Implementations\Spends\SpendService.cs" />

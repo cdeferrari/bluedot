@@ -8,6 +8,8 @@ using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.CommonData;
+using Administracion.Services.Contracts.ConsortiumConfigurations;
+using Administracion.Services.Contracts.ConsortiumConfigurationTypes;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.Countries;
 using Administracion.Services.Contracts.ElevatorControlService;
@@ -51,6 +53,9 @@ namespace Administracion.Controllers
         public virtual IProviderService ProviderService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
         public virtual IElevatorControlService ElevatorControlService { get; set; }
+
+        public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
+        public virtual IConsortiumConfigurationTypeService ConsortiumConfigurationTypeService { get; set; }
         public virtual IFireExtinguisherControlService FireExtinguisherControlService { get; set; }
         // GET: Backlog
         public ActionResult Index()
@@ -126,6 +131,15 @@ namespace Administracion.Controllers
             };
             
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult ConfigureConsortium(int id)
+        {
+
+            var configurationTypes = this.ConsortiumConfigurationTypeService.GetAll();
+
+            return null;
         }
 
 

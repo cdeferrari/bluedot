@@ -589,4 +589,46 @@
   <data name="GetAllBacklogUsers" xml:space="preserve">
     <value>Account/</value>
   </data>
+  <data name="CreateConsortiumConfiguration" xml:space="preserve">
+    <value>ConsortiumConfigurations/</value>
+  </data>
+  <data name="CreateUnitConfiguration" xml:space="preserve">
+    <value>UnitConfigurations/</value>
+  </data>
+  <data name="DeleteConsortiumConfiguration" xml:space="preserve">
+    <value>ConsortiumConfigurations/{0}</value>
+  </data>
+  <data name="DeleteUnitConfiguration" xml:space="preserve">
+    <value>UnitConfigurations/{0}</value>
+  </data>
+  <data name="GatAllUnitConfigurations" xml:space="preserve">
+    <value>UnitConfigurations/</value>
+  </data>
+  <data name="GetAllConsortiumConfigurations" xml:space="preserve">
+    <value>ConsortiumConfigurations/</value>
+  </data>
+  <data name="GetAllConsortiumConfigurationTypes" xml:space="preserve">
+    <value>ConsortiumConfigurationTypes/</value>
+  </data>
+  <data name="GetAllUnitConfigurationTypes" xml:space="preserve">
+    <value>UnitConfigurationTypes/</value>
+  </data>
+  <data name="GetConfigurationByConsortiumId" xml:space="preserve">
+    <value>Consorcio/{0}/ConsortiumConfiguration</value>
+  </data>
+  <data name="GetConfigurationByUnitId" xml:space="preserve">
+    <value>Unidad/{0}/UnitConfiguration</value>
+  </data>
+  <data name="GetConsortiumConfiguration" xml:space="preserve">
+    <value>ConsortiumConfigurations/{0}</value>
+  </data>
+  <data name="GetUnitConfiguration" xml:space="preserve">
+    <value>UnitConfigurations/{0}</value>
+  </data>
+  <data name="UpdateConsortiumConfiguration" xml:space="preserve">
+    <value>ConsortiumConfigurations/{0}</value>
+  </data>
+  <data name="UpdateUnitConfiguration" xml:space="preserve">
+    <value>UnitConfigurations/{0}</value>
+  </data>
 </root>
