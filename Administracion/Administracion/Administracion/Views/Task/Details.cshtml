@@ -59,27 +59,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label>Empleado</label>
-                        @if(Model.Task.Worker != null) { 
-                            <p>@Model.Task.Worker.User.Name</p>
-                        }
-                        else
-                        {
-                            <p>-</p>
-                        }
-                    </div>
-                    <div class="col-md-4">
-                        <label>Encargado</label>
-                        @if (Model.Task.Manager != null)
-                        {
-                            <p>@Model.Task.Manager.User.Name</p>
-                        }
-                        else
-                        {
-                            <p>-</p>
-                        }
-                    </div>
-                    <div class="col-md-4">
                         <label>Proveedor</label>
                         @if (Model.Task.Provider != null)
                         {
@@ -91,6 +70,7 @@
                         }
                     </div>
                 </div>
+                <!-- Gastos -->
                 @if (Model.Task.Spends != null && Model.Task.Spends.Count() > 0)
                 {
                     <br />
@@ -123,7 +103,8 @@
 
                             <!-- END Latest Orders Content -->
                     </div>
-                }
+                }<!-- END Gastos -->
+                <!-- Seguimientos -->
                 @if (Model.Task.TaskHistory.Any())
                 {
                     <br />
@@ -135,12 +116,15 @@
                             <ul>
                                 @foreach (var follow in Model.Task.TaskHistory)
                                 {
-                                    <li><strong>Comentario:</strong> @follow.Coment -<strong>Próxima Fecha:</strong>@follow.FollowDate.ToShortDateString()</li>
+                                    <li>
+                                        <strong>Fecha: </strong> @follow.FollowDate.ToShortDateString()
+                                        <p>@follow.Coment</p>
+                                    </li>
                                 }
                             </ul>
                         </div>
                     </div>
-                }
+                }<!-- END Seguimientos -->
             </div>
         </div>
     </div>

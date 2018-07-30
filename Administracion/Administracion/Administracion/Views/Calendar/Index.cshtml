@@ -1,0 +1,32 @@
+﻿@model Administracion.Models.Calendar.Calendar
+@{
+    ViewBag.Title = "Calendario";
+}
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+    <div id="main-container">
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-calendar"></i>Calendario<br><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                </h1>
+            </div>
+        </div>
+        <div class="block block-alt-noborder full">
+            <div class="row">                
+                <div class="col-md-10 col-md-offset-1">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach(Administracion.Models.Calendar.Event calendarEvent in Model.EventList)
+{
+    <input type="hidden" data-title="@calendarEvent.Title" data-day="@calendarEvent.Day" data-color="@calendarEvent.Color"
+           data-month="@calendarEvent.Month" data-year="@calendarEvent.Year" data-url="@calendarEvent.Url" class="event-hidden"/>
+}
+
+@section scripts {
+    <script src="~/Scripts/Calendar/compCalendar.js"></script>
+}
