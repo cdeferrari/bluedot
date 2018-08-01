@@ -30,14 +30,16 @@ namespace Administracion.Controllers
             List<Models.Calendar.Event> eventList = new List<Models.Calendar.Event>();
             foreach (Models.TicketViewModel ticket in ticketList)
             {
-                if(ticket.LimitDate != null)
+                string url = Url.Action("UpdateTicketById", "Backlog", new { id = ticket.Id });
+                if (ticket.LimitDate != null)
                 {
                     eventList.Add(new Models.Calendar.Event() {
                         Title = ticket.Title,
                         Day = ticket.LimitDate.Day,
-                        Month = ticket.LimitDate.Month,
+                        Month = ticket.LimitDate.Month - 1,
                         Year = ticket.LimitDate.Year,
-                        Color = Models.Calendar.Color.Default
+                        Color = Models.Calendar.Color.Default,
+                        Url = url
                     });
                 }
                 List<Models.TicketHistoryViewModel> ticketHistoryList = new List<Models.TicketHistoryViewModel>();
@@ -49,7 +51,7 @@ namespace Administracion.Controllers
                 {
                     ticketHistoryList.Add(ticket.TicketFollow);
                 }
-                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList);
+                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList, url);
             }
             return eventList;
         }
@@ -63,7 +65,7 @@ namespace Administracion.Controllers
             return eventList;
         }
 
-        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList)
+        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList, string url)
         {
             foreach(Models.TicketHistoryViewModel ticketHistory in ticketHistoryList)
             {
@@ -71,9 +73,10 @@ namespace Administracion.Controllers
                 {
                     Title = ticketHistory.Coment,
                     Day = ticketHistory.FollowDate.Day,
-                    Month = ticketHistory.FollowDate.Month,
+                    Month = ticketHistory.FollowDate.Month - 1,
                     Year = ticketHistory.FollowDate.Year,
-                    Color = Models.Calendar.Color.Default
+                    Color = Models.Calendar.Color.Default,
+                    Url = url
                 });
             }
         }

@@ -6,7 +6,10 @@ $(function () {
         var _event = {
             title: $events.eq(i).data("title"),
             start: new Date($events.eq(i).data("year"), $events.eq(i).data("month"), $events.eq(i).data("day")),
-            color: $events.eq(i).data("color")
+            color: $events.eq(i).data("color"),
+            url: $events.eq(i).data("url"),
+            allDay: true,
+            //description: 'Some description'
         };
         _events.push(_event);
     }
@@ -27,8 +30,18 @@ $(function () {
                         right: 'prev,next'
                     },
                     firstDay: 1,
+                    eventRender: function (eventObj, $el) {
+                        $el.popover({
+                            title: eventObj.title,
+                            //content: eventObj.description,
+                            trigger: 'hover',
+                            placement: 'top',
+                            container: 'body'
+                        });
+                    },
                     events: _events,
-                    locale: 'es'
+                    locale: 'es',
+
                 });
             }
         };
