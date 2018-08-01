@@ -57,11 +57,9 @@ namespace Administracion.Controllers
             };
             
             try
-            {
-            
-                var entity = this.TasksService.CreateTask(ntask);
-                var result = entity.Id != 0;                
-                if (result)
+            {            
+                Entidad entity = this.TasksService.CreateTask(ntask);           
+                if (entity.Id != 0)
                 {
                     var taskHistory = new TaskHistoryRequest()
                     {
