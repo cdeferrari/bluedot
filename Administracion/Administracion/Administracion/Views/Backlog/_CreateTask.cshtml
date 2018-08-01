@@ -10,10 +10,8 @@
             <!-- END Modal Header -->
             <!-- Modal Body -->
             <div class="modal-body">
-
                 @using (Html.BeginForm("CreateTask", "Task", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
                 {
-
                     <input type="hidden" name="Task.TicketId" id="Task.TicketId" value="@Model.Id" />
 
                     <div class="form-group row">
@@ -38,7 +36,7 @@
                         <label class="control-label col-md-2">Seguimiento inicial:</label>
                         <div class='col-md-4'>
                             <div class='input-group date'>
-                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required." id="TaskFollow_FollowDate" name="FollowDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de proximo seguimiento')" required="required" type="datetime" value="">
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required." id="TaskFollow_FollowDate" name="Task.FollowDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de proximo seguimiento')" required="required" type="datetime" value="">
                                 @Html.ValidationMessage("", new { @class = "text-danger" })
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -53,7 +51,6 @@
                         </div>
                     </div>
                 }
-                @*</form>*@
             </div>
             <!-- END Modal Body -->
         </div>
