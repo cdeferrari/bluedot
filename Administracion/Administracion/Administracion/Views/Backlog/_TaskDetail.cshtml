@@ -4,18 +4,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center clearfix">
-                <div class="col-md-5">
-                    <h2 class="modal-title"><i class="fa fa-pencil"></i> @Model.Description</h2>
+            <div class="modal-header clearfix">
+                <h2 class="modal-title col-md-4"><i class="fa fa-thumb-tack"></i> Detalles</h2>
+                <div class="col-md-8">
                     @if (Model.Status.Description != "closed")
                     {
-                    <a href="/Task/CloseTask?Id=@Model.Id" class="btn btn-xs btn-default pull-left"><i class="fa fa-check"></i> Cerrar Órden</a>
+                        <a href="@Url.Action("CloseTask", "Task", new { Id = Model.Id })" class="btn btn-default"><i class="fa fa-lock"></i> Cerrar</a>
                     }
-
-                </div>
-                <div class="col-md-7">
-                    <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-info">Agregar Seguimiento</a>
-                    <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
+                    <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" class="btn btn-success"><i class="fa fa-plus"></i> Seguimiento</a>
+                    <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento"class="btn btn-info"><i class="fa fa-eye"></i> Seguimiento</a>
                 </div>                
             </div>
             <!-- END Modal Header -->
@@ -38,6 +35,12 @@
         <legend>Estado: @estado</legend>
         <legend>Proveedor: @providerDescription</legend>
     </fieldset>*@
+                <div class="form-group clearfix">
+                    <div class="col-md-12">
+                        <label>Descripción</label>
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
                 <div class="form-group clearfix">
                     <div class="col-md-4">
                         <label>Creador</label>
@@ -64,6 +67,8 @@
                 </div>
 
 
+                @if (Model.Spends != null && Model.Spends.Any())
+                {    
                     <div class="block">
                         <!-- Latest Orders Title -->
                         <div class="block-title">                            
@@ -71,33 +76,29 @@
                         </div>
                         <!-- END Latest Orders Title -->
                         <!-- Latest Orders Content -->
-                        @if (Model.Spends != null)
+                        @foreach (var spend in Model.Spends)
                         {
-    
-                                    foreach (var spend in Model.Spends)
-                                    {
-                                     var provdescription = spend.Bill.Provider != null ?
-                                          spend.Bill.Provider.User.Name+" " +spend.Bill.Provider.User.Surname : "-";
-                                    var workerdescription = spend.Bill.Worker != null ?
-                                        spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
-                                    var managerdescription = spend.Bill.Manager != null ?
-                                        spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
+                            var provdescription = spend.Bill.Provider != null ?
+                                spend.Bill.Provider.User.Name+" " +spend.Bill.Provider.User.Surname : "-";
+                        var workerdescription = spend.Bill.Worker != null ?
+                            spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
+                        var managerdescription = spend.Bill.Manager != null ?
+                            spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
 
                                 
-                                        <h3>@spend.Description</h3>
-                                        <ul>
-                                            <li><strong>Tipo:</strong>@spend.Type.Description</li>
-                                            <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
-                                            <li><strong>Monto:</strong> @spend.Bill.Amount</li>                                            
-                                            <li><strong>Proveedor:</strong> @provdescription</li>                                            
-                                            <li><strong>Encargado:</strong> @managerdescription</li>                                            
-                                            <li><strong>Empleado:</strong> @workerdescription</li>                                            
-                                        </ul>
-                                    }
-
+                            <h3>@spend.Description</h3>
+                            <ul>
+                                <li><strong>Tipo:</strong>@spend.Type.Description</li>
+                                <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
+                                <li><strong>Monto:</strong> @spend.Bill.Amount</li>                                            
+                                <li><strong>Proveedor:</strong> @provdescription</li>                                            
+                                <li><strong>Encargado:</strong> @managerdescription</li>                                            
+                                <li><strong>Empleado:</strong> @workerdescription</li>                                            
+                            </ul>
                         }
                         <!-- END Latest Orders Content -->
                     </div>
+                }
 
                 @*</form>*@
             </div>                                                
