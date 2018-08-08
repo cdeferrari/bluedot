@@ -8,8 +8,8 @@ $(function () {
             start: new Date($events.eq(i).data("year"), $events.eq(i).data("month"), $events.eq(i).data("day")),
             color: $events.eq(i).data("color"),
             url: $events.eq(i).data("url"),
-            allDay: true,
-            //description: 'Some description'
+            description: $events.eq(i).data("description"),
+            allDay: true
         };
         _events.push(_event);
     }
@@ -31,9 +31,12 @@ $(function () {
                     },
                     firstDay: 1,
                     eventRender: function (eventObj, $el) {
+                        console.log(eventObj);
+                        console.log($el);
                         $el.popover({
                             title: eventObj.title,
-                            //content: eventObj.description,
+                            content: eventObj.description,
+                            html: true,
                             trigger: 'hover',
                             placement: 'top',
                             container: 'body'

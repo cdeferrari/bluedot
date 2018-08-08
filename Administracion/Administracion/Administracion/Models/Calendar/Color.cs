@@ -13,13 +13,9 @@ namespace Administracion.Models.Calendar
         public const string Warning = "#ffc107";
 
         //Task
-        public const string TaskOpen = "#00e6e6";
-        public const string TaskFollow = "#00b3b3";
-        public const string TaskClose = "#004d4d";
+        public const string Task = "#00b3b3";
 
         //Ticket
-        public const string TicketOpen = "#7547d1";
-        public const string TicketFollow = "#5229a3";
-        public const string TicketClose = "#331966";
+        public const string Ticket = "#6241a3";
     }
 }

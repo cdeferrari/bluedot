@@ -24,7 +24,8 @@
 @foreach(Administracion.Models.Calendar.Event calendarEvent in Model.EventList)
 {
     <input type="hidden" data-title="@calendarEvent.Title" data-day="@calendarEvent.Day" data-color="@calendarEvent.Color"
-           data-month="@calendarEvent.Month" data-year="@calendarEvent.Year" data-url="@calendarEvent.Url" class="event-hidden"/>
+           data-month="@calendarEvent.Month" data-year="@calendarEvent.Year" data-url="@calendarEvent.Url" class="event-hidden"
+           data-description="@calendarEvent.Description"/>
 }
 
 @section scripts {

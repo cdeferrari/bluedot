@@ -13,6 +13,8 @@ namespace Administracion.Controllers
     {
         public virtual ITaskService TaskService { get; set; }
         public virtual ITicketService TicketService { get; set; }
+        private const double MinHoursWarning = 72;
+        private const double MinHoursDanger = 24;
         
         public ActionResult Index()
         {
@@ -36,17 +38,31 @@ namespace Administracion.Controllers
             foreach (Models.TicketViewModel ticket in ticketList)
             {
                 string url = Url.Action("UpdateTicketById", "Backlog", new { id = ticket.Id });
-                if (ticket.LimitDate != null)//PUEDE QUE ESTEN FALTANDO TICKET OPEN Y TICKET CLOSE
+                if (ticket.LimitDate != null)
                 {
-                    eventList.Add(new Models.Calendar.Event() {
+                    double remainingHours = DateTimeDifferenceInHours(ticket.LimitDate, DateTime.Now);
+                    string color = Models.Calendar.Color.Success;
+                    if (remainingHours < MinHoursDanger)
+                    {
+                        color = Models.Calendar.Color.Danger;
+                    }
+                    else if (remainingHours < MinHoursWarning)
+                    {
+                        color = Models.Calendar.Color.Warning;
+                    }
+
+                    eventList.Add(new Models.Calendar.Event()
+                    {
                         Title = ticket.Title,
                         Day = ticket.LimitDate.Day,
                         Month = ticket.LimitDate.Month - 1,
                         Year = ticket.LimitDate.Year,
-                        Color = Models.Calendar.Color.TicketOpen,
-                        Url = url
+                        Color = color,
+                        Url = url,
+                        Description = GetTicketEventDescription(ticket, false)
                     });
                 }
+                string description = GetTicketEventDescription(ticket, true);
                 List<Models.TicketHistoryViewModel> ticketHistoryList = new List<Models.TicketHistoryViewModel>();
                 if(ticket.TicketHistory != null)
                 {
@@ -56,53 +72,58 @@ namespace Administracion.Controllers
                 {
                     ticketHistoryList.Add(ticket.TicketFollow);
                 }
-                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList, url);
+                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList, url, description);
             }            
         }
 
-        public void LoadEventsFromTicketTasks(ref List<Models.Calendar.Event> eventList, List<Models.TicketViewModel> ticketList)
+        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList, string url, string description)
         {
-            List<DomainModel.Task> taskList = new List<DomainModel.Task>();
-            foreach (Models.TicketViewModel ticket in ticketList)
+            foreach (Models.TicketHistoryViewModel ticketHistory in ticketHistoryList)
             {
-                taskList.AddRange(ticket.Tasks.Where(x => x.Status.Description == "open"));
+                eventList.Add(new Models.Calendar.Event()
+                {
+                    Title = ticketHistory.Coment,
+                    Day = ticketHistory.FollowDate.Day,
+                    Month = ticketHistory.FollowDate.Month - 1,
+                    Year = ticketHistory.FollowDate.Year,
+                    Color = Models.Calendar.Color.Ticket,
+                    Description = description,
+                    Url = url
+                });
             }
-            LoadEventsFromTaskList(ref eventList, taskList);
         }
 
-        public void LoadEventsFromTaskList(ref List<Models.Calendar.Event> eventList, List<DomainModel.Task> taskList)
+        public void LoadEventsFromTaskList(ref List<Models.Calendar.Event> eventList, IEnumerable<DomainModel.Task> taskList, string ticketTitle)
         {
             foreach(DomainModel.Task task in taskList)
             {
                 string url = Url.Action("Details", "Task", new { id = task.Id });
+                string description = GetTaskEventDescription(task, ticketTitle);
                 eventList.Add(new Models.Calendar.Event()
                 {
                     Title = task.Description,
                     Day = task.OpenDate.Day,
                     Month = task.OpenDate.Month - 1,
                     Year = task.OpenDate.Year,
-                    Color = Models.Calendar.Color.TaskOpen,
+                    Color = Models.Calendar.Color.Task,
+                    Description = description,
                     Url = url
                 });
 
-                if(task.CloseDate.HasValue)
-                {
-                    eventList.Add(new Models.Calendar.Event()
-                    {
-                        Title = task.Description,
-                        Day = task.CloseDate.Value.Day,
-                        Month = task.CloseDate.Value.Month - 1,
-                        Year = task.CloseDate.Value.Year,
-                        Color = Models.Calendar.Color.TaskClose,
-                        Url = url
-                    });
-                }
-
-                LoadEventsFromTaskHistoryList(ref eventList, task.TaskHistory, url);
+                LoadEventsFromTaskHistoryList(ref eventList, task.TaskHistory, url, description);
             }
         }
 
-        public void LoadEventsFromTaskHistoryList(ref List<Models.Calendar.Event> eventList, IList<DomainModel.TaskHistory> taskHistoryList, string url)
+        public void LoadEventsFromTicketTasks(ref List<Models.Calendar.Event> eventList, List<Models.TicketViewModel> ticketList)
+        {
+            foreach (Models.TicketViewModel ticket in ticketList)
+            {
+                LoadEventsFromTaskList(ref eventList, ticket.Tasks.Where(x => x.Status.Description == "open"), ticket.Title);
+            }
+            
+        }
+
+        public void LoadEventsFromTaskHistoryList(ref List<Models.Calendar.Event> eventList, IList<DomainModel.TaskHistory> taskHistoryList, string url, string description)
         {
             foreach(DomainModel.TaskHistory taskHistory in taskHistoryList)
             {
@@ -112,32 +133,49 @@ namespace Administracion.Controllers
                     Day = taskHistory.FollowDate.Day,
                     Month = taskHistory.FollowDate.Month - 1,
                     Year = taskHistory.FollowDate.Year,
-                    Color = Models.Calendar.Color.TaskFollow,
+                    Color = Models.Calendar.Color.Task,
+                    Description = description,
                     Url = url
                 });
             }
-        }
-
-        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList, string url)
-        {
-            foreach(Models.TicketHistoryViewModel ticketHistory in ticketHistoryList)
-            {
-                eventList.Add(new Models.Calendar.Event()
-                {
-                    Title = ticketHistory.Coment,
-                    Day = ticketHistory.FollowDate.Day,
-                    Month = ticketHistory.FollowDate.Month - 1,
-                    Year = ticketHistory.FollowDate.Year,
-                    Color = Models.Calendar.Color.TicketFollow,
-                    Url = url
-                });
-            }
-        }
+        }        
 
         private double DateTimeDifferenceInHours(DateTime date1, DateTime date2)
         {
             TimeSpan difference = date1 - date2;
             return difference.TotalHours;
         }
+
+        private string GetTicketEventDescription(Models.TicketViewModel ticket, bool ticketTitle)
+        {
+            string description = "";
+            if(ticketTitle)
+            {
+                description += "<label>Titulo ticket</label>" +
+                "<p>" + ticket.Title + "</p>";
+            }
+            description +=
+            "<label>Descripción</label>" +
+                "<p>" + ticket.Description + "</p>";
+
+            return description;
+        }
+
+        private string GetTaskEventDescription(DomainModel.Task task, string ticketTitle)
+        {
+            string description = 
+                "<label>Prioridad</label>" +
+                "<p>" + task.Priority.Description + "</p>" +
+                "<label>Ticket padre</label>" +
+                "<p>" + ticketTitle + "</p>";
+            if (task.Provider != null && task.Provider.User != null)
+            {
+                description += "<label>Proveedor</label>" +
+                "<p>" + task.Provider.User.Name + "</p>";
+            }
+
+            return description;
+        }
+
     }
 }
