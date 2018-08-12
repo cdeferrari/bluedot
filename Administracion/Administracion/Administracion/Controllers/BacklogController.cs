@@ -442,8 +442,8 @@ namespace Administracion.Controllers
                 .Select(x => new SelectListItem()
             {
                     Value = x.Id.ToString(),
-                    Text = oTicket.Consortium.Ownership.Address.Street + " " + oTicket.Consortium.Ownership.Address.Street + "-"
-                    + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
+                    Text = oTicket.Consortium.Ownership.Address.Street + " " + oTicket.Consortium.Ownership.Address.Number + " - "
+                    + "Nro: " + x.Number + "   Piso: " + x.Floor + "   Dto: " + x.Dto
                 });
 
             var back_user = this.AuthenticationService.GetAll().Where(x => x.Id == ticket.Creator.Id).FirstOrDefault();

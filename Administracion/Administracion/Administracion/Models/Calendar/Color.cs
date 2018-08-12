@@ -11,5 +11,11 @@ namespace Administracion.Models.Calendar
         public const string Success = "#28a745";
         public const string Danger = "#dc3545";
         public const string Warning = "#ffc107";
+
+        //Task
+        public const string Task = "#00b3b3";
+
+        //Ticket
+        public const string Ticket = "#6241a3";
     }
 }

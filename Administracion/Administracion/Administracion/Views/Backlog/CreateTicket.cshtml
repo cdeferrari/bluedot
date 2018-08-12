@@ -327,9 +327,9 @@
                                         <p class="push-bit">
                                             <span class="text-muted pull-right">
                                                 hace
-                                                @{var restTime = message.Date - DateTime.Now;}
+                                                @{TimeSpan restTime = DateTime.Now - message.Date;}
                                                 <small> @Math.Round(restTime.TotalDays) dias</small>
-                                                <small>@Math.Round(restTime.TotalHours) horas</small>
+                                                <small>@restTime.Hours horas</small>
                                             </span>
                                             @*<div>
                                                 <span class="text-muted pull-right">@message.Sender.Name @message.Sender.Surname</span>
