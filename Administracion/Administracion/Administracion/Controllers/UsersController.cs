@@ -392,7 +392,7 @@ namespace Administracion.Controllers
                     user.FunctionalUnitList = functionalUnits.Where(x => x.Ownership.Id == userUnit.Ownership.Id).Select(x => new SelectListItem()
                     {
                         Value = x.Id.ToString(),
-                        Text = "Piso:" + x.Floor + " Unidad:" + x.Dto
+                        Text = "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
                     });
 
                     user.FunctionalUnitUserList = Mapper.Map<List<FunctionalUnitViewModel>>(functionalUnits.Where(x => owner.FunctionalUnitId.Contains(x.Id)).ToList());
@@ -617,7 +617,7 @@ namespace Administracion.Controllers
             var functionalUnitList = this.OwnershipService.GetUnits(id).Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = "Piso:" + x.Floor + " Unidad:" + x.Dto
+                Text = "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto                
             });
 
             return JsonConvert.SerializeObject(functionalUnitList);

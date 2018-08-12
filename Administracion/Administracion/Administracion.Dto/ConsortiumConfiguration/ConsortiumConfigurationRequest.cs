@@ -9,12 +9,9 @@ namespace Administracion.Dto.ConsortiumConfigurations
 {
     public class ConsortiumConfigurationRequest
     {
-        public virtual int Id { get; set; }
         public virtual int ConsortiumConfigurationTypeId { get; set; }
-        public virtual int ConsortiumId { get; set; }
-        public virtual string Description { get; set; }
-        public virtual decimal Value { get; set; }
-        public virtual DateTime ConfigurationDate { get; set; }
+        public virtual int ConsortiumId { get; set; }        
+        public virtual decimal Value { get; set; }        
 
     }
 }

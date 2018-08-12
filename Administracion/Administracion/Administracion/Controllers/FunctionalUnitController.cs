@@ -3,6 +3,7 @@ using Administracion.DomainModel.Enum;
 using Administracion.Dto.Owner;
 using Administracion.Dto.Renter;
 using Administracion.Dto.Unit;
+using Administracion.Dto.UnitConfigurations;
 using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Consortiums;
@@ -11,6 +12,8 @@ using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.UnitConfigurations;
+using Administracion.Services.Contracts.UnitConfigurationTypes;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
@@ -30,6 +33,9 @@ namespace Administracion.Controllers
         public virtual IOwnerService OwnersService { get; set; }
         public virtual IRenterService RenterService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
+
+        public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
+        public virtual IUnitConfigurationTypeService UnitConfigurationTypeService { get; set; }
 
         public ActionResult Index()
         {
@@ -72,6 +78,75 @@ namespace Administracion.Controllers
             };
 
             return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public ActionResult CreateUpdateUnitConfiguration(int id)
+        {
+
+            var configurationTypes = this.UnitConfigurationTypeService.GetAll();
+            var configurations = this.UnitConfigurationService.GetByUnitId(id, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, UnitConfiguration>();
+
+            foreach (var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if (lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+            var ConfigurationVm = new UnitConfigurationViewModel()
+            {
+                Configurations = configDictionary,
+                ConfigurationTypes = configurationTypes,
+                UnitId = id
+            };
+
+            return View(ConfigurationVm);
+        }
+
+        [HttpPost]
+        public ActionResult CreateUpdateUnitConfiguration(UnitConfigurationViewModel configurationModel)
+        {
+            var configurationTypes = this.UnitConfigurationTypeService.GetAll();
+            var configurations = this.UnitConfigurationService.GetByUnitId(configurationModel.UnitId, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, UnitConfiguration>();
+
+            foreach (var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if (lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+            foreach (var configuration in configurationModel.UnitConfigurations)
+            {
+                var actualConfig = configDictionary.ContainsKey(configuration.UnitConfigurationTypeId) ?
+                    configDictionary[configuration.UnitConfigurationTypeId] : null;
+
+                if (configuration.Value != 0 && (actualConfig == null || actualConfig.Value != configuration.Value))
+                {
+                    var confRequest = new UnitConfigurationRequest()
+                    {
+                        UnitConfigurationTypeId = configuration.UnitConfigurationTypeId,
+                        UnitId = configurationModel.UnitId,                        
+                        Value = configuration.Value,
+                        
+                    };
+
+                    this.UnitConfigurationService.CreateUnitConfiguration(confRequest);
+                }
+            }
+
+            return Redirect("/FunctionalUnit/CreateUpdateUnitConfiguration?Id=" + configurationModel.UnitId);
+
         }
 
         [HttpPost]

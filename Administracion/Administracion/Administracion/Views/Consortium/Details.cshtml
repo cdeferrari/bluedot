@@ -27,6 +27,9 @@
                     <li>
                         <a href="/Spend/Index?Id=@Model.Id"><i class="fa fa-arrow-down"></i> Gastos</a>
                     </li>
+                    <li>
+                        <a href="/Consortium/CreateUpdateConsortiumConfiguration?Id=@Model.Id"><i class="fa fa-cogs"></i> Configuraciones</a>
+                    </li>
                 </ul>                
             </div>
             <ul class="breadcrumb breadcrumb-top">
@@ -214,6 +217,7 @@
                                             <div class="btn-group">
                                                 <a href="/FunctionalUnit/UpdateFunctionalUnitById?id=@unit.Id&consortiumId=@Model.Id" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                                                 <a href="#modal-delete-uf-@unit.Id" data-toggle="modal" title="Borrar unidad" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <a href="/FunctionalUnit/CreateUpdateUnitConfiguration?Id=@unit.Id"><i class="fa fa-cogs"></i></a>
                                             </div>
                                         </td>
                                     </tr>

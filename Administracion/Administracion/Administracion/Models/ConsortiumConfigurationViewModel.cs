@@ -6,8 +6,9 @@ namespace Administracion.Models
 {
     public class ConsortiumConfigurationViewModel
     {        
-        public virtual IList<ConsortiumConfiguration> Configurations { get; set; }
-        public virtual IList<ConsortiumConfigurationType> ConfigurationType { get; set; }        
+        public virtual List<ConsortiumConfigurationType> ConfigurationTypes { get; set; }
+        public virtual Dictionary<int, ConsortiumConfiguration> Configurations { get; set; }
+        public virtual List<ConsortiumConfigurationItemViewModel> ConsortiumConfigurations { get; set; }
         public virtual int ConsortiumId { get; set; }
     }
 }

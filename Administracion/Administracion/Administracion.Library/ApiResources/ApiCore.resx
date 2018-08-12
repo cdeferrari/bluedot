@@ -614,10 +614,10 @@
     <value>UnitConfigurationTypes/</value>
   </data>
   <data name="GetConfigurationByConsortiumId" xml:space="preserve">
-    <value>Consorcio/{0}/ConsortiumConfiguration</value>
+    <value>Consorcio/{0}/ConsortiumConfiguration?startDate={1}&amp;endDate={2}</value>
   </data>
   <data name="GetConfigurationByUnitId" xml:space="preserve">
-    <value>Unidad/{0}/UnitConfiguration</value>
+    <value>Unidad/{0}/UnitConfiguration?startDate={1}&amp;endDate={2}</value>
   </data>
   <data name="GetConsortiumConfiguration" xml:space="preserve">
     <value>ConsortiumConfigurations/{0}</value>

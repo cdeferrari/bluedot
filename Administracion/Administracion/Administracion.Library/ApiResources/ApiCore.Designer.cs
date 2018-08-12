@@ -1087,7 +1087,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumConfiguration.
+        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumConfiguration?startDate={1}&amp;endDate={2}.
         /// </summary>
         public static string GetConfigurationByConsortiumId {
             get {
@@ -1096,7 +1096,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unidad/{0}/UnitConfiguration.
+        ///   Looks up a localized string similar to Unidad/{0}/UnitConfiguration?startDate={1}&amp;endDate={2}.
         /// </summary>
         public static string GetConfigurationByUnitId {
             get {

@@ -18,11 +18,7 @@ namespace Administracion.Services.Implementations.ConsortiumConfigurations
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateConsortiumConfiguration, RestMethod.Post, null, ConsortiumConfiguration);                        
         }
-
-        public bool UpdateConsortiumConfiguration(ConsortiumConfigurationRequest ConsortiumConfiguration)
-        {            
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateConsortiumConfiguration, ConsortiumConfiguration.Id), RestMethod.Put, null, ConsortiumConfiguration);
-        }
+        
 
         public bool DeleteConsortiumConfiguration(int ConsortiumConfigurationId)
         {
@@ -43,7 +39,9 @@ namespace Administracion.Services.Implementations.ConsortiumConfigurations
 
         public IList<ConsortiumConfiguration> GetByConsortiumId(int consortiumId, DateTime startDate, DateTime endDate)
         {
-            return IntegrationService.RestCall<List<ConsortiumConfiguration>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConfigurationByConsortiumId, consortiumId, startDate, endDate), RestMethod.Get, null, null);
+            var sstartDate = startDate.Date.ToShortDateString();
+            var sendDate = endDate.Date.ToShortDateString();            
+            return IntegrationService.RestCall<List<ConsortiumConfiguration>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConfigurationByConsortiumId, consortiumId, sstartDate, sendDate), RestMethod.Get, null, null);
         }
     }
 }

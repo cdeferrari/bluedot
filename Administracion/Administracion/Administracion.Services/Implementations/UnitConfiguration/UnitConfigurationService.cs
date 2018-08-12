@@ -19,11 +19,7 @@ namespace Administracion.Services.Implementations.UnitConfigurations
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateUnitConfiguration, RestMethod.Post, null, UnitConfiguration);                        
         }
 
-        public bool UpdateUnitConfiguration(UnitConfigurationRequest UnitConfiguration)
-        {            
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateUnitConfiguration, UnitConfiguration.Id), RestMethod.Put, null, UnitConfiguration);
-        }
-
+        
         public bool DeleteUnitConfiguration(int UnitConfigurationId)
         {
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteUnitConfiguration, UnitConfigurationId), RestMethod.Delete, null, new RestParamList { new RestParam("id", UnitConfigurationId) });                        
@@ -38,7 +34,9 @@ namespace Administracion.Services.Implementations.UnitConfigurations
         
         public IList<UnitConfiguration> GetByUnitId(int UnitId, DateTime startDate, DateTime endDate)
         {
-            return IntegrationService.RestCall<List<UnitConfiguration>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConfigurationByUnitId, UnitId, startDate, endDate), RestMethod.Get, null, null);
+            var sstartDate = startDate.Date.ToShortDateString();
+            var sendDate = endDate.Date.ToShortDateString();
+            return IntegrationService.RestCall<List<UnitConfiguration>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConfigurationByUnitId, UnitId, sstartDate, sendDate), RestMethod.Get, null, null);
         }
     }
 }
