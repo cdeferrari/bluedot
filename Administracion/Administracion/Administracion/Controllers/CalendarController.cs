@@ -13,8 +13,6 @@ namespace Administracion.Controllers
     {
         public virtual ITaskService TaskService { get; set; }
         public virtual ITicketService TicketService { get; set; }
-        private const double MinHoursWarning = 72;
-        private const double MinHoursDanger = 24;
         
         public ActionResult Index()
         {
@@ -38,19 +36,26 @@ namespace Administracion.Controllers
             foreach (Models.TicketViewModel ticket in ticketList)
             {
                 string url = Url.Action("UpdateTicketById", "Backlog", new { id = ticket.Id });
+                string color;
+                switch (ticket.Priority.Description.ToLower())
+                {
+                    case "alta":
+                        color = Models.Calendar.Color.Danger;
+                        break;
+                    case "media":
+                        color = Models.Calendar.Color.Warning;
+                        break;
+                    case "baja":
+                        color = Models.Calendar.Color.Success;
+                        break;
+                    default:
+                        color = Models.Calendar.Color.Ticket;
+                        break;
+                }
                 if (ticket.LimitDate != null)
                 {
-                    double remainingHours = DateTimeDifferenceInHours(ticket.LimitDate, DateTime.Now);
-                    string color = Models.Calendar.Color.Success;
-                    if (remainingHours < MinHoursDanger)
-                    {
-                        color = Models.Calendar.Color.Danger;
-                    }
-                    else if (remainingHours < MinHoursWarning)
-                    {
-                        color = Models.Calendar.Color.Warning;
-                    }
-
+                    double remainingHours = DateTimeDifferenceInHours(ticket.LimitDate, DateTime.Now);                    
+                    
                     eventList.Add(new Models.Calendar.Event()
                     {
                         Title = ticket.Title,
@@ -72,11 +77,11 @@ namespace Administracion.Controllers
                 {
                     ticketHistoryList.Add(ticket.TicketFollow);
                 }
-                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList, url, description);
+                LoadEventsFromTicketHistoryList(ref eventList, ticketHistoryList, url, description, color);
             }            
         }
 
-        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList, string url, string description)
+        public void LoadEventsFromTicketHistoryList(ref List<Models.Calendar.Event> eventList, List<Models.TicketHistoryViewModel> ticketHistoryList, string url, string description, string color)
         {
             foreach (Models.TicketHistoryViewModel ticketHistory in ticketHistoryList)
             {
@@ -86,7 +91,7 @@ namespace Administracion.Controllers
                     Day = ticketHistory.FollowDate.Day,
                     Month = ticketHistory.FollowDate.Month - 1,
                     Year = ticketHistory.FollowDate.Year,
-                    Color = Models.Calendar.Color.Ticket,
+                    Color = color,
                     Description = description,
                     Url = url
                 });
@@ -99,18 +104,34 @@ namespace Administracion.Controllers
             {
                 string url = Url.Action("Details", "Task", new { id = task.Id });
                 string description = GetTaskEventDescription(task, ticketTitle);
-                eventList.Add(new Models.Calendar.Event()
+                string color;
+                switch (task.Priority.Description.ToLower())
                 {
-                    Title = task.Description,
-                    Day = task.OpenDate.Day,
-                    Month = task.OpenDate.Month - 1,
-                    Year = task.OpenDate.Year,
-                    Color = Models.Calendar.Color.Task,
-                    Description = description,
-                    Url = url
-                });
+                    case "alta":
+                        color = Models.Calendar.Color.Danger;
+                        break;
+                    case "media":
+                        color = Models.Calendar.Color.Warning;
+                        break;
+                    case "baja":
+                        color = Models.Calendar.Color.Success;
+                        break;
+                    default:
+                        color = Models.Calendar.Color.Task;
+                        break;
+                }
+                //eventList.Add(new Models.Calendar.Event()
+                //{
+                //    Title = task.Description,
+                //    Day = task.OpenDate.Day,
+                //    Month = task.OpenDate.Month - 1,
+                //    Year = task.OpenDate.Year,
+                //    Color = color,
+                //    Description = description,
+                //    Url = url
+                //});
 
-                LoadEventsFromTaskHistoryList(ref eventList, task.TaskHistory, url, description);
+                LoadEventsFromTaskHistoryList(ref eventList, task.TaskHistory, url, description, color);
             }
         }
 
@@ -123,7 +144,7 @@ namespace Administracion.Controllers
             
         }
 
-        public void LoadEventsFromTaskHistoryList(ref List<Models.Calendar.Event> eventList, IList<DomainModel.TaskHistory> taskHistoryList, string url, string description)
+        public void LoadEventsFromTaskHistoryList(ref List<Models.Calendar.Event> eventList, IList<DomainModel.TaskHistory> taskHistoryList, string url, string description, string color)
         {
             foreach(DomainModel.TaskHistory taskHistory in taskHistoryList)
             {
@@ -133,7 +154,7 @@ namespace Administracion.Controllers
                     Day = taskHistory.FollowDate.Day,
                     Month = taskHistory.FollowDate.Month - 1,
                     Year = taskHistory.FollowDate.Year,
-                    Color = Models.Calendar.Color.Task,
+                    Color = color,
                     Description = description,
                     Url = url
                 });
@@ -151,13 +172,13 @@ namespace Administracion.Controllers
             string description = "";
             if(ticketTitle)
             {
-                description += "<label>Titulo ticket</label>" +
-                "<p>" + ticket.Title + "</p>";
+                description += "<label>Titulo ticket</label>" + "<p>" + ticket.Title + "</p>";
             }
-            description +=
-            "<label>Descripción</label>" +
-                "<p>" + ticket.Description + "</p>";
-
+            description += "<label>Descripción</label>" + "<p>" + ticket.Description + "</p>";
+            if (ticket.Provider != null && ticket.Provider.User != null)
+            {
+                description += "<label>Proveedor</label>" + "<p>" + ticket.Provider.User.Name + "</p>";
+            }
             return description;
         }
 
