@@ -220,7 +220,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.FriendlyName
-            });
+            }).OrderBy(x => x.Text);
 
             var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
             {
