@@ -92,7 +92,7 @@ namespace Administracion.Controllers
                 var taskHistoryRequest = Mapper.Map<TaskHistoryRequest>(task);
                 this.TasksService.CreateTaskHistory(taskHistoryRequest);
                 var otask = this.TasksService.GetTask(task.TaskId);
-                return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", otask.Ticket.Id));
+                return RedirectToAction("Details", new { id = task.TaskId });
             }
             catch (Exception ex)
             {

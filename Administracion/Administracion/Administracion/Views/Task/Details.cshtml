@@ -18,7 +18,7 @@
                         </p>
                     </div>
                     <div class="col-md-6 clearfix task-actions">
-                        <button class="btn btn-danger pull-right" title="Eliminar"  data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
+                        <button class="btn btn-danger pull-right" title="Eliminar" data-toggle="modal" data-target="#modal-delete-task-@Model.Task.Id"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button>
                         <button class="btn btn-success pull-right" title="Agregar gasto" data-toggle="modal" data-target="#modal-spend-@Model.Task.Id"><i class="fa fa-dollar" aria-hidden="true"></i> Gasto</button>
                         <button class="btn btn-success pull-right" title="Agregar seguimiento" data-target="#modal-add-task-history-@Model.Task.Id" data-toggle="modal"><i class="fa fa-plus"></i> Seguimiento</button>
                         @*<button class="btn btn-info pull-right" title="Ver seguimiento" data-target="#modal-follow-list-task-@Model.Task.Id" data-toggle="modal"><i class="fa fa-eye"></i> Seguimiento</button>*@
@@ -29,45 +29,44 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <label>Fecha de creación</label>
-                        <p>@Model.Task.OpenDate.ToString("dddd, dd MMMM yyyy")</p>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Creador</label>
-                        <p>@Model.Task.Creator.User.Name</p>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Ticket</label>
-                        <p>@Model.Task.Ticket.Title</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Estado</label>
-                        @{ var estado = Model.Task.Status.Description == "open" ? "abierto" : "cerrado"; }
-                        <p>@estado</p>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Prioridad</label>
-                        <p>@Model.Task.Priority.Description</p>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Fecha de creación</label>
+                                <p>@Model.Task.OpenDate.ToString("dddd, dd MMMM yyyy")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Creador</label>
+                                <p>@Model.Task.Creator.User.Name</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Ticket</label>
+                                <p><a href="@Url.Action("UpdateTicketById", "Backlog", new { id = Model.Task.Ticket.Id })">@Model.Task.Ticket.Title</a></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Estado</label>
+                                @{ var estado = Model.Task.Status.Description == "open" ? "abierto" : "cerrado"; }
+                                <p>@estado</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Prioridad</label>
+                                <p>@Model.Task.Priority.Description</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Proveedor</label>
+                                <p>@(Model.Task.Provider != null ? Model.Task.Provider.User.Name : "-")</p>
+                            </div>
+                        </div>                        
                     </div>
                     <div class="col-md-4">
                         <label>Consorcio</label>
-                        <p>@Model.Task.Ticket.Consortium.FriendlyName</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Proveedor</label>
-                        @if (Model.Task.Provider != null)
-                        {
-                            <p>@Model.Task.Provider.User.Name</p>
-                        }
-                        else
-                        {
-                            <p>-</p>
-                        }
+                        <p><a href="@Url.Action("Details", "Consortium", new { id = Model.Task.Ticket.Consortium.Id })">@Model.Task.Ticket.Consortium.FriendlyName</a></p>
+                        <p><i class="fa fa-phone"></i> @(string.IsNullOrEmpty(Model.Task.Ticket.Consortium.Telephone) ? "no tiene" : Model.Task.Ticket.Consortium.Telephone)</p>
+                        <p><i class="fa fa-envelope-o"></i> @(string.IsNullOrEmpty(Model.Task.Ticket.Consortium.MailingList) ? "no tiene" : Model.Task.Ticket.Consortium.MailingList)</p>
                     </div>
                 </div>
                 <!-- Gastos -->
@@ -75,33 +74,33 @@
                 {
                     <br />
                     <div class="block col-md-7">
-                            <!-- Latest Orders Title -->
-                            <div class="block-title">
-                                <h2><strong>Gastos</strong> </h2>
-                            </div>
-                            <!-- END Latest Orders Title -->
-                            <!-- Latest Orders Content -->
-                                @foreach (var spend in Model.Task.Spends)
-                                {
-                                    var provdescription = spend.Bill.Provider != null ?
-                                         spend.Bill.Provider.User.Name + " " + spend.Bill.Provider.User.Surname : "-";
-                                    var workerdescription = spend.Bill.Worker != null ?
-                                        spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
-                                    var managerdescription = spend.Bill.Manager != null ?
-                                        spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">
+                            <h2><strong>Gastos</strong> </h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        @foreach (var spend in Model.Task.Spends)
+                        {
+                            var provdescription = spend.Bill.Provider != null ?
+                                 spend.Bill.Provider.User.Name + " " + spend.Bill.Provider.User.Surname : "-";
+                            var workerdescription = spend.Bill.Worker != null ?
+                                spend.Bill.Worker.User.Name + " " + spend.Bill.Worker.User.Surname : "-";
+                            var managerdescription = spend.Bill.Manager != null ?
+                                spend.Bill.Manager.User.Name + " " + spend.Bill.Manager.User.Surname : "-";
 
-                                    <h3>@spend.Description</h3>
-                                            <ul>
-                                                <li><strong>Tipo:</strong>@spend.Type.Description</li>
-                                                <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
-                                                <li><strong>Monto:</strong> @spend.Bill.Amount</li>
-                                                <li><strong>Proveedor:</strong> @provdescription</li>
-                                                <li><strong>Encargado:</strong> @managerdescription</li>
-                                                <li><strong>Empleado:</strong> @workerdescription</li>
-                                            </ul>
-                                }
+                            <h3>@spend.Description</h3>
+                                    <ul>
+                                        <li><strong>Tipo:</strong>@spend.Type.Description</li>
+                                        <li><strong>Nro Factura:</strong> @spend.Bill.Number</li>
+                                        <li><strong>Monto:</strong> @spend.Bill.Amount</li>
+                                        <li><strong>Proveedor:</strong> @provdescription</li>
+                                        <li><strong>Encargado:</strong> @managerdescription</li>
+                                        <li><strong>Empleado:</strong> @workerdescription</li>
+                                    </ul>
+                        }
 
-                            <!-- END Latest Orders Content -->
+                        <!-- END Latest Orders Content -->
                     </div>
                 }<!-- END Gastos -->
                 <!-- Seguimientos -->
