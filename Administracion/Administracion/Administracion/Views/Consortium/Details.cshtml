@@ -14,7 +14,6 @@
                     <li>
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
-
                     <li class="active">
                         <a href="/Consortium/Index"><i class="gi gi-building"></i> Consorcios</a>
                     </li>
@@ -122,7 +121,7 @@
 
 
                 <div class="col-sm-6 col-lg-3">
-                    <a href="@Url.Action("Index", "Backlog", new { consortiumId = Model.Id, selectedindex = 0, status = "open" })" class="widget widget-hover-effect2">
+                    <a href="@Url.Action("Index", "Backlog", new { consortiumId = Model.Id, selectedindex = 0 })" class="widget widget-hover-effect2">
                         <div class="widget-extra themed-background">
                             <h4 class   ="widget-content-light"><strong>Reclamos</strong> Abiertos</h4>
                         </div>

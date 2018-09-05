@@ -91,7 +91,9 @@ namespace Administracion.Controllers
                     }
                 }
                 if (consortiumId != null) {
-                    ticketListViewModel.Tickets.RemoveAll(x => x.Consortium.Id != consortiumId.Value);
+                    ticketListViewModel.Tickets.RemoveAll(
+                        x => x.Consortium.Id != consortiumId.Value ||
+                        x.Status.Description != "open");
                 }
                 
 
