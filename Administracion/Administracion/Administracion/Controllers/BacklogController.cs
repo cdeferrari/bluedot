@@ -67,16 +67,14 @@ namespace Administracion.Controllers
 
                 ticketListViewModel.Self = selfTickets.Count();
                 IList<Ticket> ticketsWithTask = GetTicketsWithTask().Where(x => x.Status.Description == "open").ToList();
-                var ticketsWithTaskIds = ticketsWithTask.Select(x => x.Id).ToList();
+                IEnumerable<int> ticketsWithTaskIds = ticketsWithTask.Select(x => x.Id).ToList();
                 ticketListViewModel.WithTask = ticketsWithTask.Count();
 
                 ticketListViewModel.Open = ticketsViewModel
-                            .Where(x => x.Status.Description == "open" && !ticketsWithTaskIds.Contains(x.Id))
-                            .ToList().Count();
+                            .Where(x => x.Status.Description == "open" && !ticketsWithTaskIds.Contains(x.Id)).Count();
 
                 ticketListViewModel.Blockers = ticketsViewModel
-                            .Where(x => x.Priority.Description == "alta" && x.Status.Description == "open")
-                            .ToList().Count();
+                            .Where(x => x.Priority.Description == "alta" && x.Status.Description == "open").Count();
 
                 if (filter.ToLower() == "self")
                 {
@@ -89,11 +87,13 @@ namespace Administracion.Controllers
                     ticketListViewModel.Tickets.RemoveAll(x => x.Status.Description != status);
                     if (status == "open")
                     {
-                        ticketListViewModel.Tickets = ticketListViewModel.Tickets.Where(x => !ticketsWithTaskIds.Contains(x.Id)).ToList();
+                        ticketListViewModel.Tickets.RemoveAll(x => ticketsWithTaskIds.Contains(x.Id));                        
                     }
                 }
                 if (consortiumId != null) {
-                    ticketListViewModel.Tickets.RemoveAll(x => x.ConsortiumId != consortiumId.Value);
+                    ticketListViewModel.Tickets.RemoveAll(
+                        x => x.Consortium.Id != consortiumId.Value ||
+                        x.Status.Description != "open");
                 }
                 
 

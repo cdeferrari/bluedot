@@ -11,14 +11,14 @@
     <div id="main-container">
 
         <div class="block full">
-             @if (Model.Id > 0)
-             {
+            @if (Model.Id > 0)
+            {
                 <h2>@Model.Title</h2>
-             }
-             else
-             {
+            }
+            else
+            {
                 <h2>Pedido</h2>
-             }
+            }
 
             @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -35,100 +35,104 @@
                     @if (Model.Id > 0)
                     {
                         <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</strong></div>
-                        <p> Creado por : @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</p>                        
+                        <p> Creado por : @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</p>
+
+                        <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-xs btn-success pull-right"><i class="fa fa-plus"></i> &oacute;rden de trabajo</a>
+                        <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-xs btn-success pull-right"><i class="fa fa-plus"></i> Seguimiento</a>
                         if (Model.Status.Description != "closed")
                         {
-                            <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-check"></i> Cerrar Ticket</a>
+                            <a href="/Backlog/CloseTicket/@Model.Id" class="btn btn-xs btn-default pull-right"><i class="fa fa-lock"></i> Cerrar</a>
                         }
 
 
                         if (Model.Resolved.HasValue && Model.Resolved.Value)
                         {
-                                                <a style="background-color:green; color:white" href="javascript:void(0)" class="btn btn-xs btn-default pull-right">
-                                                     RESUELTO</a>
-                                                    }
-                                                    else
-                                                    {
-                                                    <a href="/Backlog/ResolveTicket?Id=@Model.Id" class="btn btn-xs btn-default pull-right">
-                                                        <i class="fa fa-check"></i> Resolver Ticket
-                                                    </a>
-                                                    }
+                            <a style="background-color:cadetblue; color:white" href="javascript:void(0)" class="btn btn-xs btn-default pull-right">
+                                <i class="fa fa-check"></i> Resuelto
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Backlog/ResolveTicket?Id=@Model.Id" class="btn btn-xs btn-default pull-right">
+                                <i class="fa fa-check"></i> Resolver Ticket
+                            </a>
+                        }
 
-                                                    <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Dar Prioridad Alta</a>
+                        <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-xs btn-danger"><i class="fa fa-flag"></i> Dar Prioridad Alta</a>
 
-                                                    <hr>
-                                                    }
-
-
-
-
-                                                    @Html.HiddenFor(model => model.Id)
-                                                    @if (Model.Id == 0)
-                                                    {
-                                                        <div class="form-group row">
-                                                            <label class="control-label col-md-2" for="Titulo">Titulo</label>
-                                                            <div class='col-md-8'>
-
-                                                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-
-                                                                @Html.ValidationMessage("", new { @class = "text-danger" })
-                                                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                                                            </div>
-                                                        </div>
-                                                    }
-
-                                                    <div class="form-group row">
-                                                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class='col-md-8'>
-
-                                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                                            @Html.ValidationMessage("", new { @class = "text-danger" })
-                                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
+                        <hr>
+                    }
 
 
-                                                    <div class="form-group  row">
-                                                        @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-4">
-                                                            <div class='input-group date'>
-                                                                @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
-                                                                <span class="input-group-addon">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                </span>
-                                                            </div>
-
-                                                            @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <label class="control-label col-md-2">Reclamado por:</label>
-                                                        <div class="col-md-2">
-                                                            @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
-                                                            @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
 
 
-                                                    <div class="form-group row">
-                                                        <label class="control-label col-md-2">Consorcio</label>
-                                                        <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- Elija Consorcio --", new { @class = "form-control" })
-                                                        </div>
-                                                        <label class="control-label col-md-2">Unidad Funcional</label>
-                                                        <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.FunctionalUnitId, Model.FunctionalUnitList, "-- Elija Unidad Funcional --", new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
+                    @Html.HiddenFor(model => model.Id)
+                    @if (Model.Id == 0)
+                    {
+                        <div class="form-group row">
+                            <label class="control-label col-md-2" for="Titulo">Titulo</label>
+                            <div class='col-md-8'>
 
-                                                    <div class="form-group row">
-                                                        <label class="control-label col-md-2">Prioridad</label>
-                                                        <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --", new { @class = "form-control" })
-                                                        </div>
-                                                        <label class="control-label col-md-2">Asignado a</label>
-                                                        <div class="col-md-4">
-                                                            @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--", new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class='col-md-8'>
+
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessage("", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group  row">
+                        @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <div class='input-group date'>
+                                @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                            @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="control-label col-md-2">Reclamado por:</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Consorcio</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- Elija Consorcio --", new { @class = "form-control" })
+                        </div>
+                        <label class="control-label col-md-2">Unidad Funcional</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.FunctionalUnitId, Model.FunctionalUnitList, "-- Elija Unidad Funcional --", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Prioridad</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --", new { @class = "form-control" })
+                        </div>
+                        <label class="control-label col-md-2">Asignado a</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--", new { @class = "form-control" })
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2">Area</label>
@@ -138,110 +142,77 @@
                     </div>
 
 
-                                                    <div class="form-group row">                     
-                                                        <label class="col-md-3 control-label" for="example-email-input">Autoasignar</label>
-                                                        <div class="form-group">
-                                                            <div class="col-md-1">
-                                                                <label id="autoasign-label" class="switch switch-primary" for='@Model.Autoasign'>
-                                                                    <input id="Autoasign" name="Autoasign" type="checkbox" value="true" @(Model.Autoasign ? "checked=\"checked\"" : "") />
-                                                                    <span data-toggle="tooltip" title="OK"></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                                <input type="submit" value="Guardar" class="btn btn-success" />
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="example-email-input">Autoasignar</label>
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <label id="autoasign-label" class="switch switch-primary" for='@Model.Autoasign'>
+                                    <input id="Autoasign" name="Autoasign" type="checkbox" value="true" @(Model.Autoasign ? "checked=\"checked\"" : "") />
+                                    <span data-toggle="tooltip" title="OK"></span>
+                                </label>
                             </div>
-                            @if (Model.Id > 0)
-                            {
-                                <div class="col-md-3">
-                                    <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-success">Generar &oacute;rden de trabajo</a>
-                                </div>
-
-                                                            <div class="col-md-3">
-                                                                <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-success">Agregar Seguimiento</a>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <a href="#modal-follow-list" data-toggle="modal" title="Ver seguimiento" value="Ver Seguimiento" class="btn btn-success">Ver Seguimiento</a>
-                                                            </div>
-
-                            }
-
-
                         </div>
-
-
-
                     </div>
 
 
 
+                    <div class="form-group">                        
+                        <div class="col-md-10"></div>
+                        <div class="col-md-1">
+                            <input type="submit" value="Guardar" class="btn btn-info" />
+                        </div>
+                    </div>
+                </div>
             }
-            </div>
+        </div>
 
-
-
-
-
-
-@if (Model.Id > 0)
-{
-        <div class="row">
-            <div class="col-lg-6">
-                <!-- Latest Orders Block -->
-                <div class="block">
-                    <!-- Latest Orders Title -->
-                    <div class="block-title">                        
-                        <h2><strong>&Oacute;rdenes</strong></h2>
-                    </div>
-                    <!-- END Latest Orders Title -->
-                    <!-- Latest Orders Content -->
-                    <table class="table table-borderless table-striped table-vcenter table-bordered">
-                        <tbody>
-                            <tr>                                
-                                <td class="text-center"><strong>Descripci&oacute;n </strong></td>
-                                <td class="text-center"><strong>Estado Actual</strong></td>                                                                
-                                <td class="text-center">Creacion</td>                                
-                                <td class="text-center">Acciones</td>
-                            </tr>
-
-                            @foreach (var task in Model.Tasks)
-                            {
+        @if (Model.Id > 0)
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Latest Orders Block -->
+                    <div class="block">
+                        <!-- Latest Orders Title -->
+                        <div class="block-title">
+                            <h2><strong>&Oacute;rdenes</strong></h2>
+                        </div>
+                        <!-- END Latest Orders Title -->
+                        <!-- Latest Orders Content -->
+                        <table class="table table-borderless table-striped table-vcenter table-bordered">
+                            <tbody>
                                 <tr>
-                                    @{
-                                        var estado = task.Status.Description == "open" ? "abierto" : "cerrado";
-                                    }
-
-                                    <td class="text-center">@task.Description</td>
-                                    <td class="text-center">
-                                        <strong>@estado</strong>
-                                    </td>                                    
-                                    @{ var workerDescription = task.Worker != null ?
-                                        task.Worker.User.Name + " " + task.Worker.User.Surname : string.Empty;
-                                    }
-                                   
-
-
-                                    <td class="text-right">@task.OpenDate.ToShortDateString()</td>
-                                    
-
-                                    <td class="text-center">
-                                        <div class="btn-group">                                   
-                                            <a href="#modal-task-details-@task.Id" data-toggle="modal" title="Detalle" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
-                                            <a href="#modal-delete-task-@task.Id" data-toggle="modal" title="Borrar tarea" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                            <a href="#modal-spend-@task.Id" data-toggle="modal" title="Asociar Gasto" class="btn btn-xs btn-info"><i class="fa fa-dollar"></i></a>
-                                        </div>
-                                    </td>
+                                    <td class="text-center"><strong>Descripci&oacute;n </strong></td>
+                                    <td class="text-center"><strong>Estado Actual</strong></td>
+                                    <td class="text-center">Creacion</td>
+                                    <td class="text-center">Acciones</td>
                                 </tr>
 
-                                @Html.Partial("_TaskDetail", task)
+                                @foreach (var task in Model.Tasks)
+                                {
+                                    <tr>
+                                        @{
+                                            var estado = task.Status.Description == "open" ? "abierto" : "cerrado";
+                                        }
 
-                                        <div id="modal-delete-task-@task.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <td class="text-center">@task.Description</td>
+                                        <td class="text-center">
+                                            <strong>@estado</strong>
+                                        </td>
+                                        @{ var workerDescription = task.Worker != null ? task.Worker.User.Name + " " + task.Worker.User.Surname : string.Empty; }
+                                        <td class="text-right">@task.OpenDate.ToShortDateString()</td>
+
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="#modal-task-details-@task.Id" data-toggle="modal" title="Detalle" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+                                                <a href="#modal-delete-task-@task.Id" data-toggle="modal" title="Borrar tarea" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <a href="#modal-spend-@task.Id" data-toggle="modal" title="Asociar Gasto" class="btn btn-xs btn-info"><i class="fa fa-dollar"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    @Html.Partial("_TaskDetail", task)
+
+                                            <div id="modal-delete-task-@task.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <!-- Modal Header -->
@@ -257,7 +228,7 @@
                                                                 <div class="form-group form-actions">
                                                                     <div class="col-xs-12 text-right">
                                                                         <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                                                                        <a  href="@Url.Action("DeleteTask", "Task", new { id = task.Id, ticketId = Model.Id })" type="submit" class="btn btn-sm btn-danger">Eliminar</a>
+                                                                        <a href="@Url.Action("DeleteTask", "Task", new { id = task.Id, ticketId = Model.Id })" type="submit" class="btn btn-sm btn-danger">Eliminar</a>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -265,55 +236,75 @@
                                                         <!-- END Modal Body -->
                                                     </div>
                                                 </div>
-                                        </div>
+                                            </div>
 
-                                        <div id="modal-spend-@task.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header text-center">
-                                                        <h2 class="modal-title"><i class="fa fa-pencil"></i> ASOCIAR GASTO</h2>
-                                                    </div>
-                                                    <!-- END Modal Header -->
-                                                    <!-- Modal Body -->
-                                                    <div class="modal-body">
-                                                        <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                                                            <fieldset>
-                                                                <legend>El gasto que genere quedará asociado a la orden "@task.Description" y al consorcio @Model.Consortium.Ownership.Address.Street @Model.Consortium.Ownership.Address.Number</legend>
-                                                            </fieldset>
-                                                            <input type="hidden" id="taskConsortiumId" value="@Model.ConsortiumId" />
-                                                            <label class="control-label col-md-3">Rubro gasto</label>
-                                                            @Html.DropDownListFor(model => model.SpendItemId, Model.SpendItemList, "-- Elija Rubro de gasto --")
+                                            <div id="modal-spend-@task.Id" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header text-center">
+                                                            <h2 class="modal-title"><i class="fa fa-pencil"></i> ASOCIAR GASTO</h2>
+                                                        </div>
+                                                        <!-- END Modal Header -->
+                                                        <!-- Modal Body -->
+                                                        <div class="modal-body">
+                                                            <form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                                                                <fieldset>
+                                                                    <legend>El gasto que genere quedará asociado a la orden "@task.Description" y al consorcio @Model.Consortium.Ownership.Address.Street @Model.Consortium.Ownership.Address.Number</legend>
+                                                                </fieldset>
+                                                                <input type="hidden" id="taskConsortiumId" value="@Model.ConsortiumId" />
+                                                                <label class="control-label col-md-3">Rubro gasto</label>
+                                                                @Html.DropDownListFor(model => model.SpendItemId, Model.SpendItemList, "-- Elija Rubro de gasto --")
 
-                                                            <div class="form-group form-actions">
-                                                                <div class="col-xs-12 text-right">                                                                    
-                                                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                                                                    <button data-html="@task.Id"  onclick="location.href='/Spend/CreateSpend?consortiumId=@Model.ConsortiumId'" type="submit" name="spend-link" class="btn btn-sm btn-info">Crear Gasto</button>
+                                                                <div class="form-group form-actions">
+                                                                    <div class="col-xs-12 text-right">
+                                                                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                                                                        <button data-html="@task.Id" onclick="location.href='/Spend/CreateSpend?consortiumId=@Model.ConsortiumId'" type="submit" name="spend-link" class="btn btn-sm btn-info">Crear Gasto</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
+                                                        <!-- END Modal Body -->
                                                     </div>
-                                                    <!-- END Modal Body -->
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        }
+                                            }
 
-                        </tbody>
-                    </table>
-                    <!-- END Latest Orders Content -->
-                </div>
-                <!-- END Latest Orders Block -->
-            </div>
-           
-            <div class="col-lg-6">
-                <!-- Top Products Block -->
-                <div class="block">
-                    <!-- Top Products Title -->
-                    <div class="block-title">
-                        <h2><strong>COMENTARIOS</strong></h2>
+                            </tbody>
+                        </table>
+                        <!-- END Latest Orders Content -->
                     </div>
+                    <!-- END Latest Orders Block -->
+                    <!-- Seguimientos -->
+                    @if (Model.TicketHistory != null && Model.TicketHistory.Any())
+                    {
+                        <div class="block">
+                            <div class="block-title">
+                                <h4><strong>Seguimientos</strong></h4>
+                            </div>
+                            <div>
+                                <ul>
+                                    @foreach (var follow in Model.TicketHistory)
+                                    {
+                                        <li>
+                                            <strong>Fecha: </strong> @follow.FollowDate.ToShortDateString()
+                                            <p>@follow.Coment</p>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }<!-- END Seguimientos -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Top Products Block -->
+                    <div class="block">
+                        <!-- Top Products Title -->
+                        <div class="block-title">
+                            <h2><strong>COMENTARIOS</strong></h2>
+                        </div>
 
                         <ul class="media-list media-feed push">
 
@@ -332,15 +323,15 @@
                                                 <small>@restTime.Hours horas</small>
                                             </span>
                                             @*<div>
-                                                <span class="text-muted pull-right">@message.Sender.Name @message.Sender.Surname</span>
-                                            </div>*@
-                                            
+                                                    <span class="text-muted pull-right">@message.Sender.Name @message.Sender.Surname</span>
+                                                </div>*@
+
                                             @*<small><a href="page_ready_user_profile.html">Inquilino1</a> a través de <a href="javascript:void(0)">llamado</a></small>*@
                                         </p>
-                                        
+
                                         <p>
                                             @{ var consortium = Model.Consortium != null ?
-                                                              Model.Consortium.Ownership.Id.ToString() + " - " + Model.Consortium.Ownership.Address.Street.ToString() + " " + Model.Consortium.Ownership.Address.Number : "-";
+   Model.Consortium.Ownership.Id.ToString() + " - " + Model.Consortium.Ownership.Address.Street.ToString() + " " + Model.Consortium.Ownership.Address.Number : "-";
                                                 var uf = Model.FunctionalUnit != null ? Model.FunctionalUnit.Number.ToString() : "-";
                                             }
 
@@ -354,8 +345,8 @@
                                     </div>
 
                                 </li>
-                                
-                             }
+
+                                                }
                         </ul>
 
                         <div class="form-group row">
@@ -364,16 +355,16 @@
                             </div>
                         </div>
 
-                        
-                </div>
-                <!-- END Top Products Block -->
-            </div>    <!-- END Quick Stats -->
+
+                    </div>
+                    <!-- END Top Products Block -->
+                </div>    <!-- END Quick Stats -->
 
 
-        </div>
+            </div>
 
-  }
-        </div>
+                                                }
+    </div>
 </div>
 
 
@@ -390,15 +381,15 @@
             <div class="modal-body">
                 @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
 
-                    @using (Html.BeginForm("CreateMessage", "Messages", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
-                    {
+                @using (Html.BeginForm("CreateMessage", "Messages", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
+                {
 
                     <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
 
                     <div class="form-group row">
                         <label class="control-label col-md-2">Mensaje</label>
                         <div>
-                            <input name="Content" id="Content" type="text" class="col-md-10" />                            
+                            <input name="Content" id="Content" type="text" class="col-md-10" />
                         </div>
                     </div>
 
@@ -406,7 +397,7 @@
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                            
+
                             @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
                             <input type="submit" class="btn btn-success" value="Guardar" />
                         </div>
@@ -436,20 +427,20 @@
 
                     var consortiumId = document.getElementById("taskConsortiumId").value;
                     var spendItem = this.value;
-                    var referencia = "location.href = '/Spend/CreateSpend?consortiumId=" + consortiumId + "&spendItemId=" + spendItem ;
+                    var referencia = "location.href = '/Spend/CreateSpend?consortiumId=" + consortiumId + "&spendItemId=" + spendItem;
 
                     var links = document.getElementsByName("spend-link");
 
                     links.forEach(function (it, ind, ar) {
                         var taskid = it.getAttribute("data-html");
-                        it.setAttribute("onclick", referencia + "&taskId="+taskid+ "'");
+                        it.setAttribute("onclick", referencia + "&taskId=" + taskid + "'");
                     });
                 },
                 false
             );
 
         });
-        
+
     };
 
     var asignlabel = document.getElementById("autoasign-label");
