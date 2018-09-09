@@ -222,8 +222,8 @@ namespace Administracion.Controllers
         [HttpPost]
         public ActionResult CreateUpdateTicket(TicketViewModel ticket)
         {
-            var statusList = this.StatusService.GetAll();
-            var nticket = Mapper.Map<TicketRequest>(ticket);
+            IList<Status> statusList = this.StatusService.GetAll();
+            TicketRequest nticket = Mapper.Map<TicketRequest>(ticket);
             nticket.CreatorId = SessionPersister.Account.Id;
             nticket.OpenDate = DateTime.Now;
             nticket.StatusId = statusList.Where(x => x.Description.Equals("open")).FirstOrDefault().Id;
@@ -407,8 +407,9 @@ namespace Administracion.Controllers
             });
 
 
-            var oTicket = this.TicketService.GetTicket(id);
-            var ticket = Mapper.Map<TicketViewModel>(oTicket);
+            Ticket oTicket = this.TicketService.GetTicket(id);
+            TicketViewModel ticket = Mapper.Map<TicketViewModel>(oTicket);
+            ticket.Messages = ticket.Messages.OrderByDescending(x => x.Date).ToList();
 
             var functionalUnitList = oTicket.Consortium.Ownership.FunctionalUnits
                 .Select(x => new SelectListItem()
