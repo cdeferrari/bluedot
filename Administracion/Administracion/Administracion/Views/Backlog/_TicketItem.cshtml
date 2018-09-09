@@ -1,7 +1,7 @@
 ﻿@model Administracion.Models.TicketViewModel
 
         <tr>            
-            <td><a href="UpdateTicketById/@Model.Id">@Model.Id</a> </td>                              
+            <td><a href="@Url.Action("UpdateTicketById", "Backlog", new { id = Model.Id })">@Model.Id</a> </td>                              
             <td>@Model.OpenDate.ToShortDateString()</td>                              
             <td class="text-center">@switch (Model.Priority.Description)
             {
