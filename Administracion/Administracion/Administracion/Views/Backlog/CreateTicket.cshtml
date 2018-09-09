@@ -5,21 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .ticket-create-add {
+        margin-top: 6px;
+        /*margin-right: 1em;*/
+        font-size: 1.50em;
+    }
+</style>
 
 <div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
 
     <div id="main-container">
-
         <div class="block full">
             @if (Model.Id > 0)
             {
-                <h2>@Model.Title</h2>
+                <h2>
+                    @if(Model.Status.Description.ToLower() == "open") {
+                        <i class="fa fa-unlock"></i>
+                    }
+                    else {
+                        <i class="fa fa-lock"></i>
+                    }
+                    @Model.Title
+                </h2>
             }
             else
             {
-                <h2>Pedido</h2>
+                <h2>Nuevo Ticket</h2>
             }
-
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <h6><label>Creado por:</label> @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</h6>
+                </div>
+                <div class="col-md-4">
+                    <h6><label>Estado:</label> @(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</h6>
+                </div>
+            </div>           
+            
             @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
@@ -30,14 +53,8 @@
                 }
 
                 <div class="form-horizontal">
-                    <hr />
-
                     @if (Model.Id > 0)
                     {
-                        <div class="alert alert-success animation-fadeInQuick">Estado Actual <strong>@(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</strong></div>
-                        <p> Creado por : @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</p>
-
-                        <a href="#modal-add-task" data-toggle="modal" title="Generar órden de trabajo" value="Generar Orden" class="btn btn-xs btn-success pull-right"><i class="fa fa-plus"></i> &oacute;rden de trabajo</a>
                         <a href="#modal-add-follow" data-toggle="modal" title="Agregar Seguimiento" value="Agregar Seguimiento" class="btn btn-xs btn-success pull-right"><i class="fa fa-plus"></i> Seguimiento</a>
                         if (Model.Status.Description != "closed")
                         {
@@ -173,8 +190,13 @@
                     <!-- Latest Orders Block -->
                     <div class="block">
                         <!-- Latest Orders Title -->
-                        <div class="block-title">
-                            <h2><strong>&Oacute;rdenes</strong></h2>
+                        <div class="block-title row">
+                            <h2 class="col-md-11"><strong><i class="fa fa-thumb-tack"></i> &Oacute;rdenes</strong></h2>
+                            <div class="col-md-1 text-center ticket-create-add">
+                                <a href="#modal-add-task" data-toggle="modal" title="Generar orden de trabajo" value="Generar Orden" class="text-success">
+                                    <i class="fa fa-plus-circle"></i>
+                                </a>
+                            </div>
                         </div>
                         <!-- END Latest Orders Title -->
                         <!-- Latest Orders Content -->
@@ -302,12 +324,16 @@
                     <!-- Top Products Block -->
                     <div class="block">
                         <!-- Top Products Title -->
-                        <div class="block-title">
-                            <h2><strong>COMENTARIOS</strong></h2>
+                        <div class="block-title row">
+                            <h2 class="col-md-11"><strong><i class="fa fa-comment-o"></i> Comentarios</strong></h2>
+                            <div class="col-md-1 text-center ticket-create-add">
+                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Comentario" value="Agregar Comentario" class="text-success">
+                                    <i class="fa fa-plus-circle"></i>
+                                </a>
+                            </div>
                         </div>
 
                         <ul class="media-list media-feed push">
-
                             @foreach (var message in Model.Messages)
                             {
                                 <li class="media">
@@ -318,15 +344,10 @@
                                         <p class="push-bit">
                                             <span class="text-muted pull-right">
                                                 hace
-                                                @{TimeSpan restTime = DateTime.Now - message.Date;}
-                                                <small> @Math.Round(restTime.TotalDays) dias</small>
-                                                <small>@restTime.Hours horas</small>
+                                                @{ TimeSpan restTime = DateTime.Now - message.Date;}
+                                                <small> @restTime.Days d&iacute;a@(restTime.Days == 1 ? "" : "s")</small>
+                                                @*<small>@restTime.Hours horas</small>*@
                                             </span>
-                                            @*<div>
-                                                    <span class="text-muted pull-right">@message.Sender.Name @message.Sender.Surname</span>
-                                                </div>*@
-
-                                            @*<small><a href="page_ready_user_profile.html">Inquilino1</a> a través de <a href="javascript:void(0)">llamado</a></small>*@
                                         </p>
 
                                         <p>
@@ -343,27 +364,24 @@
                                             <span class="text-muted pull-left">@message.Sender.Name @message.Sender.Surname</span>
                                         </p>
                                     </div>
-
                                 </li>
-
-                                                }
+                               }
                         </ul>
 
-                        <div class="form-group row">
-                            <div class="col-md-offset-2 col-md-4">
-                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Comentario" value="Agregar Comentario" class="btn btn-success">Agregar Comentario</a>
+                        @*<div class="form-group">
+                            <div class="text-center">
+                                <a href="#modal-add-message" data-toggle="modal" title="Agregar Comentario" value="Agregar Comentario" class="btn btn-success">
+                                    <i class="fa fa-plus"></i> Comentario
+                                </a>
                             </div>
-                        </div>
+                        </div>*@
 
 
                     </div>
                     <!-- END Top Products Block -->
                 </div>    <!-- END Quick Stats -->
-
-
             </div>
-
-                                                }
+        }
     </div>
 </div>
 
@@ -373,23 +391,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center">
-                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO MENSAJE</h2>
+            <div class="modal-header">
+                <h2 class="modal-title">Nuevo comentario</h2>
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
             <div class="modal-body">
-                @*<form action="Messages/CreateMessage" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">*@
-
                 @using (Html.BeginForm("CreateMessage", "Messages", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
                 {
-
                     <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
 
                     <div class="form-group row">
                         <label class="control-label col-md-2">Mensaje</label>
-                        <div>
-                            <input name="Content" id="Content" type="text" class="col-md-10" />
+                        <div class="col-md-10">
+                            <input name="Content" id="Content" type="text" class="form-control" />
                         </div>
                     </div>
 
@@ -399,7 +414,7 @@
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
 
                             @*<button type="submit" class="btn btn-success"  data-dismiss="modal">Guardar</button>*@
-                            <input type="submit" class="btn btn-success" value="Guardar" />
+                            <input type="submit" class="btn btn-info" value="Guardar" />
                         </div>
                     </div>
                 }
