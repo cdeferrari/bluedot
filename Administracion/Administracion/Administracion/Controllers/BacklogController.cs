@@ -148,17 +148,11 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
-            var priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Description
-            });
+            List<Priority> priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").ToList();
+            priorityList.ForEach(x => x.Description = Common.Capitalize(x.Description));
 
-            var areaList = this.AreaService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Description
-            });
+            List<Area> areaList = this.AreaService.GetAll().ToList();
+            areaList.ForEach(x => x.Description = Common.Capitalize(x.Description));
 
 
             var userList = this.AuthenticationService.GetAll().Select(x => new SelectListItem()
@@ -202,14 +196,14 @@ namespace Administracion.Controllers
             
             var viewModel = new TicketViewModel()
             {
-                PriorityList = priorityList,
+                PriorityList = new SelectList(priorityList, "Id", "Description"),
                 StatusList = statusSelectList,
                 WorkersList = workersList,
                 ManagerList = managerList,
                 ProviderList = new SelectList(providerList, "Id", "User.Name"),
                 UsersList = userList,
                 ConsortiumList = consortiumList,
-                AreaList = areaList,
+                AreaList = new SelectList(areaList, "Id", "Description"),
                 BacklogUserList = backloguserList,
                 FunctionalUnitList = functionalUnitList
 
@@ -222,8 +216,8 @@ namespace Administracion.Controllers
         [HttpPost]
         public ActionResult CreateUpdateTicket(TicketViewModel ticket)
         {
-            var statusList = this.StatusService.GetAll();
-            var nticket = Mapper.Map<TicketRequest>(ticket);
+            IList<Status> statusList = this.StatusService.GetAll();
+            TicketRequest nticket = Mapper.Map<TicketRequest>(ticket);
             nticket.CreatorId = SessionPersister.Account.Id;
             nticket.OpenDate = DateTime.Now;
             nticket.StatusId = statusList.Where(x => x.Description.Equals("open")).FirstOrDefault().Id;
@@ -358,17 +352,11 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
-            var areaList = this.AreaService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Description
-            });
+            List<Area> areaList = this.AreaService.GetAll().ToList();
+            areaList.ForEach(x => x.Description = Common.Capitalize(x.Description));
 
-            var priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Description
-            });
+            List<Priority> priorityList = this.PriorityService.GetAll().Where(x => x.Description != "bloqueante").ToList();
+            priorityList.ForEach(x => x.Description = Common.Capitalize(x.Description));
 
             var backloguserList = this.AccountService.GetAll().Select(x => new SelectListItem()
             {
@@ -407,8 +395,9 @@ namespace Administracion.Controllers
             });
 
 
-            var oTicket = this.TicketService.GetTicket(id);
-            var ticket = Mapper.Map<TicketViewModel>(oTicket);
+            Ticket oTicket = this.TicketService.GetTicket(id);
+            TicketViewModel ticket = Mapper.Map<TicketViewModel>(oTicket);
+            ticket.Messages = ticket.Messages.OrderByDescending(x => x.Date).ToList();
 
             var functionalUnitList = oTicket.Consortium.Ownership.FunctionalUnits
                 .Select(x => new SelectListItem()
@@ -429,7 +418,7 @@ namespace Administracion.Controllers
                 });
 
             ticket.StatusList = statusList;
-            ticket.PriorityList = priorityList;
+            ticket.PriorityList = new SelectList(priorityList, "Id", "Description");
             ticket.WorkersList = workersList;
             ticket.ManagerList = managerList;
             ticket.ProviderList = new SelectList(providerList, "Id", "User.Name");
@@ -445,7 +434,7 @@ namespace Administracion.Controllers
             ticket.FunctionalUnitId = oTicket.FunctionalUnit != null ? oTicket.FunctionalUnit.Id : 0;
             ticket.SpendItemList = spendItemsList;
             ticket.Creator = user;
-            ticket.AreaList = areaList;
+            ticket.AreaList = new SelectList(areaList, "Id", "Description");
             ticket.Area = oTicket.Area;
             ticket.Autoasign = oTicket.BacklogUser != null && oTicket.BacklogUser.Id == SessionPersister.Account.Id;
             ticket.BacklogUser = oTicket.BacklogUser;
@@ -653,6 +642,5 @@ namespace Administracion.Controllers
                 return View("../Shared/Error");
             }
         }
-
     }
 }

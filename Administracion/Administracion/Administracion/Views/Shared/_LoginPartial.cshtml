@@ -42,7 +42,7 @@
                             <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Mensajes"><i class="gi gi-envelope"></i></a>
                             <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
                             <a href="/Users/Details" class="enable-tooltip" data-placement="bottom" title="Mis Datos"><i class="gi gi-cogwheel"></i></a>
-                            <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                            <a href="/Account/LogOff" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out"></i></a>
                         </div>
                     </div>
                     <!-- END User Info -->
@@ -194,7 +194,7 @@
                                         <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
                                     </li>
                                     <li>
-                                        <a href="/Backlog/Index">Ver Tickets</a>
+                                        <a href="@Url.Action("Index", "Backlog")">Ver Tickets</a>
                                     </li>
 
                                 </ul>
@@ -410,7 +410,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/Account/LogOff"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+                                <a href="/Account/LogOff"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
 
                                 @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm", @class = "navbar-right" }))
                                 {
