@@ -23,15 +23,16 @@ namespace Administracion.Models
         public virtual DateTime OpenDate { get; set; }
         public virtual DateTime CloseDate { get; set; }
         [DisplayName("Fecha Límite")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public virtual DateTime LimitDate { get; set; }
         public virtual int FunctionalUnitId { get; set; }
         public virtual FunctionalUnit FunctionalUnit { get; set; }
         public virtual Priority Priority { get; set; }
         public virtual IEnumerable<SelectListItem> StatusList { get; set; }
-        public virtual IEnumerable<SelectListItem> PriorityList { get; set; }
+        public virtual SelectList PriorityList { get; set; }
         public virtual IEnumerable<SelectListItem> WorkersList { get; set; }
         public virtual IEnumerable<SelectListItem> ManagerList { get; set; }        
-        public virtual IEnumerable<SelectListItem> AreaList { get; set; }
+        public virtual SelectList AreaList { get; set; }
         public virtual IEnumerable<SelectListItem> ProviderList { get; set; }
         public virtual IEnumerable<SelectListItem> UsersList { get; set; }
         public virtual IEnumerable<SelectListItem> ConsortiumList { get; set; }
