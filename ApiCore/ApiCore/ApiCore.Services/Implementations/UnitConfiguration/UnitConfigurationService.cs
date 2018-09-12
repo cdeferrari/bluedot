@@ -76,8 +76,8 @@ namespace ApiCore.Services.Implementations.UnitConfigurations
         {            
             originalUnitConfiguration.Unit = this.UnitRepository.GetById(UnitConfiguration.UnitId);
             originalUnitConfiguration.Type = this.UnitConfigurationTypeRepository.GetById(UnitConfiguration.UnitConfigurationTypeId);
-            originalUnitConfiguration.Value = UnitConfiguration.Value;            
-            originalUnitConfiguration.ConfigurationDate = UnitConfiguration.UnitConfigurationDate;            
+            originalUnitConfiguration.Value = UnitConfiguration.Value;
+            originalUnitConfiguration.ConfigurationDate = DateTime.Now;
         }
 
         public IList<UnitConfiguration> GetByUnitId(int UnitId, DateTime startDate, DateTime endDate)

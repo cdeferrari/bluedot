@@ -306,6 +306,7 @@
     <Compile Include="Models\TicketListViewModel.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Models\ProviderViewModel.cs" />
+    <Compile Include="Models\UnitPaymentViewModel.cs" />
     <Compile Include="Models\WorkerViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

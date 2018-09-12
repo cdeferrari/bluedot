@@ -70,6 +70,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/.
+        /// </summary>
+        public static string CreateAccountStatus {
+            get {
+                return ResourceManager.GetString("CreateAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration/.
         /// </summary>
         public static string CreateAdministration {
@@ -1371,6 +1380,15 @@ namespace Administracion.Library.ApiResources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/RegisterUnitsMonthDebt.
+        /// </summary>
+        public static string RegisterUnitsMonthDebt {
+            get {
+                return ResourceManager.GetString("RegisterUnitsMonthDebt", resourceCulture);
             }
         }
         

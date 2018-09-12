@@ -442,6 +442,13 @@ namespace Administracion.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult RegisterUnitsMonthDebt(int id)
+        {
+            this.ConsortiumService.RegisterUnitsMonthDebt(id);
+            return Redirect(string.Format("/Consortium/Details/{0}", id));
+        }
+
         [HttpPost]
         public ActionResult CreateUpdateConsortium(ConsortiumViewModel consortium)
         {

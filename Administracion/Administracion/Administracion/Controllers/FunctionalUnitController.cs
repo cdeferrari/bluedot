@@ -1,11 +1,13 @@
 ﻿using Administracion.DomainModel;
 using Administracion.DomainModel.Enum;
+using Administracion.Dto.Account;
 using Administracion.Dto.Owner;
 using Administracion.Dto.Renter;
 using Administracion.Dto.Unit;
 using Administracion.Dto.UnitConfigurations;
 using Administracion.Models;
 using Administracion.Security;
+using Administracion.Services.Contracts.AccountStatuss;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
@@ -28,6 +30,7 @@ namespace Administracion.Controllers
     [CustomAuthorize(Roles.Root)]
     public class FunctionalUnitController : Controller
     {
+        public virtual IAccountStatusService AccountStatusService { get; set; }
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
         public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IOwnerService OwnersService { get; set; }
@@ -148,6 +151,38 @@ namespace Administracion.Controllers
             return Redirect("/FunctionalUnit/CreateUpdateUnitConfiguration?Id=" + configurationModel.UnitId);
 
         }
+
+
+        [HttpGet]
+        public ActionResult CreatePaymentRegister(int id, int unitId)
+        {
+            
+            var UnitPaymentVm = new UnitPaymentViewModel()
+            {                
+                ConsortiumId = id,
+                UnitId = unitId
+            };
+
+            return View(UnitPaymentVm);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePaymentRegister(UnitPaymentViewModel unitPaymentViewModel)
+        {
+            var request = new AccountStatusRequest()
+            {
+                Haber = unitPaymentViewModel.Amount,
+                StatusDate = DateTime.Now,
+                UnitId = unitPaymentViewModel.UnitId
+            };
+
+            var result = this.AccountStatusService.CreateAccountStatus(request);
+            
+            return Redirect(string.Format("/Consortium/Details/{0}", unitPaymentViewModel.ConsortiumId));
+
+        }
+
+
 
         [HttpPost]
         public ActionResult CreateUpdateFunctionalUnit(FunctionalUnitViewModel unit)
@@ -355,7 +390,7 @@ namespace Administracion.Controllers
                     Value = x.Id.ToString(),
                     Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Street + "-"
                     + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
-                })
+                }).OrderBy(x => x.Text)
                 .ToList();
 
             return Json(new SelectList(units, "Value", "Text"));

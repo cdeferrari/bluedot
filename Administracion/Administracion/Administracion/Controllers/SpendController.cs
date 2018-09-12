@@ -50,7 +50,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
-            });
+            }).OrderBy(x => x.Text);
 
 
             var choseConsortiumVM = new ChoseConsortiumViewModel()
@@ -481,17 +481,8 @@ namespace Administracion.Controllers
                     {
 
                         var line = csvreader.ReadLine();
-                        line += ",";
-                        line = line.Replace('"', '*');
-                        line = line.Replace("*,", ";");
                         var values = line.Split(';').ToList();
-
-                        for(int i=0; i< values.Count; i++)
-                        {
-                            values[i] = values[i].Replace("*", "");
-                        }
                         
-
                         this.ParseSpend(values, spendDictionary, managers, spendTypes, spendClasses, consortiumId);
 
                     }

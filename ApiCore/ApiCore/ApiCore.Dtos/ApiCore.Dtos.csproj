@@ -43,6 +43,7 @@
     <Compile Include="Entidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\AdministrationBankAccountRequest.cs" />
+    <Compile Include="Request\AccountStatusRequest.cs" />
     <Compile Include="Request\UnitConfigurationRequest.cs" />
     <Compile Include="Request\ControlRequest.cs" />
     <Compile Include="Request\ConsortiumConfigurationRequest.cs" />

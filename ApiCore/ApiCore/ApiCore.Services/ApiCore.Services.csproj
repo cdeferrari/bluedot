@@ -46,6 +46,7 @@
     <Compile Include="Contracts\AdministrationBankAccounts\IAdministrationBankAccountService.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationsService.cs" />
     <Compile Include="Contracts\BankAccounts\IBankAccountService.cs" />
+    <Compile Include="Contracts\AccountStatus\IAccountStatusService.cs" />
     <Compile Include="Contracts\UnitConfigurations\IUnitConfigurationsService.cs" />
     <Compile Include="Contracts\ConsortiumConfigurations\IConsortiumConfigurationsService.cs" />
     <Compile Include="Contracts\UnitConfigurationTypes\IUnitConfigurationTypesService.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Implementations\AdministrationBankAccounts\AdministrationBankAccountService.cs" />
     <Compile Include="Implementations\BankAccounts\BankAccountService.cs" />
     <Compile Include="Implementations\CommonDataItems\CommonDataItemsService.cs" />
+    <Compile Include="Implementations\AccountStatus\AccountStatusService.cs" />
     <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
     <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
     <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />

@@ -135,7 +135,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Address.Street + " " + x.Address.Number 
-            });
+            }).OrderBy(x => x.Text);
 
             var functionalUnitList = new List<FunctionalUnit>().Select(x => new SelectListItem()
             {
@@ -166,7 +166,7 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitIds = user.Units,
+                            FunctionalUnitIds = user.Units!= null ? user.Units : new List<int>(),
                             PaymentTypeId = user.PaymentTypeId
                         };
                         this.OwnerService.CreateOwner(owner);

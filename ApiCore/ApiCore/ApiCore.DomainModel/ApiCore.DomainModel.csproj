@@ -47,6 +47,7 @@
     <Compile Include="BacklogUser.cs" />
     <Compile Include="Administration.cs" />
     <Compile Include="BankAccount.cs" />
+    <Compile Include="AccountStatus.cs" />
     <Compile Include="UnitConfiguration.cs" />
     <Compile Include="ConsortiumConfiguration.cs" />
     <Compile Include="UnitConfigurationType.cs" />

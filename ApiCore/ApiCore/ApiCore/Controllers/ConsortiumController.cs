@@ -19,6 +19,8 @@ using ApiCore.Services.Contracts.Incomes;
 using ApiCore.Services.Contracts.PatrimonyStatuss;
 using ApiCore.Services.Contracts.Spends;
 using ApiCore.Services.Contracts.SpendTypes;
+using ApiCore.Services.Contracts.ConsortiumConfigurations;
+using ApiCore.Services.Contracts.AccountStatuss;
 
 namespace ApiCore.Controllers
 {
@@ -29,11 +31,13 @@ namespace ApiCore.Controllers
     public class ConsortiumController : ApiController
     {
 
+        public IAccountStatusService AccountStatusService { get; set; }
         public IConsortiumService ConsortiumService { get; set; }
         public IListService ListService { get; set; }
 
         public ITicketService TicketService { get; set; }        
         public IIncomeService IncomeService { get; set; }
+        public IConsortiumConfigurationsService ConsortiumConfigurationService { get; set; }
         public IPatrimonyStatusService PatrimonyStatusService { get; set; }
         public ISpendService SpendService { get; set; }
         
@@ -120,6 +124,26 @@ namespace ApiCore.Controllers
 
         }
 
+        // POST api/<controller>/5
+        /// <summary>
+        /// Cierra el mes
+        /// </summary>
+        /// <param name="consortiumId">Consorcio a cerrar</param>
+        /// <returns></returns>
+        [Route("{id}/RegisterUnitsMonthDebt")]
+        public IHttpActionResult RegisterUnitsMonthDebt(int id)
+        {
+            var consortium = this.ConsortiumService.GetById(id);
+
+            foreach(var unit in consortium.Ownership.FunctionalUnits)
+            {
+                var result = this.AccountStatusService.RegisterMonth(unit.Id);
+            }
+            
+            return Ok();
+
+        }
+
 
 
         // GET api/<controller>/5
@@ -167,6 +191,32 @@ namespace ApiCore.Controllers
                 throw new NotFoundException(ErrorMessages.IngresoNoEncontrado);
             
             return Ok(completeIncomeList);
+        }
+
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve ingresos del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/ConsortiumConfiguration")]
+        [ResponseType(typeof(List<ConsortiumConfiguration>))]
+        public IHttpActionResult GetConsortiumConfiguration(int id, string startDate, string endDate)
+        {
+
+            var dstartDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            var dendDate = DateTime.ParseExact(endDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            var completeConfigurationList = ConsortiumConfigurationService.GetByConsortiumId(id, dstartDate, dendDate);
+
+            if (completeConfigurationList == null)
+                throw new NotFoundException(ErrorMessages.IngresoNoEncontrado);
+
+            return Ok(completeConfigurationList);
         }
 
         // GET api/<controller>/5

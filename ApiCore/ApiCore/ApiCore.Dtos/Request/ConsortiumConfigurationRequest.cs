@@ -11,8 +11,7 @@ namespace ApiCore.Dtos.Request
     {        
         public virtual int ConsortiumConfigurationTypeId { get; set; }
         public virtual int ConsortiumId { get; set; }        
-        public virtual decimal Value { get; set; }
-        public virtual DateTime ConsortiumConfigurationDate { get; set; }
+        public virtual decimal Value { get; set; }        
         
     }
 }

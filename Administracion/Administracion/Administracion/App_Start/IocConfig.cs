@@ -1,5 +1,6 @@
 ﻿using Administracion.Integration.Contracts;
 using Administracion.Integration.Implementations;
+using Administracion.Services.Contracts.AccountStatuss;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.AreaService;
 using Administracion.Services.Contracts.Autentication;
@@ -41,6 +42,7 @@ using Administracion.Services.Contracts.UnitConfigurations;
 using Administracion.Services.Contracts.UnitConfigurationTypes;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
+using Administracion.Services.Implementations.AccountStatuss;
 using Administracion.Services.Implementations.Administrations;
 using Administracion.Services.Implementations.AreaService;
 using Administracion.Services.Implementations.Autentication;
@@ -148,6 +150,7 @@ namespace Administracion.App_Start
             builder.RegisterType<CountryService>().As<ICountryService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PaymentTypesService>().As<IPaymentTypesService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<AccountStatusService>().As<IAccountStatusService>().SingleInstance().PropertiesAutowired();
 
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<AreaService>().As<IAreaService>().SingleInstance().PropertiesAutowired();

@@ -76,8 +76,8 @@ namespace ApiCore.Services.Implementations.ConsortiumConfigurations
         {            
             originalConsortiumConfiguration.Consortium = this.ConsortiumRepository.GetById(ConsortiumConfiguration.ConsortiumId);
             originalConsortiumConfiguration.Type = this.ConsortiumConfigurationTypeRepository.GetById(ConsortiumConfiguration.ConsortiumConfigurationTypeId);
-            originalConsortiumConfiguration.Value = ConsortiumConfiguration.Value;            
-            originalConsortiumConfiguration.ConfigurationDate = ConsortiumConfiguration.ConsortiumConfigurationDate;            
+            originalConsortiumConfiguration.Value = ConsortiumConfiguration.Value;
+            originalConsortiumConfiguration.ConfigurationDate = DateTime.Now; 
         }
 
         public IList<ConsortiumConfiguration> GetByConsortiumId(int consortiumId, DateTime startDate, DateTime endDate)

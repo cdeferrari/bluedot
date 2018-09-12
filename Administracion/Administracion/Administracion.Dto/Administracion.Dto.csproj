@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountResponse.cs" />
+    <Compile Include="Account\AccountStatusRequest.cs" />
     <Compile Include="Account\RoleResponse.cs" />
     <Compile Include="Account\UserResponse.cs" />
     <Compile Include="Account\WorkerResponse.cs" />

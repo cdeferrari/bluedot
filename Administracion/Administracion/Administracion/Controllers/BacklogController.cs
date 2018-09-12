@@ -186,7 +186,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.User.Name + " " + x.User.Surname
-            });
+            }).OrderBy(x => x.Text);
 
             var consortiumList = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
             {
@@ -197,9 +197,10 @@ namespace Administracion.Controllers
             var functionalUnitList = this.FunctionalUnitService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Dto != null ? x.Dto.ToString() : "-"
-            });
-            
+                Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Street + "-"
+                    + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
+            }).OrderBy(x => x.Text);
+
             var viewModel = new TicketViewModel()
             {
                 PriorityList = priorityList,

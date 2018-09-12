@@ -12,5 +12,6 @@ namespace ApiCore.DomainModel
         public virtual UnitConfigurationType Type { get; set; }
         public virtual DateTime ConfigurationDate { get; set; }
         public virtual decimal Value { get; set; }        
+
     }
 }

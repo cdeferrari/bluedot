@@ -10,5 +10,7 @@ namespace ApiCore.DomainModel
     {
         public virtual string Description {get; set;}
         public virtual bool IsPercentage { get; set; }
+
+        public virtual IList<UnitConfigurationType> UnitConfigurationTypes { get; set; }
     }
 }

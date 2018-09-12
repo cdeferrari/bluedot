@@ -14,6 +14,7 @@ namespace ApiCore.Repository.Mappings
             
             this.Property(x => x.Description).IsRequired().HasColumnName("description");
             this.Property(x => x.IsPercentage).IsRequired().HasColumnName("isPercentage");
+            this.HasOptional(x => x.ConsortiumConfigurationType).WithMany(x => x.UnitConfigurationTypes).Map(x => x.MapKey("consortium_configuration_type_id"));
         }
 
     }

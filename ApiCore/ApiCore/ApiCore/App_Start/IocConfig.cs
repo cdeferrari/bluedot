@@ -98,6 +98,8 @@ using ApiCore.Services.Implementations.ConsortiumConfigurationTypes;
 using ApiCore.Services.Contracts.ConsortiumConfigurationTypes;
 using ApiCore.Services.Implementations.UnitConfigurationTypes;
 using ApiCore.Services.Contracts.UnitConfigurationTypes;
+using ApiCore.Services.Contracts.AccountStatuss;
+using ApiCore.Services.Implementations.AccountStatuss;
 
 namespace ApiCore.App_Start
 {
@@ -292,6 +294,10 @@ namespace ApiCore.App_Start
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
 
+            builder.RegisterType<AccountStatusService>().As<IAccountStatusService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
             builder.RegisterType<TicketService>().As<ITicketService>().PropertiesAutowired().InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
@@ -364,6 +370,7 @@ namespace ApiCore.App_Start
             builder.RegisterType<ConsortiumConfigurationRepository>().As<IConsortiumConfigurationRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<UnitConfigurationRepository>().As<IUnitConfigurationRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PatrimonyStatusRepository>().As<IPatrimonyStatusRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<AccountStatusRepository>().As<IAccountStatusRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<ElevatorControlRepository>().As<IElevatorControlRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<FireExtinguisherControlRepository>().As<IFireExtinguisherControlRepository>().PropertiesAutowired().InstancePerRequest();
