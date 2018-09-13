@@ -4,8 +4,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header text-center">
-                <h2 class="modal-title"><i class="fa fa-pencil"></i> NUEVO SEGUIMIENTO</h2>
+            <div class="modal-header">
+                <h2 class="modal-title"> Nuevo seguimiento</h2>
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
@@ -17,9 +17,9 @@
                     <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
 
                     <div class="form-group row">
-                        <label class="control-label col-md-2">Comentario</label>
-                        <div class="col-md-10">
-                            <input name="Coment" id="Coment" type="text" class="form-control" />
+                        <label class="control-label col-md-3">Comentario</label>
+                        <div class="col-md-8">
+                            <textarea name="Coment" id="Coment" class="form-control text-box multi-line"></textarea>
                         </div>
                     </div>
 

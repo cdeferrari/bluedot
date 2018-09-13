@@ -452,12 +452,11 @@ namespace Administracion.Controllers
         [HttpPost]
         public ActionResult CreateUpdateConsortium(ConsortiumViewModel consortium)
         {
-
             var nConsortium = Mapper.Map<ConsortiumRequest>(consortium);
             try
             {
                 
-                var result = false;
+                bool result = false;
                 if (nConsortium.Id == 0)
                 {
                     var nOwnershp = Mapper.Map<Ownership>(consortium.Ownership);

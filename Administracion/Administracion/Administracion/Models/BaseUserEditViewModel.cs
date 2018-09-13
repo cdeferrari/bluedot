@@ -57,9 +57,12 @@ namespace Administracion.Models
                 this.ProfilePicFileName = user.ProfilePic;
             }
             this.Comments = user.Comments;
-            this.Telephone = user.ContactData.Telephone;
-            this.Cellphone = user.ContactData.Cellphone;
-            this.Email = user.ContactData.Email;
+            if(user.ContactData != null)
+            {
+                this.Telephone = user.ContactData.Telephone;
+                this.Cellphone = user.ContactData.Cellphone;
+                this.Email = user.ContactData.Email;
+            }
         }
 
         public void GetUser(ref DomainModel.User user)

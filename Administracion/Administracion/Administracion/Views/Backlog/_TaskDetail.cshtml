@@ -6,24 +6,23 @@
             <!-- Modal Header -->
             <div class="modal-header clearfix">
                 <h2 class="modal-title col-md-4"><i class="fa fa-thumb-tack"></i> Detalles</h2>
-                <div class="col-md-8">
+                <div class="col-md-8 text-right">
                     @if (Model.Status.Description != "closed")
                     {
                         <a href="@Url.Action("CloseTask", "Task", new { Id = Model.Id })" class="btn btn-default"><i class="fa fa-lock"></i> Cerrar</a>
                     }
                     <a href="#modal-add-task-history-@Model.Id" data-toggle="modal" title="Agregar Seguimiento" class="btn btn-success"><i class="fa fa-plus"></i> Seguimiento</a>
-                    <a href="#modal-follow-list-task-@Model.Id" data-toggle="modal" title="Ver seguimiento"class="btn btn-info"><i class="fa fa-eye"></i> Seguimiento</a>
                 </div>                
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
             <div class="modal-body row">
-            @{var workerDescription = Model.Worker != null ? Model.Worker.User.Name + " " + Model.Worker.User.Surname : "-";
-                var managerDescription = Model.Manager != null ? Model.Manager.User.Name + " " + Model.Manager.User.Surname : "-";
-                var providerDescription = Model.Provider != null ? Model.Provider.User.Name : "-";
+            @{string workerDescription = Model.Worker != null ? Model.Worker.User.Name + " " + Model.Worker.User.Surname : "-";
+                string managerDescription = Model.Manager != null ? Model.Manager.User.Name + " " + Model.Manager.User.Surname : "-";
+                string providerDescription = Model.Provider != null ? Model.Provider.User.Name : "-";
                 }
                 @{
-                    var estado = Model.Status.Description == "open" ? "abierto" : "cerrado";
+                    string estado = Model.Status.Description == "open" ? "abierto" : "cerrado";
 
                 }
 
@@ -99,6 +98,28 @@
                         <!-- END Latest Orders Content -->
                     </div>
                 }
+
+                <!-- Seguimientos -->
+                @if (Model.TaskHistory.Any())
+                {
+                    <br />
+                    <div class="block">
+                        <div class="block-title">
+                            <h4><strong>Seguimientos</strong></h4>
+                        </div>
+                        <div class="task-seguimiento-list">
+                            <ul>
+                                @foreach (var follow in Model.TaskHistory)
+                                {
+                                    <li>
+                                        <strong>Fecha: </strong> @follow.FollowDate.ToShortDateString()
+                                        <p>@follow.Coment</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }<!-- END Seguimientos -->
 
                 @*</form>*@
             </div>                                                
