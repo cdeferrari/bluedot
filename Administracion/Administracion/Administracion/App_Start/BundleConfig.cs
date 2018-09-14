@@ -52,7 +52,8 @@ namespace Administracion
                       "~/Content/main.css",
                       "~/Content/plugins.css",
                       "~/Content/themes.css",
-                      "~/Content/lightbox.min.css"
+                      "~/Content/lightbox.min.css",
+                      "~/Content/Spacing.css"
                       //"~/Content/Site.css"
                       ));
         }
