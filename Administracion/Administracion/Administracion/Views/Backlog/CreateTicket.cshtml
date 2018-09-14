@@ -34,15 +34,23 @@
                 <h2>Nuevo Ticket</h2>
             }
             <hr />
+            @if (Model.Id > 0)
+            {
             <div class="row">
                 <div class="col-md-3">
-                    <h6><label>Creado por:</label> @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</h6>
+                    @{
+                        var creatorName = Model.Creator != null && !string.IsNullOrEmpty(Model.Creator.Name) ? Model.Creator.Name : string.Empty;
+                        var creatorSurName = Model.Creator != null && !string.IsNullOrEmpty(Model.Creator.Surname) ? Model.Creator.Surname : string.Empty;
+                    }
+
+                    <h6><label>Creado por:</label> @creatorName @creatorSurName el @Model.OpenDate.ToShortDateString()</h6>
                 </div>
                 <div class="col-md-4">
                     <h6><label>Estado:</label> @(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</h6>
                 </div>
             </div>           
-            
+            }
+
             @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
