@@ -334,6 +334,7 @@
     <Content Include="Content\lightbox.css" />
     <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\plugins.css" />
+    <Content Include="Content\Spacing.css" />
     <Content Include="Content\themes.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\themes\amethyst.css" />
