@@ -19,7 +19,7 @@
         <div class="block full">
             @if (Model.Id > 0)
             {
-                <h2>
+                <h2 class="ml-4">
                     @if(Model.Status.Description.ToLower() == "open") {
                         <i class="fa fa-unlock"></i>
                     }
@@ -31,72 +31,83 @@
             }
             else
             {
-                <h2>Nuevo Ticket</h2>
+                <h2 class="ml-4">Nuevo Ticket</h2>
             }
             <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    <h6><label>Creado por:</label> @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</h6>
-                </div>
-                <div class="col-md-4">
-                    <h6><label>Estado:</label> @(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</h6>
-                </div>
-            </div>           
-            
-            @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @if(Model.Id != 0)
             {
-                @Html.AntiForgeryToken()
-
-                if (Model.Id > 0)
-                {
-                    @Html.HiddenFor(x => x.Title)
-                }
-
-                <div class="form-horizontal">
-                    <div class="row">
-                        <div class="col-md-2 text-right">
-                            <a href="/Backlog/SetTicketBlocker/@Model.Id" class="btn btn-sm btn-danger"><i class="fa fa-flag"></i> Dar prioridad alta</a>
-                        </div>
-                        <div class="col-md-9 text-right">
-                            @if (Model.Id > 0)
-                            {
-                                if (Model.Status.Description != "closed")
-                                {
-                                    <a href="@Url.Action("CloseTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default"><i class="fa fa-lock"></i> Cerrar</a>
-                                }
-
-                                if (Model.Resolved.HasValue && Model.Resolved.Value)
-                                {
-                                    <a style="background-color:cadetblue; color:white" href="javascript:void(0)" class="btn btn-sm btn-default">
-                                        <i class="fa fa-check"></i> Resuelto
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("ResolveTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default">
-                                        <i class="fa fa-check"></i> Resolver
-                                    </a>
-                                }
-                                @*<button type="button" class="btn btn-sm btn-success"><i class="fa fa-comment"></i></button>
-                                <button type="button" class="btn btn-sm btn-success"><i class="fa fa-thumb-tack"></i></button>
-                                <button type="button" class="btn btn-sm btn-success"><i class="fa fa-calendar-o"></i></button>*@
-                            }
-                        </div>
-
+                @*<div class="row">
+                    <div class="col-md-2 col-md-offset-2">
+                        <a href="@Url.Action("SetTicketBlocker", "Backlog", new { id = Model.Id})" class="btn btn-sm btn-danger"><i class="fa fa-flag"></i> Dar prioridad alta</a>
                     </div>
-                    
-                    <hr>
+                    <div class="col-md-5 text-right">
+                        @if (Model.Status.Description != "closed")
+                        {
+                            <a href="@Url.Action("CloseTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default"><i class="fa fa-lock"></i> Cerrar</a>
+                        }
 
+                        @if (Model.Resolved.HasValue && Model.Resolved.Value)
+                        {
+                        <a style="background-color:cadetblue; color:white" href="javascript:void(0)" class="btn btn-sm btn-default">
+                            <i class="fa fa-check"></i> Resuelto
+                        </a>
+                        }
+                        else
+                        {
+                        <a href="@Url.Action("ResolveTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default">
+                            <i class="fa fa-check"></i> Resolver
+                        </a>
+                        }
+                        
+                    </div>
 
+                </div>*@
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-1">
+                        <h6><label>Creado por:</label> @Model.Creator.Name @Model.Creator.Surname el @Model.OpenDate.ToShortDateString()</h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><label>Estado:</label> @(Model.Status.Description.ToLower() == "open" ? "abierto" : "cerrado")</h6>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        @if (Model.Status.Description != "closed")
+                        {
+                            <a href="@Url.Action("CloseTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default"><i class="fa fa-lock"></i> Cerrar</a>
+                        }
 
+                        @if (Model.Resolved.HasValue && Model.Resolved.Value)
+                        {
+                            <a style="background-color:cadetblue; color:white" href="javascript:void(0)" class="btn btn-sm btn-default">
+                                <i class="fa fa-check"></i> Resuelto
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ResolveTicket", "Backlog", new { id = Model.Id })" class="btn btn-sm btn-default">
+                                <i class="fa fa-check"></i> Resolver
+                            </a>
+                        }
+                        <a href="@Url.Action("SetTicketBlocker", "Backlog", new { id = Model.Id})" class="btn btn-sm btn-danger"><i class="fa fa-flag"></i> Dar prioridad alta</a>
+                    </div>
+                </div>
+                <hr>
+            }
+            <div class="row">
+                @using (Html.BeginForm("CreateUpdateTicket", "Backlog", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-offset-2 col-md-8" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                    @Html.HiddenFor(model => model.Id)
-                    @if (Model.Id == 0)
+                    if (Model.Id > 0)
                     {
-                        <div class="form-group row">
-                            <label class="control-label col-md-2" for="Titulo">Titulo</label>
-                            <div class='col-md-8'>
-
+                        @Html.HiddenFor(x => x.Title)
+                    }
+                
+                    @Html.HiddenFor(model => model.Id)
+                    if (Model.Id == 0)
+                    {
+                        <div class="form-group clearfix">
+                            <div class="col-md-11">
+                                <label class="control-label" for="Titulo">Titulo</label>
                                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
 
                                 @Html.ValidationMessage("", new { @class = "text-danger" })
@@ -104,21 +115,20 @@
                             </div>
                         </div>
                     }
-
-                    <div class="form-group row">
-                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class='col-md-8'>
-
+                    <div class="form-group clearfix">
+                        <div class="col-md-11">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessage("", new { @class = "text-danger" })
-                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })                            
                         </div>
+                        
                     </div>
 
 
-                    <div class="form-group  row">
-                        @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-4">
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.LimitDate, htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date'>
                                 @Html.EditorFor(model => model.LimitDate, new { htmlAttributes = new { @class = "form-control" } })
                                 <span class="input-group-addon">
@@ -128,17 +138,17 @@
 
                             @Html.ValidationMessageFor(model => model.LimitDate, "", new { @class = "text-danger" })
                         </div>
-                        <label class="control-label col-md-2">Reclamado por:</label>
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
+                        <div class="col-md-5 col-md-offset-1">
+                            <label class="control-label">Prioridad</label>
+                            @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --", new { @class = "form-control" })
                         </div>
+                        
                     </div>
 
 
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Consorcio</label>
-                        <div class="col-md-4">
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            <label class="control-label">Consorcio</label>
                             @{ 
                                 object _htmlAttributes;
                                 if (Model.Id > 0)
@@ -152,35 +162,32 @@
                             }
                             @Html.DropDownListFor(model => model.ConsortiumId, Model.ConsortiumList, "-- Elija Consorcio --", _htmlAttributes)
                         </div>
-                        <label class="control-label col-md-2">Unidad Funcional</label>
-                        <div class="col-md-3">
+                        <div class="col-md-5 col-md-offset-1">
+                            <label class="control-label">Unidad Funcional</label>
                             @Html.DropDownListFor(model => model.FunctionalUnitId, Model.FunctionalUnitList, "-- Elija Unidad Funcional --", new { @class = "form-control" })
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Prioridad</label>
-                        <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.Priority.Id, Model.PriorityList, "-- Elija Prioridad --", new { @class = "form-control" })
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            <label class="control-label">&Aacute;rea</label>
+                             @Html.DropDownListFor(model => model.Area.Id, Model.AreaList, "-- Elija Area --", new { @class = "form-control" })
                         </div>
-                        <label class="control-label col-md-2">Asignado a</label>
-                        <div class="col-md-3">
+                        <div class="col-md-5 col-md-offset-1">
+                            <label class="control-label">Reclamado por:</label>
+                            @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Customer, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            <label class="control-label">Asignado a</label>
                             @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--", new { @class = "form-control" })
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Area</label>
-                        <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.Area.Id, Model.AreaList, "-- Elija Area --", new { @class = "form-control" })
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label" for="example-email-input">Autoasignar</label>
-                        <div class="form-group">
-                            <div class="col-md-1">
+                        <div class="col-md-5 col-md-offset-1">
+                            <label class="control-label" for="example-email-input">Autoasignar</label>
+                            <div class="form-group">
                                 <label id="autoasign-label" class="switch switch-primary" for='@Model.Autoasign'>
                                     <input id="Autoasign" name="Autoasign" type="checkbox" value="true" @(Model.Autoasign ? "checked=\"checked\"" : "") />
                                     <span data-toggle="tooltip" title="OK"></span>
@@ -189,16 +196,13 @@
                         </div>
                     </div>
 
-
-
-                    <div class="form-group">                        
-                        <div class="col-md-10"></div>
-                        <div class="col-md-1">
+                    <div class="form-group">
+                        <div class="col-md-1 col-md-offset-9">
                             <input type="submit" value="Guardar" class="btn btn-info" />
                         </div>
-                    </div>
-                </div>
-            }
+                    </div>                    
+                }
+            </div>
         </div>
 
         @if (Model.Id > 0)
