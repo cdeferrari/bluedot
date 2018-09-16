@@ -1,16 +1,21 @@
 ﻿using Administracion.DomainModel;
 using Administracion.DomainModel.Enum;
+using Administracion.Dto.Account;
 using Administracion.Dto.Owner;
 using Administracion.Dto.Renter;
 using Administracion.Dto.Unit;
+using Administracion.Dto.UnitConfigurations;
 using Administracion.Models;
 using Administracion.Security;
+using Administracion.Services.Contracts.AccountStatuss;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.UnitConfigurations;
+using Administracion.Services.Contracts.UnitConfigurationTypes;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Implementations.Tickets;
 using AutoMapper;
@@ -25,11 +30,15 @@ namespace Administracion.Controllers
     [CustomAuthorize(Roles.Root)]
     public class FunctionalUnitController : Controller
     {
+        public virtual IAccountStatusService AccountStatusService { get; set; }
         public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
         public virtual IOwnershipService OwnershipService { get; set; }
         public virtual IOwnerService OwnersService { get; set; }
         public virtual IRenterService RenterService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
+
+        public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
+        public virtual IUnitConfigurationTypeService UnitConfigurationTypeService { get; set; }
 
         public ActionResult Index()
         {
@@ -73,6 +82,107 @@ namespace Administracion.Controllers
 
             return View(viewModel);
         }
+
+
+        [HttpGet]
+        public ActionResult CreateUpdateUnitConfiguration(int id)
+        {
+
+            var configurationTypes = this.UnitConfigurationTypeService.GetAll();
+            var configurations = this.UnitConfigurationService.GetByUnitId(id, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, UnitConfiguration>();
+
+            foreach (var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if (lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+            var ConfigurationVm = new UnitConfigurationViewModel()
+            {
+                Configurations = configDictionary,
+                ConfigurationTypes = configurationTypes,
+                UnitId = id
+            };
+
+            return View(ConfigurationVm);
+        }
+
+        [HttpPost]
+        public ActionResult CreateUpdateUnitConfiguration(UnitConfigurationViewModel configurationModel)
+        {
+            var configurationTypes = this.UnitConfigurationTypeService.GetAll();
+            var configurations = this.UnitConfigurationService.GetByUnitId(configurationModel.UnitId, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, UnitConfiguration>();
+
+            foreach (var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if (lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+            foreach (var configuration in configurationModel.UnitConfigurations)
+            {
+                var actualConfig = configDictionary.ContainsKey(configuration.UnitConfigurationTypeId) ?
+                    configDictionary[configuration.UnitConfigurationTypeId] : null;
+
+                if (configuration.Value != 0 && (actualConfig == null || actualConfig.Value != configuration.Value))
+                {
+                    var confRequest = new UnitConfigurationRequest()
+                    {
+                        UnitConfigurationTypeId = configuration.UnitConfigurationTypeId,
+                        UnitId = configurationModel.UnitId,                        
+                        Value = configuration.Value,
+                        
+                    };
+
+                    this.UnitConfigurationService.CreateUnitConfiguration(confRequest);
+                }
+            }
+
+            return Redirect("/FunctionalUnit/CreateUpdateUnitConfiguration?Id=" + configurationModel.UnitId);
+
+        }
+
+
+        [HttpGet]
+        public ActionResult CreatePaymentRegister(int id, int unitId)
+        {
+            
+            var UnitPaymentVm = new UnitPaymentViewModel()
+            {                
+                ConsortiumId = id,
+                UnitId = unitId
+            };
+
+            return View(UnitPaymentVm);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePaymentRegister(UnitPaymentViewModel unitPaymentViewModel)
+        {
+            var request = new AccountStatusRequest()
+            {
+                Haber = unitPaymentViewModel.Amount,
+                StatusDate = DateTime.Now,
+                UnitId = unitPaymentViewModel.UnitId
+            };
+
+            var result = this.AccountStatusService.CreateAccountStatus(request);
+            
+            return Redirect(string.Format("/Consortium/Details/{0}", unitPaymentViewModel.ConsortiumId));
+
+        }
+
+
 
         [HttpPost]
         public ActionResult CreateUpdateFunctionalUnit(FunctionalUnitViewModel unit)
@@ -280,7 +390,7 @@ namespace Administracion.Controllers
                     Value = x.Id.ToString(),
                     Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Street + "-"
                     + "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
-                })
+                }).OrderBy(x => x.Text)
                 .ToList();
 
             return Json(new SelectList(units, "Value", "Text"));

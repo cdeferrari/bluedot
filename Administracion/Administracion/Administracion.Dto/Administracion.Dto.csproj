@@ -41,10 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountResponse.cs" />
+    <Compile Include="Account\AccountStatusRequest.cs" />
     <Compile Include="Account\RoleResponse.cs" />
     <Compile Include="Account\UserResponse.cs" />
     <Compile Include="Account\WorkerResponse.cs" />
+    <Compile Include="UnitConfiguration\UnitConfigurationRequest.cs" />
     <Compile Include="Control\ControlRequest.cs" />
+    <Compile Include="ConsortiumConfiguration\ConsortiumConfigurationRequest.cs" />
     <Compile Include="Task\TaskRequest.cs" />
     <Compile Include="PatrimonyStatus\PatrimonyStatusRequest.cs" />
     <Compile Include="IncomeType\IncomeTypeRequest.cs" />

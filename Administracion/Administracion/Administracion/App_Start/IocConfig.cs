@@ -1,10 +1,13 @@
 ﻿using Administracion.Integration.Contracts;
 using Administracion.Integration.Implementations;
+using Administracion.Services.Contracts.AccountStatuss;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.AreaService;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Bills;
 using Administracion.Services.Contracts.CommonData;
+using Administracion.Services.Contracts.ConsortiumConfigurations;
+using Administracion.Services.Contracts.ConsortiumConfigurationTypes;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.ConsortiumSecure;
 using Administracion.Services.Contracts.Countries;
@@ -35,14 +38,19 @@ using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.TaskResult;
 using Administracion.Services.Contracts.Tasks;
 using Administracion.Services.Contracts.Tickets;
+using Administracion.Services.Contracts.UnitConfigurations;
+using Administracion.Services.Contracts.UnitConfigurationTypes;
 using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Workers;
+using Administracion.Services.Implementations.AccountStatuss;
 using Administracion.Services.Implementations.Administrations;
 using Administracion.Services.Implementations.AreaService;
 using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Bills;
 using Administracion.Services.Implementations.Checklists;
 using Administracion.Services.Implementations.CommonData;
+using Administracion.Services.Implementations.ConsortiumConfigurations;
+using Administracion.Services.Implementations.ConsortiumConfigurationTypes;
 using Administracion.Services.Implementations.Consortiums;
 using Administracion.Services.Implementations.ConsortiumSecure;
 using Administracion.Services.Implementations.Countrys;
@@ -70,6 +78,8 @@ using Administracion.Services.Implementations.Status;
 using Administracion.Services.Implementations.TaskResult;
 using Administracion.Services.Implementations.Tasks;
 using Administracion.Services.Implementations.Tickets;
+using Administracion.Services.Implementations.UnitConfigurations;
+using Administracion.Services.Implementations.UnitConfigurationTypes;
 using Administracion.Services.Implementations.Users;
 using Administracion.Services.Implementations.Workers;
 using Autofac;
@@ -109,6 +119,13 @@ namespace Administracion.App_Start
             builder.RegisterType<TicketService>().As<ITicketService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ConsortiumService>().As<IConsortiumService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ConsortiumSecureService>().As<IConsortiumSecureService>().SingleInstance().PropertiesAutowired();
+
+            builder.RegisterType<ConsortiumConfigurationTypesService>().As<IConsortiumConfigurationTypeService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ConsortiumConfigurationService>().As<IConsortiumConfigurationService>().SingleInstance().PropertiesAutowired();
+
+            builder.RegisterType<UnitConfigurationTypesService>().As<IUnitConfigurationTypeService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<UnitConfigurationService>().As<IUnitConfigurationService>().SingleInstance().PropertiesAutowired();
+
             builder.RegisterType<AdministrationService>().As<IAdministrationService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<MultimediaService>().As<IMultimediaService>().SingleInstance().PropertiesAutowired();
 
@@ -133,6 +150,7 @@ namespace Administracion.App_Start
             builder.RegisterType<CountryService>().As<ICountryService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PaymentTypesService>().As<IPaymentTypesService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<SecureStatusService>().As<ISecureStatusService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<AccountStatusService>().As<IAccountStatusService>().SingleInstance().PropertiesAutowired();
 
             builder.RegisterType<AccountService>().As<IAccountService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<AreaService>().As<IAreaService>().SingleInstance().PropertiesAutowired();

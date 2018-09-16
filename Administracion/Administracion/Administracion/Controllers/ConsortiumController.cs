@@ -2,12 +2,15 @@
 using Administracion.DomainModel.Enum;
 using Administracion.Dto.CommonData;
 using Administracion.Dto.Consortium;
+using Administracion.Dto.ConsortiumConfigurations;
 using Administracion.Dto.Control;
 using Administracion.Dto.List;
 using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.CommonData;
+using Administracion.Services.Contracts.ConsortiumConfigurations;
+using Administracion.Services.Contracts.ConsortiumConfigurationTypes;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.Countries;
 using Administracion.Services.Contracts.ElevatorControlService;
@@ -51,6 +54,9 @@ namespace Administracion.Controllers
         public virtual IProviderService ProviderService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
         public virtual IElevatorControlService ElevatorControlService { get; set; }
+
+        public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
+        public virtual IConsortiumConfigurationTypeService ConsortiumConfigurationTypeService { get; set; }
         public virtual IFireExtinguisherControlService FireExtinguisherControlService { get; set; }
         // GET: Backlog
         public ActionResult Index()
@@ -126,6 +132,72 @@ namespace Administracion.Controllers
             };
             
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult CreateUpdateConsortiumConfiguration(int id)
+        {
+
+            var configurationTypes = this.ConsortiumConfigurationTypeService.GetAll();
+            var configurations = this.ConsortiumConfigurationService.GetByConsortiumId(id, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, ConsortiumConfiguration>();
+
+            foreach(var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if(lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+            var ConfigurationVm = new ConsortiumConfigurationViewModel()
+            {
+                Configurations = configDictionary,
+                ConfigurationTypes  = configurationTypes,
+                ConsortiumId = id
+            };
+
+            return View(ConfigurationVm);
+        }
+
+        [HttpPost]
+        public ActionResult CreateUpdateConsortiumConfiguration(ConsortiumConfigurationViewModel configurationModel)
+        {
+            var configurationTypes = this.ConsortiumConfigurationTypeService.GetAll();
+            var configurations = this.ConsortiumConfigurationService.GetByConsortiumId(configurationModel.ConsortiumId, DateTime.Now.AddYears(-1), DateTime.Now);
+            var configDictionary = new Dictionary<int, ConsortiumConfiguration>();
+
+            foreach (var conft in configurationTypes)
+            {
+                var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                    .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                if (lastConfig != null)
+                {
+                    configDictionary.Add(conft.Id, lastConfig);
+                }
+            }
+
+
+            foreach (var configuration in configurationModel.ConsortiumConfigurations)
+            {
+                var actualConfig = configDictionary.ContainsKey(configuration.ConsortiumConfigurationTypeId) ?
+                    configDictionary[configuration.ConsortiumConfigurationTypeId] : null;                    
+
+                if (configuration.Value != 0 && (actualConfig == null || actualConfig.Value != configuration.Value))
+                {
+                    var confRequest = new ConsortiumConfigurationRequest()
+                    {
+                        ConsortiumConfigurationTypeId = configuration.ConsortiumConfigurationTypeId,
+                        Value = configuration.Value,
+                        ConsortiumId = configurationModel.ConsortiumId
+                    };
+                    this.ConsortiumConfigurationService.CreateConsortiumConfiguration(confRequest);
+                }
+            }
+
+            return Redirect("/Consortium/CreateUpdateConsortiumConfiguration/" + configurationModel.ConsortiumId);
         }
 
 
@@ -368,6 +440,13 @@ namespace Administracion.Controllers
                 return View("../Shared/Error");
             }
 
+        }
+
+        [HttpGet]
+        public ActionResult RegisterUnitsMonthDebt(int id)
+        {
+            this.ConsortiumService.RegisterUnitsMonthDebt(id);
+            return Redirect(string.Format("/Consortium/Details/{0}", id));
         }
 
         [HttpPost]

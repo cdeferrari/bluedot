@@ -50,7 +50,7 @@ namespace Administracion.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
-            });
+            }).OrderBy(x => x.Text);
 
 
             var choseConsortiumVM = new ChoseConsortiumViewModel()
@@ -482,7 +482,7 @@ namespace Administracion.Controllers
 
                         var line = csvreader.ReadLine();
                         var values = line.Split(';').ToList();
-
+                        
                         this.ParseSpend(values, spendDictionary, managers, spendTypes, spendClasses, consortiumId);
 
                     }
@@ -614,7 +614,7 @@ namespace Administracion.Controllers
                 var managerCuit = values[25];
                 var cuitWithouthSimbols = managerCuit.Trim().Replace("-", "");
                 var manager = managers.Where(x => !string.IsNullOrEmpty(x.User.CUIT) && x.User.CUIT.Trim().Replace("-", "") == cuitWithouthSimbols).FirstOrDefault();
-                var spendDate = DateTime.Parse(values[39]);
+                var spendDate = DateTime.Now; // DateTime.Parse(values[39]);
 
                 var spendDescription = values[89];
                 if (!string.IsNullOrEmpty(spendDescription))

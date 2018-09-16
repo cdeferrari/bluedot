@@ -58,5 +58,10 @@ namespace Administracion.Services.Implementations.Consortiums
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.CloseMonth, consortiumId), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId) });
         }
 
+        public bool RegisterUnitsMonthDebt(int consortiumId)
+        {
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.RegisterUnitsMonthDebt, consortiumId), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId) });
+        }
+
     }
 }

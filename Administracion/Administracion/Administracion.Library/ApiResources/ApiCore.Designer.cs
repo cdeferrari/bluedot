@@ -70,6 +70,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/.
+        /// </summary>
+        public static string CreateAccountStatus {
+            get {
+                return ResourceManager.GetString("CreateAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration/.
         /// </summary>
         public static string CreateAdministration {
@@ -120,6 +129,15 @@ namespace Administracion.Library.ApiResources {
         public static string CreateConsortium {
             get {
                 return ResourceManager.GetString("CreateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurations/.
+        /// </summary>
+        public static string CreateConsortiumConfiguration {
+            get {
+                return ResourceManager.GetString("CreateConsortiumConfiguration", resourceCulture);
             }
         }
         
@@ -331,6 +349,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurations/.
+        /// </summary>
+        public static string CreateUnitConfiguration {
+            get {
+                return ResourceManager.GetString("CreateUnitConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users/.
         /// </summary>
         public static string CreateUser {
@@ -399,6 +426,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteConsortium {
             get {
                 return ResourceManager.GetString("DeleteConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurations/{0}.
+        /// </summary>
+        public static string DeleteConsortiumConfiguration {
+            get {
+                return ResourceManager.GetString("DeleteConsortiumConfiguration", resourceCulture);
             }
         }
         
@@ -583,6 +619,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurations/{0}.
+        /// </summary>
+        public static string DeleteUnitConfiguration {
+            get {
+                return ResourceManager.GetString("DeleteUnitConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User/{0}.
         /// </summary>
         public static string DeleteUser {
@@ -597,6 +642,15 @@ namespace Administracion.Library.ApiResources {
         public static string DeleteWorker {
             get {
                 return ResourceManager.GetString("DeleteWorker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurations/.
+        /// </summary>
+        public static string GatAllUnitConfigurations {
+            get {
+                return ResourceManager.GetString("GatAllUnitConfigurations", resourceCulture);
             }
         }
         
@@ -696,6 +750,24 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllConsortium {
             get {
                 return ResourceManager.GetString("GetAllConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurations/.
+        /// </summary>
+        public static string GetAllConsortiumConfigurations {
+            get {
+                return ResourceManager.GetString("GetAllConsortiumConfigurations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurationTypes/.
+        /// </summary>
+        public static string GetAllConsortiumConfigurationTypes {
+            get {
+                return ResourceManager.GetString("GetAllConsortiumConfigurationTypes", resourceCulture);
             }
         }
         
@@ -943,6 +1015,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurationTypes/.
+        /// </summary>
+        public static string GetAllUnitConfigurationTypes {
+            get {
+                return ResourceManager.GetString("GetAllUnitConfigurationTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users/.
         /// </summary>
         public static string GetAllUsers {
@@ -1015,11 +1096,38 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumConfiguration?startDate={1}&amp;endDate={2}.
+        /// </summary>
+        public static string GetConfigurationByConsortiumId {
+            get {
+                return ResourceManager.GetString("GetConfigurationByConsortiumId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unidad/{0}/UnitConfiguration?startDate={1}&amp;endDate={2}.
+        /// </summary>
+        public static string GetConfigurationByUnitId {
+            get {
+                return ResourceManager.GetString("GetConfigurationByUnitId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consorcio/{0}.
         /// </summary>
         public static string GetConsortium {
             get {
                 return ResourceManager.GetString("GetConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurations/{0}.
+        /// </summary>
+        public static string GetConsortiumConfiguration {
+            get {
+                return ResourceManager.GetString("GetConsortiumConfiguration", resourceCulture);
             }
         }
         
@@ -1231,6 +1339,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurations/{0}.
+        /// </summary>
+        public static string GetUnitConfiguration {
+            get {
+                return ResourceManager.GetString("GetUnitConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Propiedad/{0}/Unidades.
         /// </summary>
         public static string GetUnits {
@@ -1263,6 +1380,15 @@ namespace Administracion.Library.ApiResources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/RegisterUnitsMonthDebt.
+        /// </summary>
+        public static string RegisterUnitsMonthDebt {
+            get {
+                return ResourceManager.GetString("RegisterUnitsMonthDebt", resourceCulture);
             }
         }
         
@@ -1308,6 +1434,15 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateConsortium {
             get {
                 return ResourceManager.GetString("UpdateConsortium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConsortiumConfigurations/{0}.
+        /// </summary>
+        public static string UpdateConsortiumConfiguration {
+            get {
+                return ResourceManager.GetString("UpdateConsortiumConfiguration", resourceCulture);
             }
         }
         
@@ -1452,6 +1587,15 @@ namespace Administracion.Library.ApiResources {
         public static string UpdateTicket {
             get {
                 return ResourceManager.GetString("UpdateTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UnitConfigurations/{0}.
+        /// </summary>
+        public static string UpdateUnitConfiguration {
+            get {
+                return ResourceManager.GetString("UpdateUnitConfiguration", resourceCulture);
             }
         }
         

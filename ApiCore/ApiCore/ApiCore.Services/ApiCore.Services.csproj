@@ -46,8 +46,13 @@
     <Compile Include="Contracts\AdministrationBankAccounts\IAdministrationBankAccountService.cs" />
     <Compile Include="Contracts\Administrations\IAdministrationsService.cs" />
     <Compile Include="Contracts\BankAccounts\IBankAccountService.cs" />
+    <Compile Include="Contracts\AccountStatus\IAccountStatusService.cs" />
+    <Compile Include="Contracts\UnitConfigurations\IUnitConfigurationsService.cs" />
+    <Compile Include="Contracts\ConsortiumConfigurations\IConsortiumConfigurationsService.cs" />
+    <Compile Include="Contracts\UnitConfigurationTypes\IUnitConfigurationTypesService.cs" />
     <Compile Include="Contracts\ElevatorControls\IElevatorControlService.cs" />
     <Compile Include="Contracts\FireExtinguisherControls\IFireExtinguisherControlService.cs" />
+    <Compile Include="Contracts\ConsortiumConfigurationTypes\IConsortiumConfigurationTypesService.cs" />
     <Compile Include="Contracts\PatrimonyStatus\IPatrimonyStatusService.cs" />
     <Compile Include="Contracts\Incomes\IIncomeService.cs" />
     <Compile Include="Contracts\Area\IAreaService.cs" />
@@ -90,8 +95,13 @@
     <Compile Include="Implementations\AdministrationBankAccounts\AdministrationBankAccountService.cs" />
     <Compile Include="Implementations\BankAccounts\BankAccountService.cs" />
     <Compile Include="Implementations\CommonDataItems\CommonDataItemsService.cs" />
+    <Compile Include="Implementations\AccountStatus\AccountStatusService.cs" />
+    <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
+    <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
+    <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />
     <Compile Include="Implementations\FireExtinguisherControls\FireExtinguisherControlService.cs" />
     <Compile Include="Implementations\ElevatorControls\ElevatorControlService.cs" />
+    <Compile Include="Implementations\ConsortiumConfigurationTypes\ConsortiumConfigurationTypesService.cs" />
     <Compile Include="Implementations\PatrimonyStatus\PatrimonyStatusService.cs" />
     <Compile Include="Implementations\LaboralUnion\LaboralUnionService.cs" />
     <Compile Include="Implementations\CommonData\CommonDataService.cs" />

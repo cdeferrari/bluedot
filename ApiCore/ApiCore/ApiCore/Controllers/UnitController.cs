@@ -15,6 +15,9 @@ using ApiCore.Services.Contracts.Consortiums;
 using ApiCore.Services.Contracts.Unit;
 using ApiCore.Services.Contracts.Owners;
 using ApiCore.Services.Contracts.Renters;
+using ApiCore.DomainModel;
+using ApiCore.Services.Contracts.UnitConfigurations;
+using ApiCore.Services.Contracts.AccountStatuss;
 
 namespace ApiCore.Controllers
 {
@@ -29,7 +32,8 @@ namespace ApiCore.Controllers
         public virtual IConsortiumService ConsortiumService { get; set; }
         public virtual IOwnerService OwnerService { get; set; }
         public virtual IRenterService RenterService { get; set; }
-
+        public virtual IAccountStatusService AccountStatusService { get; set; }
+        public IUnitConfigurationsService UnitConfigurationService { get; set; }
 
         // GET api/<controller>/5
         /// <summary>
@@ -125,6 +129,51 @@ namespace ApiCore.Controllers
                 return InternalServerError(new Exception(ex.Message));
             }
             
+        }
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve ingresos del consorcio
+        /// </summary>
+        /// <param name="consorcio">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/UnitConfiguration")]
+        [ResponseType(typeof(List<UnitConfiguration>))]
+        public IHttpActionResult GetUnitConfiguration(int id, string startDate, string endDate)
+        {
+
+            var dstartDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            var dendDate = DateTime.ParseExact(endDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            var completeConfigurationList = UnitConfigurationService.GetByUnitId(id, dstartDate, dendDate);
+
+            if (completeConfigurationList == null)
+                throw new NotFoundException(ErrorMessages.IngresoNoEncontrado);
+
+            return Ok(completeConfigurationList);
+        }
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve el estado de cuenta de la unidad
+        /// </summary>
+        /// <param name="id">id de la Unidad</param>
+        /// <returns></returns>
+
+        [Route("{id}/AccountStatus")]
+        [ResponseType(typeof(List<AccountStatus>))]
+        public IHttpActionResult GetAccountStatus(int id)
+        {
+
+            var completeAccountStatusList = AccountStatusService.GetByUnitId(id);
+
+            if (completeAccountStatusList == null)
+                throw new NotFoundException(ErrorMessages.PatrimonioNoEncontrado);
+
+            return Ok(completeAccountStatusList);
         }
     }
 }
