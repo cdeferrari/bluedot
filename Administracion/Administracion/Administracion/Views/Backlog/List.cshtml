@@ -49,7 +49,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         @{ var clase = Model.SelectedIndex == 1 ? "active" : string.Empty;}
                         <li class="@clase">
-                            <a href="/Backlog/Index" style="padding-left:0">
+                            <a href="@Url.Action("Index", "Backlog")" style="padding-left:0">
                                 <span class="badge pull-right">@Model.All</span>
                                 <i class="fa fa-ticket fa-fw"></i> <strong>Todos</strong>
                             </a>
@@ -144,7 +144,7 @@
                     <!-- Tickets Title -->
                     <div class="block-title">
                         <div class="block-options pull-right">                            
-                            <a href="CreateTicket/" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Crear Pedido"><i class="fa fa-plus"></i></a>
+                            <a href="@Url.Action("CreateTicket", "Backlog")" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Crear Pedido"><i class="fa fa-plus"></i></a>
                         </div>
                         <ul class="nav nav-tabs" data-toggle="tabs">
                             <li class="active"><a href="#tickets-list">Listado de Pedidos</a></li>                            
