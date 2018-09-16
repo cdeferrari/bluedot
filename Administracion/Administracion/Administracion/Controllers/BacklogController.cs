@@ -137,7 +137,6 @@ namespace Administracion.Controllers
             return tickets;
         }
 
-        // GET: Backlog
         public ActionResult CreateTicket()
         {
             var statusList = this.StatusService.GetAll();

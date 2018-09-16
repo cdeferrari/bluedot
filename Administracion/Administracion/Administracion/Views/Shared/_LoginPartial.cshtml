@@ -191,7 +191,7 @@
                                 <a href="/Backlog/Index" class="sidebar-nav-menu @(url.Contains("/backlog") ? "active" : "")"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-life_preserver sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Tickets/Reclamos</span></a>
                                 <ul>
                                     <li>
-                                        <a href="/Backlog/CreateTicket">Nuevo Ticket</a>
+                                        <a href="@Url.Action("CreateTicket", "Backlog")">Nuevo Ticket</a>
                                     </li>
                                     <li>
                                         <a href="@Url.Action("Index", "Backlog")">Ver Tickets</a>
