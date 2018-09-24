@@ -94,22 +94,15 @@ namespace Administracion.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTaskFollow(TaskHistoryViewModel task, bool toTicket = false)
+        public ActionResult CreateTaskFollow(TaskHistoryViewModel task)
         {
             try
             {
                 TaskHistoryRequest taskHistoryRequest = Mapper.Map<TaskHistoryRequest>(task);
                 this.TasksService.CreateTaskHistory(taskHistoryRequest);
                 Task otask = this.TasksService.GetTask(task.TaskId);
-
-                if (toTicket)
-                {
-                    return RedirectToAction("UpdateTicketById", "Backlog", new { id = task.TicketId });
-                }
-                else
-                {
-                    return RedirectToAction("Details", new { id = task.TaskId });
-                }
+                
+                return RedirectToAction("Details", new { id = task.TaskId });                
             }
             catch (Exception ex)
             {
