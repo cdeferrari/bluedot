@@ -61,15 +61,24 @@ namespace Administracion.Controllers
                 Entidad entity = this.TasksService.CreateTask(ntask);           
                 if (entity.Id != 0)
                 {
-                    var taskHistory = new TaskHistoryRequest()
+                    TaskHistoryRequest taskHistory = new TaskHistoryRequest()
                     {
                         Coment = "Seguimiento inicial",
                         FollowDate = task.FollowDate,                        
                         TaskId = entity.Id
-                    };
-
-                    
+                    };                    
                     this.TasksService.CreateTaskHistory(taskHistory);
+
+                    if (task.TaskFollow.FollowDate != default(DateTime))
+                    {
+                        taskHistory = new TaskHistoryRequest()
+                        {
+                            Coment = "Próximo contacto",
+                            FollowDate = task.TaskFollow.FollowDate,
+                            TaskId = entity.Id
+                        };
+                        this.TasksService.CreateTaskHistory(taskHistory);
+                    }
                     
                     return Redirect(string.Format("/Backlog/UpdateTicketById/{0}", task.TicketId));
                 }
@@ -85,14 +94,22 @@ namespace Administracion.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTaskFollow(TaskHistoryViewModel task)
+        public ActionResult CreateTaskFollow(TaskHistoryViewModel task, bool toTicket = false)
         {
             try
             {
-                var taskHistoryRequest = Mapper.Map<TaskHistoryRequest>(task);
+                TaskHistoryRequest taskHistoryRequest = Mapper.Map<TaskHistoryRequest>(task);
                 this.TasksService.CreateTaskHistory(taskHistoryRequest);
-                var otask = this.TasksService.GetTask(task.TaskId);
-                return RedirectToAction("Details", new { id = task.TaskId });
+                Task otask = this.TasksService.GetTask(task.TaskId);
+
+                if (toTicket)
+                {
+                    return RedirectToAction("UpdateTicketById", "Backlog", new { id = task.TicketId });
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = task.TaskId });
+                }
             }
             catch (Exception ex)
             {
