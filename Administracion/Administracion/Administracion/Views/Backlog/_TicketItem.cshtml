@@ -17,7 +17,7 @@
             }
             
             </td>
-            <td class="text-center"><a href="UpdateTicketById/@Model.Id">@Model.Title</a> </td>
+            <td class="text-center"><a href="@Url.Action("UpdateTicketById", "Backlog", new { id = Model.Id })">@Model.Title</a> </td>
             @if (Model.BacklogUser != null)
             {
                 <td class="text-center">@Model.BacklogUser.User.Name @Model.BacklogUser.User.Surname</td>

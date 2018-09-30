@@ -184,7 +184,7 @@
                     <div class="form-group clearfix">
                         <div class="col-md-5">
                             <label class="control-label">Asignado a</label>
-                            @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.BacklogUser.Id, Model.BacklogUserList, "-- Elija usuario--", new { @class = "form-control chosen-select" })
                         </div>
                         <div class="col-md-5 col-md-offset-1">
                             <label class="control-label" for="example-email-input">Autoasignar</label>
@@ -478,6 +478,10 @@
 @Html.Partial("_CreateTicketFollow", Model)
 @Html.Partial("_TicketFollowDetails", Model)
 
+@section scripts {
+    @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@
+    <script src="~/Scripts/Backlog/CreateTicket.js"></script>
+}
 <script>
 
     document.onreadystatechange = function () {
@@ -521,6 +525,5 @@
         },
         false
     );
-
-
 </script>
+
