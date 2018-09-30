@@ -572,6 +572,7 @@
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Consortium\CreateUpdateConsortiumConfiguration.cshtml" />
     <Content Include="Views\FunctionalUnit\CreateUpdateUnitConfiguration.cshtml" />
+    <Content Include="Views\FunctionalUnit\CreatePaymentRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

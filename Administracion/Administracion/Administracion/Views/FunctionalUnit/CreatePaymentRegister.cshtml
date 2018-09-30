@@ -1,0 +1,57 @@
+﻿@model Administracion.Models.UnitPaymentViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/Consortium/Details/@Model.ConsortiumId"><i class="fa fa-home"></i> Consorcio</a>
+                </li>                
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>            
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>ALTA NUEVO </strong> PAGO</h2>
+                    </div>
+                    @using (Html.BeginForm("CreatePaymentRegister", "FunctionalUnit", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="ConsortiumId" name="ConsortiumId" value="@Model.ConsortiumId">
+                        <input type="hidden" id="UnitId" name="UnitId" value="@Model.UnitId">
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Monto</label>
+                            <div class="col-md-4">
+                                
+                                <input id="Amount" type="number" step=".01" name="Amount" value="0">                                
+                            </div>                            
+                        </div>
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Aceptar</button>                                    
+                                </div>
+                            </div>
+                    }
+
+                </div>
+            </div>
+        </div>                
+    </div>            
+</div>
+
