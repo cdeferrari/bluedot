@@ -16,5 +16,6 @@ namespace ApiCore.Services.Contracts.ConsortiumConfigurations
         IList<ConsortiumConfiguration> GetByConsortiumId(int consortiumId, DateTime startDate, DateTime endDate);
         ConsortiumConfiguration UpdateConsortiumConfiguration(ConsortiumConfiguration originalConsortiumConfiguration, ConsortiumConfigurationRequest ConsortiumConfiguration);
         void DeleteConsortiumConfiguration(int id);
+        ConsortiumConfiguration GetByTypeDescription(int consortiumId, string description);
     }
 }

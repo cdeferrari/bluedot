@@ -1,5 +1,6 @@
 ﻿using ApiCore.DomainModel;
 using ApiCore.Dtos.Request;
+using ApiCore.Dtos.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,8 @@ namespace ApiCore.Services.Contracts.AccountStatuss
         AccountStatus UpdateAccountStatus(AccountStatus originalAccountStatus, AccountStatusRequest AccountStatus);
         void DeleteAccountStatus(int AccountStatusId);
         bool RegisterMonth(int unitId);
+        IList<UnitAccountStatusSummary> GetConsortiumSummary(int consortiumId);
+
+
     }
 }

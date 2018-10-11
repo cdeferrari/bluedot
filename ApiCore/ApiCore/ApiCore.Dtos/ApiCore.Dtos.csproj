@@ -78,6 +78,7 @@
     <Compile Include="Request\BankAccountRequest.cs" />
     <Compile Include="Request\WorkerRequest.cs" />
     <Compile Include="Request\UserRequest.cs" />
+    <Compile Include="Response\UnitAccountStatusSummary.cs" />
     <Compile Include="Response\AccountResponse.cs" />
     <Compile Include="Response\AccountTypeResponse.cs" />
     <Compile Include="Response\AddressResponse.cs" />
