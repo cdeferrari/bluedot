@@ -96,30 +96,18 @@ namespace Administracion.Controllers
 
             
 
-            var provinces = this.CountryService
-                .GetAllProvinces(int.Parse(ConfigurationManager.AppSettings["default_country_id"]));
+            IList<Province> provinceList = this.CountryService.GetAllProvinces(int.Parse(ConfigurationManager.AppSettings["default_country_id"]));
 
-            var provincesList = provinces.Select(x => new SelectListItem()
-            {
-                Value = x.Description,
-                Text = x.Description
-            });
+            Province provincia = provinceList.FirstOrDefault();
+            List<City> cityList = provincia == null ? new List<City>() : provincia.Cities.ToList();
 
-            var cities = provinces.FirstOrDefault().Cities;
-
-            var citiesList = cities.Select(x => new SelectListItem()
-            {
-                Value = x.Description,
-                Text = x.Description
-            });
-
-            var viewModel = new ConsortiumViewModel()
+            ConsortiumViewModel viewModel = new ConsortiumViewModel()
             {
                 Administrations = new SelectList(administrations, "Value", "Text"),
                 Ownerships = new SelectList(ownerships, "Value", "Text"),
                 CommonDataItems = new SelectList(commonDataItems, "Value", "Text"),
-                Provinces = provincesList,
-                Cities = citiesList
+                Provinces = new SelectList(provinceList, "Description", "Description"),
+                Cities = new SelectList(cityList, "Description", "Description")
             };
 
             viewModel.Ownership = new OwnershipViewModel()

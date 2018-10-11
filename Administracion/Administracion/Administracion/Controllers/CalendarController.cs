@@ -98,12 +98,12 @@ namespace Administracion.Controllers
             }
         }
 
-        public void LoadEventsFromTaskList(ref List<Models.Calendar.Event> eventList, IEnumerable<DomainModel.Task> taskList, string ticketTitle)
+        public void LoadEventsFromTaskList(ref List<Models.Calendar.Event> eventList, IEnumerable<DomainModel.Task> taskList, string ticketTitle, string consortium)
         {
             foreach(DomainModel.Task task in taskList)
             {
                 string url = Url.Action("Details", "Task", new { id = task.Id });
-                string description = GetTaskEventDescription(task, ticketTitle);
+                string description = GetTaskEventDescription(task, ticketTitle, consortium);
                 string color;
                 switch (task.Priority.Description.ToLower())
                 {
@@ -120,16 +120,6 @@ namespace Administracion.Controllers
                         color = Models.Calendar.Color.Task;
                         break;
                 }
-                //eventList.Add(new Models.Calendar.Event()
-                //{
-                //    Title = task.Description,
-                //    Day = task.OpenDate.Day,
-                //    Month = task.OpenDate.Month - 1,
-                //    Year = task.OpenDate.Year,
-                //    Color = color,
-                //    Description = description,
-                //    Url = url
-                //});
 
                 LoadEventsFromTaskHistoryList(ref eventList, task.TaskHistory, url, description, color);
             }
@@ -139,7 +129,7 @@ namespace Administracion.Controllers
         {
             foreach (Models.TicketViewModel ticket in ticketList)
             {
-                LoadEventsFromTaskList(ref eventList, ticket.Tasks.Where(x => x.Status.Description == "open"), ticket.Title);
+                LoadEventsFromTaskList(ref eventList, ticket.Tasks.Where(x => x.Status.Description == "open"), ticket.Title, ticket.Consortium.FriendlyName);
             }
             
         }
@@ -179,10 +169,11 @@ namespace Administracion.Controllers
             {
                 description += "<label>Proveedor</label>" + "<p>" + ticket.Provider.User.Name + "</p>";
             }
+            description += "<label>Consorcio</label>" + "<p>" + ticket.Consortium.FriendlyName + "</p>";
             return description;
         }
 
-        private string GetTaskEventDescription(DomainModel.Task task, string ticketTitle)
+        private string GetTaskEventDescription(DomainModel.Task task, string ticketTitle, string consortium)
         {
             string description = 
                 "<label>Prioridad</label>" +
@@ -194,7 +185,7 @@ namespace Administracion.Controllers
                 description += "<label>Proveedor</label>" +
                 "<p>" + task.Provider.User.Name + "</p>";
             }
-
+            description += "<label>Consorcio</label>" + "<p>" + consortium + "</p>";
             return description;
         }
 

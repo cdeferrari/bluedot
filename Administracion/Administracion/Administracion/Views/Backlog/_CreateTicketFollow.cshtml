@@ -5,7 +5,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h2 class="modal-title"> Nuevo seguimiento</h2>
+                <h2 class="modal-title"><i class="fa fa-calendar-o"></i> Nuevo seguimiento</h2>
             </div>
             <!-- END Modal Header -->
             <!-- Modal Body -->
@@ -17,19 +17,17 @@
                     <input type="hidden" name="TicketId" id="TicketId" value="@Model.Id" />
 
                     <div class="form-group row">
-                        <label class="control-label col-md-3">Comentario</label>
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-md-offset-2">
+                        <label class="control-label">Comentario</label>
                             <textarea name="Coment" id="Coment" class="form-control text-box multi-line"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         
-                        <label class="control-label col-md-3">Próxima fecha de seguimiento</label>
-                        <div class='col-md-4 '>
-
-                            <div class='input-group date'>
-                        
+                        <div class='col-md-5 col-md-offset-2'>
+                            <label class="control-label">Próxima fecha de seguimiento</label>
+                            <div class='input-group date'>                        
                                 <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required." id="TicketFollow_FollowDate" name="FollowDate" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Ingrese fecha de proximo seguimiento')" required="required" type="datetime" value="">
 
                                 @Html.ValidationMessage("", new { @class = "text-danger" })
@@ -44,7 +42,7 @@
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-success" value="Guardar" />
+                            <input type="submit" class="btn btn-primary" value="Guardar" />
                         </div>
                     </div>
                 }
