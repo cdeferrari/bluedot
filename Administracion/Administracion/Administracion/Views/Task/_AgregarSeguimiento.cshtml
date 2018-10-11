@@ -13,9 +13,7 @@
 
                 @using (Html.BeginForm("CreateTaskFollow", "Task", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-bordered" }))
                 {
-
                     <input type="hidden" name="TaskId" id="TaskId" value="@Model.Id" />
-
                     <div class="form-group row">
                         <label class="control-label col-md-2">Comentarios</label>
                         <div class="col-md-10">
