@@ -25,8 +25,10 @@ namespace ApiCore.Services.Implementations.AccountStatuss
         public IFunctionalUnitRepository UnitRepository { get; set; }
         public ISpendRepository SpendRepository { get; set; }
         public IIncomeRepository IncomeRepository { get; set; }
+        public IConsortiumRepository ConsortiumRepository { get; set; }
         public ISpendTypeRepository SpendTypeRepository { get; set; }
-
+        public IConsortiumConfigurationRepository ConsortiumConfigurationRepository { get; set; }
+        public IUnitConfigurationRepository UnitConfigurationRepository { get; set; }        
         public IConsortiumService ConsortiumService { get; set; }
         public IUnitService UnitService { get; set; }
         public IConsortiumConfigurationsService ConsortiumConfigurationService { get; set; }
@@ -129,13 +131,13 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var endDate = startDate.AddMonths(1).AddDays(-1);
            
             var unit = this.UnitRepository.GetById(UnitId);
-            var consortiums = this.ConsortiumService.GetAll();
+            var consortiums = this.ConsortiumRepository.GetAll();
             var consortium = consortiums.Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
             if (consortium != null)
             {
                 //traer la configuracion de la unidad
-                var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortium.Id,startDate,endDate);
-                var unitConfig = this.UnitConfigurationService.GetByUnitId(UnitId, startDate, endDate);
+                var consortiumConfig = this.ConsortiumConfigurationRepository.GetByConsortiumId(consortium.Id,startDate,endDate);
+                var unitConfig = this.UnitConfigurationRepository.GetByUnitId(UnitId, startDate, endDate);
                 decimal debt = 0;
 
                 foreach(var uc in unitConfig)
@@ -244,9 +246,18 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var endDate = startDate.AddMonths(1).AddDays(-1);
 
             var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortiumId, startDate, endDate);
+
             var unitConfig = this.UnitConfigurationService.GetByUnitId(unit.Id, startDate, endDate);
-            decimal debt = 0; decimal spendA = 0; decimal spendB = 0; decimal edesur = 0; decimal aysa = 0;
+            decimal debt = 0; decimal spendA = 0; decimal spendB = 0; decimal edesur = 0; decimal aysa = 0; decimal descAmount = 0;
             
+            var descAmountConfig = consortiumConfig.Where(x => x.Type.Description == "Descuento por pago adelantado").OrderByDescending(x => x.ConfigurationDate)
+                    .FirstOrDefault();
+            
+            if(descAmountConfig != null)
+            {
+                descAmount = descAmountConfig.Value;
+            }
+
 
             foreach (var uc in unitConfig)
             {
@@ -271,8 +282,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                             break;
                         case "Monto a recaudar aysa":
                             aysa = auxdebt;
-                            break;
-
+                            break;                        
                     }
                     
                 }
@@ -281,6 +291,10 @@ namespace ApiCore.Services.Implementations.AccountStatuss
 
 
             var allStatus = this.GetByUnitId(unit.Id);
+            var lastStatus = allStatus
+                .Where(x => x.Debe > 0)
+                .OrderByDescending(x => x.StatusDate)
+                .FirstOrDefault();
 
             var debe = allStatus.Sum(x => x.Debe);
             var haber = allStatus.Sum(x => x.Haber);
@@ -288,6 +302,9 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             //revisar
             var result = new UnitAccountStatusSummary()
             {
+                Uf = unit.Number.ToString(),
+                Propietario = unit.Owner != null ? unit.Owner.User.Name+" "+unit.Owner.User.Surname : string.Empty,
+                SaldoAnterior =lastStatus != null ?  lastStatus.Debe - debe : debe,
                 Deuda = debe - haber,
                 Pagos = haber,
                 Aysa = aysa,
@@ -296,7 +313,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 GastosB = spendB,
                 Dto = unit.Dto,
                 Piso = unit.Floor.ToString(),
-                SiPagaAntes = 0,
+                SiPagaAntes = (debe - haber) - ((debe-haber) * descAmount / 100),
                 Intereses = 0,
                 Total = debe - haber                
             };

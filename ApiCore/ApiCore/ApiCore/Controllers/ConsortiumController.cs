@@ -273,7 +273,7 @@ namespace ApiCore.Controllers
         /// <param name="id">id del Consorcio</param>
         /// <returns></returns>
 
-        [Route("{id}/Spend")]
+        [Route("{id}/ConsortiumAccountStatusSummary")]
         [ResponseType(typeof(List<UnitAccountStatusSummary>))]
         public IHttpActionResult GetConsortiumAccountStatusSummary(int id)
         {

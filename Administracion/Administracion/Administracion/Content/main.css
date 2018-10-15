@@ -1816,6 +1816,10 @@ a[data-toggle="lightbox-image"]:hover img {
     color: #ffffff;
 }
 
+
+.table.table-vcenter.table-condensed.table-bordered.reporte th {
+    font-size:12px;
+}
 /* Chat UI */
 .chatui-container {
     position: relative;

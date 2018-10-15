@@ -18,5 +18,6 @@ namespace Administracion.Services.Contracts.Consortiums
         IList<List> GetAllChecklists(int consortiumId);
         bool CloseMonth(int ConsortiumId);
         bool RegisterUnitsMonthDebt(int consortiumId);
+        IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId);
     }
 }

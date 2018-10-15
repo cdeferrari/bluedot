@@ -1,0 +1,22 @@
+﻿@model Administracion.DomainModel.UnitAccountStatusSummary
+
+@{var expensas = Model.GastosA + Model.GastosB; }
+        <tr>
+            <td>@Model.Uf</td>
+            <td>@Model.Piso</td>
+            <td>@Model.Dto</td>            
+            <td>@Model.Propietario</td>
+            <td>@Model.SaldoAnterior</td>
+            <td>@Model.Pagos</td>
+            <td>@Model.Deuda</td>
+            <td>@Model.Intereses</td>
+            <td>@Model.GastosA</td>
+            <td>@Model.GastosB</td>
+            <td>@expensas </td>
+            <td>@Model.Edesur</td>
+            <td>@Model.Aysa</td>
+            <td>@Model.SiPagaAntes</td>
+            <td>@Model.Total</td>
+            
+        </tr>
+
