@@ -172,7 +172,7 @@ namespace Administracion.Controllers
             var request = new AccountStatusRequest()
             {
                 Haber = unitPaymentViewModel.Amount,
-                StatusDate = DateTime.Now,
+                StatusDate = unitPaymentViewModel.PaymentDate,
                 UnitId = unitPaymentViewModel.UnitId
             };
 

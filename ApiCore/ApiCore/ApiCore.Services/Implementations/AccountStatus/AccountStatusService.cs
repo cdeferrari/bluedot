@@ -43,19 +43,24 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             if (entityToInsert.IsPayment())
             {
 
-                var unit = UnitService.GetById(AccountStatus.UnitId);
-                var consortium = ConsortiumService.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
+                var unit = UnitRepository.GetById(AccountStatus.UnitId);
+                var consortium = ConsortiumRepository.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
                 
                 var dateDay = DateTime.Now.Day;
-                var limitDateConfiguration = ConsortiumConfigurationService
-                    .GetByTypeDescription(consortium.Id, "Día límite pago adelantado");
-
-                var limitDayValue = limitDateConfiguration != null ? int.Parse(limitDateConfiguration.Value.ToString()) : 0;
+                var limitDateConfiguration = ConsortiumConfigurationRepository
+                .GetAll().Where(x => x.Consortium.Id == consortium.Id && x.Type.Description == "Día límite pago adelantado")
+                .OrderByDescending(x => x.ConfigurationDate)
+                        .FirstOrDefault();
+                
+                var limitDayValue = limitDateConfiguration != null ? Convert.ToInt32(limitDateConfiguration.Value): 0;
                 if(dateDay <= limitDayValue)
                 {
 
-                    var advancedPaymentConfiguration = ConsortiumConfigurationService
-                        .GetByTypeDescription(consortium.Id, "Descuento por pago adelantado");
+                    var advancedPaymentConfiguration = ConsortiumConfigurationRepository
+                .GetAll().Where(x => x.Consortium.Id == consortium.Id && x.Type.Description == "Descuento por pago adelantado")
+                .OrderByDescending(x => x.ConfigurationDate)
+                        .FirstOrDefault();
+
                         
                     var advandedPaymentValue = advancedPaymentConfiguration != null ? advancedPaymentConfiguration.Value : 0;
 
