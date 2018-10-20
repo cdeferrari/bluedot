@@ -10,7 +10,6 @@ namespace Administracion.Models
         public int ConsortiumId { get; set; }
         public int UnitId { get; set; }
         public decimal Amount { get; set; }
-
-
+        public DateTime PaymentDate { get; set; }
     }
 }

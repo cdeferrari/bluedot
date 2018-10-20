@@ -437,6 +437,13 @@ namespace Administracion.Controllers
             return Redirect(string.Format("/Consortium/Details/{0}", id));
         }
 
+        [HttpGet]
+        public ActionResult ConsortiumAccountStatusSummary(int id)
+        {
+            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id);
+            return View(unitsReport);
+        }
+
         [HttpPost]
         public ActionResult CreateUpdateConsortium(ConsortiumViewModel consortium)
         {

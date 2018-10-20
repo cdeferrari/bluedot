@@ -637,4 +637,7 @@
   <data name="CreateAccountStatus" xml:space="preserve">
     <value>AccountStatus/</value>
   </data>
+  <data name="GetConsortiumAccountSummary" xml:space="preserve">
+    <value>Consorcio/{0}/ConsortiumAccountStatusSummary</value>
+  </data>
 </root>

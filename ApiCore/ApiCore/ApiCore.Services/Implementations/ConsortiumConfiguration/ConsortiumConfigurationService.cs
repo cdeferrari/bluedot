@@ -35,7 +35,23 @@ namespace ApiCore.Services.Implementations.ConsortiumConfigurations
 
             return ConsortiumConfiguration;
         }
-        
+
+        public ConsortiumConfiguration GetByTypeDescription(int consortiumId, string description)
+        {
+            var ConsortiumConfiguration = ConsortiumConfigurationRepository
+                .GetAll().Where(x => x.Consortium.Id == consortiumId && x.Type.Description == description)
+                .OrderByDescending(x => x.ConfigurationDate)
+                        .FirstOrDefault();
+
+            return ConsortiumConfiguration;
+
+            ;
+            if (ConsortiumConfiguration == null)
+                throw new BadRequestException(ErrorMessages.GastoNoEncontrado);
+
+            return ConsortiumConfiguration;
+        }
+
 
         [Transaction]
         public ConsortiumConfiguration UpdateConsortiumConfiguration(ConsortiumConfiguration originalConsortiumConfiguration, ConsortiumConfigurationRequest ConsortiumConfiguration)

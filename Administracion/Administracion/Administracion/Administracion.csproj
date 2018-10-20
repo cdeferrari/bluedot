@@ -271,6 +271,7 @@
     <Compile Include="Models\Calendar\Color.cs" />
     <Compile Include="Models\UnitConfigurationItemViewModel.cs" />
     <Compile Include="Models\ConsortiumConfigurationItemViewModel.cs" />
+    <Compile Include="Models\UnitAccountStatusViewModel.cs" />
     <Compile Include="Models\UnitConfigurationViewModel.cs" />
     <Compile Include="Models\FireExtinguisherControlViewModel.cs" />
     <Compile Include="Models\FastUpdateViewModel.cs" />
@@ -574,6 +575,8 @@
     <Content Include="Views\Consortium\CreateUpdateConsortiumConfiguration.cshtml" />
     <Content Include="Views\FunctionalUnit\CreateUpdateUnitConfiguration.cshtml" />
     <Content Include="Views\FunctionalUnit\CreatePaymentRegister.cshtml" />
+    <Content Include="Views\Consortium\ConsortiumAccountStatusSummary.cshtml" />
+    <Content Include="Views\Consortium\_UnitResumeItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

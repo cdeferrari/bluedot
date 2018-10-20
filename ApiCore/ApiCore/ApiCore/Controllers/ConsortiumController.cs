@@ -265,6 +265,28 @@ namespace ApiCore.Controllers
         }
 
 
+
+        // GET api/<controller>/5
+        /// <summary>
+        /// Devuelve los gastos del consorcio
+        /// </summary>
+        /// <param name="id">id del Consorcio</param>
+        /// <returns></returns>
+
+        [Route("{id}/ConsortiumAccountStatusSummary")]
+        [ResponseType(typeof(List<UnitAccountStatusSummary>))]
+        public IHttpActionResult GetConsortiumAccountStatusSummary(int id)
+        {
+            
+            var completeResume = AccountStatusService.GetConsortiumSummary(id);
+
+            if (completeResume == null)
+                throw new NotFoundException(ErrorMessages.UnidadNoEncontrada);
+
+            return Ok(completeResume);
+        }
+
+
         // POST api/<controller>
         /// <summary>
         /// Inserta un consorcio

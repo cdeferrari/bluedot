@@ -63,5 +63,10 @@ namespace Administracion.Services.Implementations.Consortiums
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.RegisterUnitsMonthDebt, consortiumId), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId) });
         }
 
+        public IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId)
+        {
+            return IntegrationService.RestCall<List<UnitAccountStatusSummary>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConsortiumAccountSummary, consortiumId), RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+        }
+
     }
 }

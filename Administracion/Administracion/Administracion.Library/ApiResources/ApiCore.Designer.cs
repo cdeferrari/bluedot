@@ -1123,6 +1123,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumAccountStatusSummary.
+        /// </summary>
+        public static string GetConsortiumAccountSummary {
+            get {
+                return ResourceManager.GetString("GetConsortiumAccountSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ConsortiumConfigurations/{0}.
         /// </summary>
         public static string GetConsortiumConfiguration {
