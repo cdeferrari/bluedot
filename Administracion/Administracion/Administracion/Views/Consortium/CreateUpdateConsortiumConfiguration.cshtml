@@ -47,8 +47,8 @@
                             <input type="hidden" id="ConsortiumConfigurations[@itemCnt].ConsortiumConfigurationTypeId" name="ConsortiumConfigurations[@itemCnt].ConsortiumConfigurationTypeId" value="@conf.Id">
                             <div class="form-group row">
                                 <label class="col-md-3 control-label" for="example-email-input">@conf.Description </label>
-                                <div class="col-md-6">
-                                    <input id="ConsortiumConfigurations[@itemCnt].Value" type="number" step=".01" name="ConsortiumConfigurations[@itemCnt].Value" value="@actualValue">@if (conf.IsPercentage) { <a>%</a> }
+                                <div class="col-md-2 form-inline">
+                                    <input class="form-control" id="ConsortiumConfigurations[@itemCnt].Value" type="number" step=".01" name="ConsortiumConfigurations[@itemCnt].Value" value="@actualValue">@if (conf.IsPercentage) { <a>%</a> }
                                 </div>
                             </div>                           
                             itemCnt++;
