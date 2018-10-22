@@ -55,7 +55,19 @@
                                 @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        <div class="form-group " id="pagosSelection">
+                            <label class="control-label col-md-2">Medio de pago</label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentTypes, "-- Por favor elja --", new
+                                   {
+                                       @class = "form-control",
+                                       @size = "1",
+                                       @required = "required",
+                                       @oninvalid = "this.setCustomValidity('Elija medio de pago')",
+                                       @oninput = "setCustomValidity('')"
+                                   })
+                            </div>
+                        </div>
 
 
                             <div class="form-group form-actions">

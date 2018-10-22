@@ -359,6 +359,7 @@ namespace ApiCore.App_Start
             builder.RegisterType<ManagerRepository>().As<IManagerRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<MessageRepository>().As<IMessageRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PaymentTypeRepository>().As<IPaymentTypeRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<PaymentRepository>().As<IPaymentRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendTypeRepository>().As<ISpendTypeRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendItemRepository>().As<ISpendItemRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<BillRepository>().As<IBillRepository>().PropertiesAutowired().InstancePerRequest();

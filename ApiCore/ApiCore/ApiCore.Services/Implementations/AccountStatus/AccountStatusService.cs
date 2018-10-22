@@ -21,6 +21,8 @@ namespace ApiCore.Services.Implementations.AccountStatuss
 {
     public class AccountStatusService : IAccountStatusService
     {
+        public IPaymentRepository PaymentRepository { get; set; }
+        public IPaymentTypeRepository PaymentTypeRepository { get; set; }
         public IAccountStatusRepository AccountStatusRepository { get; set; }        
         public IFunctionalUnitRepository UnitRepository { get; set; }
         public ISpendRepository SpendRepository { get; set; }
@@ -46,7 +48,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 var unit = UnitRepository.GetById(AccountStatus.UnitId);
                 var consortium = ConsortiumRepository.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
                 
-                var dateDay = DateTime.Now.Day;
+                var dateDay = AccountStatus.StatusDate.Day;
                 var limitDateConfiguration = ConsortiumConfigurationRepository
                 .GetAll().Where(x => x.Consortium.Id == consortium.Id && x.Type.Description == "Día límite pago adelantado")
                 .OrderByDescending(x => x.ConfigurationDate)
@@ -71,6 +73,20 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             }
             
             AccountStatusRepository.Insert(entityToInsert);
+
+            if (entityToInsert.IsPayment())
+            {
+                
+                var payment = new Payment()
+                {
+                    AccountStatus = entityToInsert,
+                    PaymentType = PaymentTypeRepository.GetById(AccountStatus.PaymentTypeId.Value)
+                };
+
+                PaymentRepository.Insert(payment);
+            }
+
+
             return entityToInsert;
         }
 
@@ -253,8 +269,9 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortiumId, startDate, endDate);
 
             var unitConfig = this.UnitConfigurationService.GetByUnitId(unit.Id, startDate, endDate);
-            decimal debt = 0; decimal spendA = 0; decimal spendB = 0; decimal edesur = 0; decimal aysa = 0; decimal descAmount = 0;
-            
+            decimal debt = 0; decimal spendA = 0; decimal spendB = 0; decimal edesur = 0;
+            decimal aysa = 0; decimal descAmount = 0; decimal expensas = 0;
+
             var descAmountConfig = consortiumConfig.Where(x => x.Type.Description == "Descuento por pago adelantado").OrderByDescending(x => x.ConfigurationDate)
                     .FirstOrDefault();
             
@@ -287,7 +304,10 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                             break;
                         case "Monto a recaudar aysa":
                             aysa = auxdebt;
-                            break;                        
+                            break;
+                        case "Monto a recaudar expensas extraordinarias":
+                            expensas = auxdebt;
+                            break;
                     }
                     
                 }
@@ -314,6 +334,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 Pagos = haber,
                 Aysa = aysa,
                 Edesur = edesur,
+                Expensas = expensas,
                 GastosA = spendA,
                 GastosB = spendB,
                 Dto = unit.Dto,

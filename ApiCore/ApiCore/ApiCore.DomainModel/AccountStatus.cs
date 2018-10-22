@@ -12,7 +12,7 @@ namespace ApiCore.DomainModel
         public virtual FunctionalUnit Unit { get; set; }
         public virtual decimal Debe { get; set; }
         public virtual decimal Haber { get; set; }        
-
+        
         public bool IsPayment()
         {
             return this.Debe == 0 && this.Haber > 0;

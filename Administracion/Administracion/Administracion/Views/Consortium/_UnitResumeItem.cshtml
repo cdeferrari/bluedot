@@ -1,6 +1,6 @@
 ﻿@model Administracion.DomainModel.UnitAccountStatusSummary
 
-@{var expensas = Model.GastosA + Model.GastosB; }
+
         <tr>
             <td>@Model.Uf</td>
             <td>@Model.Piso</td>
@@ -12,7 +12,7 @@
             <td>@Model.Intereses</td>
             <td>@Model.GastosA</td>
             <td>@Model.GastosB</td>
-            <td>@expensas </td>
+            <td>@Model.Expensas</td>
             <td>@Model.Edesur</td>
             <td>@Model.Aysa</td>
             <td>@Model.SiPagaAntes</td>
