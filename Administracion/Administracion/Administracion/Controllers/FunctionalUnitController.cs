@@ -12,6 +12,7 @@ using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.PaymentTypesService;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Tickets;
 using Administracion.Services.Contracts.UnitConfigurations;
@@ -36,7 +37,7 @@ namespace Administracion.Controllers
         public virtual IOwnerService OwnersService { get; set; }
         public virtual IRenterService RenterService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
-
+        public virtual IPaymentTypesService PaymentTypeService { get; set; }
         public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
         public virtual IUnitConfigurationTypeService UnitConfigurationTypeService { get; set; }
 
@@ -156,11 +157,18 @@ namespace Administracion.Controllers
         [HttpGet]
         public ActionResult CreatePaymentRegister(int id, int unitId)
         {
-            
+            var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
+
+
             var UnitPaymentVm = new UnitPaymentViewModel()
             {                
                 ConsortiumId = id,
-                UnitId = unitId
+                UnitId = unitId,
+                PaymentTypes = paymentTypes
             };
 
             return View(UnitPaymentVm);
@@ -173,7 +181,8 @@ namespace Administracion.Controllers
             {
                 Haber = unitPaymentViewModel.Amount,
                 StatusDate = unitPaymentViewModel.PaymentDate,
-                UnitId = unitPaymentViewModel.UnitId
+                UnitId = unitPaymentViewModel.UnitId,
+                PaymentTypeId = unitPaymentViewModel.PaymentTypeId
             };
 
             var result = this.AccountStatusService.CreateAccountStatus(request);

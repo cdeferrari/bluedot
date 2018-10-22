@@ -12,5 +12,6 @@ namespace Administracion.Dto.Account
         public virtual decimal Debe { get; set; }
         public virtual decimal Haber { get; set; }
         public virtual DateTime StatusDate { get; set; }
+        public virtual int? PaymentTypeId { get; set; }
     }
 }

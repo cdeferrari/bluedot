@@ -135,15 +135,27 @@ namespace ApiCore.Controllers
         {
             var consortium = this.ConsortiumService.GetById(id);
 
-            foreach(var unit in consortium.Ownership.FunctionalUnits)
+            if (!this.MonthClosed(consortium))
             {
-                var result = this.AccountStatusService.RegisterMonth(unit.Id);
+                foreach (var unit in consortium.Ownership.FunctionalUnits)
+                {
+                    var result = this.AccountStatusService.RegisterMonth(unit.Id);
+                }
             }
             
             return Ok();
 
         }
 
+
+        private bool MonthClosed(Consortium consortium)
+        {
+
+            var accountsStatus = this.AccountStatusService.GetByUnitId(consortium.Ownership.FunctionalUnits.FirstOrDefault().Id)
+                .Where(x => x.StatusDate.Month == DateTime.Now.Month && x.StatusDate.Year == DateTime.Now.Year);
+
+            return accountsStatus.Any(x => !x.IsPayment());
+        }
 
 
         // GET api/<controller>/5

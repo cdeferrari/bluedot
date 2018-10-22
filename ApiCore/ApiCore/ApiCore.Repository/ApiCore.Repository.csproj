@@ -85,6 +85,7 @@
     <Compile Include="Contracts\ICommonDataItemsRepository.cs" />
     <Compile Include="Contracts\ICityRepository.cs" />
     <Compile Include="Contracts\IAccountStatusRepository.cs" />
+    <Compile Include="Contracts\IPaymentRepository.cs" />
     <Compile Include="Contracts\IUnitConfigurationRepository.cs" />
     <Compile Include="Contracts\IConsortiumConfigurationRepository.cs" />
     <Compile Include="Contracts\IUnitConfigurationTypeRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Implementatios\CommonDataItemsRepository.cs" />
     <Compile Include="Implementatios\CityRepository.cs" />
     <Compile Include="Implementatios\AccountStatusRepository.cs" />
+    <Compile Include="Implementatios\PaymentRepository.cs" />
     <Compile Include="Implementatios\UnitConfigurationRepository.cs" />
     <Compile Include="Implementatios\ConsortiumConfigurationRepository.cs" />
     <Compile Include="Implementatios\UnitConfigurationTypeRepository.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Mappings\CommonDataMap.cs" />
     <Compile Include="Mappings\CityMap.cs" />
     <Compile Include="Mappings\AccountStatusMap.cs" />
+    <Compile Include="Mappings\PaymentMap.cs" />
     <Compile Include="Mappings\UnitConfigurationMap.cs" />
     <Compile Include="Mappings\ConsortiumConfigurationMap.cs" />
     <Compile Include="Mappings\UnitConfigurationTypeMap.cs" />
