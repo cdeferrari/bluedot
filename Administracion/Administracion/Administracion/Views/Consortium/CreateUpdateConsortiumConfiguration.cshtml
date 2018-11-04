@@ -47,8 +47,8 @@
                             <input type="hidden" id="ConsortiumConfigurations[@itemCnt].ConsortiumConfigurationTypeId" name="ConsortiumConfigurations[@itemCnt].ConsortiumConfigurationTypeId" value="@conf.Id">
                             <div class="form-group row">
                                 <label class="col-md-3 control-label" for="example-email-input">@conf.Description </label>
-                                <div class="col-md-6">
-                                    <input id="ConsortiumConfigurations[@itemCnt].Value" type="number" step=".01" name="ConsortiumConfigurations[@itemCnt].Value" value="@actualValue">@if (conf.IsPercentage) { <a>%</a> }
+                                <div class="col-md-3 form-inline">
+                                    <input class="form-control mr-2" id="ConsortiumConfigurations[@itemCnt].Value" type="number" step=".01" name="ConsortiumConfigurations[@itemCnt].Value" value="@actualValue">@(conf.IsPercentage ? "%" : "")
                                 </div>
                             </div>                           
                             itemCnt++;
@@ -57,9 +57,8 @@
 
                             <div class="form-group form-actions">
                                 <div class="col-md-9 col-md-offset-3">
-                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
-                                    <!--<button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Resetear</button>-->
-                                    <a href='javascript:history.go(-1)' class="btn btn-sm btn-warning">Cancelar</a>
+                                    <a href='javascript:history.go(-1)' class="btn btn-sm btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
                                 </div>
                             </div>
 
