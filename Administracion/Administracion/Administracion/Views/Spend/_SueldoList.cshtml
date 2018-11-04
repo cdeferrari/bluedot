@@ -29,7 +29,7 @@
         <div class="row" style="margin-bottom: 34px;">
             <div class="col-md-6">
                 <label class="col-md-6">Período:</label>
-                @DateTime.Now.ToString("yyyy/MM")
+                @DateTime.Now.AddMonths(-1).ToString("yyyy/MM")
             </div>
             <div class="col-md-6">
                 <label class="col-md-6">Categoría del encargado:</label>
