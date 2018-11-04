@@ -144,6 +144,21 @@
                             {
                                 @Html.Partial("_SpendItem", aporte)
                             }
+                            @foreach(var key in Model.AportesYContribucionesSpends.Keys)
+                            {
+                                <tr>
+                                    <td style="border: solid 1px; border-color: #eaedf1;"></td>
+                                    <td style="border-left: solid 1px; border-color: #eaedf1;"><span style="font-weight:bolder">@key </span></td>
+                                    <td class="border-left-right-none"></td>
+                                    <td class="border-left-none" style="border-right: solid 1px; border-color: #eaedf1;"></td>
+                                    <td style="border: solid 1px; border-color: #eaedf1;">$@Model.AportesYContribucionesSpends[key]</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>                                
+                                </tr>                                
+                            }
+
                         </tbody>
                     </table>
                     @{decimal percentageItemAportesYContr = 0;
