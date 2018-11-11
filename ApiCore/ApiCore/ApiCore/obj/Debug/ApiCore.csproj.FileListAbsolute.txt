@@ -809,7 +809,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Owin
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Practices.ServiceLocation.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Newtonsoft.Json.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\NLog.dll
@@ -916,7 +915,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Exte
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Extensions.WebEncoders.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Net.Http.Headers.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Practices.ServiceLocation.xml
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Newtonsoft.Json.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\NLog.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Remotion.Linq.xml
@@ -960,3 +958,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CoreCompileInputs.cache
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.pdb
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.xml
