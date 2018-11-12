@@ -10,14 +10,14 @@
         <div id="page-content">
 
             <div class="content-header">
-                <ul class="nav-horizontal text-center">                    
+                <ul class="nav-horizontal text-center">
                     <li>
                         <a href="/DataBase/Index"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li class="active">
                         <a href="/Consortium/Index"><i class="gi gi-building"></i> Consorcios</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="/Patrimony/Index?Id=@Model.Id"><i class="fa fa-dollar"></i> Estado Patrimonial</a>
                     </li>
                     <li>
@@ -27,13 +27,16 @@
                         <a href="/Spend/Index?Id=@Model.Id"><i class="fa fa-arrow-down"></i> Gastos</a>
                     </li>
                     <li>
-                        <a href="/Consortium/ConsortiumAccountStatusSummary?Id=@Model.Id"><i class="fa fa-calculator"></i> Estados de cuenta</a>
+                        <a href="/Consortium/ConsortiumAccountStatusSummary?Id=@(Model.Id)&month=@(DateTime.Now.Month)"><i class="fa fa-calculator"></i> Estados de cuenta</a>
                     </li>
                     <li>
                         <a href="/Consortium/CreateUpdateConsortiumConfiguration?Id=@Model.Id"><i class="fa fa-cogs"></i> Configuraciones</a>
                     </li>
                     <li>
-                        <a href="/Consortium/RegisterUnitsMonthDebt?Id=@Model.Id"><i class="fa fa-calendar-check-o"></i> Cerrar mes</a>
+                        <a href="/Consortium/RegisterUnitsMonthDebt?Id=@(Model.Id)&month=@(DateTime.Now.Month)"><i class="fa fa-calendar-check-o"></i> Cerrar mes actual</a>
+                    </li>
+                    <li>
+                        <a href="/Consortium/RegisterUnitsMonthDebt?Id=@(Model.Id))&month=@(DateTime.Now.Month - 1)"><i class="fa fa-calendar-check-o"></i> Cerrar mes anterior</a>
                     </li>
                 </ul>                
             </div>

@@ -8,6 +8,8 @@ using ApiCore.Library.Exceptions;
 using ApiCore.Library.Mensajes;
 using ApiCore.DomainModel;
 using ApiCore.Services.Contracts.AccountStatuss;
+using System.Linq;
+using ApiCore.Services.Contracts.Consortiums;
 
 namespace ApiCore.Controllers
 {
@@ -18,7 +20,8 @@ namespace ApiCore.Controllers
     public class AccountStatusController : ApiController
     {
 
-        public IAccountStatusService AccountStatuservice { get; set; }
+        public IAccountStatusService AccountStatusService { get; set; }
+        public IConsortiumService ConsortiumService { get; set; }
 
         // GET api/<controller>/5
         /// <summary>
@@ -29,7 +32,7 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(IList<AccountStatus>))]
         public IHttpActionResult Get()
         {
-            var AccountStatus = AccountStatuservice.GetAll();
+            var AccountStatus = AccountStatusService.GetAll();
 
             if (AccountStatus == null)
                 throw new NotFoundException(ErrorMessages.GastoNoEncontrado);
@@ -51,7 +54,8 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(Entidad))]
         public IHttpActionResult Post(AccountStatusRequest AccountStatus)
         {
-            var result = AccountStatuservice.CreateAccountStatus(AccountStatus);
+            var consortium = this.ConsortiumService.GetById(AccountStatus.UnitId);
+            var result = AccountStatusService.CreateAccountStatus(AccountStatus);
 
             return Created<Entidad>("", new Entidad { Id = result.Id });
 
@@ -66,9 +70,9 @@ namespace ApiCore.Controllers
         /// <returns></returns>
         public IHttpActionResult Put(int id, AccountStatusRequest AccountStatus)
         {            
-            var originalAccountStatus = AccountStatuservice.GetById(id);
+            var originalAccountStatus = AccountStatusService.GetById(id);
             
-            var ret = AccountStatuservice.UpdateAccountStatus(originalAccountStatus, AccountStatus);
+            var ret = AccountStatusService.UpdateAccountStatus(originalAccountStatus, AccountStatus);
 
             return Ok();
             
@@ -88,7 +92,7 @@ namespace ApiCore.Controllers
             
             try
             {
-               AccountStatuservice.DeleteAccountStatus(id);
+               AccountStatusService.DeleteAccountStatus(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -96,6 +100,15 @@ namespace ApiCore.Controllers
                 return InternalServerError(new Exception(ex.Message));
             }
             
+        }
+
+        private bool MonthClosed(Consortium consortium, int month)
+        {
+
+            var accountsStatus = this.AccountStatusService.GetByUnitId(consortium.Ownership.FunctionalUnits.FirstOrDefault().Id)
+                .Where(x => x.StatusDate.Month == month && x.StatusDate.Year == DateTime.Now.Year);
+
+            return accountsStatus.Any(x => !x.IsPayment());
         }
     }
 }

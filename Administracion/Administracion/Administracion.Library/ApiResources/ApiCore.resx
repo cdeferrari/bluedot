@@ -632,12 +632,12 @@
     <value>UnitConfigurations/{0}</value>
   </data>
   <data name="RegisterUnitsMonthDebt" xml:space="preserve">
-    <value>Consorcio/{0}/RegisterUnitsMonthDebt</value>
+    <value>Consorcio/{0}/RegisterUnitsMonthDebt/{1}</value>
   </data>
   <data name="CreateAccountStatus" xml:space="preserve">
     <value>AccountStatus/</value>
   </data>
   <data name="GetConsortiumAccountSummary" xml:space="preserve">
-    <value>Consorcio/{0}/ConsortiumAccountStatusSummary</value>
+    <value>Consorcio/{0}/ConsortiumAccountStatusSummary/{1}</value>
   </data>
 </root>

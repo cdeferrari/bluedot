@@ -17,7 +17,7 @@ namespace Administracion.Services.Contracts.Consortiums
         bool DeleteConsortium(int consortiumId);
         IList<List> GetAllChecklists(int consortiumId);
         bool CloseMonth(int ConsortiumId);
-        bool RegisterUnitsMonthDebt(int consortiumId);
-        IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId);
+        bool RegisterUnitsMonthDebt(int consortiumId, int month);
+        IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId, int month);
     }
 }

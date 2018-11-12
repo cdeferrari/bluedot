@@ -1123,7 +1123,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumAccountStatusSummary.
+        ///   Looks up a localized string similar to Consorcio/{0}/ConsortiumAccountStatusSummary/{1}.
         /// </summary>
         public static string GetConsortiumAccountSummary {
             get {
@@ -1393,7 +1393,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consorcio/{0}/RegisterUnitsMonthDebt.
+        ///   Looks up a localized string similar to Consorcio/{0}/RegisterUnitsMonthDebt/{1}.
         /// </summary>
         public static string RegisterUnitsMonthDebt {
             get {

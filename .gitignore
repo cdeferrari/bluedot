@@ -8,3 +8,9 @@ src/.vs/
 src/packages/EntityFrameworkProfiler.3.0.3089.0/tools/log.txt
 *.suo
 /src/.vs
+ApiCore/ApiCore/.vs
+ApiCore/ApiCore/ApiCore/obj
+ApiCore/ApiCore/ApiCore/bin
+Administracion/Administracion/.vs
+Administracion/Administracion/Administracion/obj
+Administracion/Administracion/Administracion/bin

@@ -431,16 +431,16 @@ namespace Administracion.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegisterUnitsMonthDebt(int id)
+        public ActionResult RegisterUnitsMonthDebt(int id, int month)
         {
-            this.ConsortiumService.RegisterUnitsMonthDebt(id);
+            this.ConsortiumService.RegisterUnitsMonthDebt(id, month);
             return Redirect(string.Format("/Consortium/Details/{0}", id));
         }
 
         [HttpGet]
-        public ActionResult ConsortiumAccountStatusSummary(int id)
+        public ActionResult ConsortiumAccountStatusSummary(int id, int month)
         {
-            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id);
+            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             return View(unitsReport);
         }
 
