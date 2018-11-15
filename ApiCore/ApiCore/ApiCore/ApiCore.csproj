@@ -491,6 +491,7 @@
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\AccountStatusController.cs" />
+    <Compile Include="Controllers\ManagerPositionController.cs" />
     <Compile Include="Controllers\UnitConfigurationController.cs" />
     <Compile Include="Controllers\ConsortiumConfigurationController.cs" />
     <Compile Include="Controllers\UnitConfigurationTypeController.cs" />

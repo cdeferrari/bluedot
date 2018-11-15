@@ -48,6 +48,7 @@
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
     <Compile Include="Contracts\Area\IAreaService.cs" />
     <Compile Include="Contracts\AccountStatus\IAccountStatusService.cs" />
+    <Compile Include="Contracts\ManagersPosition\IManagerPositionService.cs" />
     <Compile Include="Contracts\UnitConfiguration\IUnitConfigurationService.cs" />
     <Compile Include="Contracts\ConsortiumConfiguration\IConsortiumConfigurationService.cs" />
     <Compile Include="Contracts\UnitConfigurationTypes\IUnitConfigurationTypeService.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Area\AreaService.cs" />
     <Compile Include="Implementations\AccountStatus\AccountStatusService.cs" />
+    <Compile Include="Implementations\ManagersPosition\ManagerPositionService.cs" />
     <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
     <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
     <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />

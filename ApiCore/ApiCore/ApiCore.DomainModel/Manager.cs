@@ -23,6 +23,7 @@ namespace ApiCore.DomainModel
         public virtual string PantsWaist { get; set; }
         public virtual string FootwearWaist { get; set; }
         public virtual string Schedule { get; set; }
+        public virtual ManagerPosition ManagerPosition { get; set; }
 
     }
 }

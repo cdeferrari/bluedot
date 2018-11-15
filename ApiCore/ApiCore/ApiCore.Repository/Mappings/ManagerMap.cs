@@ -26,7 +26,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.ShirtWaist).IsOptional().HasColumnName("shirt_waist");
             this.Property(x => x.PantsWaist).IsOptional().HasColumnName("pants_waist");
             this.Property(x => x.Schedule).IsOptional().HasColumnName("schedule");
-
+            this.HasOptional(x => x.ManagerPosition).WithMany().Map(x => x.MapKey("manager_position_id"));
         }
 
     }

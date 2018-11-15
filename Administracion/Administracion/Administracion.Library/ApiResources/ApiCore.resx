@@ -640,4 +640,7 @@
   <data name="GetConsortiumAccountSummary" xml:space="preserve">
     <value>Consorcio/{0}/ConsortiumAccountStatusSummary</value>
   </data>
+  <data name="GetAllManagerPosition" xml:space="preserve">
+    <value>ManagerPosition/</value>
+  </data>
 </root>

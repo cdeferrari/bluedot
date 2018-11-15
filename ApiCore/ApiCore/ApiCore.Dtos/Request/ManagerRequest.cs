@@ -26,6 +26,7 @@ namespace ApiCore.Dtos.Request
         public virtual string PantsWaist { get; set; }
         public virtual string FootwearWaist { get; set; }
         public virtual string Schedule { get; set; }
+        public virtual int? ManagerPositionId { get; set; }
 
     }
 }
