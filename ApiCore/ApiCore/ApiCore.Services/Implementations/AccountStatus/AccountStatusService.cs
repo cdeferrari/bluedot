@@ -302,7 +302,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortiumId, startDate, endDate);
 
             var unitConfig = this.UnitConfigurationService.GetByUnitId(unit.Id, startDate, endDate);
-            decimal spendA = 0; decimal spendB = 0; decimal edesur = 0; decimal spendC = 0;
+            decimal spendA = 0; decimal spendB = 0; decimal edesur = 0; decimal spendC = 0; decimal spendD = 0;
             decimal aysa = 0; decimal discount = 0; decimal expensas = 0;
 
 
@@ -327,6 +327,9 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                         case "Monto a recaudar gasto tipo C":
                             spendC = auxdebt;
                             break;
+                        case "Monto a recaudar gasto tipo D":
+                            spendD = auxdebt;
+                            break;
                         case "Monto a recaudar edesur":
                             edesur = auxdebt;
                             break;
@@ -347,7 +350,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var unitPayments = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.IsPayment()).Sum(x => x.Haber);
             var unitDebt = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == (month - 1) && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
             var unitInterest = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == (month - 1) && !x.IsPayment() && x.Interest).Sum(x => x.Debe);
-            var currentDebt = spendA + spendB + spendC + edesur + aysa + expensas;
+            var currentDebt = spendA + spendB + spendC + spendD + edesur + aysa + expensas;
             var totalUnitDebt = unitDebt + unitInterest;
 
             var discountConfig = consortiumConfig.Where(x => x.Type.Description == "Descuento por pago adelantado").OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
@@ -373,12 +376,14 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 GastosA = spendA,
                 GastosB = spendB,
                 GastosC = spendC,
+                GastosD = spendD,
                 Dto = unit.Dto,
                 Piso = unit.Floor.ToString(),
                 SiPagaAntes = discount,
                 Intereses = unitInterest,
                 Total = totalUnitDebt + currentDebt - discount,
-                DiscountDay = discountConfig != null ? discountConfig.ConfigurationDate.Day : (int?)null
+                DiscountDay = discountConfig != null ? discountConfig.ConfigurationDate.Day : (int?)null,
+                DiscountValue = discountConfig != null ? discountConfig.Value : (decimal?)null
             };
 
             return result;

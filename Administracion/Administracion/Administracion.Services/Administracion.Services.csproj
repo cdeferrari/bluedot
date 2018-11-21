@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NVelocity, Version=1.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\NVelocity.1.1.1\lib\net40\NVelocity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -48,6 +57,7 @@
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
     <Compile Include="Contracts\Area\IAreaService.cs" />
     <Compile Include="Contracts\AccountStatus\IAccountStatusService.cs" />
+    <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
     <Compile Include="Contracts\UnitConfiguration\IUnitConfigurationService.cs" />
     <Compile Include="Contracts\ConsortiumConfiguration\IConsortiumConfigurationService.cs" />
     <Compile Include="Contracts\UnitConfigurationTypes\IUnitConfigurationTypeService.cs" />
@@ -72,7 +82,7 @@
     <Compile Include="Contracts\ConsortiumSecure\IConsortiumSecureService.cs" />
     <Compile Include="Contracts\Messages\IMessageService.cs" />
     <Compile Include="Contracts\Multimedias\IMultimediaService.cs" />
-    <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
+    <Compile Include="Contracts\PaymentTickets\IPaymentTicketService.cs" />
     <Compile Include="Contracts\FunctionalUnits\IFunctionalUnitService.cs" />
     <Compile Include="Contracts\Managers\IManagerService.cs" />
     <Compile Include="Contracts\Ownerships\IOwnershipService.cs" />
@@ -90,6 +100,8 @@
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Area\AreaService.cs" />
     <Compile Include="Implementations\AccountStatus\AccountStatusService.cs" />
+    <Compile Include="Implementations\PaymentTickets\PaymentTicketService.cs" />
+    <Compile Include="Implementations\PaymentTickets\PaymentTicketsStruct.cs" />
     <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
     <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
     <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />
