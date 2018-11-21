@@ -12,5 +12,6 @@ namespace Administracion.Models
         public virtual IEnumerable<SelectListItem> SpendTypes { get; set; }
         public virtual IEnumerable<SelectListItem> SpendItems { get; set; }                
         public virtual int ConsortiumId { get; set; }
+        public virtual Dictionary<string, decimal> AportesYContribucionesSpends { get; set; }
     }
 }

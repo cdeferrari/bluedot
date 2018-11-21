@@ -101,24 +101,43 @@ namespace Administracion.Controllers
                 var spendsWithoutManager = new List<Spend>();
 
                 var managers = new List<Manager>();
-                
+
+                var aportesYcontribucionesSpends = new Dictionary<string,decimal>();
+
                 salarySpends.ForEach(x => 
                 {
                     if (x.Bill.Manager != null)
                     {
-                        if (!salaryDictionary.Keys.Contains(x.Bill.Manager.Id))
+                        if(x.Description == "Suterh" || x.Description == "Fateryh" || x.Description == "Seracarh")
                         {
-                            var list = new List<Spend>() { x };
-                            salaryDictionary.Add(x.Bill.Manager.Id, list);
-                            managers.Add(x.Bill.Manager);
-                
+                            if (!aportesYcontribucionesSpends.Keys.Contains(x.Description))
+                            {
+                                aportesYcontribucionesSpends.Add(x.Description, x.Bill.Amount);
+                            }
+                            else
+                            {
+                                var actual = aportesYcontribucionesSpends[x.Description];
+                                actual += x.Bill.Amount;
+                                aportesYcontribucionesSpends[x.Description] = actual;
+                            }
                         }
                         else
                         {
-                            var list = salaryDictionary[x.Bill.Manager.Id];
-                            list.Add(x);
-                            salaryDictionary[x.Bill.Manager.Id] = list;
+                            if (!salaryDictionary.Keys.Contains(x.Bill.Manager.Id))
+                            {
+                                var list = new List<Spend>() { x };
+                                salaryDictionary.Add(x.Bill.Manager.Id, list);
+                                managers.Add(x.Bill.Manager);
+
+                            }
+                            else
+                            {
+                                var list = salaryDictionary[x.Bill.Manager.Id];
+                                list.Add(x);
+                                salaryDictionary[x.Bill.Manager.Id] = list;
+                            }
                         }
+                        
                     }
                     else
                     {
@@ -140,6 +159,7 @@ namespace Administracion.Controllers
                     SpendTypes = spendTypesList,
                     ConsortiumId = id,
                     SalarySpends = salaryDictionaryManager,
+                    AportesYContribucionesSpends = aportesYcontribucionesSpends,
                     SalarySpendWithoutManager = spendsWithoutManager
                 };
 
@@ -614,7 +634,7 @@ namespace Administracion.Controllers
                 var managerCuit = values[25];
                 var cuitWithouthSimbols = managerCuit.Trim().Replace("-", "");
                 var manager = managers.Where(x => !string.IsNullOrEmpty(x.User.CUIT) && x.User.CUIT.Trim().Replace("-", "") == cuitWithouthSimbols).FirstOrDefault();
-                var spendDate = DateTime.Now; // DateTime.Parse(values[39]);
+                var spendDate = DateTime.Now;
 
                 var spendDescription = values[89];
                 if (!string.IsNullOrEmpty(spendDescription))
@@ -634,7 +654,17 @@ namespace Administracion.Controllers
                         spendsToAdd.Add(this.CreateSpend(spendDescription, spendData, spendClassE, consortiumId, spendDate, spendTypes, spendClasses.Where(x => x.Description == "E").FirstOrDefault(), manager));
                     }
 
-                    dictionary.Add(spendDescription + "_" + managerCuit + "_" + spendDate, spendsToAdd);
+                    try
+                    {
+                        dictionary.Add(spendDescription + "_" + managerCuit + "_" + spendDate, spendsToAdd);
+                    }
+                    catch(Exception ex)
+                    {
+
+                        System.Threading.Thread.Sleep(1000);
+                        spendDate = DateTime.Now;
+                        dictionary.Add(spendDescription + "_" + managerCuit + "_" + spendDate, spendsToAdd);
+                    }
                 }
                                 
             }
