@@ -128,18 +128,19 @@ namespace ApiCore.Controllers
         /// <summary>
         /// Cierra el mes
         /// </summary>
-        /// <param name="consortiumId">Consorcio a cerrar</param>
+        /// <param name="id">Consorcio a cerrar</param>
+        /// <param name="month">mes a cerrar</param>
         /// <returns></returns>
-        [Route("{id}/RegisterUnitsMonthDebt")]
-        public IHttpActionResult RegisterUnitsMonthDebt(int id)
+        [Route("{id}/RegisterUnitsMonthDebt/{month}")]
+        public IHttpActionResult RegisterUnitsMonthDebt(int id, int month)
         {
             var consortium = this.ConsortiumService.GetById(id);
 
-            if (!this.MonthClosed(consortium))
+            if (!this.MonthClosed(consortium, month))
             {
                 foreach (var unit in consortium.Ownership.FunctionalUnits)
                 {
-                    var result = this.AccountStatusService.RegisterMonth(unit.Id);
+                    var result = this.AccountStatusService.RegisterMonth(unit.Id, month);
                 }
             }
             
@@ -148,11 +149,11 @@ namespace ApiCore.Controllers
         }
 
 
-        private bool MonthClosed(Consortium consortium)
+        private bool MonthClosed(Consortium consortium, int month)
         {
 
             var accountsStatus = this.AccountStatusService.GetByUnitId(consortium.Ownership.FunctionalUnits.FirstOrDefault().Id)
-                .Where(x => x.StatusDate.Month == DateTime.Now.Month && x.StatusDate.Year == DateTime.Now.Year);
+                .Where(x => x.StatusDate.Month == month && x.StatusDate.Year == DateTime.Now.Year);
 
             return accountsStatus.Any(x => !x.IsPayment());
         }
@@ -283,14 +284,15 @@ namespace ApiCore.Controllers
         /// Devuelve los gastos del consorcio
         /// </summary>
         /// <param name="id">id del Consorcio</param>
+        /// <param name="month">mes del balanceo</param>
         /// <returns></returns>
 
-        [Route("{id}/ConsortiumAccountStatusSummary")]
+        [Route("{id}/ConsortiumAccountStatusSummary/{month}")]
         [ResponseType(typeof(List<UnitAccountStatusSummary>))]
-        public IHttpActionResult GetConsortiumAccountStatusSummary(int id)
+        public IHttpActionResult GetConsortiumAccountStatusSummary(int id, int month)
         {
             
-            var completeResume = AccountStatusService.GetConsortiumSummary(id);
+            var completeResume = AccountStatusService.GetConsortiumSummary(id, month);
 
             if (completeResume == null)
                 throw new NotFoundException(ErrorMessages.UnidadNoEncontrada);

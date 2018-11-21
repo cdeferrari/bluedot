@@ -12,6 +12,7 @@ using Administracion.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -99,6 +100,22 @@ namespace Administracion.App_Start
                 cfg.CreateMap<SpendTypeViewModel, SpendTypeRequest>();
                 cfg.CreateMap<TicketHistoryViewModel, TicketHistoryRequest>();
                 cfg.CreateMap<TaskHistoryViewModel, TaskHistoryRequest>();
+
+                cfg.CreateMap<UnitAccountStatusSummary, PaymentTicket>()
+               .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Propietario))
+               .ForMember(dest => dest.Department, opt => opt.MapFrom(src => "Piso: " + src.Piso + " Depto: " + src.Dto))
+               .ForMember(dest => dest.ExpenseA, opt => opt.MapFrom(src => src.GastosA.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.ExpenseB, opt => opt.MapFrom(src => src.GastosB.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.ExpenseC, opt => opt.MapFrom(src => src.GastosC.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.ExpenseD, opt => opt.MapFrom(src => src.GastosD.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.ExtraordinaryExpense, opt => opt.MapFrom(src => src.Expensas.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Power, opt => opt.MapFrom(src => src.Edesur.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Water, opt => opt.MapFrom(src => src.Aysa.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Debt, opt => opt.MapFrom(src => src.Deuda.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Interest, opt => opt.MapFrom(src => src.Intereses.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.DiscountTotal, opt => opt.MapFrom(src => (src.Total - (src.Total * (src.DiscountValue ?? 0) / 100)).ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.Total.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.DiscountDay, opt => opt.MapFrom(src => src.DiscountDay));
 
 
             });

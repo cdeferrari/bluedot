@@ -1,0 +1,54 @@
+body {
+	font-family: Arial;
+}
+
+td {
+	font-size: 12pt
+}
+
+.std-width {
+	width: 10%;
+}
+
+.td-right{
+	text-align: right;
+}
+
+.td-right-bold{
+	text-align:right;
+	font-weight:bold
+}
+
+.td-center{
+	text-align: center;
+}
+
+.td-discount {
+	font-size:11.5pt;
+	font-weight:bold;
+}
+
+.tr-big {
+	height: 1cm !important;
+}
+
+.master-table {
+	height:9cm; 
+	width:21cm; 
+}
+
+.full-width {
+	width:100%
+}
+
+.full-width tr {
+	height: 0.5cm;
+}
+
+.half-width {
+	width:50%
+}
+
+.separator {
+	height: 0.25cm;
+}

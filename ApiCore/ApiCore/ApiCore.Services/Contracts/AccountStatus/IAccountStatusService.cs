@@ -17,8 +17,8 @@ namespace ApiCore.Services.Contracts.AccountStatuss
         IList<AccountStatus> GetByUnitId(int unitId);
         AccountStatus UpdateAccountStatus(AccountStatus originalAccountStatus, AccountStatusRequest AccountStatus);
         void DeleteAccountStatus(int AccountStatusId);
-        bool RegisterMonth(int unitId);
-        IList<UnitAccountStatusSummary> GetConsortiumSummary(int consortiumId);
+        bool RegisterMonth(int unitId, int month);
+        IList<UnitAccountStatusSummary> GetConsortiumSummary(int consortiumId, int month);
 
 
     }

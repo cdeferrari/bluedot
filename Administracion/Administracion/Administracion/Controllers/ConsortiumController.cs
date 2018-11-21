@@ -54,6 +54,7 @@ namespace Administracion.Controllers
         public virtual IProviderService ProviderService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
         public virtual IElevatorControlService ElevatorControlService { get; set; }
+        public virtual IPaymentTicketService PaymentTicketService { get; set; }
 
         public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
         public virtual IConsortiumConfigurationTypeService ConsortiumConfigurationTypeService { get; set; }
@@ -431,17 +432,25 @@ namespace Administracion.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegisterUnitsMonthDebt(int id)
+        public ActionResult RegisterUnitsMonthDebt(int id, int month)
         {
-            this.ConsortiumService.RegisterUnitsMonthDebt(id);
+            this.ConsortiumService.RegisterUnitsMonthDebt(id, month);
             return Redirect(string.Format("/Consortium/Details/{0}", id));
         }
 
         [HttpGet]
-        public ActionResult ConsortiumAccountStatusSummary(int id)
+        public ActionResult ConsortiumAccountStatusSummary(int id, int month)
         {
-            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id);
-            return View(unitsReport);
+            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
+
+            var model = new ConsortiumAccountSummaryViewModel
+            {
+                Id = id,
+                Month= month,
+                Units = unitsReport
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -654,6 +663,26 @@ namespace Administracion.Controllers
             this.ConsortiumService.DeleteConsortium(id);
             return Redirect("/Consortium/Index");
             
+        }
+
+        [HttpGet]
+        public FileResult PrintPaymentTicketsPDF(int id, int month)
+        {
+            var consortium = ConsortiumService.GetConsortium(id);
+            var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
+            var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
+            //return Content(PaymentTicketService.GetTikcets(consortium, paymentTickets, month).ToString());
+            var htmlTickets = PaymentTicketService.GetTickets(consortium, paymentTickets, month);
+            return File(PaymentTicketService.GetPDFTickets(htmlTickets), "application/pdf");
+        }
+
+        [HttpGet]
+        public ContentResult PrintPaymentTicketsHtml(int id, int month)
+        {
+            var consortium = ConsortiumService.GetConsortium(id);
+            var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
+            var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
+            return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).ToString());
         }
 
         private void UploadMultimedia(int ownershipId)
