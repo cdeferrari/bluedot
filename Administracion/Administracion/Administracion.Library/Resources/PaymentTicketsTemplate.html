@@ -1,0 +1,199 @@
+﻿<link rel="stylesheet" type="text/css" href="PaymentTickets.css">
+#foreach($item in $model.Items)
+<table class="master-table" align="center">
+    <tr>
+        <!-- Start First Receipt -->
+        <td class="half-width">
+            <table class="full-width">
+                <tr>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="5" >$item.Owner</td>
+                    <td colspan="4" class="td-center">$model.FromDate</td>
+                </tr>
+				<tr>
+				
+				</tr>
+                <tr class="tr-big">
+                    <td></td>
+                    <td colspan="5" >$model.ConsortiumAddress</td>
+                    <td colspan="4" >$item.Department</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa A</td>
+                    <td colspan="4" class="td-right">$item.ExpenseA</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa B</td>
+                    <td colspan="4" class="td-right">$item.ExpenseB</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa C</td>
+                    <td colspan="4" class="td-right">$item.ExpenseC</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa D</td>
+                    <td colspan="4" class="td-right">$item.ExpenseD</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa Ext.</td>
+                    <td colspan="4" class="td-right">$item.ExtraordinaryExpense</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Edesur</td>
+                    <td colspan="4" class="td-right">$item.Power</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Aysa A</td>
+                    <td colspan="4" class="td-right">$item.Water</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Deuda Anterior</td>
+                    <td colspan="4" class="td-right">$item.Debt</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Punitorios</td>
+                    <td colspan="4" class="td-right">$item.Interest</td>
+                    <td></td>
+                </tr>
+                <tr class="tr-big">
+                    <td></td>
+                    <td colspan="4" class="td-discount">Si Paga Antes del $item.DiscountDay</td>
+                    <td colspan="4" class="td-right-bold">$item.DiscountTotal</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >$model.ToDate</td>
+                    <td colspan="4" class="td-right">$item.Total</td>
+                    <td></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="full-width">
+                <tr>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                    <td class="std-width"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="5" >$item.Owner</td>
+                    <td colspan="4" class="td-center">$model.FromDate</td>
+                </tr>
+				<tr>
+				
+				</tr>
+                <tr class="tr-big">
+                    <td></td>
+                    <td colspan="5" >$model.ConsortiumAddress</td>
+                    <td colspan="4" >$item.Department</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa A</td>
+                    <td colspan="4" class="td-right">$item.ExpenseA</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa B</td>
+                    <td colspan="4" class="td-right">$item.ExpenseB</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa C</td>
+                    <td colspan="4" class="td-right">$item.ExpenseC</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa D</td>
+                    <td colspan="4" class="td-right">$item.ExpenseD</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Expensa Ext.</td>
+                    <td colspan="4" class="td-right">$item.ExtraordinaryExpense</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Edesur</td>
+                    <td colspan="4" class="td-right">$item.Power</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Aysa A</td>
+                    <td colspan="4" class="td-right">$item.Water</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Deuda Anterior</td>
+                    <td colspan="4" class="td-right">$item.Debt</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >Punitorios</td>
+                    <td colspan="4" class="td-right">$item.Interest</td>
+                    <td></td>
+                </tr>
+                <tr class="tr-big">
+                    <td></td>
+                    <td colspan="4" class="td-discount">Si Paga Antes del $item.DiscountDay</td>
+                    <td colspan="4" class="td-right-bold">$item.DiscountTotal</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4" >$model.ToDate</td>
+                    <td colspan="4" class="td-right">$item.Total</td>
+                    <td></td>
+                </tr>
+            </table>
+        </td>
+        <!-- End First Receipt -->
+    </tr>
+</table>
+#end

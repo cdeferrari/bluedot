@@ -1,4 +1,4 @@
-﻿@model IList<Administracion.DomainModel.UnitAccountStatusSummary>
+﻿@model Administracion.Models.ConsortiumAccountSummaryViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,6 +16,12 @@
 
                 <li class="active">
                     <a href="#"><i class="gi gi-building"></i> Consorcios</a>
+                </li>
+                <li>
+                    <a href="/Consortium/PrintPaymentTicketsPDF?Id=@Model.Id&month=@Model.Month"><i class="fa fa-file-pdf-o"></i> Talones de Pago PDF</a>
+                </li>
+                <li>
+                    <a href="/Consortium/PrintPaymentTicketsHTML?Id=@Model.Id&month=@Model.Month"><i class="fa fa-html5"></i> Talones de Pago HTML</a>
                 </li>
             </ul>
         </div>
@@ -41,9 +47,8 @@
 
 
             <div class="table-responsive">
-                @if (Model.Count() > 0)
+                @if (Model.Units.Count() > 0)
                 {
-
                     <table id="example-datatable" class="table table-vcenter table-condensed table-bordered reporte">                    
 
                             <thead>
@@ -53,21 +58,23 @@
                                     <th class="text-center">Depto</th>
                                     <th class="text-center">Prop.</th>
                                     <th class="text-center">Saldo Anterior</th>
-                                    <th class="text-center">Pagos</th>
-                                    <th class="text-center">Deuda</th>
-                                    <th class="text-center">Int</th>
                                     <th class="text-center">Gastos A</th>
                                     <th class="text-center">Gastos B</th>
+                                    <th class="text-center">Gastos C</th>
                                     <th class="text-center">Expensas</th>
                                     <th class="text-center">Edesur</th>
                                     <th class="text-center">Aysa</th>
-                                    <th class="text-center">Antes del</th>
-                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Intereses</th>
+                                    <th class="text-center">Total del Mes</th>
+                                    <th class="text-center">Desc. Pago Puntual</th>
+                                    <th class="text-center">Total A Pagar</th>
+                                    <th class="text-center">Pagos</th>
+
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach (var unitResume in Model)
+                                @foreach (var unitResume in Model.Units)
                                 {
                                     @Html.Partial("_UnitResumeItem", unitResume)
                                 }

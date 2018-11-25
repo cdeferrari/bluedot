@@ -18,10 +18,14 @@ namespace Administracion.DomainModel
         public virtual decimal Intereses { get; set; }
         public virtual decimal GastosA { get; set; }
         public virtual decimal GastosB { get; set; }
+        public virtual decimal GastosC { get; set; }
+        public virtual decimal GastosD { get; set; }
         public virtual decimal Expensas { get; set; }
         public virtual decimal Aysa { get; set; }
         public virtual decimal Edesur { get; set; }
         public virtual decimal SiPagaAntes { get; set; }
         public virtual decimal Total { get; set; }
+        public virtual int? DiscountDay { get; set; }
+        public virtual decimal? DiscountValue { get; set; }
     }
 }

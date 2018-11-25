@@ -167,6 +167,7 @@ namespace Administracion.App_Start
             builder.RegisterType<IncomeTypesService>().As<IIncomeTypeService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ElevatorControlService>().As<IElevatorControlService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<FireExtinguisherControlService>().As<IFireExtinguisherControlService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<PaymentTicketService>().As<IPaymentTicketService>().SingleInstance().PropertiesAutowired();
 
 
         }

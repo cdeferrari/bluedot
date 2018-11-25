@@ -58,14 +58,14 @@ namespace Administracion.Services.Implementations.Consortiums
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.CloseMonth, consortiumId), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId) });
         }
 
-        public bool RegisterUnitsMonthDebt(int consortiumId)
+        public bool RegisterUnitsMonthDebt(int consortiumId, int month)
         {
-            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.RegisterUnitsMonthDebt, consortiumId), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId) });
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.RegisterUnitsMonthDebt, consortiumId, month), RestMethod.Post, null, new RestParamList { new RestParam("id", consortiumId), new RestParam("month", month) });
         }
 
-        public IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId)
+        public IList<UnitAccountStatusSummary> GetConsortiumAccountStatusSummary(int consortiumId, int month)
         {
-            return IntegrationService.RestCall<List<UnitAccountStatusSummary>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConsortiumAccountSummary, consortiumId), RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId) });
+            return IntegrationService.RestCall<List<UnitAccountStatusSummary>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetConsortiumAccountSummary, consortiumId, month), RestMethod.Get, null, new RestParamList { new RestParam("id", consortiumId), new RestParam("month", month) });
         }
 
     }
