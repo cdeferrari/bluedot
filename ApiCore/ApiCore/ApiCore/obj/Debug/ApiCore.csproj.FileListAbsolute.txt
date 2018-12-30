@@ -809,7 +809,6 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Owin
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Practices.ServiceLocation.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Newtonsoft.Json.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\NLog.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Owin.dll
@@ -954,10 +953,16 @@ C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\System.Web.Htt
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Net.Http.Formatting.resources.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.Http.resources.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\es\System.Web.Http.WebHost.resources.dll
-C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csprojResolveAssemblyReference.cache
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CoreCompileInputs.cache
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.pdb
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csprojAssemblyReference.cache
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\obj\Debug\ApiCore.csproj.CopyComplete
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Google.Protobuf.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\Google.Protobuf.xml
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.dll
 C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.Entity.EF6.xml
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.EntityFramework.dll
+C:\Users\lanacondio\Documents\bluedot\ApiCore\ApiCore\ApiCore\bin\MySql.Data.EntityFramework.xml

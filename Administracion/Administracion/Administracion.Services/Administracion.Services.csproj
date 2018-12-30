@@ -101,12 +101,9 @@
     <Compile Include="Contracts\Users\IUserService.cs" />
     <Compile Include="Implementations\Area\AreaService.cs" />
     <Compile Include="Implementations\AccountStatus\AccountStatusService.cs" />
-<<<<<<< HEAD
     <Compile Include="Implementations\ManagersPosition\ManagerPositionService.cs" />
-=======
     <Compile Include="Implementations\PaymentTickets\PaymentTicketService.cs" />
     <Compile Include="Implementations\PaymentTickets\PaymentTicketsStruct.cs" />
->>>>>>> rvoroz
     <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />
     <Compile Include="Implementations\ConsortiumConfiguration\ConsortiumConfigurationService.cs" />
     <Compile Include="Implementations\UnitConfigurationTypes\UnitConfigurationTypesService.cs" />

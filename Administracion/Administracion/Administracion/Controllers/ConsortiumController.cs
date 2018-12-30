@@ -697,7 +697,7 @@ namespace Administracion.Controllers
             var consortium = ConsortiumService.GetConsortium(id);
             var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
-            return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).ToString());
+            return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).HtmlTickets.ToString());
         }
 
         private void UploadMultimedia(int ownershipId)
