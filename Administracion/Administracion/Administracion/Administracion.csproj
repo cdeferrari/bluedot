@@ -586,6 +586,7 @@
     <Content Include="Views\FunctionalUnit\CreatePaymentRegister.cshtml" />
     <Content Include="Views\Consortium\ConsortiumAccountStatusSummary.cshtml" />
     <Content Include="Views\Consortium\_UnitResumeItem.cshtml" />
+    <Content Include="Views\FunctionalUnit\CreatedPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
