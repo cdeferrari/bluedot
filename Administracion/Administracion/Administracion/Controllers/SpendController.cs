@@ -6,6 +6,7 @@ using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Bills;
 using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.ExpensesBill;
 using Administracion.Services.Contracts.Managers;
 using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.SpendClass;
@@ -37,6 +38,7 @@ namespace Administracion.Controllers
         public virtual IProviderService ProviderService { get; set; }
         public virtual IWorkerService WorkerService { get; set; }
         public virtual IManagerService ManagerService { get; set; }
+        public virtual IExpensesBillervice ExpensesBillService { get; set; }
 
         private decimal suterhPercentage = decimal.Parse(ConfigurationManager.AppSettings["suterhPercentage"]);
         private decimal fateryhPercentage = decimal.Parse(ConfigurationManager.AppSettings["fateryhPercentage"]);
@@ -73,8 +75,8 @@ namespace Administracion.Controllers
         {
             try
             {
-                var startDate = DateTime.Now.AddDays(-DateTime.Now.Date.Day);
-                var endDate = DateTime.Now.AddDays(30 - DateTime.Now.Date.Day);
+                var startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+                var endDate = new DateTime(startDate.Year, startDate.Month, startDate.AddMonths(1).AddDays(-1).Day, 0, 0, 0);
                 var spendsList = this.SpendService.GetByConsortiumId(id, startDate, endDate);
 
                 var spendTypes = this.SpendTypeService.GetAll();
@@ -154,6 +156,8 @@ namespace Administracion.Controllers
 
                 var spendsViewModel = new SpendViewModel()
                 {
+                    Id = id,
+                    Month = startDate.Month,
                     Spends = spendsList,
                     SpendItems = spendItemsList,
                     SpendTypes = spendTypesList,
@@ -514,6 +518,32 @@ namespace Administracion.Controllers
             }
 
             return Redirect(string.Format("/Spend/Index?Id={0}", consortiumId));
+        }
+
+        [HttpGet]
+        public FileResult PrintExpensesPDF(int id, int month)
+        {
+            DateTime now = DateTime.Now;
+            var startDate = new DateTime(now.Year, month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+            var spendsList = SpendService.GetByConsortiumId(id, startDate, endDate);
+            var consortium = ConsortiumService.GetConsortium(id);
+
+            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, month);
+            return File(ExpensesBillService.GetPDFTickets(expensesHtml), "application/pdf");
+        }
+
+        [HttpGet]
+        public ContentResult PrintExpensesHtml(int id, int month)
+        {
+            DateTime now = DateTime.Now;
+            var startDate = new DateTime(now.Year, month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+            var spendsList = SpendService.GetByConsortiumId(id, startDate, endDate);
+            var consortium = ConsortiumService.GetConsortium(id);
+
+            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, month);
+            return Content("<style>" + expensesHtml.HtmlExpensesStyles + "</style>\n" + expensesHtml.HtmlExpenses);
         }
 
         private void CreateLaboralUnionSpends(IDictionary<string,IList<Spend>> spendsDictionary, IList<Manager> managers, int consortiumId, IList<SpendType> spendTypes, IList<SpendClass> spendClasses)

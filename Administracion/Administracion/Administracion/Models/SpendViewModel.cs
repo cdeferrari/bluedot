@@ -6,6 +6,8 @@ namespace Administracion.Models
 {
     public class SpendViewModel
     {
+        public virtual int Id { get; set; }
+        public virtual int Month { get; set; }
         public virtual IDictionary<Manager, IList<Spend>> SalarySpends { get; set; }
         public virtual IList<Spend> SalarySpendWithoutManager { get; set; }
         public virtual IList<Spend> Spends { get; set; }

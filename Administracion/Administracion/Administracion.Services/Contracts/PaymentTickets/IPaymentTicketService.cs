@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Administracion.Services.Contracts.Consortiums
+namespace Administracion.Services.Contracts.PaymentTickets
 {
     public interface IPaymentTicketService
     {

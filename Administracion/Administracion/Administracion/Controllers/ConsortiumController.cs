@@ -19,12 +19,12 @@ using Administracion.Services.Contracts.Lists;
 using Administracion.Services.Contracts.Multimedias;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
+using Administracion.Services.Contracts.PaymentTickets;
 using Administracion.Services.Contracts.Providers;
 using Administracion.Services.Contracts.Renters;
 using Administracion.Services.Contracts.Status;
 using Administracion.Services.Contracts.TaskResult;
 using Administracion.Services.Contracts.Tickets;
-using Administracion.Services.Implementations.Consortiums;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -671,7 +671,6 @@ namespace Administracion.Controllers
             var consortium = ConsortiumService.GetConsortium(id);
             var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
-            //return Content(PaymentTicketService.GetTikcets(consortium, paymentTickets, month).ToString());
             var htmlTickets = PaymentTicketService.GetTickets(consortium, paymentTickets, month);
             return File(PaymentTicketService.GetPDFTickets(htmlTickets), "application/pdf");
         }
