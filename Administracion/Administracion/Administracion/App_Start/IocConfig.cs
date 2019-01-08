@@ -19,6 +19,7 @@ using Administracion.Services.Contracts.Incomes;
 using Administracion.Services.Contracts.IncomeTypes;
 using Administracion.Services.Contracts.LaboralUnion;
 using Administracion.Services.Contracts.Lists;
+using Administracion.Services.Contracts.ManagerPositions;
 using Administracion.Services.Contracts.Managers;
 using Administracion.Services.Contracts.Messages;
 using Administracion.Services.Contracts.Multimedias;
@@ -147,6 +148,7 @@ namespace Administracion.App_Start
             builder.RegisterType<TaskResultService>().As<ITaskResultService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<LaboralUnionService>().As<ILaboralUnionService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ManagerService>().As<IManagerService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ManagerPositionService>().As<IManagerPositionService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<MessageService>().As<IMessageService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<FunctionalUnitService>().As<IFunctionalUnitService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ChecklistService>().As<IChecklistService>().SingleInstance().PropertiesAutowired();

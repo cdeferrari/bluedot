@@ -15,6 +15,7 @@ namespace ApiCore.Services.Implementations.Managers
     public class ManagerService : IManagerService
     {
         public virtual IManagerRepository ManagerRepository { get; set; }
+        public virtual IManagerPositionRepository ManagerPositionRepository { get; set; }
 
         public virtual ILaboralUnionRepository LaboralUnionRepository { get; set; }
         public IUserRepository UserRepository { get; set; }
@@ -43,6 +44,7 @@ namespace ApiCore.Services.Implementations.Managers
                 PantsWaist = Manager.PantsWaist,
                 ShirtWaist = Manager.ShirtWaist,
                 FootwearWaist = Manager.FootwearWaist,
+                ManagerPosition = Manager.ManagerPositionId.HasValue ? this.ManagerPositionRepository.GetById(Manager.ManagerPositionId.Value) : null,
                 WorkInsurance = Manager.WorkInsurance
             };
 
@@ -94,6 +96,7 @@ namespace ApiCore.Services.Implementations.Managers
             originalManager.ShirtWaist = Manager.ShirtWaist;
             originalManager.FootwearWaist = Manager.FootwearWaist;
             originalManager.Schedule = Manager.Schedule;
+            originalManager.ManagerPosition = Manager.ManagerPositionId.HasValue ? this.ManagerPositionRepository.GetById(Manager.ManagerPositionId.Value) : null;
         }
 
         [Transaction]

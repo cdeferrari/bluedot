@@ -29,10 +29,23 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Office.Interop.Excel;
+using Administracion.Services.Contracts.UnitConfigurationTypes;
+using Administracion.Dto.UnitConfigurations;
+using Administracion.Services.Contracts.UnitConfigurations;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.Text;
+using System.Xml.Linq;
+using ICSharpCode.SharpZipLib.Zip;
+using System.Globalization;
 
 namespace Administracion.Controllers
 {
@@ -57,7 +70,9 @@ namespace Administracion.Controllers
         public virtual IPaymentTicketService PaymentTicketService { get; set; }
 
         public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
+        public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
         public virtual IConsortiumConfigurationTypeService ConsortiumConfigurationTypeService { get; set; }
+        public virtual IUnitConfigurationTypeService UnitConfigurationTypeService { get; set; }
         public virtual IFireExtinguisherControlService FireExtinguisherControlService { get; set; }
         // GET: Backlog
         public ActionResult Index()
@@ -681,7 +696,7 @@ namespace Administracion.Controllers
             var consortium = ConsortiumService.GetConsortium(id);
             var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
-            return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).ToString());
+            return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).HtmlTickets.ToString());
         }
 
         private void UploadMultimedia(int ownershipId)
@@ -704,5 +719,206 @@ namespace Administracion.Controllers
                 }
             }
         }
+
+        
+
+        public ActionResult ProcessConfigurationsCsv()
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var unitConfigurationList = new List<UnitConfigurationRequest>();
+                    var consortiums = this.ConsortiumService.GetAll();
+                    var unitConfigurationTypes = this.UnitConfigurationTypeService.GetAll();
+
+                    var gastosATypeId = unitConfigurationTypes.Where(x => x.Description == "gasto tipo A").FirstOrDefault().Id;
+                    var gastosBTypeId = unitConfigurationTypes.Where(x => x.Description == "gasto tipo B").FirstOrDefault().Id;
+                    var gastosCTypeId = unitConfigurationTypes.Where(x => x.Description == "gasto tipo C").FirstOrDefault().Id;
+                    var gastosDTypeId = unitConfigurationTypes.Where(x => x.Description == "gasto tipo D").FirstOrDefault().Id;
+                    var gastosExtraTypeId = unitConfigurationTypes.Where(x => x.Description == "expensas extraordinarias").FirstOrDefault().Id;
+                    var gastosAysaTypeId = unitConfigurationTypes.Where(x => x.Description == "AYSA").FirstOrDefault().Id;
+                    var gastosEdesurTypeId = unitConfigurationTypes.Where(x => x.Description == "EDESUR").FirstOrDefault().Id;
+                    var provider = new CultureInfo("en-ES");
+
+                    StreamReader csvreader = new StreamReader(file.InputStream);
+
+                    var path = AppDomain.CurrentDomain.BaseDirectory + "/" + file.FileName;
+
+                    while (!csvreader.EndOfStream)
+                    {
+
+                        var line = csvreader.ReadLine();
+                        var values = line.Split(';').ToList();
+
+
+                        var consortiumCuit = values[0];             
+                        var consortium = consortiums.Where(x => x.CUIT == consortiumCuit).FirstOrDefault();
+
+                        if (consortium != null)
+                        {
+                            var ufNumber = int.Parse(values[1]);                            
+                            var unit = consortium.Ownership.FunctionalUnits.Where(x => x.Number == ufNumber).FirstOrDefault();
+                            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+                            if (unit != null)
+                            {
+
+                                //decimal gastosAValue = 0;
+                                //decimal gastosBValue = 0;
+                                //decimal gastosCValue = 0;
+                                //decimal gastosDValue = 0;
+                                //decimal gastosExtraValue = 0;
+                                //decimal gastosAYSAValue = 0;
+                                //decimal gastosEDESURValue = 0;
+
+                                //var addA = decimal.TryParse(values[3],out gastosAValue);
+                                //gastosAValue = gastosAValue * 100;
+
+                                //var addB = decimal.TryParse(values[4], out gastosBValue);
+                                //gastosBValue = gastosBValue * 100;
+
+                                //var addC = decimal.TryParse(values[5], out gastosCValue);
+                                //gastosCValue = gastosCValue * 100;
+
+                                //var addD = decimal.TryParse(values[6], out gastosDValue);
+                                //gastosDValue = gastosDValue * 100;
+
+                                //var addExtra = decimal.TryParse(values[7], out gastosExtraValue);
+                                //gastosExtraValue = gastosExtraValue * 100;
+
+                                //var addAYSA = decimal.TryParse(values[8], out gastosAYSAValue);
+                                //gastosAYSAValue = gastosAYSAValue * 100;
+
+                                //var addEDESUR = decimal.TryParse(values[9], out gastosEDESURValue);
+                                //gastosEDESURValue = gastosEDESURValue * 100;
+
+                                var gastosAValue = decimal.Parse(values[3], numberFormatInfo) * 100;
+                                var gastosBValue = decimal.Parse(values[4], numberFormatInfo) * 100;
+                                var gastosCValue = decimal.Parse(values[5], numberFormatInfo) * 100;
+                                var gastosDValue = decimal.Parse(values[6], numberFormatInfo) * 100;
+                                var gastosExtraValue = decimal.Parse(values[7], numberFormatInfo) * 100;
+                                var gastosAYSAValue = decimal.Parse(values[8], numberFormatInfo) * 100;
+                                var gastosEDESURValue = decimal.Parse(values[9], numberFormatInfo) * 100;
+
+
+                                var configurationGastoA = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosAValue,
+                                    UnitConfigurationTypeId = gastosATypeId
+                                };
+
+                                var configurationGastoB = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosBValue,
+                                    UnitConfigurationTypeId = gastosBTypeId
+                                };
+
+                                var configurationGastoC = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosCValue,
+                                    UnitConfigurationTypeId = gastosCTypeId
+                                };
+
+                                var configurationGastoD = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosDValue,
+                                    UnitConfigurationTypeId = gastosDTypeId
+                                };
+
+                                var configurationGastoExtra = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosExtraValue,
+                                    UnitConfigurationTypeId = gastosExtraTypeId
+                                };
+
+                                var configurationGastoAysa = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosAYSAValue,
+                                    UnitConfigurationTypeId = gastosAysaTypeId
+                                };
+
+                                var configurationGastoEdesur = new UnitConfigurationRequest()
+                                {
+                                    UnitId = unit.Id,
+                                    Value = gastosEDESURValue,
+                                    UnitConfigurationTypeId = gastosEdesurTypeId
+                                };
+
+                                //if(addA) unitConfigurationList.Add(configurationGastoA);
+                                //if (addB) unitConfigurationList.Add(configurationGastoB);
+                                //if (addC) unitConfigurationList.Add(configurationGastoC);
+                                //if (addD) unitConfigurationList.Add(configurationGastoD);
+                                //if (addExtra) unitConfigurationList.Add(configurationGastoExtra);
+                                //if (addAYSA) unitConfigurationList.Add(configurationGastoAysa);
+                                //if (addEDESUR) unitConfigurationList.Add(configurationGastoEdesur);
+
+                                unitConfigurationList.Add(configurationGastoA);
+                                unitConfigurationList.Add(configurationGastoB);
+                                unitConfigurationList.Add(configurationGastoC);
+                                unitConfigurationList.Add(configurationGastoD);
+                                unitConfigurationList.Add(configurationGastoExtra);
+                                unitConfigurationList.Add(configurationGastoAysa);
+                                unitConfigurationList.Add(configurationGastoEdesur);
+
+                            }
+
+                        }
+
+                    }
+                    
+                    unitConfigurationList.ForEach(x => this.UnitConfigurationService.CreateUnitConfiguration(x));
+                }
+            }
+
+            return Redirect(string.Format("/Consortium/Index"));
+        }
+        
+        
+        private static string GetContentXml(Stream fileStream)
+        {
+            var contentXml = "";
+
+            using (var zipInputStream = new ZipInputStream(fileStream))
+            {
+                ZipEntry contentEntry = null;
+                while ((contentEntry = zipInputStream.GetNextEntry()) != null)
+                {
+                    if (!contentEntry.IsFile)
+                        continue;
+                    if (contentEntry.Name.ToLower() == "content.xml")
+                        break;
+                }
+
+                if (contentEntry.Name.ToLower() != "content.xml")
+                {
+                    throw new Exception("Cannot find content.xml");
+                }
+
+                var bytesResult = new byte[] { };
+                var bytes = new byte[2000];
+                var i = 0;
+
+                while ((i = zipInputStream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    var arrayLength = bytesResult.Length;
+                    Array.Resize<byte>(ref bytesResult, arrayLength + i);
+                    Array.Copy(bytes, 0, bytesResult, arrayLength, i);
+                }
+                contentXml = Encoding.UTF8.GetString(bytesResult);
+            }
+
+            return contentXml;
+            
+        }
+
+
     }
 }

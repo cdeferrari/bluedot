@@ -39,14 +39,20 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySql.Data.6.10.6\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.9.11\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.10.8\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.EntityFramework.8.0.13\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.1.0.0.505\lib\NLog.dll</HintPath>
@@ -83,6 +89,7 @@
     <Compile Include="Contracts\ICityRepository.cs" />
     <Compile Include="Contracts\IAccountStatusRepository.cs" />
     <Compile Include="Contracts\IPaymentRepository.cs" />
+    <Compile Include="Contracts\IManagerPositionRepository.cs" />
     <Compile Include="Contracts\IUnitConfigurationRepository.cs" />
     <Compile Include="Contracts\IConsortiumConfigurationRepository.cs" />
     <Compile Include="Contracts\IUnitConfigurationTypeRepository.cs" />
@@ -138,6 +145,7 @@
     <Compile Include="Implementatios\CommonDataItemsRepository.cs" />
     <Compile Include="Implementatios\CityRepository.cs" />
     <Compile Include="Implementatios\AccountStatusRepository.cs" />
+    <Compile Include="Implementatios\ManagerPositionRepository.cs" />
     <Compile Include="Implementatios\PaymentRepository.cs" />
     <Compile Include="Implementatios\UnitConfigurationRepository.cs" />
     <Compile Include="Implementatios\ConsortiumConfigurationRepository.cs" />
@@ -191,6 +199,7 @@
     <Compile Include="Mappings\CityMap.cs" />
     <Compile Include="Mappings\AccountStatusMap.cs" />
     <Compile Include="Mappings\PaymentMap.cs" />
+    <Compile Include="Mappings\ManagerPositionMap.cs" />
     <Compile Include="Mappings\UnitConfigurationMap.cs" />
     <Compile Include="Mappings\ConsortiumConfigurationMap.cs" />
     <Compile Include="Mappings\UnitConfigurationTypeMap.cs" />
@@ -255,19 +264,6 @@
       <Project>{429b4985-2396-4ec3-9fe2-59c466ffde87}</Project>
       <Name>ApiCore.Library</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="docs\MySqlCommand.xml" />
-    <Content Include="docs\MySqlCommandBuilder.xml" />
-    <Content Include="docs\MySqlConnection.xml" />
-    <Content Include="docs\MySqlConnectionStringBuilder.xml" />
-    <Content Include="docs\MySqlDataAdapter.xml" />
-    <Content Include="docs\MySqlDataReader.xml" />
-    <Content Include="docs\MySqlException.xml" />
-    <Content Include="docs\MySqlHelper.xml" />
-    <Content Include="docs\MySqlParameter.xml" />
-    <Content Include="docs\MySqlParameterCollection.xml" />
-    <Content Include="docs\MySqlTransaction.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

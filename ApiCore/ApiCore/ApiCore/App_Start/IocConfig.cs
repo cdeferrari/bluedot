@@ -100,6 +100,8 @@ using ApiCore.Services.Implementations.UnitConfigurationTypes;
 using ApiCore.Services.Contracts.UnitConfigurationTypes;
 using ApiCore.Services.Contracts.AccountStatuss;
 using ApiCore.Services.Implementations.AccountStatuss;
+using ApiCore.Services.Implementations.ManagerPositions;
+using ApiCore.Services.Contracts.ManagerPositions;
 
 namespace ApiCore.App_Start
 {
@@ -319,6 +321,11 @@ namespace ApiCore.App_Start
            .InterceptedBy(typeof(ServicesInterceptor));
 
 
+            builder.RegisterType<ManagerPositionService>().As<IManagerPositionService>().PropertiesAutowired().InstancePerRequest()
+           .EnableInterfaceInterceptors()
+           .InterceptedBy(typeof(ServicesInterceptor));
+
+
             builder.RegisterType<ElevatorControlService>().As<IElevatorControlService>().PropertiesAutowired().InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(ServicesInterceptor));
@@ -361,6 +368,7 @@ namespace ApiCore.App_Start
             builder.RegisterType<PaymentTypeRepository>().As<IPaymentTypeRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<PaymentRepository>().As<IPaymentRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendTypeRepository>().As<ISpendTypeRepository>().PropertiesAutowired().InstancePerRequest();
+            builder.RegisterType<ManagerPositionRepository>().As<IManagerPositionRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendItemRepository>().As<ISpendItemRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<BillRepository>().As<IBillRepository>().PropertiesAutowired().InstancePerRequest();
             builder.RegisterType<SpendRepository>().As<ISpendRepository>().PropertiesAutowired().InstancePerRequest();

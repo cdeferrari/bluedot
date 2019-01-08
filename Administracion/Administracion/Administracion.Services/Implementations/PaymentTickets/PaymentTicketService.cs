@@ -49,11 +49,13 @@ namespace Administracion.Services.Implementations.Consortiums
         public PaymentTicketsStruct GetTickets(Consortium consortium, IList<PaymentTicket> paymentTickets, int month)
         {
             Velocity.Init();
+            var toDate = month < 12 ? new DateTime(DateTime.Now.Year, month + 1, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper() :
+                new DateTime(DateTime.Now.Year + 1, 1, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper();
 
             var model = new
             {
                 FromDate = new DateTime(DateTime.Now.Year, month, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper(),
-                ToDate = new DateTime(DateTime.Now.Year, month + 1, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper(),
+                ToDate = toDate,
                 ConsortiumAddress = consortium.Ownership.Address.Street + " " + consortium.Ownership.Address.Number,
                 Items = paymentTickets,
                 FontFamily = "Arial",

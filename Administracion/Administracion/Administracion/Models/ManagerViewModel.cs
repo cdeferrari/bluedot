@@ -14,6 +14,7 @@ namespace Administracion.Models
     	public virtual UserViewModel User{ get; set; }
         public virtual IEnumerable<SelectListItem> LaboralUnionList { get; set; }
         public virtual IEnumerable<SelectListItem> ConsortiumList { get; set; }
+        public virtual IEnumerable<SelectListItem> ManagerPositionList { get; set; }
         public virtual int Id { get; set; }
         public virtual AddressViewModel Home { get; set; }
 
@@ -39,5 +40,6 @@ namespace Administracion.Models
         public virtual string Schedule { get; set; }
 
         public IEnumerable<SelectListItem> Provinces { get; set; }
+        public virtual int? ManagerPositionId { get; set; }
     }
 }
