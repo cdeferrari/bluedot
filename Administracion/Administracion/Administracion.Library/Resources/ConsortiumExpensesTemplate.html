@@ -1,0 +1,595 @@
+<link rel="stylesheet" type="text/css" href="ConsortiumExpenses.css">
+<table class="main_table" align="center" cell-padding=0 cellspacing=0>
+    <tr>
+        <td class="title" colspan="21">Mis Expensas</td>
+    </tr>
+    <tr>
+        <td class="title" colspan="21">Liquidacion del mes: $model.Month $model.Year</td>
+    </tr>
+    <tr>
+        <td class="header" colspan="14">ADMINISTRACIÓN</td> 
+        <td class="header" colspan="7">CONSORCIO</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="14">Nombre: $model.AdministrationName</td> 
+        <td class="header_data" colspan="7">Nombre: $model.ConsortiumName</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="14">Domicilio: $model.ConsortiumAddress</td> 
+        <td class="header_data" colspan="7"></td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="7">Mail: $model.ConsortiumMail</td> 
+        <td class="header_data" colspan="7">Tel: $model.ConsortiumPhone</td> 
+        <td class="header_data" colspan="7">CUIT: $model.ConsortiumCUIT</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="7">CUIT: $model.AdministrationCUIT</td> 
+        <td class="header_data" colspan="7">Situación Fiscal</td> 
+        <td class="header_data" colspan="7">Clave SUTERH: $model.ConsortiumSuther</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="21">Inscripción R.P.A: N/A</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="title" colspan="21">REMUNERACIONES AL PERSONAL Y CARGAS SOCIALES</td>
+    </tr>
+    <tr>
+        <td class="data" colspan="21">(Conf. Art. 10 inc de ley N° 941</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="7"><b>Nombre y apellido: </b>$model.ManagerName</td> 
+        <td class="data_bold_right" colspan="7">CUIL:</td> 
+        <td class="data" colspan="7">$model.ManagerCUIT</td> 
+    </tr>
+    <tr>
+        #if ($model.ManagerAlternate)
+        <td class="data" colspan="7"><b>Cargo: </b>Encargado alternante sin vivienda</td>
+        #else
+        <td class="data" colspan="7"><b>Cargo: </b>Encargado permanente con vivienda</td>
+        #end
+        <td class="data_bold_right" colspan="7">Categoria del edificio:</td> 
+        <td class="data" colspan="7">$model.BuildingCategory</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="7"><b>Período: </b>$model.Month $model.Year</td> 
+        <td class="data_bold_right" colspan="7">Categoría Del Encargado:</td> 
+        <td class="data" colspan="7">$model.ManagerCategory</td> 
+    </tr>
+    <tr>
+        <td class="header_data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">1</td> 
+        <td class="data_header border_lr border_b" colspan="12">DETALLE DE SUELDO Y CARGAS SOCIALES</td> 
+        <td class="data_header_right border_b" colspan="2">GASTOS A</td> 
+        <td class="data_header_right border_lr border_b" colspan="2">GASTOS B</td> 
+        <td class="data_header_right border_b" colspan="2">GASTOS C</td> 
+        <td class="data_header_right border_lr border_b" colspan="2">TOTAL</td> 
+    </tr>
+    #foreach($item in $model.Salary)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="8">$item.Description</td> 
+        
+        <td class="data_right border_b" colspan="2">
+            #if ($item.SpendClass.Id == 4)
+                $item.Bill.FormatedAmount
+            #end
+        </td> 
+        <td class="data_right border_r border_b" colspan="2">
+            #if ($item.SpendClass.Id == 5)
+                ($item.Bill.FormatedAmount)
+            #end
+        </td>
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data"></td> 
+        <td class="data" colspan="4"></td> 
+        <td class="data" colspan="4">Sueldo Neto</td> 
+        <td class="data_right" colspan="2">$model.SalaryTotal</td> 
+        <td class="data_right border_r" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data"></td> 
+        <td class="data" colspan="4"></td> 
+        <td class="data_gray" colspan="4">Total</td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray_right" colspan="2">$model.SalaryPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.SalaryTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b"></td> 
+        <td class="data_header border_l border_b" colspan="20">APORTES Y CONTRIBUCIONES</td> 
+    </tr>
+    #foreach($item in $model.Contributions)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10">$item.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year </td> 
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td>
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data"></td> 
+        <td class="data" colspan="4"></td> 
+        <td class="data_gray" colspan="4">Total</td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray" colspan="2"></td> 
+        <td class="data_gray_right" colspan="2">$model.ContributionsPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.ContributionsTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 1</td> 
+        <td class="data_gray_right" colspan="2">$model.SalaryContributionsPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.SalaryContributionsTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="title" colspan="21">PAGOS DEL PERÍODO POR SUMINISTROS, SERVICIOS, ABONOS Y SEGUROS</td>
+    </tr>
+    <tr>
+        <td class="data" colspan="21">(Conf. Art. 10 inc de ley N° 941</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21">RUBROS- CONCEPTO-DETALLE DE PROVEEDORES</td>
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">2</td> 
+        <td class="data_header border_l border_b" colspan="20">SERVICIOS PÚBLICOS</td> 
+    </tr>
+    #foreach($item in $model.PublicServices)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> vto. $model.Bill.SimpleExpirationDate</td> 
+        <td class="data_right border_r border_b" colspan="2"></td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 2</td> 
+        <td class="data_gray_right" colspan="2">$model.PublicServicesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.PublicServicesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">3</td> 
+        <td class="data_header border_l border_b" colspan="20">ABONO DE SERVICIOS</td> 
+    </tr>
+    #foreach($item in $model.ServicePayment)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description Factura $item.Bill.Number</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 3</td> 
+        <td class="data_gray_right" colspan="2">$model.ServicePaymentPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.ServicePaymentTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">4</td> 
+        <td class="data_header border_l border_b" colspan="20">MANTENIMIENTO DE PARTES COMUNES</td> 
+    </tr>
+    #foreach($item in $model.CommonMaintenance)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description Factura $item.Bill.Number</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 4</td> 
+        <td class="data_gray_right" colspan="2">$model.CommonMaintenancePercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.CommonMaintenanceTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">5</td> 
+        <td class="data_header border_l border_b" colspan="20">TRABAJO DE REPARACIONES EN UNIDADES</td> 
+    </tr>
+    #foreach($item in $model.UnitRepairs)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description Factura $item.Bill.Number</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 5</td> 
+        <td class="data_gray_right" colspan="2">$model.UnitRepairsPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.UnitRepairsTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">6</td> 
+        <td class="data_header border_l border_b" colspan="20">GASTOS BANCARIOS</td> 
+    </tr>
+    #foreach($item in $model.BankExpenses)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 6</td> 
+        <td class="data_gray_right" colspan="2">$model.BankExpensesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.BankExpensesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">7</td> 
+        <td class="data_header border_l border_b" colspan="20">GASTOS DE LIMPIEZA</td> 
+    </tr>
+    #foreach($item in $model.CleaningExpenses)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 7</td> 
+        <td class="data_gray_right" colspan="2">$model.CleaningExpensesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.CleaningExpensesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">8</td> 
+        <td class="data_header border_l border_b" colspan="20">GASTOS DE LIMPIEZA</td> 
+    </tr>
+    #foreach($item in $model.AdminExpenses)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 8</td> 
+        <td class="data_gray_right" colspan="2">$model.AdminExpensesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.AdminExpensesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">9</td> 
+        <td class="data_header border_l border_b" colspan="20">PAGOS DEL PERÍODO DE SEGUROS</td> 
+    </tr>
+    #foreach($item in $model.InsuranceExpenses)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 9</td> 
+        <td class="data_gray_right" colspan="2">$model.InsuranceExpensesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.InsuranceExpensesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_header_right border_b">10</td> 
+        <td class="data_header border_l border_b" colspan="20">OTROS</td> 
+    </tr>
+    #foreach($item in $model.OtherExpenses)
+    #if ($item.Bill.Amount != 0)
+    <tr>
+        <td class="data_right border_l border_b"></td> 
+        <td class="data border_l border_b" colspan="10"><b>$item.Description:</b> $item.SpendType.Description</td> 
+        <td class="data_right border_r border_b" colspan="2">$model.Month $model.Year</td>
+        <td class="data_right border_b" colspan="2">$item.Bill.FormatedAmount</td> 
+        <td class="data_right border_lr border_b" colspan="2"></td> 
+        <td class="data_right border_b" colspan="2"></td> 
+        <td class="data_right border_lr border_b" colspan="2"></td>
+    </tr>
+    #end
+    #end
+    <tr>
+        <td class="data" colspan="13"></td> 
+        <td class="data_gray" colspan="4">TOTAL RUBRO 10</td> 
+        <td class="data_gray_right" colspan="2">$model.OtherExpensesPercent %</td> 
+        <td class="data_gray_right" colspan="2">$model.OtherExpensesTotal</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="super_total" colspan="11">TOTAL DE GASTOS</td>
+        <td class="super_total border_wr" colspan="2">100%</td>
+        <td class="super_total_r border_wr" colspan="2">$model.Total</td>
+        <td class="super_total_r border_wr" colspan="2">$ 0,00</td>
+        <td class="super_total_r border_wr" colspan="2">$ 0,00</td>
+        <td class="super_total_r" colspan="2">$model.Total</td>
+    </tr>
+    <tr>
+        <td class="space" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="black_title" colspan="21">ESTADO FINANCIERO</td>
+    </tr>
+    <tr>
+        <td class="data" colspan="21">(CONF.Art. 10 inc C ley N°941)</td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21">CONCEPTO</td>
+    </tr>
+    <tr>
+        <td class="data_header border_tb" colspan="19">SALDO ANTERIOR</td> 
+        <td class="data_right border_tb" colspan="2">-$ 11.046,40</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data border_l border_b" colspan="18">Ingresos por pagos de expensas en término</td> 
+        <td class="data_right border_b" colspan="2">$ 171.083,27</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data border_l border_b" colspan="18">Ingreso por pago de expenas adeudadas</td> 
+        <td class="data_right border_b" colspan="2">$ 0,00</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data border_l border_b" colspan="18">Ingreso por pago de intereses</td> 
+        <td class="data_right border_b" colspan="2">$ 0,00</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data border_l border_b" colspan="18">Egresos por pagos del mes</td> 
+        <td class="data_right border_b" colspan="2">$ 207.303,74</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data border_l border_b" colspan="18">Egresos por gastos particulares</td> 
+        <td class="data_right border_b" colspan="2">$ 0,00</td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="19">SALDO AL CIERRE</td> 
+        <td class="data_gray_right" colspan="2">-$ 47.266,87</td> 
+    </tr>
+    <tr>
+        <td class="space" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="8">(CON. Art. 10 inc. I Ley N°941)</td> 
+        <td class="data_gray" colspan="13">RESUMEN DE MOVIMIENTOS BANCARIOS</td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="18">Saldo Inicial</td> 
+        <td class="data_right border_b" colspan="2">-$ 11.046,40</td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="18">Ingresos</td> 
+        <td class="data_right border_b" colspan="2">$ 171.083,27</td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="18">Egresos</td> 
+        <td class="data_right border_b" colspan="2">$ 207.303,74</td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="19">SALDO AL CIERRE</td> 
+        <td class="data_gray_right" colspan="2">-$ 47.266,87</td> 
+    </tr>
+    <tr>
+        <td class="space" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="9">(Conf. Art. 10 inc C ley N° 941)</td> 
+        <td class="data" colspan="12"><b>ESTADO PATRIMONIAL</b></td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="21">SALDO DISPONIBLE AL CIERRE</td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="18">Expensas y otros conceptos a cobrar</td> 
+        <td class="data_right border_b" colspan="2">$ 191.552,19</td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="18">Otros Activos</td> 
+        <td class="data_right border_b" colspan="2">$ 0,00</td> 
+    </tr>
+    <tr>
+        <td class="data_right"></td> 
+        <td class="data" colspan="18">Gastos devengados pendientes de pago</td> 
+        <td class="data_right" colspan="2">$ 0,00</td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="19">PATRIMONIO NETO AL CIERRE</td> 
+        <td class="data_gray_right" colspan="2">-$ 47.266,87</td> 
+    </tr>
+    <tr>
+        <td class="space" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="9">(Conf. Art. 10 inc H ley N° 941)</td> 
+        <td class="data" colspan="12"><b>DATOS DE JUICIOS</b></td> 
+    </tr>
+    <tr>
+        <td class="data" colspan="21"></td>
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="2">CARÁTULA</td> 
+        <td class="data_right border_b" colspan="18"></td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="2">N° de expediente</td> 
+        <td class="data_right border_b" colspan="18"></td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="2">Juzgado/Secretaría</td> 
+        <td class="data_right border_b" colspan="18"></td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="2">Objeto</td> 
+        <td class="data_right border_b" colspan="18"></td> 
+    </tr>
+    <tr>
+        <td class="data_right border_b"></td> 
+        <td class="data border_b" colspan="2">Estado</td> 
+        <td class="data_right border_b" colspan="18"></td> 
+    </tr>
+    <tr>
+        <td class="data_gray" colspan="3">MONTO RECLAMADO (%):</td> 
+        <td class="data_gray" colspan="18">-$ 47.266,87</td> 
+    </tr>
+    <tr>
+        <td class="space" colspan="21"></td> 
+    </tr>
+    <tr>
+        <td class="title" colspan="21">NOTAS: Les recordamos que el horario de atención de la Administración es de 9:30 a 17hs.</td>
+    </tr>
+    <tr>
+        <td class="title" colspan="21">EL ULTIMO PLAZO PARA PAGAR ESTA LIQUIDACIÓN ES EL DÍA 20.</td>
+    </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+    <tr>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+        <td class="default_td"></td>
+    </tr>
+</table>

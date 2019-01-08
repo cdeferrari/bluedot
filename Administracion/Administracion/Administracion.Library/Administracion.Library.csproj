@@ -69,6 +69,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\ConsortiumExpenses.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ConsortiumExpensesTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PaymentTickets.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

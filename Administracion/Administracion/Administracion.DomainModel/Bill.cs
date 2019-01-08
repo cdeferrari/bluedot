@@ -18,5 +18,7 @@ namespace Administracion.DomainModel
         public virtual DateTime CreationDate { get; set; }
         public virtual DateTime ExpirationDate { get; set; }
         public virtual DateTime NextExpirationDate { get; set; }
+        public string SimpleExpirationDate { get; set; }
+        public virtual string FormatedAmount { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Administracion.DomainModel;
-using Administracion.Services.Contracts.Consortiums;
+using Administracion.Services.Contracts.PaymentTickets;
 using Administracion.Services.Implementations.PaymentTickets;
 using iTextSharp.text;
 using iTextSharp.text.pdf;

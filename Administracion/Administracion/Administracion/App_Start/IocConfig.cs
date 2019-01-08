@@ -12,6 +12,7 @@ using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.ConsortiumSecure;
 using Administracion.Services.Contracts.Countries;
 using Administracion.Services.Contracts.ElevatorControlService;
+using Administracion.Services.Contracts.ExpensesBill;
 using Administracion.Services.Contracts.FireExtinguisherControlService;
 using Administracion.Services.Contracts.FunctionalUnits;
 using Administracion.Services.Contracts.Incomes;
@@ -25,6 +26,7 @@ using Administracion.Services.Contracts.Multimedias;
 using Administracion.Services.Contracts.Owners;
 using Administracion.Services.Contracts.Ownerships;
 using Administracion.Services.Contracts.PatrimonyStatuss;
+using Administracion.Services.Contracts.PaymentTickets;
 using Administracion.Services.Contracts.PaymentTypesService;
 using Administracion.Services.Contracts.Priorities;
 using Administracion.Services.Contracts.Providers;
@@ -56,6 +58,7 @@ using Administracion.Services.Implementations.Consortiums;
 using Administracion.Services.Implementations.ConsortiumSecure;
 using Administracion.Services.Implementations.Countrys;
 using Administracion.Services.Implementations.ElevatorControls;
+using Administracion.Services.Implementations.ExpensesBill;
 using Administracion.Services.Implementations.FireExtinguisherControls;
 using Administracion.Services.Implementations.FunctionalUnits;
 using Administracion.Services.Implementations.Incomes;
@@ -168,6 +171,7 @@ namespace Administracion.App_Start
             builder.RegisterType<ElevatorControlService>().As<IElevatorControlService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<FireExtinguisherControlService>().As<IFireExtinguisherControlService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PaymentTicketService>().As<IPaymentTicketService>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ExpensesBillService>().As<IExpensesBillervice>().SingleInstance().PropertiesAutowired();
 
 
         }
