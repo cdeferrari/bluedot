@@ -121,6 +121,13 @@ td {
     padding-right: 5px;
 }
 
+.data_left {
+    white-space: pre;
+    background-color: lightgrey;
+    font-family: Arial;
+    font-size: 9px;
+}
+
 .data_bold {
     height: 0.5cm;
     text-align: left;

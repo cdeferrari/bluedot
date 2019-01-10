@@ -108,6 +108,8 @@ namespace Administracion.Services.Implementations.ExpensesBill
             var fromDate = new DateTime(DateTime.Now.Year, month, 1, 0, 0, 0);
             var toDate = new DateTime(fromDate.Year, month, fromDate.AddMonths(1).AddDays(-1).Day, 0, 0, 0);
 
+            var juicios = consortium.Juicios;
+
             var model = new
             {
                 FromDate = fromDate.ToString("MMM dd", new CultureInfo("es-AR")).ToUpper(),
@@ -163,6 +165,7 @@ namespace Administracion.Services.Implementations.ExpensesBill
                 OtherExpenses = spendItemOtros,
                 OtherExpensesTotal = otherExpensesTotal.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 OtherExpensesPercent = GetExpensepencentage(total, otherExpensesTotal).ToString("#,###,##0.00", new CultureInfo("es-AR")),
+                Juicios = juicios,
                 Total = total.ToString("$#,###,##0.00", new CultureInfo("es-AR"))
             };
 

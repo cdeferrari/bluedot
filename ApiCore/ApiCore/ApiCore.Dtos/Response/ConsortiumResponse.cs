@@ -23,5 +23,6 @@ namespace ApiCore.Dtos.Response
         public virtual IList<ControlResponse> FireExtinguisherControls { get; set; }
         public virtual IList<ControlResponse> ElevatorControls { get; set; }
         public virtual string ClaveSuterh { get; set; }
+        public virtual string Juicios { get; set; }
     }
 }

@@ -28,5 +28,6 @@ namespace Administracion.Models
         public virtual OwnershipViewModel Ownership { get; set; }
         public virtual HttpPostedFileBase Image { get; set; }
         public virtual string ClaveSuterh { get; set; }
+        public virtual string Juicios { get; set; }
     }
 }

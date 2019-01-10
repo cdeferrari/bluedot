@@ -23,6 +23,7 @@ namespace ApiCore.Repository.Mappings
             this.Property(x => x.Inactive).IsRequired().HasColumnName("inactive");
             this.Property(x => x.Telephone).IsOptional().HasColumnName("telephone");
             this.Property(x => x.ClaveSuterh).IsOptional().HasColumnName("clave_suterh");
+            this.Property(x => x.Juicios).IsOptional().HasColumnName("juicios");
         }
 
     }
