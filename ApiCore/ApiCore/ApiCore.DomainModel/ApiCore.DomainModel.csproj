@@ -49,6 +49,7 @@
     <Compile Include="Administration.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="AccountStatus.cs" />
+    <Compile Include="ManagerPosition.cs" />
     <Compile Include="UnitConfiguration.cs" />
     <Compile Include="ConsortiumConfiguration.cs" />
     <Compile Include="UnitConfigurationType.cs" />

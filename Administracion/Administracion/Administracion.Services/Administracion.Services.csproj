@@ -57,6 +57,7 @@
     <Compile Include="Contracts\Administrations\IAdministrationService.cs" />
     <Compile Include="Contracts\Area\IAreaService.cs" />
     <Compile Include="Contracts\AccountStatus\IAccountStatusService.cs" />
+    <Compile Include="Contracts\ManagersPosition\IManagerPositionService.cs" />
     <Compile Include="Contracts\Consortiums\IConsortiumService.cs" />
     <Compile Include="Contracts\ConsortiumBalance\IConsortiumBalanceService.cs" />
     <Compile Include="Contracts\ExpensesBill\IExpensesBillService.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Implementations\ConsortiumBalance\ConsortiumBalanceStruct.cs" />
     <Compile Include="Implementations\ExpensesBill\ExpensesBillService.cs" />
     <Compile Include="Implementations\ExpensesBill\ExpensesBillStruct.cs" />
+    <Compile Include="Implementations\ManagersPosition\ManagerPositionService.cs" />
     <Compile Include="Implementations\PaymentTickets\PaymentTicketService.cs" />
     <Compile Include="Implementations\PaymentTickets\PaymentTicketsStruct.cs" />
     <Compile Include="Implementations\UnitConfiguration\UnitConfigurationService.cs" />

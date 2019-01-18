@@ -844,6 +844,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ManagerPosition/.
+        /// </summary>
+        public static string GetAllManagerPosition {
+            get {
+                return ResourceManager.GetString("GetAllManagerPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager/.
         /// </summary>
         public static string GetAllManagers {

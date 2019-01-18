@@ -29,6 +29,19 @@
             </div>
             <p>Acá podrás encontrar toda la información de los consorcios</p>
 
+            @*@using (Html.BeginForm("ProcessConfigurationsCsv", "Consortium", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Elija el archivo a procesar</label>
+                    <div class='col-md-8'>                        
+                        <input type="file" id="managercsv" name="managercsv" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Procesar</button>
+            }*@
+
+
 
             <div class="panel-heading">
                 <div class="row">

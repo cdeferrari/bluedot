@@ -16,6 +16,7 @@ using Administracion.Services.Contracts.Users;
 using Administracion.Services.Contracts.Consortiums;
 using Administracion.Services.Contracts.Provinces;
 using Administracion.Dto.Manager;
+using Administracion.Services.Contracts.ManagerPositions;
 
 namespace Administracion.Controllers
 {
@@ -25,6 +26,7 @@ namespace Administracion.Controllers
         public virtual IManagerService ManagerService { get; set; }
         public virtual IUserService UserService { get; set; }
         public virtual IConsortiumService ConsortiumService { get; set; }
+        public virtual IManagerPositionService ManagerPositionService { get; set; }
         public virtual ILaboralUnionService LaboralUnionService { get; set; }
         public virtual IMultimediaService MultimediaService { get; set; }
         public virtual IProvinceService ProvinceService { get; set; }        
@@ -57,6 +59,11 @@ namespace Administracion.Controllers
                 Text = x.FriendlyName
             });
 
+            var managerPositionList = this.ManagerPositionService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
 
             var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
             {
@@ -75,6 +82,7 @@ namespace Administracion.Controllers
                 ConsortiumId = consortium != null ? consortium.Id : 0,
                 LaboralUnionList = laboralUnions,
                 ConsortiumList = consortiumList,
+                ManagerPositionList = managerPositionList,
                 Provinces = provinces
             };
 
@@ -158,6 +166,11 @@ namespace Administracion.Controllers
                 Text = x.Description
             });
 
+            var managerPositionList = this.ManagerPositionService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Description
+            });
 
             var omanager = this.ManagerService.GetManager(id);
             var laboralUnions = this.LaboralUnionService.GetAll().Select(x => new SelectListItem()
@@ -177,6 +190,7 @@ namespace Administracion.Controllers
             manager.ConsortiumId =  consortiumId.HasValue ? consortiumId.Value : 0;
             manager.ConsortiumList = consortiumList;
             manager.LaboralUnionList = laboralUnions;
+            manager.ManagerPositionList = managerPositionList;
             manager.Provinces = provinces;
             return View("CreateManager",manager);
         }
