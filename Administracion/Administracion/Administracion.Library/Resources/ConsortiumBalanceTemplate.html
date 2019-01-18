@@ -1,0 +1,115 @@
+<link rel="stylesheet" type="text/css" href="ConsortiumBalance.css">
+<table class="main_table" align="center" cell-padding=0 cellspacing=0>
+    <tr>
+        <td class="header border_l border_t" colspan="6">Administración: $model.Consortium.Administration.Name</td>
+        <td class="header border_t" colspan="6">N° R.P.A: 3502</td>
+        <td class="header border_t border_r" colspan="5">C.U.I.T: $model.Consortium.Administration.CUIT</td>
+    </tr>
+    <tr>
+        <td class="header border_l" colspan="8">Domicilio del consorcio: $model.Consortium.Ownership.Address.Street $model.Consortium.Ownership.Address.Number</td>
+        <td class="header border_r" colspan="9">C.U.I.T: $model.Consortium.CUIT</td>
+    </tr>
+    <tr>
+        <td class="header border_l border_b" colspan="8">Período: $model.Month $model.Year</td>
+        <td class="header border_r border_b" colspan="9">Vencimiento $model.ToDate</td>
+    </tr>
+    <tr>
+        <td class="data border_lr border_b" colspan="17"></td> 
+    </tr>
+    <tr>
+        <td class="title border_lr border_b" colspan="17">ESTADO DE CUENTAS Y PRORRATEO</td>
+    </tr>
+    <tr>
+        <td class="subtitle border_l border_b">U.F</td>
+        <td class="subtitle border_l border_b">Piso</td>
+        <td class="subtitle border_l border_b">Depto</td>
+        <td class="subtitle border_l border_b">Propietario</td>
+        <td class="subtitle border_l border_b">Saldo Ant.</td>
+        <td class="subtitle border_l border_b">Pagos</td>
+        <td class="subtitle border_l border_b">Deuda</td>
+        <td class="subtitle border_l border_b">Int.</td>
+        <td class="subtitle border_l border_b" colspan="2">Gastos A</td>
+        <td class="subtitle border_l border_b" colspan="2">Gastos B</td>
+        <td class="subtitle border_l border_b">Exp. (A+B)</td>
+        <td class="subtitle border_l border_b">Edesur</td>
+        <td class="subtitle border_l border_b">Aysa</td>
+        <td class="subtitle border_l border_b">Pago antes del $model.DiscountDay </td>
+        <td class="subtitle border_lr border_b">Total a pagar</td>
+    </tr>
+    #foreach($item in $model.Balances)
+    <tr>
+        <td class="data_gray_center border_l border_b">$item.Uf</td>
+        <td class="data_gray_center border_l border_b">$item.Piso</td>
+        <td class="data_gray_center border_l border_b">A$item.Dto</td>
+        <td class="data_gray_center border_l border_b">$item.Propietario</td>
+        <td class="data_gray_right border_l border_b">$item.SaldoAnterior</td>
+        <td class="data_gray_right border_l border_b">$item.Pagos</td>
+        <td class="data_gray_right border_l border_b">$item.Deuda</td>
+        <td class="data_gray_right border_l border_b">$item.Intereses</td>
+        <td class="data_gray_right border_l border_b">$item.GastosAPercent</td>
+        <td class="data_gray_right border_l border_b">$item.GastosA</td>
+        <td class="data_gray_right border_l border_b">$item.GastosBPercent</td>
+        <td class="data_gray_right border_l border_b">$item.GastosB</td>
+        <td class="data_gray_right border_l border_b">$item.Expensas</td>
+        <td class="data_gray_right border_l border_b">$item.Edesur</td>
+        <td class="data_gray_right border_l border_b">$item.Aysa</td>
+        <td class="data_gray_right border_l border_b">$item.SiPagaAntes</td>
+        <td class="data_gray_right border_lr border_b">$item.Total</td>
+    </tr>
+    #end
+    <tr>
+        <td class="data_cyan_center border_l border_b" colspan="4">Total</td>
+        <td class="data_gray_right border_l border_b">$model.TotalSaldoAnterior</td>
+        <td class="data_gray_right border_l border_b">$model.TotalPagos</td>
+        <td class="data_gray_right border_l border_b">$model.TotalDeuda</td>
+        <td class="data_gray_right border_l border_b">$model.TotalIntereses</td>
+        <td class="data_gray_right border_l border_b">$model.TotalGastosAPercent</td>
+        <td class="data_gray_right border_l border_b">$model.TotalGastosA</td>
+        <td class="data_gray_right border_l border_b">$model.TotalGastosBPercent</td>
+        <td class="data_gray_right border_l border_b">$model.TotalGastosB</td>
+        <td class="data_gray_right border_l border_b">$model.TotalExpensas</td>
+        <td class="data_gray_right border_l border_b">$model.TotalEdesur</td>
+        <td class="data_gray_right border_l border_b">$model.TotalAysa</td>
+        <td class="data_gray_right border_l border_b">$model.TotalSiPagaAntes</td>
+        <td class="data_gray_right border_lr border_b">$model.TotalTotal</td>
+    </tr>
+    <tr>
+        <td class="header border_lr" colspan="17">FORMAS DE PAGO</td>
+    </tr>
+    <tr>
+        <td class="header border_lr" colspan="17">DEPÓSITO O TRANSFERENCIA</td>
+    </tr>
+    <tr>
+        <td class="header border_l" colspan="9">Titular: Consorcio de Propietarios Guido 1933</td>
+        <td class="header border_r" colspan="8">Sucursal: Quintana</td>
+    </tr>
+    <tr>
+        <td class="header border_l" colspan="9">CBU: 00700115-20000021308035</td>
+        <td class="header border_r" colspan="8">Vencimiento 20-08-2018</td>
+    </tr>
+    <tr>
+        <td class="header border_lr border_b" colspan="17">N° de cuenta: 21308-0 011-3</td>
+    </tr>
+    <tr>
+        <td class="data_gray_center border_lr border_b" colspan="17">Ante cualquier irregularidad podés llamar al 147. chatear en buenosaires.gob.ar/ba147 o escribirnos en facebook.com/badefensaconsumidor y @BAConsumidor</td>
+    </tr>
+    <tr>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+            <td class="default_td"></td>
+        </tr>
+</table>
