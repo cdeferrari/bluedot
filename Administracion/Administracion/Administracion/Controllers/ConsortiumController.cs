@@ -201,7 +201,8 @@ namespace Administracion.Controllers
                 }
             }
 
-            return Redirect("/Consortium/CreateUpdateConsortiumConfiguration/" + configurationModel.ConsortiumId);
+            return View("CreateUpdateConsortiumConfigurationSuccess", configurationModel.ConsortiumId);
+            
         }
 
 

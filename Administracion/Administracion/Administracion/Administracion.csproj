@@ -587,6 +587,9 @@
     <Content Include="Views\Consortium\ConsortiumAccountStatusSummary.cshtml" />
     <Content Include="Views\Consortium\_UnitResumeItem.cshtml" />
     <Content Include="Views\FunctionalUnit\CreatedPayment.cshtml" />
+    <Content Include="Views\Patrimony\CloseMonthSuccess.cshtml" />
+    <Content Include="Views\Consortium\CreateUpdateConsortiumConfigurationSuccess.cshtml" />
+    <Content Include="Views\FunctionalUnit\CreateUpdateUnitConfigurationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

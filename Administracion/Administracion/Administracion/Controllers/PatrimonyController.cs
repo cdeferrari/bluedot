@@ -36,7 +36,9 @@ namespace Administracion.Controllers
         public ActionResult CloseMonth(int consortiumId)
         {
             this.ConsortiumService.CloseMonth(consortiumId);
-            return Redirect(string.Format("/Patrimony/Index?Id={0}", consortiumId));
+            //return Redirect(string.Format("/Patrimony/Index?Id={0}", consortiumId));
+            return View("CloseMonthSuccess", consortiumId);
+
         }
 
 

@@ -10,6 +10,7 @@ using ApiCore.DomainModel;
 using ApiCore.Services.Contracts.AccountStatuss;
 using System.Linq;
 using ApiCore.Services.Contracts.Consortiums;
+using ApiCore.Services.Contracts.Unit;
 
 namespace ApiCore.Controllers
 {
@@ -22,6 +23,7 @@ namespace ApiCore.Controllers
 
         public IAccountStatusService AccountStatusService { get; set; }
         public IConsortiumService ConsortiumService { get; set; }
+        public IUnitService UnitService { get; set; }
 
         // GET api/<controller>/5
         /// <summary>
@@ -54,11 +56,17 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(Entidad))]
         public IHttpActionResult Post(AccountStatusRequest AccountStatus)
         {
-            var consortium = this.ConsortiumService.GetById(AccountStatus.UnitId);
-            var result = AccountStatusService.CreateAccountStatus(AccountStatus);
+            var unit = this.UnitService.GetById(AccountStatus.UnitId);
+            var consortium = this.ConsortiumService.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
 
-            return Created<Entidad>("", new Entidad { Id = result.Id });
+            if (consortium != null)
+            {
+                var result = AccountStatusService.CreateAccountStatus(AccountStatus);
+                return Created<Entidad>("", new Entidad { Id = result.Id });
+            }
 
+            return NotFound();
+            
         }
 
         
