@@ -6,6 +6,7 @@ using Administracion.Services.Contracts.AreaService;
 using Administracion.Services.Contracts.Autentication;
 using Administracion.Services.Contracts.Bills;
 using Administracion.Services.Contracts.CommonData;
+using Administracion.Services.Contracts.ConsortiumBalance;
 using Administracion.Services.Contracts.ConsortiumConfigurations;
 using Administracion.Services.Contracts.ConsortiumConfigurationTypes;
 using Administracion.Services.Contracts.Consortiums;
@@ -52,6 +53,7 @@ using Administracion.Services.Implementations.Autentication;
 using Administracion.Services.Implementations.Bills;
 using Administracion.Services.Implementations.Checklists;
 using Administracion.Services.Implementations.CommonData;
+using Administracion.Services.Implementations.ConsortiumBalance;
 using Administracion.Services.Implementations.ConsortiumConfigurations;
 using Administracion.Services.Implementations.ConsortiumConfigurationTypes;
 using Administracion.Services.Implementations.Consortiums;
@@ -172,6 +174,7 @@ namespace Administracion.App_Start
             builder.RegisterType<FireExtinguisherControlService>().As<IFireExtinguisherControlService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<PaymentTicketService>().As<IPaymentTicketService>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<ExpensesBillService>().As<IExpensesBillervice>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<ConsortiumBalanceService>().As<IConsortiumBalanceService>().SingleInstance().PropertiesAutowired();
 
 
         }

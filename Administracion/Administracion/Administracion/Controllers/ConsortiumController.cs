@@ -9,6 +9,7 @@ using Administracion.Models;
 using Administracion.Security;
 using Administracion.Services.Contracts.Administrations;
 using Administracion.Services.Contracts.CommonData;
+using Administracion.Services.Contracts.ConsortiumBalance;
 using Administracion.Services.Contracts.ConsortiumConfigurations;
 using Administracion.Services.Contracts.ConsortiumConfigurationTypes;
 using Administracion.Services.Contracts.Consortiums;
@@ -68,6 +69,7 @@ namespace Administracion.Controllers
         public virtual IMultimediaService MultimediaService { get; set; }
         public virtual IElevatorControlService ElevatorControlService { get; set; }
         public virtual IPaymentTicketService PaymentTicketService { get; set; }
+        public virtual IConsortiumBalanceService ConsortiumBalanceService { get; set; }
 
         public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
         public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
@@ -698,6 +700,26 @@ namespace Administracion.Controllers
             var tickets = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var paymentTickets = Mapper.Map<IList<PaymentTicket>>(tickets);
             return Content(PaymentTicketService.GetTickets(consortium, paymentTickets, month).HtmlTickets.ToString());
+        }
+
+        [HttpGet]
+        public FileResult PrintBalancePDF(int id, int month)
+        {
+            var consortium = ConsortiumService.GetConsortium(id);
+            var balances = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
+            var balanceDocument = ConsortiumBalanceService.GetBalance(consortium, balances, month);
+
+            return File(ConsortiumBalanceService.GetPDFBalance(balanceDocument), "application/pdf");
+        }
+
+        [HttpGet]
+        public ContentResult PrintBalanceHtml(int id, int month)
+        {
+            var consortium = ConsortiumService.GetConsortium(id);
+            var balances = ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
+            var balanceDocument = ConsortiumBalanceService.GetBalance(consortium, balances, month);
+
+            return Content("<style>" + balanceDocument.HtmlBalanceStyles + "</style>\n" + balanceDocument.HtmlBalance);
         }
 
         private void UploadMultimedia(int ownershipId)
