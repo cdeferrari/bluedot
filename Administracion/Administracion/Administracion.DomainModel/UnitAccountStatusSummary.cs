@@ -27,5 +27,7 @@ namespace Administracion.DomainModel
         public virtual decimal Total { get; set; }
         public virtual int? DiscountDay { get; set; }
         public virtual decimal? DiscountValue { get; set; }
+        public virtual decimal GastosAPercent { get; set; }
+        public virtual decimal GastosBPercent { get; set; }
     }
 }

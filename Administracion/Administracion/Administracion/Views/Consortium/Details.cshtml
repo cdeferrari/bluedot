@@ -36,7 +36,7 @@
                         <a href="/Consortium/RegisterUnitsMonthDebt?Id=@(Model.Id)&month=@(DateTime.Now.Month)"><i class="fa fa-calendar-check-o"></i> Cerrar mes actual</a>
                     </li>
                     <li>
-                        <a href="/Consortium/RegisterUnitsMonthDebt?Id=@(Model.Id))&month=@(DateTime.Now.Month - 1)"><i class="fa fa-calendar-check-o"></i> Cerrar mes anterior</a>
+                        <a href="/Consortium/RegisterUnitsMonthDebt?Id=@(Model.Id)&month=@(DateTime.Now.Month == 1 ? 12 : DateTime.Now.Month - 1)"><i class="fa fa-calendar-check-o"></i> Cerrar mes anterior</a>
                     </li>
                 </ul>                
             </div>

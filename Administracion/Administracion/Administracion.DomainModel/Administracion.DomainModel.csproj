@@ -46,6 +46,7 @@
     <Compile Include="Administration.cs" />
     <Compile Include="ManagerPosition.cs" />
     <Compile Include="PaymentTicket.cs" />
+    <Compile Include="ConsortiumBalanceItem.cs" />
     <Compile Include="UnitAccountStatusSummary.cs" />
     <Compile Include="UnitConfiguration.cs" />
     <Compile Include="ConsortiumConfiguration.cs" />

@@ -13,3 +13,4 @@ namespace Administracion.Services.Implementations.ExpensesBill
         public StringBuilder HtmlExpensesStyles { get; set; }
     }
 }
+
