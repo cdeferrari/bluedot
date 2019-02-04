@@ -657,21 +657,22 @@ namespace Administracion.Controllers
 
         private void ParseSpend(IList<string> values, Dictionary<string, IList<Spend>> dictionary, IList<Manager> managers, IList<SpendType> spendTypes,IList<SpendClass> spendClasses, int consortiumId)
         {
-            var code = values[88];
+            var code =  values[104]; //values[88];
             if (code != "00")
             {
                 
-                var managerCuit = values[25];
+                var managerCuit = values[25]; //values[25];
                 var cuitWithouthSimbols = managerCuit.Trim().Replace("-", "");
                 var manager = managers.Where(x => !string.IsNullOrEmpty(x.User.CUIT) && x.User.CUIT.Trim().Replace("-", "") == cuitWithouthSimbols).FirstOrDefault();
                 var spendDate = DateTime.Now;
 
-                var spendDescription = values[89];
+                var spendDescription = values[105]; //values[89];
+                var spendDescriptionE = values[109]; //values[89];
                 if (!string.IsNullOrEmpty(spendDescription))
                 {
-                    var spendData = values[90];
-                    var spendClassD = values[91];
-                    var spendClassE = values[92];
+                    var spendData = values[106];// values[90];
+                    var spendClassD = values[107]; // values[91];
+                    var spendClassE = values[111];// values[92];
 
                     var spendsToAdd = new List<Spend>();
                     if (!string.IsNullOrEmpty(spendClassD) && spendClassD != "0")
@@ -684,9 +685,9 @@ namespace Administracion.Controllers
                         
                     }
 
-                    if (!string.IsNullOrEmpty(spendClassE) && spendClassE != "0")
+                    if (!string.IsNullOrEmpty(spendClassE) && spendClassE != "0.00")
                     {
-                        var spend = this.CreateSpend(spendDescription, spendData, spendClassE, consortiumId, spendDate, spendTypes, spendClasses.Where(x => x.Description == "E").FirstOrDefault(), manager);
+                        var spend = this.CreateSpend(spendDescriptionE, spendData, spendClassE, consortiumId, spendDate, spendTypes, spendClasses.Where(x => x.Description == "E").FirstOrDefault(), manager);
                         if(spend != null)
                         {
                             spendsToAdd.Add(spend);

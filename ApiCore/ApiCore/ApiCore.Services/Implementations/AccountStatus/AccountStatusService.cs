@@ -416,27 +416,27 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 if (consConfigAux != null)
                 {
                     var auxdebt = this.CalculateDebtFromConfigurations(uc, consConfigAux);
-                    switch (consConfigAux.Type.Description)
+                    switch (consConfigAux.Type.Description.ToLower())
                     {
-                        case "Monto a recaudar gasto tipo A":
+                        case "monto a recaudar gastos a":
                             spendA = auxdebt;
                             break;
-                        case "Monto a recaudar gasto tipo B":
+                        case "monto a recaudar gastos b":
                             spendB = auxdebt;
                             break;
-                        case "Monto a recaudar gasto tipo C":
+                        case "monto a recaudar gastos c":
                             spendC = auxdebt;
                             break;
-                        case "Monto a recaudar gasto tipo D":
+                        case "monto a recaudar gastos d":
                             spendD = auxdebt;
                             break;
-                        case "Monto a recaudar edesur":
+                        case "monto a recaudar edesur":
                             edesur = auxdebt;
                             break;
-                        case "Monto a recaudar aysa":
+                        case "monto a recaudar aysa":
                             aysa = auxdebt;
                             break;
-                        case "Monto a recaudar expensas extraordinarias":
+                        case "monto a recaudar expensas extraordinarias":
                             expensas = auxdebt;
                             break;
                     }                    
