@@ -458,14 +458,17 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 discount = currentDebt * (discountConfig.Value / 100);
             }
 
-
+            decimal lastBalance = 0;
+            var lastsDebts = unitAccount.Where(x => x.StatusDate.Year >= startDate.Year && x.StatusDate.Month <= (month - 2) && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
+            var lastsPayments = unitAccount.Where(x => x.StatusDate.Year >= startDate.Year && x.StatusDate.Month <= (month -1)  && x.IsPayment()).Sum(x => x.Haber);
+            lastBalance = lastsDebts - lastsPayments;
             //revisar
 
             var result = new UnitAccountStatusSummary()
             {
                 Uf = unit.Number.ToString(),
                 Propietario = unit.Owner != null ? unit.Owner.User.Name+" "+unit.Owner.User.Surname : string.Empty,
-                SaldoAnterior = unitDebt - unitPayments,
+                SaldoAnterior = lastBalance,
                 Deuda = currentDebt,
                 Pagos = unitPayments,
                 Aysa = aysa,
