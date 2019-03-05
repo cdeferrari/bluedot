@@ -111,7 +111,7 @@ namespace Administracion.App_Start
                .ForMember(dest => dest.ExtraordinaryExpense, opt => opt.MapFrom(src => src.Expensas.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
                .ForMember(dest => dest.Power, opt => opt.MapFrom(src => src.Edesur.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
                .ForMember(dest => dest.Water, opt => opt.MapFrom(src => src.Aysa.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
-               .ForMember(dest => dest.Debt, opt => opt.MapFrom(src => src.Deuda.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
+               .ForMember(dest => dest.Debt, opt => opt.MapFrom(src => src.MesActual.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
                .ForMember(dest => dest.Interest, opt => opt.MapFrom(src => src.Intereses.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
                .ForMember(dest => dest.DiscountTotal, opt => opt.MapFrom(src => (src.Total - (src.Total * (src.DiscountValue ?? 0) / 100)).ToString("$#,###,##0.00", new CultureInfo("es-AR"))))
                .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.Total.ToString("$#,###,##0.00", new CultureInfo("es-AR"))))

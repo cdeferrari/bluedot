@@ -527,9 +527,10 @@ namespace Administracion.Controllers
             var startDate = new DateTime(now.Year, month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
             var spendsList = SpendService.GetByConsortiumId(id, startDate, endDate);
+            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var consortium = ConsortiumService.GetConsortium(id);
 
-            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, month);
+            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, unitsReport, month);
             return File(ExpensesBillService.GetPDFTickets(expensesHtml), "application/pdf");
         }
 
@@ -540,9 +541,10 @@ namespace Administracion.Controllers
             var startDate = new DateTime(now.Year, month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
             var spendsList = SpendService.GetByConsortiumId(id, startDate, endDate);
+            var unitsReport = this.ConsortiumService.GetConsortiumAccountStatusSummary(id, month);
             var consortium = ConsortiumService.GetConsortium(id);
 
-            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, month);
+            var expensesHtml = ExpensesBillService.GetExpensesBill(consortium, spendsList, unitsReport, month);
             return Content("<style>" + expensesHtml.HtmlExpensesStyles + "</style>\n" + expensesHtml.HtmlExpenses);
         }
 

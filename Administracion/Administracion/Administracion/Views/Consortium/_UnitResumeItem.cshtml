@@ -6,16 +6,7 @@
     <td class="text-center">@Model.Dto</td>
     @*<td class="text-center">@Model.Propietario</td>*@
 
-    @if (Model.SaldoAnterior > 0)
-    {
-        <td class="text-right">@Model.SaldoAnterior</td>
-            }
-            else
-            {
-                var saldoanteriornormalizado = Model.SaldoAnterior * -1;
-        <td class="text-right">( @saldoanteriornormalizado)</td>
-    }
-
+    <td class="text-right">@(Model.SaldoAnterior * -1)</td>
     <td class="text-right">@Model.GastosA</td>
     <td class="text-right">@Model.GastosB</td>
     <td class="text-right">@Model.GastosC</td>
@@ -23,7 +14,7 @@
     <td class="text-right">@Model.Edesur</td>
     <td class="text-right">@Model.Aysa</td>
     <td class="text-right">@Model.Intereses</td>
-    <td class="text-right">@Model.Deuda</td>
+    <td class="text-right">@Model.MesActual</td>
     <td class="text-right">@Model.SiPagaAntes</td>
     <td class="text-right">@Model.Total</td>
     <td class="text-right">@Model.Pagos</td>

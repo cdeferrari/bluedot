@@ -55,8 +55,8 @@ namespace Administracion.Services.Implementations.ConsortiumBalance
             foreach (var item in balances)
             {
                 item.Expensas = item.GastosA + item.GastosB;
-                item.GastosAPercent = GetExpensePencentage(item.Expensas, item.GastosA);
-                item.GastosBPercent = GetExpensePencentage(item.Expensas, item.GastosB);
+                item.GastosAPercent = GetExpensePencentage(balances.Sum(x => x.GastosA), item.GastosA);
+                item.GastosBPercent = GetExpensePencentage(balances.Sum(x => x.GastosB), item.GastosB);
 
                 velocityBalances.Add(new ConsortiumBalanceItem
                 {
@@ -66,7 +66,7 @@ namespace Administracion.Services.Implementations.ConsortiumBalance
                     Propietario = item.Propietario,
                     SaldoAnterior = item.SaldoAnterior.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                     Pagos = item.Pagos.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
-                    Deuda = item.Deuda.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                    Deuda = item.MesActual.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                     Intereses = item.Intereses.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                     GastosA = item.GastosA.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                     GastosB = item.GastosB.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
@@ -94,7 +94,7 @@ namespace Administracion.Services.Implementations.ConsortiumBalance
                 Balances = velocityBalances,
                 TotalSaldoAnterior = balances.Sum(x=> x.SaldoAnterior).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 TotalPagos = balances.Sum(x => x.Pagos).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
-                TotalDeuda = balances.Sum(x => x.Deuda).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                TotalDeuda = balances.Sum(x => x.MesActual).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 TotalIntereses = balances.Sum(x => x.Intereses).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 TotalGastosA = balances.Sum(x => x.GastosA).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 TotalGastosB = balances.Sum(x => x.GastosB).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
