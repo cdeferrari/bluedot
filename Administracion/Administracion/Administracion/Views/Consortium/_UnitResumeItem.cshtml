@@ -1,11 +1,21 @@
 ﻿@model Administracion.DomainModel.UnitAccountStatusSummary
 
 <tr>
-    <td class="text-center">@Model.Uf</td>
+    @*<td class="text-center">@Model.Uf</td>*@
     <td class="text-center">@Model.Piso</td>
     <td class="text-center">@Model.Dto</td>
-    <td class="text-center">@Model.Propietario</td>
-    <td class="text-right">@Model.SaldoAnterior</td>
+    @*<td class="text-center">@Model.Propietario</td>*@
+
+    @if (Model.SaldoAnterior > 0)
+    {
+        <td class="text-right">@Model.SaldoAnterior</td>
+            }
+            else
+            {
+                var saldoanteriornormalizado = Model.SaldoAnterior * -1;
+        <td class="text-right">( @saldoanteriornormalizado)</td>
+    }
+
     <td class="text-right">@Model.GastosA</td>
     <td class="text-right">@Model.GastosB</td>
     <td class="text-right">@Model.GastosC</td>

@@ -16,5 +16,6 @@ namespace Administracion.Dto.Consortium
         public virtual int AdministrationId { get; set; }
         public virtual int OwnershipId { get; set; }
         public virtual string ClaveSuterh { get; set; }
+        public virtual string Juicios { get; set; }
     }
 }

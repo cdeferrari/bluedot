@@ -149,8 +149,7 @@ namespace Administracion.Controllers
                 }
             }
 
-            return Redirect("/FunctionalUnit/CreateUpdateUnitConfiguration?Id=" + configurationModel.UnitId);
-
+            return View("CreateUpdateUnitConfigurationSuccess", configurationModel.UnitId);            
         }
 
 

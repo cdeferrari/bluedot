@@ -20,6 +20,6 @@ namespace Administracion.DomainModel
         public virtual IList<FireExtinguisherControl> FireExtinguisherControls { get; set; }
         public virtual IList<ElevatorControl> ElevatorControls { get; set; }
         public virtual string ClaveSuterh { get; set; }
-
+        public virtual string Juicios { get; set; }
     }
 }

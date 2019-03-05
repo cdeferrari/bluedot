@@ -104,7 +104,12 @@ namespace ApiCore.Services.Implementations.PatrimonyStatuss
 
             var lastValidStatus = this.ValidateUnique(lastStatus,oldStatus, startDate, endDate);
 
-            var debt = spends.Sum(x => x.Bill.Amount);
+            var debt = spends.Where(x => x.SpendClass.Description != "E").Sum(x => x.Bill.Amount);
+            var discounts = spends.Where(x => x.SpendClass.Description == "E");
+            if(discounts != null)
+            {
+                debt = debt - discounts.Sum(x => x.Bill.Amount);
+            }
             var totalIncome = incomes.Sum(x => x.Amount);
 
             var patrimonyStatus = new PatrimonyStatus()
