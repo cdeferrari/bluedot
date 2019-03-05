@@ -19,7 +19,7 @@ namespace ApiCore.Services.Contracts.AccountStatuss
         void DeleteAccountStatus(int AccountStatusId);
         bool RegisterMonth(int unitId, int month);
         IList<UnitAccountStatusSummary> GetConsortiumSummary(int consortiumId, int month);
-
+        bool MonthClosed(Consortium consortium, int month);
 
     }
 }
