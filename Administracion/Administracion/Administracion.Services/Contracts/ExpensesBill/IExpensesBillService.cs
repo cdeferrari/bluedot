@@ -9,7 +9,7 @@ namespace Administracion.Services.Contracts.ExpensesBill
 {
     public interface IExpensesBillervice
     {
-        ExpensesBillStruct GetExpensesBill(Consortium consortium, IList<Spend> spendings, int month);
+        ExpensesBillStruct GetExpensesBill(Consortium consortium, IList<Spend> spendings, IList<UnitAccountStatusSummary> unitsReport, int month);
         byte[] GetPDFTickets(ExpensesBillStruct expenseBillStruct);
     }
 }

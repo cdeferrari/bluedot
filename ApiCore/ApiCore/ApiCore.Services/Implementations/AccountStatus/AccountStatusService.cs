@@ -169,17 +169,18 @@ namespace ApiCore.Services.Implementations.AccountStatuss
         public bool RegisterMonth(int UnitId, int month)
         {
             DateTime now = DateTime.Now;
-            var startDate = DateTime.Now.AddYears(-1);// new DateTime(now.Year, month, 1);
-            var endDate = now; // startDate.AddMonths(1).AddDays(-1);
-           
+            var startDate = new DateTime(now.Year, month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+            var previousMonth = new DateTime(now.Year, month, 1).AddMonths(-1);
+
             var unit = this.UnitRepository.GetById(UnitId);
             var consortiums = this.ConsortiumRepository.GetAll();
             var consortium = consortiums.Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
             if (consortium != null)
             {
                 //traer la configuracion de la unidad
-                var consortiumConfig = this.ConsortiumConfigurationRepository.GetByConsortiumId(consortium.Id,startDate,endDate).ToList();
-                var unitConfig = this.UnitConfigurationRepository.GetByUnitId(UnitId, startDate, endDate).ToList();                
+                var consortiumConfig = this.ConsortiumConfigurationRepository.GetByConsortiumId(consortium.Id, startDate, endDate).ToList();
+                var unitConfig = this.UnitConfigurationRepository.GetByUnitId(UnitId, startDate, endDate).ToList();
 
                 var auxConsortiumConfig = new List<ConsortiumConfigurationType>();// = consortiumConfig.ForEach
                 var auxUnitConfig = new List<UnitConfigurationType>();// = consortiumConfig.ForEach
@@ -197,33 +198,33 @@ namespace ApiCore.Services.Implementations.AccountStatuss
 
                 var consortiumConfigList = this.MakeConsortiumConfigList(consortiumConfig);
                 var unitConfigList = this.MakeUnitConfigList(unitConfig);
-                
+
                 decimal currentDebt = 0;
                 decimal discount = 0;
 
-                foreach(var uc in unitConfigList)
+                foreach (var uc in unitConfigList)
                 {
                     var consConfigAux = consortiumConfigList
                         .Where(x => x.Type.Id == uc.Type.ConsortiumConfigurationType.Id)
                         .OrderByDescending(x => x.ConfigurationDate)
                         .FirstOrDefault();
 
-                    if(consConfigAux != null)
+                    if (consConfigAux != null)
                     {
                         currentDebt += this.CalculateDebtFromConfigurations(uc, consConfigAux);
                     }
-                    
+
                 }
 
                 var unitAccount = this.AccountStatusRepository.GetByUnitId(UnitId).ToList();
                 var unitPayments = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.IsPayment()).Sum(x => x.Haber);
-                var unitDebt = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
-                var unitInterest = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && !x.IsPayment() && x.Interest).Sum(x => x.Debe);
+                var unitDebt = unitAccount.Where(x => x.StatusDate.Year == previousMonth.Year && x.StatusDate.Month == previousMonth.Month && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
+                var unitInterest = unitAccount.Where(x => x.StatusDate.Year == previousMonth.Year && x.StatusDate.Month == previousMonth.Month && !x.IsPayment() && x.Interest).Sum(x => x.Debe);
 
                 var discountConfig = consortiumConfig.Where(x => x.Type.Description == "Descuento por pago adelantado").OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
                 var discountDateConfig = consortiumConfig.Where(x => x.Type.Description == "Día límite pago adelantado").OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
 
-                if (discountConfig != null && unitAccount.Any(x=>x.IsPayment() && x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.StatusDate.Day < discountDateConfig.Value))
+                if (discountConfig != null && unitAccount.Any(x => x.IsPayment() && x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.StatusDate.Day < discountDateConfig.Value))
                 {
                     discount = currentDebt * (discountConfig.Value / 100);
                 }
@@ -231,7 +232,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 var totalPayments = unitPayments - unitInterest;
                 var remainignInterest = totalPayments < 0 ? totalPayments * -1 : 0;
 
-                var totalDebt = currentDebt - discount + unitDebt - totalPayments;
+                var totalDebt = totalPayments - (currentDebt - discount) + unitDebt;
 
                 var debtStatus = new AccountStatus()
                 {
@@ -259,7 +260,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                     this.AccountStatusRepository.Insert(interestStatus);
                 }
             }
-            
+
             return true;
         }
 
@@ -376,8 +377,9 @@ namespace ApiCore.Services.Implementations.AccountStatuss
         public UnitAccountStatusSummary GetUnitSummary(FunctionalUnit unit, Consortium consortium, int month)
         {
             DateTime now = DateTime.Now;
-            var startDate = DateTime.Now.AddYears(-1);// new DateTime(now.Year, month, 1);
-            var endDate = now; // startDate.AddMonths(1).AddDays(-1);
+            var startDate = new DateTime(now.Year, month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+            var previousMonth = new DateTime(now.Year, month, 1).AddMonths(-1);
 
 
             var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortium.Id, startDate, endDate).ToList();
@@ -443,55 +445,46 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 }
             }
 
-            var alreadyClosed = this.MonthClosed(consortium, endDate.Month);
-
             var unitAccount = this.AccountStatusRepository.GetByUnitId(unit.Id).ToList();
-            var unitPayments = unitAccount.Where(x => x.StatusDate.Year >= startDate.Year && x.StatusDate.Month <= month && x.IsPayment()).Sum(x => x.Haber);
-            var lastsDebts = unitAccount.Where(x => (x.StatusDate >= (startDate.AddMonths(-1))) && ((x.StatusDate.Year == DateTime.Now.Year && x.StatusDate.Month != DateTime.Now.Month) || x.StatusDate.Year < DateTime.Now.Year) && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
-            //var unitDebt = unitAccount.Where(x => x.StatusDate.Year >= startDate.Year && x.StatusDate.Month <= (month - 1) && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
-            var unitInterest = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == (month - 1) && !x.IsPayment() && x.Interest).Sum(x => x.Debe);
-            var currentDebt =   spendA + spendB + spendC + spendD + edesur + aysa + expensas;
-            var totalUnitDebt = lastsDebts + unitInterest ;
+            var unitPayments = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.IsPayment()).Sum(x => x.Haber);
+            var unitDebt = unitAccount.Where(x => x.StatusDate.Year == previousMonth.Year && x.StatusDate.Month == previousMonth.Month && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
+            var unitInterest = unitAccount.Where(x => x.StatusDate.Year == previousMonth.Year && x.StatusDate.Month == previousMonth.Month && !x.IsPayment() && x.Interest).Sum(x => x.Debe);
+            var currentMonth = spendA + spendB + spendC + spendD + edesur + aysa + expensas;
+            var totalUnitDebt = unitDebt + unitInterest;
 
             var discountConfig = consortiumConfig.Where(x => x.Type.Description == "Descuento por pago adelantado").OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
             var discountDateConfig = consortiumConfig.Where(x => x.Type.Description == "Día límite pago adelantado").OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
 
-            if (discountConfig != null && discountDateConfig!=null &&  unitAccount.Any(x => x.IsPayment() && x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.StatusDate.Day < discountDateConfig.Value))
+            if (discountConfig != null && discountDateConfig != null && unitAccount.Any(x => x.IsPayment() && x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.StatusDate.Day < discountDateConfig.Value))
             {
-                discount = currentDebt * (discountConfig.Value / 100);
+                discount = currentMonth * (discountConfig.Value / 100);
             }
-
-            decimal lastBalance = 0;
-            
-            var lastsPayments = unitAccount.Where(x => x.StatusDate >= startDate.AddMonths(-1) && ((x.StatusDate.Year == DateTime.Now.Year && x.StatusDate.Month != DateTime.Now.Month) || x.StatusDate.Year < DateTime.Now.Year)  && x.IsPayment()).Sum(x => x.Haber);
-            lastBalance = lastsDebts - lastsPayments;
-
 
             var result = new UnitAccountStatusSummary()
             {
                 Uf = unit.Number.ToString(),
                 Propietario = unit.Owner != null ? unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty,
-                SaldoAnterior = lastBalance,
-                Deuda = alreadyClosed ? currentDebt : 0,
+                SaldoAnterior = unitDebt,
+                MesActual = currentMonth,
                 Pagos = unitPayments,
-                Aysa = alreadyClosed ? aysa : 0,
-                Edesur = alreadyClosed ? edesur : 0,
-                Expensas = alreadyClosed ? expensas : 0,
-                GastosA = alreadyClosed ? spendA : 0,
-                GastosB = alreadyClosed ? spendB : 0,
-                GastosC = alreadyClosed ? spendC : 0,
-                GastosD = alreadyClosed ? spendD : 0,
+                Aysa = aysa,
+                Edesur = edesur,
+                Expensas = expensas,
+                GastosA = spendA,
+                GastosB = spendB,
+                GastosC = spendC,
+                GastosD = spendD,
                 Dto = unit.Dto,
                 Piso = unit.Floor.ToString(),
-                SiPagaAntes = alreadyClosed ? discount : 0,
-                Intereses = alreadyClosed ? unitInterest : 0,
-                Total = alreadyClosed ? totalUnitDebt + currentDebt - discount - unitPayments : totalUnitDebt - discount - unitPayments,
+                SiPagaAntes = discount,
+                Intereses = unitInterest,
+                Total = totalUnitDebt + currentMonth - discount - unitPayments,
                 DiscountDay = discountConfig != null ? discountConfig.ConfigurationDate.Day : (int?)null,
-                DiscountValue = alreadyClosed ? discountConfig != null ? discountConfig.Value : (decimal?)null : 0
+                DiscountValue = discountConfig != null ? discountConfig.Value : (decimal?)null
             };
 
             return result;
-            
+
         }
 
         public bool MonthClosed(Consortium consortium, int month)

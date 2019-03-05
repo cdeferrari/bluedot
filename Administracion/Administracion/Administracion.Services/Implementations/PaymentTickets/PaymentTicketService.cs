@@ -52,6 +52,10 @@ namespace Administracion.Services.Implementations.Consortiums
             var toDate = month < 12 ? new DateTime(DateTime.Now.Year, month + 1, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper() :
                 new DateTime(DateTime.Now.Year + 1, 1, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper();
 
+            foreach (var item in paymentTickets) {
+                item.DiscountDay = item.DiscountDay ?? 0;
+            }
+
             var model = new
             {
                 FromDate = new DateTime(DateTime.Now.Year, month, 18, 0, 0, 0).ToString("MMM dd", new CultureInfo("es-AR")).ToUpper(),

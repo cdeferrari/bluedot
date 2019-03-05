@@ -47,7 +47,7 @@ namespace Administracion.Services.Implementations.ExpensesBill
             return resultPDF;
         }
 
-        public ExpensesBillStruct GetExpensesBill(Consortium consortium, IList<Spend> expenses, int month)
+        public ExpensesBillStruct GetExpensesBill(Consortium consortium, IList<Spend> expenses, IList<UnitAccountStatusSummary> unitsReport, int month)
         {
             Velocity.Init();
 
@@ -57,16 +57,32 @@ namespace Administracion.Services.Implementations.ExpensesBill
             }
 
 
-            var spendItemDetYSueldos = expenses.Where(x => x.Type.Item.Description.ToLower().Equals("detalle de sueldo y cargas sociales")).ToList();
+            var salaryItems = expenses.Where(x => x.Type.Item.Description.ToLower().Equals("detalle de sueldo y cargas sociales")).ToList();
             decimal salaryTotal = 0;
-            foreach (var item in spendItemDetYSueldos) {
-                if (item.Bill.Amount != 0)
+            var spendItemDetYSueldos = new List<Spend>();
+            foreach (var item in salaryItems) {
+                if (item.Description != "Suterh" && item.Description != "Fateryh" && item.Description != "Seracarh")
                 {
-                    salaryTotal += item.SpendClass.Id == 5 ?  item.Bill.Amount * -1 : item.Bill.Amount;
+                    if (item.Bill.Amount != 0)
+                    {
+                        salaryTotal += item.SpendClass.Id == 5 ? item.Bill.Amount * -1 : item.Bill.Amount;
+                    }
+
+                    spendItemDetYSueldos.Add(item);
                 }
             }
 
-            var spendItemAportesYContr = expenses.Where(x => x.Type.Item.Description.ToLower().Equals("aportes y contribuciones")).ToList();
+            //var spendItemAportesYContr = expenses.Where(x => x.Type.Item.Description.ToLower().Equals("aportes y contribuciones")).ToList();
+            var spendItemAportesYContr = new List<Spend>();
+
+            salaryItems.ForEach(x =>
+            {
+                if (x.Description == "Suterh" || x.Description == "Fateryh" || x.Description == "Seracarh")
+                {
+                    spendItemAportesYContr.Add(x);
+                }
+            });
+        
             var contributionsTotal = spendItemAportesYContr.Sum(x => x.Bill.Amount);
 
             var salaryContributionsTotal = salaryTotal + spendItemAportesYContr.Sum(x => x.Bill.Amount);
@@ -136,7 +152,7 @@ namespace Administracion.Services.Implementations.ExpensesBill
                 Contributions = spendItemAportesYContr,
                 ContributionsTotal = contributionsTotal.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 ContributionsPercent = GetExpensepencentage(total, contributionsTotal).ToString("#,###,##0.00", new CultureInfo("es-AR")),
-                SalaryContributionsTotal = (salaryTotal + salaryContributionsTotal).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                SalaryContributionsTotal = salaryContributionsTotal.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 SalaryContributionsPercent = GetExpensepencentage(total, salaryContributionsTotal).ToString("#,###,##0.00", new CultureInfo("es-AR")),
                 PublicServices = spendItemServPub,
                 PublicServicesTotal = publicServicesTotal.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
@@ -165,6 +181,11 @@ namespace Administracion.Services.Implementations.ExpensesBill
                 OtherExpenses = spendItemOtros,
                 OtherExpensesTotal = otherExpensesTotal.ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 OtherExpensesPercent = GetExpensepencentage(total, otherExpensesTotal).ToString("#,###,##0.00", new CultureInfo("es-AR")),
+                TotalDebt = (unitsReport.Sum(x => x.SaldoAnterior) * - 1).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                TotalInTermsPayments = unitsReport.Sum(x => x.Pagos).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                TotalInterest = unitsReport.Sum(x => x.Intereses).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                ClosingTotal = (unitsReport.Sum(x => x.Pagos) - unitsReport.Sum(x => x.MesActual) + (unitsReport.Sum(x => x.SaldoAnterior))).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
+                ChargeTotal = (unitsReport.Sum(x => x.Total) * -1).ToString("$#,###,##0.00", new CultureInfo("es-AR")),
                 Juicios = juicios,
                 Total = total.ToString("$#,###,##0.00", new CultureInfo("es-AR"))
             };

@@ -14,7 +14,7 @@ namespace ApiCore.Dtos.Response
         public virtual string Propietario { get; set; }
         public virtual decimal SaldoAnterior { get; set; }
         public virtual decimal Pagos { get; set; }
-        public virtual decimal Deuda { get; set; }
+        public virtual decimal MesActual { get; set; }
         public virtual decimal Intereses { get; set; }
         public virtual decimal GastosA { get; set; }
         public virtual decimal GastosB { get; set; }
