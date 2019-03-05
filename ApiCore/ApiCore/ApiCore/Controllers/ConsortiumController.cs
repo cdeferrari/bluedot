@@ -136,7 +136,7 @@ namespace ApiCore.Controllers
         {
             var consortium = this.ConsortiumService.GetById(id);
 
-            if (!this.MonthClosed(consortium, month))
+            if (!this.AccountStatusService.MonthClosed(consortium, month))
             {
                 foreach (var unit in consortium.Ownership.FunctionalUnits)
                 {
@@ -147,17 +147,7 @@ namespace ApiCore.Controllers
             return Ok();
 
         }
-
-
-        private bool MonthClosed(Consortium consortium, int month)
-        {
-
-            var accountsStatus = this.AccountStatusService.GetByUnitId(consortium.Ownership.FunctionalUnits.FirstOrDefault().Id)
-                .Where(x => x.StatusDate.Month == month && x.StatusDate.Year == DateTime.Now.Year);
-
-            return accountsStatus.Any(x => !x.IsPayment());
-        }
-
+        
 
         // GET api/<controller>/5
         /// <summary>
