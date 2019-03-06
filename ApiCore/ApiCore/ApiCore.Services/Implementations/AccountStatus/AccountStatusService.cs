@@ -377,14 +377,17 @@ namespace ApiCore.Services.Implementations.AccountStatuss
         public UnitAccountStatusSummary GetUnitSummary(FunctionalUnit unit, Consortium consortium, int month)
         {
             DateTime now = DateTime.Now;
+            var configurationStartDate = DateTime.Now.AddYears(-1);// new DateTime(now.Year, month, 1);
+            var configurationEndDate = now; // startDate.AddMonths(1).AddDays(-1);
+
             var startDate = new DateTime(now.Year, month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
             var previousMonth = new DateTime(now.Year, month, 1).AddMonths(-1);
 
 
-            var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortium.Id, startDate, endDate).ToList();
+            var consortiumConfig = this.ConsortiumConfigurationService.GetByConsortiumId(consortium.Id, configurationStartDate, configurationEndDate).ToList();
 
-            var unitConfig = this.UnitConfigurationService.GetByUnitId(unit.Id, startDate, endDate).ToList();
+            var unitConfig = this.UnitConfigurationService.GetByUnitId(unit.Id, configurationStartDate, configurationEndDate).ToList();
 
             var auxConsortiumConfig = new List<ConsortiumConfigurationType>();// = consortiumConfig.ForEach
             var auxUnitConfig = new List<UnitConfigurationType>();// = consortiumConfig.ForEach
