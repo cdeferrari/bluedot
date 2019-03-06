@@ -447,7 +447,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                     }                    
                 }
             }
-
+            var alreadyClosed = this.MonthClosed(consortium, endDate.Month);
             var unitAccount = this.AccountStatusRepository.GetByUnitId(unit.Id).ToList();
             var unitPayments = unitAccount.Where(x => x.StatusDate.Year == startDate.Year && x.StatusDate.Month == month && x.IsPayment()).Sum(x => x.Haber);
             var unitDebt = unitAccount.Where(x => x.StatusDate.Year == previousMonth.Year && x.StatusDate.Month == previousMonth.Month && !x.IsPayment() && !x.Interest).Sum(x => x.Debe);
@@ -468,22 +468,22 @@ namespace ApiCore.Services.Implementations.AccountStatuss
                 Uf = unit.Number.ToString(),
                 Propietario = unit.Owner != null ? unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty,
                 SaldoAnterior = unitDebt,
-                MesActual = currentMonth,
+                MesActual = alreadyClosed ? currentMonth : 0,
                 Pagos = unitPayments,
-                Aysa = aysa,
-                Edesur = edesur,
-                Expensas = expensas,
-                GastosA = spendA,
-                GastosB = spendB,
-                GastosC = spendC,
-                GastosD = spendD,
+                Aysa = alreadyClosed ? aysa : 0,
+                Edesur = alreadyClosed ? edesur : 0,
+                Expensas = alreadyClosed ? expensas : 0,
+                GastosA = alreadyClosed ? spendA : 0,
+                GastosB = alreadyClosed ? spendB : 0,
+                GastosC = alreadyClosed ? spendC : 0,
+                GastosD = alreadyClosed ? spendD : 0,
                 Dto = unit.Dto,
                 Piso = unit.Floor.ToString(),
-                SiPagaAntes = discount,
-                Intereses = unitInterest,
-                Total = totalUnitDebt + currentMonth - discount - unitPayments,
+                SiPagaAntes = alreadyClosed ? discount : 0,
+                Intereses = alreadyClosed ? unitInterest : 0,
+                Total = alreadyClosed ? totalUnitDebt + currentMonth - discount - unitPayments: totalUnitDebt - discount - unitPayments,
                 DiscountDay = discountConfig != null ? discountConfig.ConfigurationDate.Day : (int?)null,
-                DiscountValue = discountConfig != null ? discountConfig.Value : (decimal?)null
+                DiscountValue = alreadyClosed ? discountConfig != null ? discountConfig.Value : (decimal?)null : 0
             };
 
             return result;
