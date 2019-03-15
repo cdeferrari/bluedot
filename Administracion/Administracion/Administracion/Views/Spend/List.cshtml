@@ -168,9 +168,12 @@
                         </tbody>
                     </table>
                     @{decimal percentageItemAportesYContr = 0;
+
+                        var sumAportYCont = Model.AportesYContribucionesSpends.Sum(x => x.Value);
                         if(Model.Spends.Sum(x => x.Bill.Amount) > 0)
                         {
-                            percentageItemAportesYContr  = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                            //percentageItemAportesYContr  =   Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                            percentageItemAportesYContr = sumAportYCont * 100 / Model.Spends.Sum(x => x.Bill.Amount);
                         }
 
                         percentageItemAportesYContr = Math.Round(percentageItemAportesYContr, 2);
@@ -183,7 +186,9 @@
                             <div class="col-md-2">
                                 @percentageItemAportesYContr %
                             </div>
-                            <div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount)</div>
+                            @*<div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount)</div>*@
+                            <div class="col-md-2">$@sumAportYCont</div>
+
                         </div>
                     </div>
 
