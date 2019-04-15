@@ -48,7 +48,7 @@
             {
                 <td style="border: solid 1px; border-color: #eaedf1;"></td>
             }
-            @{ var total = Model.SpendClass != null && Model.SpendClass.Id == 5 ? -Model.Bill.Amount : Model.Bill.Amount;}
+            @{ var total = Model.SpendClass != null && Model.SpendClass.Id == 5 ? - Model.Bill.Amount : Model.Bill.Amount;}
             <td  style="border: solid 1px; border-color: #eaedf1;"> @total</td>                        
             <td style="border: solid 1px; border-color: #eaedf1;" class="text-center">
                 <div class="btn-group">

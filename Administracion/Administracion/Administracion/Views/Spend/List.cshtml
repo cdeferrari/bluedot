@@ -11,7 +11,7 @@
         <div class="content-header">
             <ul class="nav-horizontal text-center">
                 <li>
-                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                    <a href="/Consortium/Details/@Model.ConsortiumId"><i class="fa fa-home"></i> Home</a>
                 </li>
 
                 <li class="active">
@@ -77,9 +77,9 @@
             
             <div class="table-responsive">
                 <div class="block">
-                    <div class="row" style="background-color: red;color: white;">
+                    @*<div class="row" style="background-color: red;color: white;">
                         Los siguientes items no estan asociados a ningún encargado
-                    </div>
+                    </div>*@
                     <div class="block-title">
                         <div class="block-options pull-right">
                             <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
@@ -125,7 +125,7 @@
 
                     <div class="block-title">
                         <div class="block-options pull-right">
-                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemAportesYContr.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
+                            <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
 

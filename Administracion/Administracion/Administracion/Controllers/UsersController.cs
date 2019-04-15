@@ -57,7 +57,7 @@ namespace Administracion.Controllers
                 //    .ToList();
 
                 //var users = this.UserService.GetAll().Select(x => !usersIds.Contains(x.Id)).ToList();
-                
+
                 var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
                 {
                     Value = x.Id.ToString(),
@@ -104,9 +104,9 @@ namespace Administracion.Controllers
                 //        IsRenter = true,
                 //        PaymentTypes = paymentTypes
                 //    }));
-                
-                
-                return View("List",usersViewModel);
+
+
+                return View("List", usersViewModel);
             }
             catch (Exception ex)
             {
@@ -119,23 +119,37 @@ namespace Administracion.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
-            var administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            });
+            var administrations = new List<SelectListItem>();
+            var paymentTypes = new List<SelectListItem>();
+            var ownershipList = new List<SelectListItem>();
 
-            var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
+            if (AdministrationService.GetAll() != null)
             {
-                Value = x.Id.ToString(),
-                Text = x.Description
-            });
+                administrations = this.AdministrationService.GetAll().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name
+                }).ToList();
+            }
 
-            var ownershipList = this.OwnershipService.GetAll().Select(x => new SelectListItem()
+            if (PaymentTypeService.GetAll() != null)
             {
-                Value = x.Id.ToString(),
-                Text = x.Address.Street + " " + x.Address.Number 
-            }).OrderBy(x => x.Text);
+                paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Description
+                }).ToList();
+            }
+
+            if (OwnershipService.GetAll() != null)
+            {
+                ownershipList = this.OwnershipService.GetAll().Where(x => x.Address != null).Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Address.Street + " " + x.Address.Number
+                })
+                .OrderBy(x => x.Text).ToList();
+            }
 
             var functionalUnitList = new List<FunctionalUnit>().Select(x => new SelectListItem()
             {
@@ -143,16 +157,16 @@ namespace Administracion.Controllers
                 Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
             });
 
-            var userViewModel = new UserViewModel() { Administrations = administrations , PaymentTypes = paymentTypes, OwnershipList = ownershipList, FunctionalUnitList = functionalUnitList, IsOwner = true};
+            var userViewModel = new UserViewModel() { Administrations = administrations, PaymentTypes = paymentTypes, OwnershipList = ownershipList, FunctionalUnitList = functionalUnitList, IsOwner = true };
             return View(userViewModel);
         }
 
         [HttpPost]
         public ActionResult CreateUpdateUser(UserViewModel user)
         {
-         
+
             var nuser = new User();
-            
+
             try
             {
                 nuser = Mapper.Map<User>(user);
@@ -166,7 +180,7 @@ namespace Administracion.Controllers
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
-                            FunctionalUnitIds = user.Units!= null ? user.Units : new List<int>(),
+                            FunctionalUnitIds = user.Units != null ? user.Units : new List<int>(),
                             PaymentTypeId = user.PaymentTypeId
                         };
                         this.OwnerService.CreateOwner(owner);
@@ -202,7 +216,7 @@ namespace Administracion.Controllers
                         this.WorkerService.CreateWorker(worker);
                     }
 
-                
+
                 }
                 else
                 {
@@ -218,7 +232,7 @@ namespace Administracion.Controllers
 
                     if (user.IsOwner)
                     {
-                        
+
                         var owner = new OwnerRequest()
                         {
                             UserId = nuser.Id,
@@ -233,10 +247,10 @@ namespace Administracion.Controllers
                             this.OwnerService.UpdateOwner(owner);
                         }
                         else
-                        {                         
+                        {
                             this.OwnerService.CreateOwner(owner);
                         }
-                        
+
                     }
                     else
                     {
@@ -245,7 +259,7 @@ namespace Administracion.Controllers
                             var owner = owners.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
                             this.OwnerService.DeleteOwner(owner.Id);
                         }
-                        
+
                     }
 
                     if (user.IsRenter)
@@ -277,7 +291,7 @@ namespace Administracion.Controllers
                             var renter = renters.Where(x => x.User.Id.Equals(user.Id)).FirstOrDefault();
                             this.RenterService.DeleteRenter(renter.Id);
                         }
-                        
+
                     }
 
                     if (user.IsWorker)
@@ -320,13 +334,13 @@ namespace Administracion.Controllers
                 {
                     return Redirect("/Users/Index");
                 }
-                
+
             }
             catch (Exception ex)
             {
                 return View("../Shared/Error");
             }
-            
+
         }
 
 
@@ -356,7 +370,7 @@ namespace Administracion.Controllers
             });
 
             user.Administrations = administrations;
-            
+
             var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
@@ -399,19 +413,19 @@ namespace Administracion.Controllers
 
                     user.FunctionalUnitId = userUnit.Id;
                 }
-                
+
             }
 
             user.CallbackUrl = callbackUrl;
 
-            return View("CreateUser",user);
+            return View("CreateUser", user);
         }
 
         public ActionResult UpdateUser(UserViewModel user)
-        {            
+        {
             var nuser = new User();
-            
-            nuser = Mapper.Map<User>(user);            
+
+            nuser = Mapper.Map<User>(user);
             this.UserService.UpdateUser(nuser);
             return View();
         }
@@ -437,7 +451,8 @@ namespace Administracion.Controllers
             //User Contact
             if (user.ContactData != null) //Si se cambio algo en la ContactData
             {//Se puede asumir que currUser tiene ContactData porque sino no aparece el form
-                if (!string.IsNullOrEmpty(user.ContactData.Email)) {
+                if (!string.IsNullOrEmpty(user.ContactData.Email))
+                {
                     currUser.ContactData.Email = user.ContactData.Email;
                 }
                 if (!string.IsNullOrEmpty(user.ContactData.Telephone))
@@ -462,7 +477,7 @@ namespace Administracion.Controllers
 
                 DateTime dt = DateTime.Now;
                 //La idea de mandar la date.now es que se refresque el cache y se vea si hubo un cambio en las fotos
-                return Redirect("/Users/Details?"+dt);
+                return Redirect("/Users/Details?" + dt);
             }
             else
             {
@@ -501,10 +516,10 @@ namespace Administracion.Controllers
             this.UserService.DeleteUser(id);
             return Redirect("/Users/Index");
         }
-        
+
         public ActionResult List()
-        {         
-         
+        {
+
             try
             {
                 var users = this.UserService.GetAll();
@@ -514,7 +529,7 @@ namespace Administracion.Controllers
             {
                 return View("../Shared/Error");
             }
-            
+
         }
 
         public ActionResult Details()
@@ -530,7 +545,7 @@ namespace Administracion.Controllers
         public ActionResult BaseUserEdit(int? id)
         {
             BaseUserEditViewModel model = new BaseUserEditViewModel();
-            if(id.HasValue)
+            if (id.HasValue)
             {
                 User user = this.UserService.GetUser(id.Value);
                 model.SetUser(user);
@@ -543,7 +558,7 @@ namespace Administracion.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return View(model);
                 }
@@ -569,15 +584,16 @@ namespace Administracion.Controllers
                 {
                     UserService.CreateUser(user);
                 }
-                if(SessionPersister.Account.User.Id == user.Id) {
+                if (SessionPersister.Account.User.Id == user.Id)
+                {
                     UpdateLoggedUser(user);
                 }
-                return View("/Users/BaseUserDetails/"+user.Id);
+                return View("/Users/BaseUserDetails/" + user.Id);
             }
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
         public ActionResult BaseUserList()
@@ -587,7 +603,7 @@ namespace Administracion.Controllers
                 List<User> users = this.UserService.GetAll().ToList();
                 return View(users);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return View("../Shared/Error");
             }
@@ -598,7 +614,7 @@ namespace Administracion.Controllers
             try
             {
                 User user = this.UserService.GetUser(id);
-                if(user == null)
+                if (user == null)
                 {
                     return View("../Shared/Error");
                 }
@@ -617,17 +633,17 @@ namespace Administracion.Controllers
             var functionalUnitList = this.OwnershipService.GetUnits(id).Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto                
+                Text = "Nro:" + x.Number + " Piso:" + x.Floor + " Dto:" + x.Dto
             });
 
             return JsonConvert.SerializeObject(functionalUnitList);
-            
+
         }
 
         private string GetUserImageName(HttpPostedFileBase image, int userId)
         {
             string fileExtension = Path.GetExtension(image.FileName);
-            string newFileName = "user-" + userId + fileExtension;            
+            string newFileName = "user-" + userId + fileExtension;
             return newFileName;
         }
 

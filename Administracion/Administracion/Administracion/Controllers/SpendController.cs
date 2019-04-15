@@ -110,7 +110,7 @@ namespace Administracion.Controllers
                 {
                     if (x.Bill.Manager != null)
                     {
-                        if(x.Description == "Suterh" || x.Description == "Fateryh" || x.Description == "Seracarh")
+                        if(x.Description == "Suterh" || x.Description == "Fateryh" || x.Description == "Seracarh" || x.Description.ToLower().Contains("afip"))
                         {
                             if (!aportesYcontribucionesSpends.Keys.Contains(x.Description))
                             {

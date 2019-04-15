@@ -113,10 +113,18 @@
                         <div class="form-group">
                             <label class="control-label col-md-3" for="Rubro gasto">Clase y Tipo de gasto</label>
                             <div class="col-md-3">
-                                @Html.DropDownListFor(model => model.SpendClassId, Model.SpendClass, "-- ELIJA CLASE DE GASTO  --", new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.SpendClassId, Model.SpendClass, "-- ELIJA CLASE DE GASTO  --", new { @class = "form-control",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Seleccione Clase y Tipo de gasto')",
+                               @oninput = "setCustomValidity('')"
+                           })
                             </div>
                             <div class="col-md-3">
-                                       @Html.DropDownListFor(model => model.SpendTypeId, Model.SpendTypes, "-- ELIJA TIPO DE GASTO  --", new { @class = "form-control" })                                                                                                       
+                                       @Html.DropDownListFor(model => model.SpendTypeId, Model.SpendTypes, "-- ELIJA TIPO DE GASTO  --", new { @class = "form-control",
+                                      @required = "required",
+                                      @oninvalid = "this.setCustomValidity('Seleccione Tipo de gasto')",
+                                      @oninput = "setCustomValidity('')"
+                                  })                                                                                                       
                             </div>
                             <div class="col-md-3 ">
                                 <a href="#modal-add-spend-type" data-toggle="modal" title="Agregar Tipo de Gasto" value="Agregar Tipo de Gasto" class="btn btn-success">Agregar Tipo de Gasto</a>
@@ -185,7 +193,11 @@
                         <div class="form-group">
                             <label class="control-label col-md-3" for="Rubro gasto">Proveedor</label>
                             <div class="col-md-6">
-                                @Html.DropDownListFor(model => model.ProviderId, Model.Providers, "-- ELIJA PROVEEDOR  --", new { @class = "form-control chosen-select" })
+                                @Html.DropDownListFor(model => model.ProviderId, Model.Providers, "-- ELIJA PROVEEDOR  --", new { @class = "form-control chosen-select",
+                               @required = "required",
+                               @oninvalid = "this.setCustomValidity('Seleccione Proveedor')",
+                               @oninput = "setCustomValidity('')"
+                           })
                             </div>
                         </div>
                         <div class="form-group">
