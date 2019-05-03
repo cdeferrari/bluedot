@@ -141,14 +141,24 @@ namespace Administracion.Controllers
                 }).ToList();
             }
 
-            if (OwnershipService.GetAll() != null)
+            var ownerships = OwnershipService.GetAll();
+
+
+            if (ownerships.Count > 0)
             {
-                ownershipList = this.OwnershipService.GetAll().Where(x => x.Address != null).Select(x => new SelectListItem()
+                ownerships.ForEach(x =>
                 {
-                    Value = x.Id.ToString(),
-                    Text = x.Address.Street + " " + x.Address.Number
-                })
-                .OrderBy(x => x.Text).ToList();
+                    if(x.Address != null)
+                    {
+                        ownershipList.Add(new SelectListItem()
+                        {
+                            Value = x.Id.ToString(),
+                            Text = x.Address.Street + " " + x.Address.Number
+                        });
+                    }
+                });
+
+                ownershipList.OrderBy(x => x.Text).ToList();
             }
 
             var functionalUnitList = new List<FunctionalUnit>().Select(x => new SelectListItem()

@@ -48,7 +48,9 @@ namespace Administracion.Controllers
         [HttpGet]
         public ActionResult ChoseConsortium()
         {
-            var consortiums = this.ConsortiumService.GetAll().Select(x => new SelectListItem()
+            var consortiums = this.ConsortiumService.GetAll()
+                .Where(x=> x.Ownership != null)
+                .Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Ownership.Address.Street + " " + x.Ownership.Address.Number
@@ -405,11 +407,14 @@ namespace Administracion.Controllers
         {
             try
             {
-                var startDate = DateTime.Now.AddMonths(-pastMonth);
-                startDate = startDate.AddDays(-startDate.Day);
+                //var startDate = DateTime.Now.AddMonths(-pastMonth);
+                //startDate = startDate.AddDays(-startDate.Day);
 
-                var endDate = DateTime.Now.AddMonths(-pastMonth);
-                endDate = endDate.AddDays(30 - endDate.Day);
+                //var endDate = DateTime.Now.AddMonths(-pastMonth);
+                //endDate = endDate.AddDays(30 - endDate.Day);
+                var month = DateTime.Now.AddMonths(-pastMonth);
+                var startDate = new DateTime(DateTime.Now.Year,  month.Month, 1, 0, 0, 0);
+                var endDate = new DateTime(startDate.Year, startDate.Month, startDate.AddMonths(1).AddDays(-1).Day, 0, 0, 0);
                 var spendsList = this.SpendService.GetByConsortiumId(id, startDate, endDate);
 
                 var spendTypes = this.SpendTypeService.GetAll();
@@ -473,7 +478,9 @@ namespace Administracion.Controllers
                     SpendTypes = spendTypesList,
                     ConsortiumId = id,
                     SalarySpends = salaryDictionaryManager,
-                    SalarySpendWithoutManager = spendsWithoutManager
+                    SalarySpendWithoutManager = spendsWithoutManager,
+                    Id = id,
+                    Month = month.Month
                 };
 
                 return View("List", spendsViewModel);

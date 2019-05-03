@@ -25,11 +25,11 @@
                 </li>
             </ul>
         </div>
-        <ul class="breadcrumb breadcrumb-top">            
-                <li><a href="/home">Home</a></li>
-                <li><a href="/Consortium/Index">Consorcios</a></li>
-                <li><a href="/Consortium/Details/@Model.ConsortiumId">Consorcio</a></li>            
-                <li><a href="">Gastos</a></li>            
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/Consortium/Index">Consorcios</a></li>
+            <li><a href="/Consortium/Details/@Model.ConsortiumId">Consorcio</a></li>
+            <li><a href="">Gastos</a></li>
         </ul>
         <div class="block full" id="spend-page">
             <div class="block-title">
@@ -40,8 +40,8 @@
 
             <div class="panel-heading">
                 <div class="row">
-                    
-                    <div class="col-md-2">                        
+
+                    <div class="col-md-2">
                     </div>
                 </div>
             </div>
@@ -70,16 +70,16 @@
                         <input type="hidden" name="consortiumId" id="consortiumId" value="@Model.ConsortiumId" />
                         <input type="file" id="managercsv" name="managercsv" />
                     </div>
-                </div>                
+                </div>
                 <button type="submit" class="btn btn-default">Procesar</button>
             }
 
-            
+
             <div class="table-responsive">
                 <div class="block">
                     @*<div class="row" style="background-color: red;color: white;">
-                        Los siguientes items no estan asociados a ningún encargado
-                    </div>*@
+                            Los siguientes items no estan asociados a ningún encargado
+                        </div>*@
                     <div class="block-title">
                         <div class="block-options pull-right">
                             <a href="/Spend/CreateSpend?consortiumId=@Model.ConsortiumId&spendItemId=@spendItemDetYSueldos.Value" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Agregar Gasto"><i class="fa fa-plus"></i></a>
@@ -119,7 +119,7 @@
                     @Html.Partial("_SueldoList", Model.SalarySpends[key]);
                 }
             }
-            
+
             <div class="table-responsive">
                 <div class="block">
 
@@ -150,48 +150,56 @@
                             {
                                 @Html.Partial("_SpendItem", aporte)
                             }
-                            @foreach(var key in Model.AportesYContribucionesSpends.Keys)
-                            {
-                                <tr>
-                                    <td style="border: solid 1px; border-color: #eaedf1;"></td>
-                                    <td style="border-left: solid 1px; border-color: #eaedf1;"><span style="font-weight:bolder">@key </span></td>
-                                    <td class="border-left-right-none"></td>
-                                    <td class="border-left-none" style="border-right: solid 1px; border-color: #eaedf1;"></td>
-                                    <td style="border: solid 1px; border-color: #eaedf1;">$@Model.AportesYContribucionesSpends[key]</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>                                
-                                </tr>                                
-                            }
 
+                            @if (Model.AportesYContribucionesSpends != null)
+                            {
+                                foreach (var key in Model.AportesYContribucionesSpends.Keys)
+                                {
+                                    <tr>
+                                        <td style="border: solid 1px; border-color: #eaedf1;"></td>
+                                        <td style="border-left: solid 1px; border-color: #eaedf1;"><span style="font-weight:bolder">@key </span></td>
+                                        <td class="border-left-right-none"></td>
+                                        <td class="border-left-none" style="border-right: solid 1px; border-color: #eaedf1;"></td>
+                                        <td style="border: solid 1px; border-color: #eaedf1;">$@Model.AportesYContribucionesSpends[key]</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
-                    @{decimal percentageItemAportesYContr = 0;
 
-                        var sumAportYCont = Model.AportesYContribucionesSpends.Sum(x => x.Value);
-                        if(Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                    @if (Model.AportesYContribucionesSpends != null)
+                    {
                         {
-                            //percentageItemAportesYContr  =   Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
-                            percentageItemAportesYContr = sumAportYCont * 100 / Model.Spends.Sum(x => x.Bill.Amount);
-                        }
+                            decimal percentageItemAportesYContr = 0;
 
-                        percentageItemAportesYContr = Math.Round(percentageItemAportesYContr, 2);
-                    }
+                            var sumAportYCont = Model.AportesYContribucionesSpends.Sum(x => x.Value);
+                            if (Model.Spends.Sum(x => x.Bill.Amount) > 0)
+                            {
+                                //percentageItemAportesYContr  =   Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                                percentageItemAportesYContr = sumAportYCont * 100 / Model.Spends.Sum(x => x.Bill.Amount);
+                            }
 
-                    <div class="total-table row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8">
-                            <div class="col-md-6">Total</div>
-                            <div class="col-md-2">
-                                @percentageItemAportesYContr %
+                            percentageItemAportesYContr = Math.Round(percentageItemAportesYContr, 2);
+                        
+
+                        <div class="total-table row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">Total</div>
+                                <div class="col-md-2">
+                                    @percentageItemAportesYContr %
+                                </div>
+                                @*<div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount)</div>*@
+                                <div class="col-md-2">$@sumAportYCont</div>
+
                             </div>
-                            @*<div class="col-md-2">$@Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAportesYContr.Value)).Sum(x => x.Bill.Amount)</div>*@
-                            <div class="col-md-2">$@sumAportYCont</div>
-
                         </div>
-                    </div>
-
+                        }
+                    }
 
                 </div>
             </div>
@@ -228,7 +236,7 @@
                         <tbody>
                             @foreach (var aporte in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemServPub.Value)))
                             {
-                            @Html.Partial("_SpendItem", aporte)
+                                @Html.Partial("_SpendItem", aporte)
                             }
                         </tbody>
                     </table>
@@ -296,7 +304,7 @@
                         {
                             percentageItemAbonoServ = Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemAbonoServ.Value)).Sum(x => x.Bill.Amount) * 100 / Model.Spends.Sum(x => x.Bill.Amount);
                         }
-                        
+
                         percentageItemAbonoServ = Math.Round(percentageItemAbonoServ, 2);
                     }
 
@@ -372,10 +380,10 @@
                         </div>
                     </div>
 
-                    </div>
-
-
                 </div>
+
+
+            </div>
 
 
             <div class="table-responsive">
@@ -433,10 +441,10 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
 
-               
+
             </div>
 
             <div class="table-responsive">
@@ -469,7 +477,7 @@
                         <tbody>
                             @foreach (var gbanc in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosBancarios.Value)))
                             {
-                            @Html.Partial("_SpendItem", gbanc)
+                                @Html.Partial("_SpendItem", gbanc)
                             }
                         </tbody>
                     </table>
@@ -575,24 +583,24 @@
 
                     <table id="example-datatable" class="table table-vcenter table-condensed" name="table">
 
-                        
-                            <tr>
-                                <th class="text-center header-item">@spendItemGastosAdmin.Value</th>
-                                <th class="text-center border-rigth-none" style="border-right:none">@spendItemGastosAdmin.Text</th>
-                                <th class="border-left-right-none" style="border-right:none; border-left:none"></th>
-                                <th class="border-left-none" style="border-left:none"></th>
-                                <th class="text-center header-item">GASTOS A</th>
-                                <th class="text-center header-item">GASTOS B</th>
-                                <th class="text-center header-item">GASTOS C</th>
-                                <th class="text-center header-item">TOTAL</th>
-                                <th class="text-center">Acciones</th>
-                            </tr>
-                        
+
+                        <tr>
+                            <th class="text-center header-item">@spendItemGastosAdmin.Value</th>
+                            <th class="text-center border-rigth-none" style="border-right:none">@spendItemGastosAdmin.Text</th>
+                            <th class="border-left-right-none" style="border-right:none; border-left:none"></th>
+                            <th class="border-left-none" style="border-left:none"></th>
+                            <th class="text-center header-item">GASTOS A</th>
+                            <th class="text-center header-item">GASTOS B</th>
+                            <th class="text-center header-item">GASTOS C</th>
+                            <th class="text-center header-item">TOTAL</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+
 
                         <tbody>
                             @foreach (var gadmin in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemGastosAdmin.Value)))
                             {
-                            @Html.Partial("_SpendItem", gadmin)
+                                @Html.Partial("_SpendItem", gadmin)
                             }
                         </tbody>
                     </table>
@@ -653,7 +661,7 @@
                         <tbody>
                             @foreach (var pseg in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemPagosSeguros.Value)))
                             {
-                            @Html.Partial("_SpendItem", pseg)
+                                @Html.Partial("_SpendItem", pseg)
                             }
                         </tbody>
                     </table>
@@ -713,7 +721,7 @@
                         <tbody>
                             @foreach (var pseg in Model.Spends.Where(x => x.Type.Item.Id == int.Parse(spendItemOtros.Value)))
                             {
-                            @Html.Partial("_SpendItem", pseg)
+                                @Html.Partial("_SpendItem", pseg)
                             }
                         </tbody>
                     </table>
@@ -749,7 +757,7 @@
                 <a href="#modal-close-month" data-toggle="modal" title="Liquidar" value="Liquidar" class="btn btn-success">Liquidar</a>
                 <a href="/Spend/PastListMenu?id=@Model.ConsortiumId" title="Ver anteriores" value="Ver anteriores" class="btn btn-info">Ver anteriores</a>
             </div>
-            
+
         </div>
 
 
@@ -790,11 +798,11 @@
 
 <script>
     document.onreadystatechange = function () {
-        var tables = document. getElementsByName("table");
-        
+        var tables = document.getElementsByName("table");
+
         tables.forEach(function (item, index, arr) {
             item.setAttribute("class", "table table-vcenter table-condensed dataTable no-footer");
         });
     }
-    
+
 </script>
