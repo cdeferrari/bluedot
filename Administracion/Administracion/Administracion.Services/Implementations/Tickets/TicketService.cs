@@ -41,6 +41,12 @@ namespace Administracion.Services.Implementations.Tickets
             return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllTicket, RestMethod.Get, null, null);                                    
         }
 
+        public IList<Ticket> GetAllList()
+        {
+            return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllTicketsList, RestMethod.Get, null, null);
+        }
+
+
         public IList<Ticket> GetByConsortiumId(int consortiumId)
         {
             return IntegrationService.RestCall<List<Ticket>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetByConsortiumId, consortiumId), RestMethod.Get, null, null);

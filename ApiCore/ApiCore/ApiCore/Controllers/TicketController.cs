@@ -43,6 +43,24 @@ namespace ApiCore.Controllers
             return Ok(dto);
         }
 
+        /// <summary>
+        /// Devuelve todos los tickets para el listado
+        /// </summary>        
+        /// <returns></returns>
+        [Route("list")]
+        [ResponseType(typeof(IList<TicketListResponse>))]
+        public IHttpActionResult GetList()
+        {
+            var tickets = TicketService.GetAll();
+
+            if (tickets == null)
+                throw new NotFoundException(ErrorMessages.TicketNoEncontrado);
+
+            var dto = Mapper.Map<IList<TicketListResponse>>(tickets);
+
+            return Ok(dto);
+        }
+
 
 
         // GET api/<controller>/5

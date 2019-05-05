@@ -1024,6 +1024,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tickets/list.
+        /// </summary>
+        public static string GetAllTicketsList {
+            get {
+                return ResourceManager.GetString("GetAllTicketsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UnitConfigurationTypes/.
         /// </summary>
         public static string GetAllUnitConfigurationTypes {

@@ -52,7 +52,7 @@ namespace Administracion.Controllers
             try
             {
                 int currUserId = SessionPersister.Account.User.Id;
-                var tickets = this.TicketService.GetAll();
+                var tickets = this.TicketService.GetAllList();
                 var ticketsViewModel = Mapper.Map<List<TicketViewModel>>(tickets);
                 var ticketListViewModel = new TicketListViewModel()
                 {
@@ -593,7 +593,7 @@ namespace Administracion.Controllers
         {
             try
             {
-                var allTickets = this.TicketService.GetAll();
+                var allTickets = this.TicketService.GetAllList();
                 var tickets = allTickets
                     .Where(x => x.Priority.Description == priorityDescription && x.Status.Description == "open")
                     .ToList();

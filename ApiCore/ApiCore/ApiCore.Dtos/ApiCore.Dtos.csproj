@@ -78,6 +78,12 @@
     <Compile Include="Request\BankAccountRequest.cs" />
     <Compile Include="Request\WorkerRequest.cs" />
     <Compile Include="Request\UserRequest.cs" />
+    <Compile Include="Response\BacklogUserResponseTicketList.cs" />
+    <Compile Include="Response\ConsortiumTicketListResponse.cs" />
+    <Compile Include="Response\FunctionalUnitTicketList.cs" />
+    <Compile Include="Response\ManagerResponseTicketList.cs" />
+    <Compile Include="Response\OwnershipTicketListResponse.cs" />
+    <Compile Include="Response\TicketListResponse.cs" />
     <Compile Include="Response\UnitAccountStatusSummary.cs" />
     <Compile Include="Response\AccountResponse.cs" />
     <Compile Include="Response\AccountTypeResponse.cs" />

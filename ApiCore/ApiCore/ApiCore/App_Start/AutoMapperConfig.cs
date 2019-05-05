@@ -18,9 +18,11 @@ namespace ApiCore
 
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Ticket, TicketResponse>();
+                cfg.CreateMap<Ticket, TicketListResponse>();
                 cfg.CreateMap<Priority, PriorityResponse>();
                 cfg.CreateMap<TicketStatus, TicketStatusResponse>();
                 cfg.CreateMap<BacklogUser, BacklogUserResponse>();
+                cfg.CreateMap<BacklogUser, BacklogUserResponseTicketList>();
                 cfg.CreateMap<User, UserResponse>();
                 cfg.CreateMap<ContactData, ContactDataResponse>();
                 cfg.CreateMap<Account, AccountResponse>();
@@ -32,6 +34,7 @@ namespace ApiCore
                 cfg.CreateMap<Provider, ProviderResponse>();
                 cfg.CreateMap<Role, RoleResponse>();
                 cfg.CreateMap<Ownership, OwnershipResponse>();
+                cfg.CreateMap<Ownership, OwnershipTicketListResponse>();
                 cfg.CreateMap<Ownership, OwnershipUnitResponse>();
                 cfg.CreateMap<Owner, OwnerResponse>()
                 .ForMember(x => x.FunctionalUnitId , opt => opt.MapFrom(y => y.FunctionalUnits.Select(x => x.Id).ToList()));
@@ -49,9 +52,12 @@ namespace ApiCore
 
                 cfg.CreateMap<FunctionalUnitRequest, FunctionalUnit>();
                 cfg.CreateMap<Consortium, ConsortiumResponse>();
+                cfg.CreateMap<Consortium, ConsortiumTicketListResponse>();
+
                 cfg.CreateMap<ConsortiumSecure, ConsortiumSecureResponse>();
                 cfg.CreateMap<FunctionalUnit, UnitResponse>();
                 cfg.CreateMap<FunctionalUnit, FunctionalUnitResponse>();
+                cfg.CreateMap<FunctionalUnit, FunctionalUnitTicketList>();
 
                 cfg.CreateMap<CommonData, CommonDataResponse>()
                 .ForMember(x => x.OwnershipId, m => m.MapFrom(y => y.Ownership.Id));
@@ -62,6 +68,8 @@ namespace ApiCore
                 cfg.CreateMap<TaskHistory, TaskHistoryResponse>();
                 cfg.CreateMap<TicketHistory, TicketHistoryResponse>();
                 cfg.CreateMap<Manager, ManagerResponse>();
+                cfg.CreateMap<Manager, ManagerResponseTicketList>();
+
                 cfg.CreateMap<Message, MessageResponse>();
 
                 cfg.CreateMap<ElevatorControl, ControlResponse>();

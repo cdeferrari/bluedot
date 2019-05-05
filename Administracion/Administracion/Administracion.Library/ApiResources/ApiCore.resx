@@ -643,4 +643,7 @@
   <data name="GetAllManagerPosition" xml:space="preserve">
     <value>ManagerPosition/</value>
   </data>
+  <data name="GetAllTicketsList" xml:space="preserve">
+    <value>Tickets/list</value>
+  </data>
 </root>
