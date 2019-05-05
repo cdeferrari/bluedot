@@ -56,8 +56,8 @@ namespace ApiCore.Services.Implementations.Ownerships
         [Transaction]
         public IList<Ownership> GetAll()
         {
-            var consortiums = this.ConsortiumService.GetAll();
-            return consortiums.Select(x => x.Ownership).Distinct().ToList();
+            var consortiums = this.ConsortiumService.GetAll().ToList();
+            return consortiums.Where(x=> x.Ownership != null).Select(x => x.Ownership).Distinct().ToList();
         }
 
 

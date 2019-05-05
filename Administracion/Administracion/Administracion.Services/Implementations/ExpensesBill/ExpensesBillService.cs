@@ -207,7 +207,11 @@ namespace Administracion.Services.Implementations.ExpensesBill
 
         private decimal GetExpensepencentage(decimal total, decimal expenseTotal)
         {
-            return (expenseTotal * 100) / total;
+            decimal totalResult = 0;
+            if(total != 0 && expenseTotal !=0)
+                totalResult = (expenseTotal * 100) / total;
+
+            return totalResult;
         }
     }
 }
