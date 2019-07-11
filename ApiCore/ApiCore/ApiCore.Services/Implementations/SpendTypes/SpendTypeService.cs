@@ -69,6 +69,13 @@ namespace ApiCore.Services.Implementations.SpendTypes
         }
 
         [Transaction]
+        public IList<SpendType> GetByConsortiumId(int ConsortiumId)
+        {
+            return SpendTypeRepository.GetByConsortiumId(ConsortiumId).ToList();
+
+        }
+
+        [Transaction]
         public SpendType UpdateSpendType(SpendType originalSpend, SpendTypeRequest Spend)
         {
             this.MergeSpendType(originalSpend, Spend);

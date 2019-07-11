@@ -191,7 +191,53 @@ namespace Administracion.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult UpdatePaymentRegister(UnitPaymentViewModel unitPaymentViewModel)
+        {
+            var request = new AccountStatusRequest()
+            {
+                Id = unitPaymentViewModel.Id,
+                Haber = unitPaymentViewModel.Amount,
+                StatusDate = unitPaymentViewModel.PaymentDate,
+                UnitId = unitPaymentViewModel.UnitId,
+                PaymentTypeId = unitPaymentViewModel.PaymentTypeId
+            };
 
+            var result = this.AccountStatusService.CreateAccountStatus(request);
+
+            //  return Redirect(string.Format("/Consortium/Details/{0}", unitPaymentViewModel.ConsortiumId));
+            return View("CreatedPayment", unitPaymentViewModel);
+
+        }
+
+        public ActionResult UpdatePaymentRegister(int id, int consId)
+        {
+            try
+            {
+                var paymentTypes = this.PaymentTypeService.GetAll().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Description
+                });
+
+                var payment = this.AccountStatusService.GetAccountStatus(id);
+                var request = new UnitPaymentViewModel()
+                {
+                    Id = payment.Id,
+                    Amount = payment.Haber,
+                    PaymentDate = payment.StatusDate,
+                    UnitId = payment.Unit.Id,
+                    PaymentTypeId = payment.PaymentTypeId,
+                    ConsortiumId = consId,
+                    PaymentTypes = paymentTypes
+                };
+                return View(request);
+            }
+            catch (Exception ex)
+            {
+                return View("../Shared/Error");
+            }
+        }
 
         [HttpPost]
         public ActionResult CreateUpdateFunctionalUnit(FunctionalUnitViewModel unit)
@@ -359,8 +405,7 @@ namespace Administracion.Controllers
 
         public ActionResult UpdateFunctionalUnit(FunctionalUnitViewModel unit)
         {            
-            var nunit = new FunctionalUnit();
-            
+            var nunit = new FunctionalUnit();        
             nunit = Mapper.Map<FunctionalUnit>(unit);
             var entity = Mapper.Map<FunctionalUnitRequest>(nunit);
             this.FunctionalUnitService.UpdateFunctionalUnit(entity);

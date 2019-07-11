@@ -39,6 +39,11 @@ namespace Administracion.Services.Implementations.SpendTypes
         {
             return IntegrationService.RestCall<List<SpendType>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllSpendType, RestMethod.Get, null, null);            
         }
-        
+
+        public List<SpendType> GetByConsortium(int ConsortiumId)
+        {
+            return IntegrationService.RestCall<List<SpendType>>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetSpendTypeByConsortium, ConsortiumId), RestMethod.Get, null, new RestParamList { new RestParam("ConsortiumId", ConsortiumId) });
+        }
+
     }
 }

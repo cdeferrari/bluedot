@@ -19,7 +19,7 @@ namespace Administracion.Library.ApiResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ApiCore {
@@ -376,6 +376,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/{0}.
+        /// </summary>
+        public static string DeleteAccountStatus {
+            get {
+                return ResourceManager.GetString("DeleteAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration/{0}.
         /// </summary>
         public static string DeleteAdministration {
@@ -655,6 +664,15 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/{0}.
+        /// </summary>
+        public static string GetAccountStatus {
+            get {
+                return ResourceManager.GetString("GetAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration/{0}.
         /// </summary>
         public static string GetAdministration {
@@ -669,6 +687,15 @@ namespace Administracion.Library.ApiResources {
         public static string GetAllAccounts {
             get {
                 return ResourceManager.GetString("GetAllAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/.
+        /// </summary>
+        public static string GetAllAccountStatus {
+            get {
+                return ResourceManager.GetString("GetAllAccountStatus", resourceCulture);
             }
         }
         
@@ -1339,7 +1366,7 @@ namespace Administracion.Library.ApiResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consorcio/{0}/SpendType.
+        ///   Looks up a localized string similar to SpendTypes/GetByConsortiumId/{0}.
         /// </summary>
         public static string GetSpendTypeByConsortium {
             get {
@@ -1416,6 +1443,15 @@ namespace Administracion.Library.ApiResources {
         public static string RegisterUnitsMonthDebt {
             get {
                 return ResourceManager.GetString("RegisterUnitsMonthDebt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AccountStatus/{0}.
+        /// </summary>
+        public static string UpdateAccountStatus {
+            get {
+                return ResourceManager.GetString("UpdateAccountStatus", resourceCulture);
             }
         }
         

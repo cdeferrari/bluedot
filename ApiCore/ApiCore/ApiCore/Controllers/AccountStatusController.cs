@@ -11,6 +11,7 @@ using ApiCore.Services.Contracts.AccountStatuss;
 using System.Linq;
 using ApiCore.Services.Contracts.Consortiums;
 using ApiCore.Services.Contracts.Unit;
+using ApiCore.Dtos.Response;
 
 namespace ApiCore.Controllers
 {
@@ -44,8 +45,20 @@ namespace ApiCore.Controllers
             return Ok(dto);
         }
 
+        [Route("{id}")]
+        [ResponseType(typeof(AccountStatus))]
+        public IHttpActionResult Get(int id)
+        {
+            var completeManager = AccountStatusService.GetById(id);
 
-        
+            if (completeManager == null)
+                throw new NotFoundException(ErrorMessages.TrabajadorNoEncontrado);
+
+            //var dto = Mapper.Map<AccountStatusRequest>(completeManager);
+
+            return Ok(completeManager);
+        }
+
         // POST api/<controller>
         /// <summary>
         /// Inserta un AccountStatus
@@ -56,16 +69,28 @@ namespace ApiCore.Controllers
         [ResponseType(typeof(Entidad))]
         public IHttpActionResult Post(AccountStatusRequest AccountStatus)
         {
-            var unit = this.UnitService.GetById(AccountStatus.UnitId);
-            var consortium = this.ConsortiumService.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
-
-            if (consortium != null)
+            if(AccountStatus.Id > 0)
             {
-                var result = AccountStatusService.CreateAccountStatus(AccountStatus);
-                return Created<Entidad>("", new Entidad { Id = result.Id });
-            }
+                var originalAccountStatus = AccountStatusService.GetById(AccountStatus.Id);
 
-            return NotFound();
+                var ret = AccountStatusService.UpdateAccountStatus(originalAccountStatus, AccountStatus);
+
+                return Ok();
+            }
+            else
+            {
+                var unit = this.UnitService.GetById(AccountStatus.UnitId);
+                var consortium = this.ConsortiumService.GetAll().Where(x => x.Ownership.Id == unit.Ownership.Id).FirstOrDefault();
+
+                if (consortium != null)
+                {
+                    var result = AccountStatusService.CreateAccountStatus(AccountStatus);
+                    return Created<Entidad>("", new Entidad { Id = result.Id });
+                }
+
+                return NotFound();
+            }
+            
             
         }
 

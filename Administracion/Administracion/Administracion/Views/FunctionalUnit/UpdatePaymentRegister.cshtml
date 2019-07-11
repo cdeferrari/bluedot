@@ -1,0 +1,84 @@
+﻿@model Administracion.Models.UnitPaymentViewModel
+@using Administracion.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/Consortium/Details/@Model.ConsortiumId"><i class="fa fa-home"></i> Consorcio</a>
+                </li>                
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>            
+        </ul>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <div class="block-title">
+                        <h2><strong>EDITAR </strong> PAGO</h2>
+                    </div>
+                    @using (Html.BeginForm("UpdatePaymentRegister", "FunctionalUnit", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal form-bordered", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="ConsortiumId" name="ConsortiumId" value="@Model.ConsortiumId">
+                        <input type="hidden" id="UnitId" name="UnitId" value="@Model.UnitId">
+                        <input type="hidden" id="Id" name="Id" value="@Model.Id">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Monto</label>
+                            <div class="col-md-4">
+                                <input id="Amount" type="number" step=".01" name="Amount" value="@Model.Amount">                                
+                            </div>                            
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-4">Día de pago</label>
+                                <div class='input-group date'>
+                                    @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+
+                                @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group " id="pagosSelection">
+                            <label class="control-label col-md-2">Medio de pago</label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentTypes, "-- Por favor elja --", new
+                                   {
+                                       @class = "form-control",
+                                       @size = "1",
+                                       @required = "required",
+                                       @oninvalid = "this.setCustomValidity('Elija medio de pago')",
+                                       @oninput = "setCustomValidity('')"
+                                   })
+                            </div>
+                        </div>
+
+
+                            <div class="form-group form-actions">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Aceptar</button>                                    
+                                </div>
+                            </div>
+                    }
+
+                </div>
+            </div>
+        </div>                
+    </div>            
+</div>
+

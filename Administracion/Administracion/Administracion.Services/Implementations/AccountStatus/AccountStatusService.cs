@@ -19,27 +19,28 @@ namespace Administracion.Services.Implementations.AccountStatuss
             return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateAccountStatus, RestMethod.Post, null, AccountStatus);                        
         }
 
-        //public bool UpdateAccountStatus(AccountStatusRequest AccountStatus)
-        //{            
-        //    return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateAccountStatus, AccountStatus.Id), RestMethod.Put, null, AccountStatus);
-        //}
+        public bool UpdateAccountStatus(AccountStatusRequest AccountStatus)
+        {
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.CreateAccountStatus, RestMethod.Post, null, AccountStatus);
+            //return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.UpdateAccountStatus, AccountStatus.Id), RestMethod.Put, null, AccountStatus);
+        }
 
-        //public bool DeleteAccountStatus(int AccountStatusId)
-        //{
-        //    return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteAccountStatus, AccountStatusId), RestMethod.Delete, null, new RestParamList { new RestParam("id", AccountStatusId) });                        
-        //}
+        public bool DeleteAccountStatus(int AccountStatusId)
+        {
+            return IntegrationService.RestCallNoReturn(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.DeleteAccountStatus, AccountStatusId), RestMethod.Delete, null, new RestParamList { new RestParam("id", AccountStatusId) });
+        }
 
-        //public AccountStatus GetAccountStatus(int AccountStatusId)
-        //{
+        public AccountStatus GetAccountStatus(int AccountStatusId)
+        {
 
-        //    return IntegrationService.RestCall<AccountStatus>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetAccountStatus, AccountStatusId), RestMethod.Get, null, new RestParamList { new RestParam("id", AccountStatusId) });
-            
-        //}
+            return IntegrationService.RestCall<AccountStatus>(ConfigurationManager.AppSettings["ApiCoreUrl"], string.Format(ApiCore.GetAccountStatus, AccountStatusId), RestMethod.Get, null, new RestParamList { new RestParam("id", AccountStatusId) });
 
-        //public List<AccountStatus> GetAll()
-        //{
-        //    return IntegrationService.RestCall<List<AccountStatus>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllAccountStatuss, RestMethod.Get, null, null);            
-        //}
+        }
+
+        public List<AccountStatus> GetAll()
+        {
+            return IntegrationService.RestCall<List<AccountStatus>>(ConfigurationManager.AppSettings["ApiCoreUrl"], ApiCore.GetAllAccountStatus, RestMethod.Get, null, null);
+        }
 
         //public IList<AccountStatus> GetByConsortiumId(int consortiumId, DateTime startDate, DateTime endDate)
         //{

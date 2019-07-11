@@ -8,6 +8,7 @@ namespace Administracion.Dto.Account
 {
     public class AccountStatusRequest
     {
+        public virtual int Id { get; set; }
         public virtual int UnitId { get; set; }
         public virtual decimal Debe { get; set; }
         public virtual decimal Haber { get; set; }

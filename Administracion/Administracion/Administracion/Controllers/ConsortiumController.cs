@@ -46,6 +46,8 @@ using System.Text;
 using System.Xml.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Globalization;
+using Administracion.Services.Contracts.AccountStatuss;
+using Administracion.Services.Contracts.FunctionalUnits;
 
 namespace Administracion.Controllers
 {
@@ -54,6 +56,7 @@ namespace Administracion.Controllers
     public class ConsortiumController : Controller
     {
         public virtual IConsortiumService ConsortiumService { get; set; }
+        public virtual IFunctionalUnitService FunctionalUnitService { get; set; }
         public virtual ICountryService CountryService { get; set; }
         public virtual IAdministrationService AdministrationService { get; set; }
         public virtual IOwnershipService OwnershipService { get; set; }
@@ -69,7 +72,7 @@ namespace Administracion.Controllers
         public virtual IElevatorControlService ElevatorControlService { get; set; }
         public virtual IPaymentTicketService PaymentTicketService { get; set; }
         public virtual IConsortiumBalanceService ConsortiumBalanceService { get; set; }
-
+        public virtual IAccountStatusService AccountStatusService { get; set; }
         public virtual IConsortiumConfigurationService ConsortiumConfigurationService { get; set; }
         public virtual IUnitConfigurationService UnitConfigurationService { get; set; }
         public virtual IConsortiumConfigurationTypeService ConsortiumConfigurationTypeService { get; set; }
@@ -165,6 +168,82 @@ namespace Administracion.Controllers
             };
 
             return View(ConfigurationVm);
+        }
+
+        public decimal getRecaudacionMes(int id)
+        {
+            try
+            {
+                var oConsortium = this.ConsortiumService.GetConsortium(id);
+                var consortium = Mapper.Map<ConsortiumDetailsViewModel>(oConsortium);
+                var owners = this.OwnersService.GetAll();
+
+                consortium.Ownership.FunctionalUnits.ForEach(x =>
+                x.Owner = owners.Where(y => y.FunctionalUnitId.Contains(x.Id)).FirstOrDefault()
+                );
+
+                var units = new List<int>();
+
+                foreach (var item in consortium.Ownership.FunctionalUnits)
+                {
+                    if (!units.Contains(item.Id))
+                        units.Add(item.Id);
+                }
+
+                DateTime first = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime last = first.AddMonths(1);
+
+                var oIncomes = this.AccountStatusService.GetAll().ToList();
+
+                oIncomes = oIncomes.Where(o => units.Contains(o.Unit.Id) && o.Haber > 0 && o.StatusDate >= first && o.StatusDate < last).ToList();
+
+                decimal total = 0;
+
+                foreach (var item in oIncomes)
+                {
+
+                    total += item.Haber;
+                }
+                return total;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public decimal getMontoRecaudar(int id)
+        {
+            try
+            {
+                var configurationTypes = this.ConsortiumConfigurationTypeService.GetAll();
+                var configurations = this.ConsortiumConfigurationService.GetByConsortiumId(id, DateTime.Now.AddYears(-1), DateTime.Now);
+                var configDictionary = new Dictionary<int, ConsortiumConfiguration>();
+
+                foreach (var conft in configurationTypes)
+                {
+                    var lastConfig = configurations.Where(x => x.Type.Id == conft.Id)
+                        .OrderByDescending(x => x.ConfigurationDate).FirstOrDefault();
+                    if (lastConfig != null)
+                    {
+                        configDictionary.Add(conft.Id, lastConfig);
+                    }
+                }
+
+                var ConfigurationVm = new ConsortiumConfigurationViewModel()
+                {
+                    Configurations = configDictionary,
+                    ConfigurationTypes = configurationTypes,
+                    ConsortiumId = id
+                };
+
+                var co = ConfigurationVm.Configurations.FirstOrDefault(o => o.Value.Type.Description.Contains("Monto a recaudar gastos a")).Value.Value;
+                return co;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
         }
 
         [HttpPost]
@@ -576,6 +655,59 @@ namespace Administracion.Controllers
         }
 
         [HttpGet]
+
+        public ActionResult Income(int id)
+        {
+            var oConsortium = this.ConsortiumService.GetConsortium(id);
+            var consortium = Mapper.Map<ConsortiumDetailsViewModel>(oConsortium);
+            var owners = this.OwnersService.GetAll();
+
+            consortium.Ownership.FunctionalUnits.ForEach(x =>
+            x.Owner = owners.Where(y => y.FunctionalUnitId.Contains(x.Id)).FirstOrDefault()
+            );
+
+            var units = new List<int>();
+
+            foreach (var item in consortium.Ownership.FunctionalUnits)
+            {
+                if (!units.Contains(item.Id))
+                    units.Add(item.Id);
+            }
+
+            DateTime first = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime last = first.AddMonths(1);
+
+            var oIncomes = this.AccountStatusService.GetAll().ToList();
+
+            oIncomes = oIncomes.Where(o => units.Contains(o.Unit.Id) && o.Haber > 0 && o.StatusDate >= first && o.StatusDate < last).ToList();
+
+            var incomes = new List<UnitPaymentViewModel>();
+
+            foreach (var item in oIncomes)
+            {
+                //var oUnit = this.FunctionalUnitService.GetFunctionalUnit(item.UnitId);
+                var unit = Mapper.Map<FunctionalUnitViewModel>(item.Unit);
+                unit.Owner = owners.Where(y => y.FunctionalUnitId.Contains(unit.Id)).FirstOrDefault();
+                var request = new UnitPaymentViewModel()
+                {
+                    Id = item.Id,
+                    Amount = item.Haber,
+                    PaymentDate = item.StatusDate,
+                    UnitId = unit.Id,
+                    PaymentTypeId = item.PaymentTypeId,
+                    FunctionalUnit = unit,
+                    ConsortiumId = id
+                    
+                };
+
+                incomes.Add(request);
+            }
+
+            ViewBag.ConsortiumId = id;
+            return View(incomes);
+        }
+
+        [HttpGet]
         public ActionResult Details(int id)
         {
             var oConsortium = this.ConsortiumService.GetConsortium(id);            
@@ -612,6 +744,8 @@ namespace Administracion.Controllers
             consortium.ImageUrl = oConsortium.Ownership.Multimedia != null && oConsortium.Ownership.Multimedia.Count > 0 ?
              ConfigurationManager.AppSettings["ImagePath"] + oConsortium.Ownership.Multimedia.OrderByDescending(x => x.Id).FirstOrDefault().Url : ConfigurationManager.AppSettings["ImagePath"] + "nophoto.jpg";
 
+            ViewBag.montoARecaudar = this.getMontoRecaudar(id);
+            ViewBag.RecaudacionMes = this.getRecaudacionMes(id);
             return View(consortium);
         }
 

@@ -20,9 +20,9 @@
                     <li>
                         <a href="/Patrimony/Index?Id=@Model.Id"><i class="fa fa-dollar"></i> Estado Patrimonial</a>
                     </li>
-                    @*<li>
-                        <a href="/Income/Index?Id=@Model.Id"><i class="fa fa-arrow-up"></i> Ingresos</a>
-                    </li>*@
+                    <li>
+                        <a href="/Consortium/Income?Id=@Model.Id"><i class="fa fa-arrow-up"></i> Ingresos</a>
+                    </li>
                     <li>
                         <a href="/Spend/Index?Id=@Model.Id"><i class="fa fa-arrow-down"></i> Gastos</a>
                     </li>
@@ -153,7 +153,18 @@
                         <div class="widget-extra themed-background-dark">
                             <h4 class="widget-content-light"><strong>Porcentaje</strong> Cobrado</h4>
                         </div>
-                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">-</span></div>
+                        @{
+                            decimal monto = ViewBag.montoARecaudar;
+                            decimal recaudacion = ViewBag.RecaudacionMes;
+                            decimal por = 0;
+                            if (monto > 0)
+                            {
+                                por = ((recaudacion / monto) * 100);
+                                por = Math.Round(por, 2);
+                            }
+
+                        }
+                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">@string.Format("{0:#,##0.00}", por)%</span></div>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
@@ -161,7 +172,7 @@
                         <div class="widget-extra themed-background-dark">
                             <h4 class="widget-content-light"><strong>Recaudacion </strong>del Mes</h4>
                         </div>
-                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">-</span></div>
+                        <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">$@string.Format("{0:#,##0.00}", recaudacion)</span></div>
                     </a>
                 </div>
             </div>

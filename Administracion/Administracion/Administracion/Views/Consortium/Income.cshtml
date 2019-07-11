@@ -1,0 +1,95 @@
+﻿@model List<Administracion.Models.UnitPaymentViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+    <div id="main-container">
+
+        <div class="content-header">
+            <ul class="nav-horizontal text-center">
+                <li>
+                    <a href="/DataBase/Index"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="nav-horizontal text-center">
+                    <a href="/Consortium/Details/@ViewBag.ConsortiumId"><i class="fa fa-home"></i> Consorcio</a>
+
+                </li>
+                <li class="active">
+                    <a href="#"><i class="gi gi-building"></i> Ingresos</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/Consortium/Details/@ViewBag.ConsortiumId">Consorcio</a></li>
+            <li><a href="#">Ingresos</a></li>
+        </ul>
+        <div class="block full">
+            <div class="block-title">
+                <h2><strong>Listado de</strong> Ingresos</h2>
+            </div>
+            <p>Acá podrás encontrar toda la información de los ingresos del Mes actual</p>
+
+            @*@using (Html.BeginForm("ProcessConfigurationsCsv", "Consortium", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Elija el archivo a procesar</label>
+                    <div class='col-md-8'>                        
+                        <input type="file" id="managercsv" name="managercsv" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Procesar</button>
+            }*@
+
+
+
+            @*<div class="panel-heading">
+                <div class="row">
+                    
+                    <div class="col-md-2">
+                        <button onclick="location.href = 'CreateConsortium'" class="btn btn-info "><i class="fa fa-plus" pull-right></i> AGREGAR NUEVO</button>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+            <div class="table-responsive">
+                @if (Model.Count() > 0)
+                {
+
+                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">                    
+
+                            <thead>
+                                <tr>
+                                    <td class="text-center"><strong>NRO</strong></td>
+                                    <td class="text-center"><strong>PISO</strong></td>
+                                    <td class="text-center"><strong>DTO</strong></td>
+                                    <td class="text-center"><strong>Propietario</strong></td>
+                                    <td class="text-center"><strong>FECHA</strong></td>
+                                    <td class="text-center"><strong>IMPORTE</strong></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var consortium in Model)
+                                {
+                                    @Html.Partial("_IncomeItem", consortium)
+                                }
+                            </tbody>
+                        </table>
+
+                }
+                
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

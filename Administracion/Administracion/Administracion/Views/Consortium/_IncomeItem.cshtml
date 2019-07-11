@@ -1,0 +1,30 @@
+﻿@model Administracion.Models.UnitPaymentViewModel
+@{ 
+    var unit = Model.FunctionalUnit;
+}
+<tr>
+    <td class="text-center">@unit.Number</td>
+    <td class="text-center" style="width: 100px;">@unit.Floor</td>
+    <td class="text-center">@unit.Dto</td>
+
+    @{ var ownerDescription = unit.Owner != null ?
+                      unit.Owner.User.Name + " " + unit.Owner.User.Surname : string.Empty;
+    }
+    @if (unit.Owner != null)
+    {
+        <td class="text-center">
+            @ownerDescription
+        </td>
+    }
+    else
+    {
+        <td></td>
+    }
+    <td class="text-right">@Model.PaymentDate.ToString("dd/MM/yyyy")</td>
+    <td class="text-right">$@Math.Round(Model.Amount,2)</td>
+    <td class="text-center">
+        <div class="btn-group">
+            <a href="/FunctionalUnit/UpdatePaymentRegister?id=@Model.Id&consId=@Model.ConsortiumId" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+        </div>
+    </td>
+</tr>

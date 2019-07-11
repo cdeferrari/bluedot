@@ -446,7 +446,7 @@
     <value>SpendTypes/{0}</value>
   </data>
   <data name="GetSpendTypeByConsortium" xml:space="preserve">
-    <value>Consorcio/{0}/SpendType</value>
+    <value>SpendTypes/GetByConsortiumId/{0}</value>
   </data>
   <data name="GetTicket" xml:space="preserve">
     <value>Tickets/{0}</value>
@@ -645,5 +645,17 @@
   </data>
   <data name="GetAllTicketsList" xml:space="preserve">
     <value>Tickets/list</value>
+  </data>
+  <data name="DeleteAccountStatus" xml:space="preserve">
+    <value>AccountStatus/{0}</value>
+  </data>
+  <data name="GetAccountStatus" xml:space="preserve">
+    <value>AccountStatus/{0}</value>
+  </data>
+  <data name="GetAllAccountStatus" xml:space="preserve">
+    <value>AccountStatus/</value>
+  </data>
+  <data name="UpdateAccountStatus" xml:space="preserve">
+    <value>AccountStatus/{0}</value>
   </data>
 </root>

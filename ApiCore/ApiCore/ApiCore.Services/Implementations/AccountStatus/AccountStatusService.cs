@@ -133,7 +133,8 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             var AccountStatus = AccountStatusRepository.GetById(AccountStatusId);
             if (AccountStatus == null)
                 throw new BadRequestException(ErrorMessages.GastoNoEncontrado);
-
+            else
+                //AccountStatus.PaymentTypeId = PaymentRepository.GetAll().FirstOrDefault(o => o.AccountStatus.Id == AccountStatusId).Id;
             return AccountStatus;
         }
         
@@ -144,7 +145,6 @@ namespace ApiCore.Services.Implementations.AccountStatuss
             this.MergeAccountStatus(originalAccountStatus, AccountStatus);
             AccountStatusRepository.Update(originalAccountStatus);
             return originalAccountStatus;
-
         }
         
 

@@ -587,6 +587,9 @@
     <Content Include="Views\Patrimony\CloseMonthSuccess.cshtml" />
     <Content Include="Views\Consortium\CreateUpdateConsortiumConfigurationSuccess.cshtml" />
     <Content Include="Views\FunctionalUnit\CreateUpdateUnitConfigurationSuccess.cshtml" />
+    <Content Include="Views\FunctionalUnit\UpdatePaymentRegister.cshtml" />
+    <Content Include="Views\Consortium\_IncomeItem.cshtml" />
+    <Content Include="Views\Consortium\Income.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
