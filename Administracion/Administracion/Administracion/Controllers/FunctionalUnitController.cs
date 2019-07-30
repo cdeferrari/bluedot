@@ -186,8 +186,8 @@ namespace Administracion.Controllers
 
             var result = this.AccountStatusService.CreateAccountStatus(request);
 
-            //  return Redirect(string.Format("/Consortium/Details/{0}", unitPaymentViewModel.ConsortiumId));
-            return View("CreatedPayment", unitPaymentViewModel);
+              return Redirect(string.Format("/Consortium/Details/{0}", unitPaymentViewModel.ConsortiumId));
+            //return View("CreatedPayment", unitPaymentViewModel);
 
         }
 

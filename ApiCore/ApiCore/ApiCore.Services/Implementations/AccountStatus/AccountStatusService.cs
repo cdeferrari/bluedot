@@ -123,7 +123,7 @@ namespace ApiCore.Services.Implementations.AccountStatuss
         private void RecalculateAmount(AccountStatus status, decimal advandedPaymentValue)
         {
             var paymentPercentage = 100 - advandedPaymentValue;
-            var total = 100 * status.Haber / paymentPercentage;
+            var total = status.Haber * (paymentPercentage / 100);
             status.Haber = total;
 
         }
